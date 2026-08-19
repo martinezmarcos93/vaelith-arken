@@ -30,7 +30,7 @@ previo a la arena del Boss 1.
 - Aquí es donde el "control aéreo nulo" del diseño se pone a prueba en serio.
 
 ## Tramo D — Combate combinado
-- Dos "No-muertos errantes" + un "Espíritu atado" (ver `diseño_enemigos.md`)
+- Dos "No-muertos errantes" + un "Espíritu atado" (ver `diseno_enemigos.md`)
   atacando desde ángulos distintos.
 - Objetivo: enseñar la Embestida (Shove) como herramienta para separar enemigos
   antes de que rodeen al jugador.

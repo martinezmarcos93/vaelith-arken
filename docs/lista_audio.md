@@ -1,7 +1,7 @@
 # Lista de Audio (Música y SFX)
 
 Checklist completo cruzado contra `GDD.md`, `guion_intro.md`, `layout_level1.md`,
-`diseño_enemigos.md` y `guion_desenlace.md`.
+`diseno_enemigos.md` y `guion_desenlace.md`.
 
 **Leyenda de estado:** igual criterio que `lista_assets_pixel_art.md`
 (🔴 Custom obligatorio / 🟡 Placeholder con pack existente / 🟢 Pack existente

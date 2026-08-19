@@ -2,7 +2,7 @@
 
 Checklist completo de todo lo que necesita la demo (intro + Level 1 + Boss 1 +
 desenlace), cruzado contra `GDD.md`, `guia_estilo_visual.md`, `layout_level1.md`,
-`diseño_enemigos.md` y `stats_personaje.md`.
+`diseno_enemigos.md` y `stats_personaje.md`.
 
 **Leyenda de estado:**
 - 🔴 **Custom obligatorio** — no existe pack que lo resuelva (es específico del

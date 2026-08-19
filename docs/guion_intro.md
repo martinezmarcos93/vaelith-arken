@@ -26,7 +26,7 @@ original. Sin texto explicativo.
 ## Escena 4 — La puerta con el símbolo (tutorial implícito de combate)
 Vaelith llega a la construcción semienterrada con la puerta entreabierta y el
 símbolo tallado. Frente a ella, un primer enemigo débil (el "No-muerto errante",
-ver `diseño_enemigos.md`) bloquea el paso. Este combate enseña: ataque, bloqueo,
+ver `diseno_enemigos.md`) bloquea el paso. Este combate enseña: ataque, bloqueo,
 sin urgencia de tiempo (el enemigo es lento y muy telegrafiado).
 
 ## Escena 5 — Transición a Level 1
