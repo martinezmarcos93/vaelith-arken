@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
+[ext_resource type="Script" path="res://scripts/test_driver.gd" id="0_driver"]
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/TrainingDummy.tscn" id="2_dummy"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(2000, 40)
@@ -12,6 +14,7 @@ size = Vector2(140, 24)
 size = Vector2(160, 24)
 
 [node name="Main" type="Node2D"]
+script = ExtResource("0_driver")
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(1000, 460)
@@ -33,3 +36,6 @@ shape = SubResource("PlatformShapeMed")
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector2(150, 380)
+
+[node name="TrainingDummy" parent="." instance=ExtResource("2_dummy")]
+position = Vector2(185, 380)

@@ -1,10 +1,13 @@
 extends CharacterBody2D
 
-## Movimiento base de Vaelith Arken.
-## Pilar de diseño: control aereo minimo, salto comprometido, sensacion "pesada".
-## Valores de referencia: docs/stats_personaje.md (ajustables aca como @export
-## para poder tunear "feel" desde el editor sin tocar codigo).
+## Vaelith Arken: movimiento (Etapa 1.1) + combate base (Etapa 1.3).
+## Valores de referencia: docs/stats_personaje.md (ajustables como @export
+## para tunear "feel" desde el editor sin tocar codigo).
 
+enum State { FREE, ATTACK_HIGH, ATTACK_LOW, BLOCK, SHOVE, HURT, STAGGERED }
+
+# --- Movimiento ---
+@export_group("Movimiento")
 @export var speed: float = 90.0
 @export var acceleration: float = 1800.0
 @export var friction: float = 1200.0
@@ -13,10 +16,100 @@ extends CharacterBody2D
 @export var air_control_factor: float = 0.1
 @export var coyote_time: float = 0.08
 
+# --- Combate ---
+@export_group("Combate")
+@export var max_health: int = 5
+@export var iframes_duration: float = 0.4
+@export var hurt_lock_time: float = 0.3
+
+@export var attack_high_damage: int = 2
+@export var attack_high_duration: float = 0.5
+@export var attack_high_active_start: float = 0.2
+@export var attack_high_active_end: float = 0.35
+
+@export var attack_low_damage: int = 1
+@export var attack_low_duration: float = 0.35
+@export var attack_low_active_start: float = 0.12
+@export var attack_low_active_end: float = 0.22
+
+@export var shove_duration: float = 0.25
+@export var shove_active_start: float = 0.05
+@export var shove_active_end: float = 0.15
+@export var shove_knockback: float = 300.0
+@export var shove_stagger_time: float = 0.6
+
+@export var block_max_consecutive: int = 3
+@export var block_stagger_time: float = 0.8
+
+## Ventana de gracia para inputs de combate presionados justo antes de que
+## el jugador pueda procesarlos (ej. un frame en el aire por el knockback
+## de un golpe recibido). Sin esto, is_action_just_pressed() se pierde para
+## siempre si no se consulta en el frame exacto -- encontrado con testing.
+@export var input_buffer_time: float = 0.12
+
+const HITBOX_OFFSET_X := 20.0
+
+@onready var attack_high_hitbox: Hitbox = $AttackHighHitbox
+@onready var attack_low_hitbox: Hitbox = $AttackLowHitbox
+@onready var shove_hitbox: Hitbox = $ShoveHitbox
+@onready var hurtbox: Hurtbox = $Hurtbox
+
+var state: State = State.FREE
+var facing: int = 1
+var health: int
 var _coyote_timer: float = 0.0
+var _iframe_timer: float = 0.0
+var _state_timer: float = 0.0
+var _consecutive_blocks: int = 0
+var _buffered_action: String = ""
+var _buffer_timer: float = 0.0
+
+const BUFFERABLE_ACTIONS := ["attack_high", "attack_low", "shove"]
+
+
+func _ready() -> void:
+	health = max_health
+	attack_high_hitbox.source = self
+	attack_high_hitbox.damage = attack_high_damage
+	attack_high_hitbox.knockback = 0.0
+	attack_low_hitbox.source = self
+	attack_low_hitbox.damage = attack_low_damage
+	attack_low_hitbox.knockback = 0.0
+	shove_hitbox.source = self
+	shove_hitbox.damage = 0
+	shove_hitbox.knockback = shove_knockback
+	shove_hitbox.stagger_time = shove_stagger_time
+	hurtbox.hurt.connect(_on_hurtbox_hurt)
 
 
 func _physics_process(delta: float) -> void:
+	if _iframe_timer > 0.0:
+		_iframe_timer = max(_iframe_timer - delta, 0.0)
+
+	_update_hitbox_facing()
+	_poll_input_buffer(delta)
+
+	match state:
+		State.FREE:
+			_process_movement(delta)
+			_process_free_inputs()
+		State.BLOCK:
+			_process_block(delta)
+		State.ATTACK_HIGH:
+			_process_action(delta, attack_high_hitbox, attack_high_duration, attack_high_active_start, attack_high_active_end)
+		State.ATTACK_LOW:
+			_process_action(delta, attack_low_hitbox, attack_low_duration, attack_low_active_start, attack_low_active_end)
+		State.SHOVE:
+			_process_action(delta, shove_hitbox, shove_duration, shove_active_start, shove_active_end)
+		State.HURT:
+			_process_timed_lock(delta, hurt_lock_time)
+		State.STAGGERED:
+			_process_timed_lock(delta, block_stagger_time)
+
+	move_and_slide()
+
+
+func _process_movement(delta: float) -> void:
 	var on_floor := is_on_floor()
 
 	if on_floor:
@@ -26,6 +119,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta
 
 	var input_dir := Input.get_axis("move_left", "move_right")
+	if input_dir != 0.0:
+		facing = 1 if input_dir > 0.0 else -1
 
 	if on_floor:
 		if input_dir != 0.0:
@@ -33,7 +128,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0.0, friction * delta)
 	else:
-		# Control aereo deliberadamente muy limitado (pilar de diseño).
 		if input_dir != 0.0:
 			velocity.x = move_toward(velocity.x, input_dir * speed, acceleration * air_control_factor * delta)
 		# Sin input en el aire no se aplica friccion: conserva el impulso del salto.
@@ -42,4 +136,122 @@ func _physics_process(delta: float) -> void:
 		velocity.y = jump_velocity
 		_coyote_timer = 0.0
 
-	move_and_slide()
+
+func _poll_input_buffer(delta: float) -> void:
+	# Se consulta SIEMPRE, sin importar el estado actual, para no perder el
+	# unico frame en el que is_action_just_pressed() es verdadero.
+	for action in BUFFERABLE_ACTIONS:
+		if Input.is_action_just_pressed(action):
+			_buffered_action = action
+			_buffer_timer = input_buffer_time
+	if _buffer_timer > 0.0:
+		_buffer_timer = max(_buffer_timer - delta, 0.0)
+		if _buffer_timer == 0.0:
+			_buffered_action = ""
+
+
+func _process_free_inputs() -> void:
+	# Ataques/bloqueo/embestida solo en tierra: simplificacion deliberada
+	# para la primera pasada de combate (Vaelith es un tanque con armadura
+	# completa, no un duelista aereo).
+	if not is_on_floor():
+		return
+	if _buffered_action != "":
+		var action := _buffered_action
+		_buffered_action = ""
+		_buffer_timer = 0.0
+		match action:
+			"attack_high":
+				_enter_action(State.ATTACK_HIGH)
+			"attack_low":
+				_enter_action(State.ATTACK_LOW)
+			"shove":
+				_enter_action(State.SHOVE)
+		return
+	if Input.is_action_pressed("block"):
+		state = State.BLOCK
+
+
+func _process_block(delta: float) -> void:
+	if not is_on_floor():
+		velocity.y += gravity * delta
+	velocity.x = move_toward(velocity.x, 0.0, friction * delta)
+	if not Input.is_action_pressed("block"):
+		state = State.FREE
+		_consecutive_blocks = 0
+
+
+func _enter_action(new_state: State) -> void:
+	state = new_state
+	_state_timer = 0.0
+	velocity.x = 0.0
+
+
+func _process_action(delta: float, hitbox: Hitbox, duration: float, active_start: float, active_end: float) -> void:
+	_state_timer += delta
+	if not is_on_floor():
+		velocity.y += gravity * delta
+
+	var should_be_active := _state_timer >= active_start and _state_timer < active_end
+	if should_be_active and not hitbox.monitoring:
+		hitbox.activate()
+	elif not should_be_active and hitbox.monitoring:
+		hitbox.deactivate()
+
+	if _state_timer >= duration:
+		hitbox.deactivate()
+		state = State.FREE
+		_state_timer = 0.0
+
+
+func _process_timed_lock(delta: float, duration: float) -> void:
+	_state_timer += delta
+	if not is_on_floor():
+		velocity.y += gravity * delta
+	velocity.x = move_toward(velocity.x, 0.0, friction * delta)
+	if _state_timer >= duration:
+		state = State.FREE
+		_state_timer = 0.0
+
+
+func _update_hitbox_facing() -> void:
+	attack_high_hitbox.position.x = HITBOX_OFFSET_X * facing
+	attack_low_hitbox.position.x = HITBOX_OFFSET_X * facing
+	shove_hitbox.position.x = (HITBOX_OFFSET_X + 4.0) * facing
+
+
+func _on_hurtbox_hurt(damage: int, direction: Vector2, knockback: float, stagger_time: float) -> void:
+	if _iframe_timer > 0.0:
+		return
+	if state == State.BLOCK and damage > 0:
+		_register_block()
+		return
+	_take_damage(damage, direction, knockback, stagger_time)
+
+
+func _register_block() -> void:
+	_consecutive_blocks += 1
+	if _consecutive_blocks > block_max_consecutive:
+		_consecutive_blocks = 0
+		state = State.STAGGERED
+		_state_timer = 0.0
+		print("Vaelith: postura rota tras bloquear %d golpes seguidos" % block_max_consecutive)
+	else:
+		print("Vaelith: golpe bloqueado (%d/%d)" % [_consecutive_blocks, block_max_consecutive])
+
+
+func _take_damage(damage: int, direction: Vector2, knockback: float, stagger_time: float) -> void:
+	health = max(health - damage, 0)
+	_iframe_timer = iframes_duration
+	velocity = direction * knockback
+	state = State.HURT
+	_state_timer = 0.0
+	print("Vaelith: recibe %d de daño (vida=%d/%d)" % [damage, health, max_health])
+	if health <= 0:
+		_die()
+
+
+func _die() -> void:
+	# Penitencia/respawn se implementa en la Etapa 4 junto con los
+	# checkpoints reales del nivel; por ahora solo se registra el evento.
+	print("Vaelith: HP a 0 - penitencia pendiente de implementar (Fase 4)")

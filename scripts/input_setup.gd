@@ -11,6 +11,7 @@ func _ready() -> void:
 	_ensure_action("attack_high", [KEY_J])
 	_ensure_action("attack_low", [KEY_K])
 	_ensure_action("block", [KEY_L])
+	_ensure_action("shove", [KEY_I])
 	_ensure_action("interact", [KEY_E])
 
 

@@ -19,10 +19,10 @@ pensados para ajustarse durante el playtesting de la Fase 1.5 — no son definit
 | Parámetro | Valor inicial | Nota |
 |---|---|---|
 | Vida (HP) | 5 "golpes" de enemigo básico | Traducción directa de HP 20 vs. daño de enemigo regular (~4 de daño promedio). |
-| Ataque alto (espada larga) | Daño alto, velocidad lenta (~0.5s de animación) | Recompensa timing, castiga spam. |
-| Ataque bajo (espada larga) | Daño medio, velocidad media | Cubre enemigos agachados/bajos. |
-| Bloqueo (escudo) | Reduce 100% del daño frontal mientras se mantiene | Consume "postura": tras 2-3 bloqueos seguidos, se abre una ventana de vulnerabilidad breve. |
-| Embestida (Shove) | Sin daño, desplaza al enemigo y lo aturde brevemente | Herramienta de control de espacio, no de daño — coherente con el diseño narrativo ya usado en el prólogo. |
+| Ataque alto (espada larga) | Daño 2, ventana activa 0.2s-0.35s de una animación de 0.5s | Recompensa timing, castiga spam. **Sin knockback** (a diferencia de la Embestida) — validado por testing: si empuja al objetivo, lo saca de rango del combo. |
+| Ataque bajo (espada larga) | Daño 1, ventana activa 0.12s-0.22s de una animación de 0.35s | Cubre enemigos agachados/bajos. Tampoco tiene knockback. |
+| Bloqueo (escudo) | Reduce 100% del daño frontal mientras se mantiene | Consume "postura": al 4to golpe bloqueado consecutivo (umbral=3), se rompe y entra en Staggered 0.8s vulnerable. Validado por testing headless. |
+| Embestida (Shove) | Sin daño, knockback 300, aturde 0.6s | Único ataque del jugador con desplazamiento — herramienta de control de espacio, coherente con el diseño narrativo del prólogo. |
 | I-frames al recibir daño | 0.4s | Suficiente para no encadenar dos golpes injustos, no tanto como para invitar a tanquear ataques. |
 | Daga ceremonial (arma secundaria) | Rápida, bajo daño, alcance corto | Reservada para desbloqueo narrativo posterior — **fuera del alcance de esta demo** salvo que el diseño de nivel la necesite antes. |
 

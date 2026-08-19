@@ -40,7 +40,7 @@ checkpoint por nivel).
 | Ataque alto | J |
 | Ataque bajo | K (mantener abajo + J también sirve) |
 | Bloquear/levantar escudo | Mantener L |
-| Embestida (Shove) | L + dirección (doble tap o botón dedicado a definir) |
+| Embestida (Shove) | I |
 | Interactuar | E |
 | Pausa | Esc |
 

@@ -33,6 +33,7 @@ en [`docs/Roadmap.md`](docs/Roadmap.md).
 | Ataque alto | J |
 | Ataque bajo | K |
 | Bloquear | L |
+| Embestida | I |
 | Interactuar | E |
 
 ## Estructura del repositorio
