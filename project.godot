@@ -1,0 +1,25 @@
+; Engine configuration file.
+; Proyecto base para la demo vertical slice de Vaelith Arken.
+; Godot 4.3+ recomendado.
+
+config_version=5
+
+[application]
+
+config/name="Vaelith Arken - Demo"
+config/description="Demo vertical slice: intro + Level 1 + Boss 1 + desenlace."
+run/main_scene="res://scenes/levels/Main.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/canvas_textures/default_texture_filter=0

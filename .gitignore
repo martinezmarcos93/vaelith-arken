@@ -1,0 +1,17 @@
+# Godot 4+ specific ignores
+.godot/
+.import/
+export.cfg
+export_presets.cfg
+
+# Godot-specific ignores
+.import/
+export_presets.cfg
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Aseprite backups
+*.aseprite-backup~
