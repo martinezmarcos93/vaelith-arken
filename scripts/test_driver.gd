@@ -6,6 +6,13 @@ extends Node2D
 ## --headless y leer los prints por consola. No es parte del juego final.
 
 func _ready() -> void:
+	# Este driver simula input real para validar el combate sin un humano
+	# jugando (ver docs/Roadmap.md, Fase 1.5). Solo debe correr en modo
+	# --headless (mis validaciones); si alguien abre el juego de verdad con
+	# ventana, el jugador tiene que tener control manual total desde el
+	# primer frame.
+	if DisplayServer.get_name() != "headless":
+		return
 	_run_test_sequence()
 
 
