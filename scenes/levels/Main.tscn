@@ -1,3 +1,35 @@
-[gd_scene format=3]
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(2000, 40)
+
+[sub_resource type="RectangleShape2D" id="PlatformShapeSmall"]
+size = Vector2(140, 24)
+
+[sub_resource type="RectangleShape2D" id="PlatformShapeMed"]
+size = Vector2(160, 24)
 
 [node name="Main" type="Node2D"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(1000, 460)
+
+[node name="GroundShape" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("GroundShape")
+
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(420, 360)
+
+[node name="Platform1Shape" type="CollisionShape2D" parent="Platform1"]
+shape = SubResource("PlatformShapeSmall")
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(650, 280)
+
+[node name="Platform2Shape" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource("PlatformShapeMed")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(150, 380)

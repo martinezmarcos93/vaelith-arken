@@ -11,6 +11,10 @@ config/description="Demo vertical slice: intro + Level 1 + Boss 1 + desenlace."
 run/main_scene="res://scenes/levels/Main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 
+[autoload]
+
+InputSetup="*res://scripts/input_setup.gd"
+
 [display]
 
 window/size/viewport_width=1280
