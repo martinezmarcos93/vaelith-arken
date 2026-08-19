@@ -37,13 +37,16 @@ externo (ver `docs/lista_assets_pixel_art.md` y `docs/lista_audio.md`).
 
 ## Nueva tanda (revisada, integrada selectivamente)
 
-- **Dungeon Tileset side-scroller (Raou)** — `assets/sprites/tilesets/dungeon_raou_unverified_license/`
+- **Dungeon Tileset side-scroller (Raou)** — `assets/sprites/tilesets/dungeon_raou_free_commercial_ok/`
+  Fuente: https://raou.itch.io/dark-dun ("Dark Dungeon - Side-Scroller Tileset")
   Coincide casi exactamente con la paleta fría de `docs/guia_estilo_visual.md`
   (piedra violeta/negra, tumbas, columnas, ventanas ojivales) — el mejor
   candidato de entorno encontrado hasta ahora.
-  ⚠️ **Licencia NO verificada** — el .zip no traía License.txt/readme.
-  **No usar en build final** hasta rastrear la página de origen y confirmar
-  términos de uso.
+  ✅ **Licencia confirmada** (respuesta del autor en los comentarios de la
+  página): uso comercial permitido ("Yes you can :D"), atribución apreciada
+  pero no obligatoria. Única restricción: no redistribuir el tileset en sí
+  (ni exportarlo/compartirlo desde editores que lo permitan) — el juego
+  final puede usarlo, pero no se puede repartir el .png suelto como asset.
 
 - **Evil Wizard / Evil Wizard 2** — `assets/sprites/enemies/evil_wizard_1_CC0/`
   y `evil_wizard_2_CC0/`
@@ -52,11 +55,15 @@ externo (ver `docs/lista_assets_pixel_art.md` y `docs/lista_audio.md`).
   a enemigo/mini-jefe tipo "acólito corrupto".
 
 - **Necromancer sprite (creativekind)** — `assets/sprites/enemies/necromancer_unverified_license/`
+  Fuente: https://creativekind.itch.io/necromancer-free ("Necromancer (Free)")
   Silueta oscura con báculo de cristal rojo y animación de disolución/muerte
   con partículas — encaje temático fuerte con el pasado nigromante de Vaelith
   (`Ideas base para el juego/`).
-  ⚠️ **Licencia NO verificada** — archivo suelto sin readme. Usar solo como
-  referencia visual/de animación hasta confirmar origen y términos.
+  ⚠️ **Licencia SIN texto explícito** — la página confirma que es gratis
+  ("pay what you think is fair") pero no declara términos de uso comercial,
+  atribución ni redistribución; solo remite a los Términos de Servicio
+  generales de itch.io. **Sigue sin usarse en build final** hasta contactar
+  al autor o encontrar una declaración de licencia explícita.
 
 - **GothicVania Town (Ansimuz)** — `assets/sprites/tilesets/gothicvania_town_CC0/`
   Licencia: **CC0** confirmada (`public-license.pdf` incluido, sin
@@ -75,9 +82,13 @@ externo (ver `docs/lista_assets_pixel_art.md` y `docs/lista_audio.md`).
   de combate/exploración de cripta definido en `docs/GDD.md`; se deja
   disponible como referencia/placeholder de ambiente, no como música final.
 
-- **Effect and Bullet 16x16** — `assets/vfx/effect_bullet_16x16_unverified_license/`
+- **Effect and Bullet 16x16 (BDragon1727)** — `assets/vfx/effect_bullet_16x16_bdragon1727_donationware/`
+  Fuente: https://bdragon1727.itch.io/free-effect-and-bullet-16x16
   Efectos de fuego/verde/púrpura/agua en 16x16.
-  ⚠️ **Licencia NO verificada** — sin readme en el .zip.
+  ✅ **Licencia confirmada**: gratis para proyectos no comerciales; para uso
+  comercial pide "contribute (any value)" (donationware, no un bloqueo
+  real). Modificación permitida. **Prohibida la reventa/redistribución**
+  del asset en sí.
 
 - **Kenney 1-Bit Platformer Pack** — `assets/sprites/tilesets/kenney_1bit_blockout_CC0/`
   Licencia: **CC0** confirmada (Kenney siempre publica CC0).
@@ -93,37 +104,30 @@ externo (ver `docs/lista_assets_pixel_art.md` y `docs/lista_audio.md`).
   contenido usable, es basura de versionado de otra herramienta). Tampoco se
   integró `separate.zip` (1218 archivos sueltos): es el mismo contenido
   desagregado, la hoja consolidada alcanza.
-  ⚠️ **Licencia NO verificada.**
+  ⚠️ **Licencia NO verificada** — Marcos no recuerda el sitio de origen
+  exacto. No usar en build final hasta poder identificar la fuente.
 
-## Descartado (no integrado al proyecto, queda solo en Herramientas/)
+## Descartado (evaluado y NO integrado — eliminado de Herramientas/ el 2026-08-19)
+
+Estos packs se revisaron, se decidió no usarlos, y **se borraron físicamente**
+de `Herramientas/Pixelherramientas/` (tanto los .zip originales como las
+carpetas extraídas) a pedido explícito. Se deja constancia acá por si en
+algún momento conviene reevaluarlos — habría que volver a descargarlos.
 
 - **boss_demon_slime_FREE_v1.0** — paleta cálida (rojo/naranja fuego), rompe
   la regla de acento único de `docs/guia_estilo_visual.md` y no tiene sentido
-  narrativo como Boss 1 (que debe reflejar visualmente a Vaelith). Sin
-  licencia embebida tampoco. Se guarda como referencia por si el juego suma
-  una zona temática de fuego en el futuro.
+  narrativo como Boss 1 (que debe reflejar visualmente a Vaelith). Candidato
+  a reconsiderar solo si el juego suma una zona temática de fuego.
 - **Free-Undead-Tileset-Top-Down-Pixel-Art (CraftPix)** — perspectiva
-  **top-down**, incompatible con la vista lateral del juego. Los objetos
-  sueltos (huesos, props) podrían rescatarse más adelante, no se hizo la
-  curación fina ahora por tiempo. Licencia CraftPix a revisar en
-  craftpix.net/file-licenses (los gratuitos suelen pedir atribución).
-- **FreeKnight_v1** — pack de caballero muy completo (242 archivos), pero en
-  formato GIF (no importable directo a Godot, requiere extraer frames) y sin
-  licencia embebida. Guardado como referencia de timing de animación para
-  cuando se produzca el arte original de Vaelith — no para usar literal.
-- **Textures-16.png** — hoja genérica de texturas variadas (piedra, ladrillo,
-  agua, lava, pasto, patrones de color), sin curar para nuestra paleta. No
-  integrada; evaluar si hace falta más adelante.
-
-## Descargado pero descartado (no encaja con la estética)
-
-- **Free Desert Enemy Sprite Sheets Pixel Art** — NO integrado al proyecto,
-  queda solo en `Herramientas/Pixelherramientas/` sin copiar al repo.
-  Contiene: Serpiente, Hiena, Escorpión, Buitre, Momia — temática de desierto
-  (paleta cálida arena/tierra), incompatible con la paleta fría gótica del
-  juego (`docs/guia_estilo_visual.md`). La Momia podría eventualmente servir
-  como referencia de proporciones/animación para un enemigo no-muerto propio,
-  pero no como asset final.
+  **top-down**, incompatible con la vista lateral del juego.
+- **FreeKnight_v1** — pack de caballero completo (242 archivos) en formato
+  GIF (no importable directo a Godot) y sin licencia embebida.
+- **Free Desert Enemy Sprite Sheets Pixel Art** — temática de desierto
+  (Serpiente, Hiena, Escorpión, Buitre, Momia), paleta cálida incompatible
+  con la estética fría gótica del juego.
+- **Textures-16.png / textures_02_08_25.png** — dos archivos prácticamente
+  idénticos (misma hoja genérica de texturas variadas: piedra, ladrillo,
+  agua, lava, pasto, patrones de color), sin curar para nuestra paleta.
 
 ## Pendientes de descarga manual (bloqueados por flujo de compra de itch.io)
 
