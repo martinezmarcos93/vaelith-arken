@@ -54,16 +54,22 @@ externo (ver `docs/lista_assets_pixel_art.md` y `docs/lista_audio.md`).
   Mago encapuchado con bastón de fuego violeta — encaja tonalmente. Candidato
   a enemigo/mini-jefe tipo "acólito corrupto".
 
-- **Necromancer sprite (creativekind)** — `assets/sprites/enemies/necromancer_unverified_license/`
+- **Necromancer sprite (creativekind)** — `assets/sprites/enemies/necromancer_creativekind_free_commercial_ok/`
   Fuente: https://creativekind.itch.io/necromancer-free ("Necromancer (Free)")
   Silueta oscura con báculo de cristal rojo y animación de disolución/muerte
   con partículas — encaje temático fuerte con el pasado nigromante de Vaelith
   (`Ideas base para el juego/`).
-  ⚠️ **Licencia SIN texto explícito** — la página confirma que es gratis
-  ("pay what you think is fair") pero no declara términos de uso comercial,
-  atribución ni redistribución; solo remite a los Términos de Servicio
-  generales de itch.io. **Sigue sin usarse en build final** hasta contactar
-  al autor o encontrar una declaración de licencia explícita.
+  ✅ **Licencia confirmada** (texto completo en `License.txt` del paquete):
+  uso permitido tanto en proyectos comerciales como no comerciales,
+  modificable libremente. **Prohibida la distribución o reventa del asset
+  en sí.** El autor pide como favor (no como condición de la licencia)
+  revisar su juego "Pixel Mage Survival" en Play Store — sin costo, no es
+  un requisito de uso.
+  Animaciones disponibles: Idle/Run (8f), Attack 1/2 (13f), Attack 3 (17f,
+  con hechizo de calavera), Hurt (5f), Death (10f). 128x128 por frame —
+  ya viene con set de ataques más completo que los otros placeholders de
+  enemigos, buen candidato a subir de "referencia" a "enemigo real" del
+  Level 1 o incluso a base visual de un mini-jefe.
 
 - **GothicVania Town (Ansimuz)** — `assets/sprites/tilesets/gothicvania_town_CC0/`
   Licencia: **CC0** confirmada (`public-license.pdf` incluido, sin

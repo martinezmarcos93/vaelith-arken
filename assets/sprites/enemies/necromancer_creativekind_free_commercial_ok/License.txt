@@ -1,0 +1,13 @@
+Necromancer (Free) - CreativeKind
+Fuente: https://creativekind.itch.io/necromancer-free
+
+Animaciones incluidas: Idle/Run (8 frames), Attack Nr1/Nr2 (13 frames),
+Attack Nr3 (17 frames, hecho junto con Magic Spell Set 4), Hurt (5 frames),
+Death (10 frames). Tamaño de sprite: 128x128.
+
+- License -
+
+1. Whether your project is commercial or non-commercial, feel free to use
+   this asset.
+2. This asset is customizable, so you can make any necessary modifications.
+3. It is prohibited to distribute or resell this asset.
