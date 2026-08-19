@@ -65,9 +65,9 @@ quedar genérico.
 - [ ] Muerte
 
 **Candidatos encontrados:**
-- [Free Ghost Pixel Art Sprite Sheets (CraftPix)](https://craftpix.net/freebies/free-ghost-pixel-art-sprite-sheets/) — 3 fantasmas con movimiento, ataque, muerte, grito.
-- [Pixel Art Ghost Sprite (OpenGameArt)](https://opengameart.org/content/pixel-art-ghost-sprite)
-- [Pixel Art - Simple Ghost and Skull Sprite sheet (Fatal)](https://fatalaigaming.itch.io/pixelghostskull) — sin atribución requerida.
+- ✅ [Pixel Art Ghost Sprite (OpenGameArt)](https://opengameart.org/content/pixel-art-ghost-sprite) — **integrado** en `assets/sprites/enemies/ghost_opengameart_CC-BY4.0/` (CC-BY 4.0).
+- ✅ [Pixel Art - Simple Ghost and Skull Sprite sheet (Fatal)](https://fatalaigaming.itch.io/pixelghostskull) — **integrado** en `assets/sprites/enemies/ghost_skull_fatalaigaming_free/` (gratis, sin atribución).
+- [Free Ghost Pixel Art Sprite Sheets (CraftPix)](https://craftpix.net/freebies/free-ghost-pixel-art-sprite-sheets/) — 3 fantasmas con movimiento, ataque, muerte, grito. Pendiente.
 
 **Recomendación:** usar estos packs como placeholder para poblar Level 1 y
 validar el diseño de comportamiento (Fase 5.1/5.3) ya mismo, sin esperar arte
@@ -101,7 +101,7 @@ lo resuelva sin romper la premisa del personaje.
 - [ ] Decoración: lápidas, árboles muertos, huesos, niebla
 
 **Candidatos encontrados:**
-- [Dungeon Tileset (Golopin) — gratis](https://golopin.itch.io/dungeon-tileset) — incluye murciélagos, cofres, puertas, tumbas, un fantasma.
+- ✅ [Dungeon Tileset (Golopin) — gratis](https://golopin.itch.io/dungeon-tileset) — **integrado** en `assets/sprites/tilesets/dungeon_golopin_free/` (81 piezas individuales + hoja compacta). Pendiente recolorear a la paleta propia en LibreSprite antes de usar en producción.
 - [Gothicvania Cold Corridors — gratis](https://itch.io/game-assets/free/tag-gothic/tag-pixel-art) (buscar en el tag Gothic+Pixel Art de itch.io)
 - Tag general para seguir explorando: [Gothic + Pixel Art + Tileset, gratis](https://itch.io/game-assets/free/tag-gothic/tag-pixel-art/tag-tileset)
 - Opción paga de calidad superior si el gratuito no alcanza: [Candle Cathedral - 16x16 Gothic Dungeon Tileset ($7.99)](https://itch.io/game-assets/tag-gothic/tag-pixel-art) (buscar por nombre en itch.io)
