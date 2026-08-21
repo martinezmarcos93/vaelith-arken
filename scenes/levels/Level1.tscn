@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=23 format=3]
 
 [ext_resource type="Script" path="res://scripts/level/hazard.gd" id="15_hazard_script"]
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Dinosaur_skeleton_part1_dark_shadow.png" id="12_bones"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/caveman_statue_dark_shadow1.png" id="13_statue"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Gates_dark_shadow3.png" id="14_bonfire"]
+[ext_resource type="PackedScene" path="res://scenes/level/MemoryFragment.tscn" id="16_memory"]
 
 [sub_resource type="RectangleShape2D" id="Shape_220x24"]
 size = Vector2(220, 24)
@@ -237,8 +238,9 @@ offset_right = 80.0
 offset_bottom = 12.0
 color = Color(0.067, 0.133, 0.180, 1)
 
-[node name="MemoriaFragmentoPlaceholder" type="Marker2D" parent="."]
+[node name="MemoryFragment1" parent="." instance=ExtResource("16_memory")]
 position = Vector2(2725, 230)
+lines = ["Una mujer.", "Un trono.", "Calaveras.", "Una rueda.", "La imagen desaparece antes de que puedas atraparla."]
 
 [node name="TramoF_Ground" type="StaticBody2D" parent="."]
 position = Vector2(2665, 470)
