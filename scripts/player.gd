@@ -62,6 +62,7 @@ const HITBOX_OFFSET_X := 20.0
 @onready var shove_hitbox: Hitbox = $ShoveHitbox
 @onready var hurtbox: Hurtbox = $Hurtbox
 @onready var camera: Camera2D = $Camera2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var state: State = State.FREE
 var facing: int = 1
@@ -118,6 +119,7 @@ func _physics_process(delta: float) -> void:
 		State.DEAD:
 			_process_dead(delta)
 
+	_update_sprite_animation()
 	move_and_slide()
 
 
@@ -233,6 +235,41 @@ func _process_dead(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	velocity.x = move_toward(velocity.x, 0.0, friction * delta)
+
+
+## Placeholder temporal (Opcion A del roadmap de arte): reutiliza el pack
+## CC0 "Evil Wizard 2" (pensado como enemigo, ver CREDITS.md) solo para
+## validar que AnimationPlayer/AnimatedSprite2D sincroniza bien con la
+## maquina de estados ANTES de invertir tiempo en el sprite sheet final de
+## Vaelith (Etapa 2.1-2.3). shove y block no tienen animacion propia en el
+## pack -- se reutilizan attack2/idle a proposito, no es un mapeo definitivo.
+func _update_sprite_animation() -> void:
+	sprite.flip_h = facing < 0
+	var target_anim: String
+	match state:
+		State.FREE:
+			if not is_on_floor():
+				target_anim = "jump" if velocity.y < 0.0 else "fall"
+			elif absf(velocity.x) > 5.0:
+				target_anim = "run"
+			else:
+				target_anim = "idle"
+		State.BLOCK:
+			target_anim = "idle"
+		State.ATTACK_HIGH:
+			target_anim = "attack1"
+		State.ATTACK_LOW:
+			target_anim = "attack2"
+		State.SHOVE:
+			target_anim = "attack2"
+		State.HURT, State.STAGGERED:
+			target_anim = "hurt"
+		State.DEAD:
+			target_anim = "dead"
+		_:
+			target_anim = "idle"
+	if sprite.animation != target_anim:
+		sprite.play(target_anim)
 
 
 func _update_camera_lookahead(delta: float) -> void:

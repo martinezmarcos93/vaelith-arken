@@ -83,6 +83,23 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
   texturas genéricas sin curar, desert enemy pack — detalle completo y
   razones en `CREDITS.md`.
 
+### Added — Integración de animación (Etapa 2.4, validada con placeholder)
+- `AnimatedSprite2D` reemplaza el rectángulo de color (`Polygon2D`) en
+  `Player.tscn`. `player.gd` ahora sincroniza la animación con la máquina
+  de estados (`_update_sprite_animation`): idle/run/jump/fall según
+  movimiento y suelo, attack1/attack2/hurt/dead según el estado de combate.
+- **El sprite es temporal**: reutiliza el pack CC0 "Evil Wizard 2" (pensado
+  como enemigo, ver `CREDITS.md`) solo para probar el cableado técnico
+  (`AnimatedSprite2D` + `SpriteFrames` + estados) antes de invertir tiempo
+  en el sprite sheet final de Vaelith. `shove` y `block` no tienen
+  animación propia en el pack — reutilizan `attack2`/`idle` a propósito,
+  no es un mapeo definitivo.
+- `assets/sprites/player/_placeholder_evil_wizard2_frames.tres` — recurso
+  `SpriteFrames` generado a partir de las hojas de sprites de
+  `evil_wizard_2_CC0/` (8 animaciones, 46 frames en total).
+- Validado headless: mismo test de combate de siempre, sin errores de
+  carga de escena/recurso.
+
 ### Added — Infraestructura de repo
 - `README.md`, `.gitattributes`, `.editorconfig`, `CREDITS.md`.
 - Repo conectado a `github.com/martinezmarcos93/vaelith-arken`, rama única
@@ -96,8 +113,9 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 - **Etapa 4** (no antes): mecánica de "penitencia" real (respawn en
   checkpoint + corrupción de nivel), cuando exista el sistema de
   checkpoints — hoy `DEAD` es terminal, sin respawn.
-- **Etapa 2**: arte y animación final del protagonista (hoy es un
-  rectángulo de color placeholder).
+- **Etapa 2**: sprite sheet final del protagonista (Fases 2.1-2.3). La
+  integración técnica (Fase 2.4) ya está resuelta con un placeholder —
+  falta el arte real de Vaelith para reemplazar el pack temporal.
 - **Etapa 3**: intro jugable real (guion ya escrito en
   `docs/guion_intro.md`, sin implementar).
 - **Etapa 4**: construcción real de Level 1 sobre el layout ya diseñado
