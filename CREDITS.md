@@ -135,6 +135,26 @@ algún momento conviene reevaluarlos — habría que volver a descargarlos.
   idénticos (misma hoja genérica de texturas variadas: piedra, ladrillo,
   agua, lava, pasto, patrones de color), sin curar para nuestra paleta.
 
+### Segunda tanda — eliminados el 2026-08-21
+- **Free-Undead-Tileset-Top-Down-Pixel-Art (CraftPix)** — vuelto a descargar
+  sin saberlo que ya estaba descartado (ver entrada de arriba, mismo motivo:
+  top-down). Confirmado visualmente de nuevo antes de re-eliminar.
+- **Free-Cursed-Land-Top-Down-Pixel-Art-Tileset (CraftPix)** — top-down
+  (mismo tipo de autotile de piso visto desde arriba) **y** paleta cálida
+  marrón-rojiza (tierra/carne corrupta), incompatible en dos ejes distintos
+  con `docs/guia_estilo_visual.md`.
+
+### Pendiente de decisión (no descartado, no integrado)
+- **Free-Top-Down-Pixel-Art-Cave-Objects (CraftPix)** — pese al nombre,
+  varios props sueltos (cristales, hongos, altares, restos óseos, braziers)
+  se ven bien también en vista lateral, y la paleta azul/teal/violeta oscura
+  calza con la del juego mejor que cualquier otro candidato evaluado hasta
+  ahora. Licencia Free de CraftPix confirmada: uso comercial permitido, sin
+  atribución requerida, solo prohíbe revender los archivos fuente sueltos.
+  Candidato a decoración de la cripta de Level 1 — falta elegir qué props
+  puntuales integrar (no el pack entero, que sigue siendo mayormente
+  top-down).
+
 ## Pendientes de descarga manual (bloqueados por flujo de compra de itch.io)
 
 El resto de los candidatos de `docs/lista_assets_pixel_art.md` y
