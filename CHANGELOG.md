@@ -6,6 +6,20 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 
 ## [Unreleased]
 
+### Added — Curación de assets: cave props + evaluación de loot icons
+- Resuelta la decisión pendiente sobre `Free-Top-Down-Pixel-Art-Cave-Objects`:
+  se evaluaron visualmente los props individuales (varios nombres de archivo
+  del pack están mal etiquetados) y se integraron 8 a
+  `assets/sprites/tilesets/cave_props_craftpix_free/` — cristales, hongos,
+  tótem, cráneo, restos óseos, estatua y una fogata ritual (mal nombrada
+  "Gates" en el pack original) que es candidata fuerte a "acento cálido" de
+  `docs/guia_estilo_visual.md`. Documentado en `CREDITS.md`.
+- Extraído y evaluado por primera vez `free-undead-loot-pixel-art-icons.zip`
+  (nunca se había descomprimido): 48 íconos de loot de buena calidad y
+  licencia, pero `docs/GDD.md` excluye explícitamente el sistema de
+  inventario del alcance de la demo — no se integró a `assets/` por eso, se
+  deja documentado para el juego completo.
+
 ### Added — Checkpoint y respawn automático (Fase 4.3, penitencia parcial)
 - `scripts/level/checkpoint.gd` + `scenes/level/Checkpoint.tscn`: Area2D que
   al ser tocada por el jugador (grupo `"player"`) actualiza su punto de

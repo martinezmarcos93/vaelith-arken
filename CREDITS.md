@@ -113,6 +113,31 @@ externo (ver `docs/lista_assets_pixel_art.md` y `docs/lista_audio.md`).
   ⚠️ **Licencia NO verificada** — Marcos no recuerda el sitio de origen
   exacto. No usar en build final hasta poder identificar la fuente.
 
+- **Cave props (CraftPix, selección de "Free-Top-Down-Pixel-Art-Cave-Objects")**
+  — `assets/sprites/tilesets/cave_props_craftpix_free/`
+  Pese al nombre del pack (mayormente top-down), 8 props sueltos se ven bien
+  también en vista lateral y calzan con `docs/guia_estilo_visual.md`. Se
+  evaluaron visualmente uno por uno (varios nombres de archivo del pack
+  original están mal etiquetados — no confiar en el nombre sin abrir el
+  PNG) y se integraron:
+  - `white_crystal_dark_shadow1.png` / `Blue-green_crystal_dark_shadow1.png`
+    — cristales, decoración de cripta.
+  - `mushroom2_light_shadow1.png` — hongos, vegetación muerta/corrupta.
+  - `Dark_totem_dark_shadow2.png` — ídolo/máscara con cuernos, acento rojo.
+  - `Demon_scull_dark_shadow.png` — cráneo con cuernos, decoración ósea.
+  - `Dinosaur_skeleton_part1_dark_shadow.png` — restos óseos ambientales.
+  - `caveman_statue_dark_shadow1.png` — estatua oscura, guardián de fondo.
+  - `Gates_dark_shadow3.png` — **pese al nombre, es una fogata/brasero
+    ritual** (roca en círculo con fuego), no un portón. Candidato fuerte a
+    "acento cálido" de `guia_estilo_visual.md` (elemento sagrado/interactuable).
+  Licencia CraftPix Free confirmada: uso comercial permitido, sin
+  atribución requerida, solo prohíbe revender los archivos fuente sueltos
+  (`License.txt` copiado junto a los props). El resto del pack (criaturas
+  top-down: escorpiones, arañas-demonio) no se integró — no aplica a vista
+  lateral. Fuente completa se conserva en
+  `Herramientas/Pixelherramientas/_extracted/Free-Top-Down-Cave-Objects/`
+  por si hace falta revisar más props a futuro.
+
 ## Descartado (evaluado y NO integrado — eliminado de Herramientas/ el 2026-08-19)
 
 Estos packs se revisaron, se decidió no usarlos, y **se borraron físicamente**
@@ -144,16 +169,16 @@ algún momento conviene reevaluarlos — habría que volver a descargarlos.
   marrón-rojiza (tierra/carne corrupta), incompatible en dos ejes distintos
   con `docs/guia_estilo_visual.md`.
 
-### Pendiente de decisión (no descartado, no integrado)
-- **Free-Top-Down-Pixel-Art-Cave-Objects (CraftPix)** — pese al nombre,
-  varios props sueltos (cristales, hongos, altares, restos óseos, braziers)
-  se ven bien también en vista lateral, y la paleta azul/teal/violeta oscura
-  calza con la del juego mejor que cualquier otro candidato evaluado hasta
-  ahora. Licencia Free de CraftPix confirmada: uso comercial permitido, sin
-  atribución requerida, solo prohíbe revender los archivos fuente sueltos.
-  Candidato a decoración de la cripta de Level 1 — falta elegir qué props
-  puntuales integrar (no el pack entero, que sigue siendo mayormente
-  top-down).
+## Evaluado, sin uso actual (fuera de alcance de la demo)
+
+- **Free-Undead-Loot-Pixel-Art-Icons (CraftPix)** — 48 íconos de loot
+  (calaveras, corazones, pociones, huesos, trofeos). Calidad y licencia
+  igual de válidas que el resto de CraftPix (uso comercial OK, sin
+  atribución), pero `docs/GDD.md` deja explícito que el sistema de
+  inventario está **fuera de alcance de esta demo**. No se integró a
+  `assets/` por ese motivo, no por calidad. Se conserva extraído en
+  `Herramientas/Pixelherramientas/_extracted/free-undead-loot-pixel-art-icons/`
+  para cuando el juego completo (post-demo) sume inventario/objetos.
 
 ## Pendientes de descarga manual (bloqueados por flujo de compra de itch.io)
 
