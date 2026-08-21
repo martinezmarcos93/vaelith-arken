@@ -1,5 +1,6 @@
-[gd_scene load_steps=21 format=3]
+[gd_scene load_steps=22 format=3]
 
+[ext_resource type="Script" path="res://scripts/level/hazard.gd" id="15_hazard_script"]
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/NoMuertoErrante.tscn" id="2_no_muerto"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/EspirituAtado.tscn" id="3_espiritu"]
@@ -59,6 +60,17 @@ offset_top = -30.0
 offset_right = 1900.0
 offset_bottom = 30.0
 color = Color(0.02, 0.02, 0.03, 1)
+
+[node name="KillZone" type="Area2D" parent="SafetyFloor"]
+script = ExtResource("15_hazard_script")
+damage = 99
+knockback = 0.0
+stagger_time = 0.0
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SafetyFloor/KillZone"]
+shape = SubResource("Shape_safety_floor")
 
 [node name="TramoA_P1" type="StaticBody2D" parent="."]
 position = Vector2(150, 272)
