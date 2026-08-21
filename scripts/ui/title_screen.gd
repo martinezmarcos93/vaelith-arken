@@ -1,10 +1,8 @@
 extends Control
 
-## Fase 9.2 - pantalla de titulo. "Iniciar partida" apunta a Level1.tscn
-## hasta que exista Intro.tscn (paso 5 del plan de la demo completa) --
-## actualizar START_SCENE cuando esa escena exista.
+## Fase 9.2 - pantalla de titulo. "Iniciar partida" arranca la Intro.
 
-const START_SCENE := "res://scenes/levels/Level1.tscn"
+const START_SCENE := "res://scenes/levels/Intro.tscn"
 
 @onready var _start_button: Button = $Center/VBox/StartButton
 @onready var _quit_button: Button = $Center/VBox/QuitButton
