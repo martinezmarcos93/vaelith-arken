@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Vaelith Arken - Demo"
 config/description="Demo vertical slice: intro + Level 1 + Boss 1 + desenlace."
-run/main_scene="res://scenes/levels/Main.tscn"
+run/main_scene="res://scenes/ui/TitleScreen.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [autoload]
