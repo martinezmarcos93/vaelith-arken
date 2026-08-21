@@ -21,15 +21,61 @@ Extraída algorítmicamente (cuantización de color, 14 colores dominantes) de
 | 🟪 | `#352037` | Violeta oscuro (transición día/noche) |
 | 🟪 | `#493165` | Violeta medio (cielo, niebla) |
 
-**Regla de acento único:** de los 14 colores, solo `#B41F1C` (rojo) rompe la gama
-fría. Se reserva exclusivamente para: sangre, peligro inminente (telegrafiado de
-ataques de boss), y elementos "sagrados" de Pharasma que deban resaltar. No usar
-rojo decorativamente — si todo es acento, nada lo es.
+**Regla madre:** de los 14 colores del núcleo, solo `#B41F1C` (rojo) rompe la
+gama fría. No usar cálidos decorativamente — si todo es acento, nada lo es. Esta
+regla se mantiene en espíritu abajo, aunque ahora hay tres acentos con roles
+distintos en vez de uno solo.
 
-**Dorado apagado (a definir en producción):** falta un tono cálido secundario para
-lo "sagrado no urgente" (símbolos de Pharasma, checkpoints). Sugerido: derivar un
-dorado desaturado (`#8A7040` aprox.) para que no compita visualmente con el rojo
-de peligro. Ajustar con muestra real en Aseprite antes de fijarlo.
+### 1.1 Paleta extendida (variedad dentro de la misma familia)
+
+Reconciliación con `Estetica ideal/Informe_Sistema_Estetica_DarkFantasy.md`, que
+midió la paleta agregada sobre las **23 imágenes** de `Estetica ideal/` (el
+núcleo de arriba sale de una sola: `Estetica ideal.jpeg`). Es el mismo eje
+cromático — negro-verdoso / índigo-azul / violeta / teal —, así que estas
+variantes no compiten con el núcleo, lo amplían para dar rango tonal
+(iluminación, profundidad, distintas zonas del nivel) sin salir de la identidad
+ya fijada.
+
+| Grupo | Núcleo (canon, no tocar) | Variantes extendidas (usar para variar tono/luz) |
+|---|---|---|
+| Negros | `#010901` `#0C1A1C` `#02100E` `#041917` | `#0f1f12` `#181d14` `#161f13` `#09160b` `#000a01` |
+| Azul-índigo | `#2B2E56` `#11222E` `#3A5184` `#162C3D` `#3B4272` | `#313682` `#4947a7` `#4c4793` `#205188` |
+| Teal | `#07424F` | `#10423b` |
+| Violeta | `#766DBC` `#352037` `#493165` | `#7a36a2` (más saturado — reservar para picos de intensidad mágica, no para uso ambiental parejo) |
+
+**Uso sugerido:** núcleo para lo que define identidad (protagonista, boss, UI —
+donde la consistencia entre assets importa más). Extendida para fondos,
+iluminación puntual o props donde conviene variar sin salirse de la familia.
+
+### 1.2 Sistema de acentos cálidos (tres roles, no uno)
+
+El análisis de las 23 imágenes sumó un cálido adicional (`#4d1409`, rojo-óxido)
+que **no compite** con el rojo de peligro porque cumple una función distinta —
+es desaturado y ambiental, no saturado y urgente. Con esto, el acento único pasa
+a ser un sistema de tres acentos, cada uno con un rol fijo y no intercambiable:
+
+| Acento | Hex | Rol | Regla de uso |
+|---|---|---|---|
+| Rojo de peligro | `#B41F1C` | Sangre, amenaza inminente, telegrafiado de ataques | Saturado, puntual, siempre ligado a una amenaza activa en pantalla |
+| Rojo-óxido (nuevo) | `#4d1409` | Desgaste ambiental — óxido en armadura, sangre seca, brasas apagadas, madera quemada | Desaturado/oscuro, puede aparecer como textura de fondo porque no se lee como "urgente" |
+| Dorado apagado (a definir en producción) | `~#8A7040` (aprox., ajustar con muestra real en Aseprite) | Lo "sagrado no urgente" — símbolos de Pharasma, checkpoints | Cálido pero tibio, nunca tan vivo como el rojo de peligro |
+
+Sigue valiendo la regla madre a nivel de conjunto: los tres cálidos juntos deben
+seguir siendo minoría absoluta del cuadro (~70-80% frío, según la medición real
+de `Informe_Sistema_Estetica_DarkFantasy.md` §3.2). Si en una escena hay más de
+un acento cálido a la vez, cada uno debe ocupar una zona/objeto claramente
+distinto — nunca mezclados en el mismo elemento.
+
+### 1.3 Fuera del canon del juego (a propósito)
+
+El corpus de 23 imágenes incluye una cuarta familia temática ("box-art
+nostálgico cálido" — pueblo nevado, aurora boreal, fogata; ver
+`Informe_Sistema_Estetica_DarkFantasy.md` §3.1) que es deliberadamente cálida y
+luminosa, no fría/opresiva. Esa familia queda **fuera del canon visual de
+VaelithArken** — rompería la identidad de SLAIN/Volgarr que define este juego.
+Es material válido si en algún momento se retoma `Estetica ideal/` para otro fin
+(ej. contenido/redes, ver `Estudio_Dark_Fantasy_Codex.md`), pero no debe
+filtrarse a prompts ni a arte de este proyecto.
 
 ## 2. Resolución y escala de sprite
 - Resolución de referencia de cámara: **1280x720**, con pixel scaling en modo
