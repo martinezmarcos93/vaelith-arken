@@ -16,6 +16,14 @@ enum State { FREE, ATTACK_HIGH, ATTACK_LOW, BLOCK, SHOVE, HURT, STAGGERED }
 @export var air_control_factor: float = 0.1
 @export var coyote_time: float = 0.08
 
+@export_group("Camara")
+## Cuanto se adelanta la camara en la direccion en la que mira Vaelith
+## (Fase 1.2 del roadmap). Los limites de nivel se configuran por escena
+## (override del nodo Camera2D en cada .tscn de nivel), no aca, porque
+## Player.tscn se reutiliza entre niveles con distintos limites.
+@export var camera_lookahead_distance: float = 60.0
+@export var camera_lookahead_lerp_speed: float = 4.0
+
 # --- Combate ---
 @export_group("Combate")
 @export var max_health: int = 5
@@ -53,6 +61,7 @@ const HITBOX_OFFSET_X := 20.0
 @onready var attack_low_hitbox: Hitbox = $AttackLowHitbox
 @onready var shove_hitbox: Hitbox = $ShoveHitbox
 @onready var hurtbox: Hurtbox = $Hurtbox
+@onready var camera: Camera2D = $Camera2D
 
 var state: State = State.FREE
 var facing: int = 1
@@ -87,6 +96,7 @@ func _physics_process(delta: float) -> void:
 		_iframe_timer = max(_iframe_timer - delta, 0.0)
 
 	_update_hitbox_facing()
+	_update_camera_lookahead(delta)
 	_poll_input_buffer(delta)
 
 	match state:
@@ -212,6 +222,12 @@ func _process_timed_lock(delta: float, duration: float) -> void:
 	if _state_timer >= duration:
 		state = State.FREE
 		_state_timer = 0.0
+
+
+func _update_camera_lookahead(delta: float) -> void:
+	var target_offset_x: float = camera_lookahead_distance * facing
+	var weight: float = clamp(camera_lookahead_lerp_speed * delta, 0.0, 1.0)
+	camera.offset.x = lerp(camera.offset.x, target_offset_x, weight)
 
 
 func _update_hitbox_facing() -> void:

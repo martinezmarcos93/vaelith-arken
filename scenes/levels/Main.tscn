@@ -37,5 +37,11 @@ shape = SubResource("PlatformShapeMed")
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector2(150, 380)
 
+[node name="Camera2D" parent="Player"]
+limit_left = 0
+limit_top = -2000
+limit_right = 2000
+limit_bottom = 560
+
 [node name="TrainingDummy" parent="." instance=ExtResource("2_dummy")]
 position = Vector2(185, 380)
