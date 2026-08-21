@@ -23,6 +23,7 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 
 InputSetup="*res://scripts/input_setup.gd"
 TransitionManager="*res://scenes/ui/TransitionManager.tscn"
+DialogueBox="*res://scenes/ui/DialogueBox.tscn"
 
 [display]
 
