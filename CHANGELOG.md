@@ -17,7 +17,9 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 ### Added — Movimiento y cámara (Etapa 1.1/1.2, completa)
 - Movimiento base del jugador (`scripts/player.gd`): control aéreo mínimo,
   coyote time, sin doble salto ni dash — pilar de diseño "salto comprometido".
-- Cámara con position smoothing siguiendo al jugador.
+- Cámara con position smoothing, lookahead en la dirección de movimiento
+  (calculado en `player.gd`, reutilizable entre niveles) y límites de nivel
+  configurados por escena (override del `Camera2D` en cada `.tscn` de nivel).
 - Input map configurado por código (`scripts/input_setup.gd`, autoload):
   mover, saltar, atacar alto/bajo, bloquear, embestida, interactuar.
 - Escena sandbox de pruebas de física (`scenes/levels/Main.tscn`).
@@ -47,6 +49,21 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
      input de 0.12s (`_poll_input_buffer`), consultado en todos los
      estados y consumido recién cuando el jugador puede procesarlo.
 
+### Added — Vida, daño y muerte (Etapa 1.4, sandbox validado)
+- Vida, daño, i-frames (0.4s) e integración con bloqueo/postura ya existían
+  desde el combate base (Etapa 1.3).
+- Estado `DEAD` para el jugador: al llegar a 0 HP, la máquina de estados
+  queda trabada (sin timer de reversión, a diferencia de `HURT`/`STAGGERED`)
+  e ignora golpes posteriores. Corrige un bug real encontrado por testing
+  headless: `_die()` solo imprimía un mensaje y dejaba `state=HURT`, que
+  vencía por tiempo y volvía a `FREE` sin importar la vida — un "cadáver"
+  con 0 HP seguía moviéndose y peleando.
+- La penitencia/respawn real (Pharasma devuelve al jugador, corrupción de
+  nivel) sigue **fuera de alcance** hasta la Etapa 4, porque depende del
+  sistema de checkpoints — hoy `DEAD` es un estado terminal sin respawn,
+  suficiente para validar el criterio de aceptación de la Fase 1.5
+  ("correr, saltar, golpear y morir sin bugs bloqueantes").
+
 ### Added — Assets de terceros (investigación + integración selectiva)
 - Checklist completo de pixel art y audio con candidatos investigados
   (itch.io, OpenGameArt, CraftPix) — ver `docs/lista_assets_pixel_art.md`
@@ -73,11 +90,12 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
   borró tras cerrar la Etapa 1).
 
 ### Pending — próximos pasos por etapa (ver `docs/Roadmap.md`)
-- **Etapa 1.4**: sistema de vida/muerte definitivo y mecánica de
-  "penitencia" real (game over → respawn con corrupción de nivel). Hoy
-  solo existe vida/daño/i-frames; morir imprime un mensaje, no respawnea.
-- **Etapa 1.5**: consolidar el sandbox actual como prototipo formal
-  (ya cumple la función informalmente).
+- **Etapa 1: cerrada.** Movimiento, cámara, combate base y vida/muerte
+  validados por testing headless (`scripts/test_driver.gd`); criterio de
+  aceptación de la Fase 1.5 cumplido.
+- **Etapa 4** (no antes): mecánica de "penitencia" real (respawn en
+  checkpoint + corrupción de nivel), cuando exista el sistema de
+  checkpoints — hoy `DEAD` es terminal, sin respawn.
 - **Etapa 2**: arte y animación final del protagonista (hoy es un
   rectángulo de color placeholder).
 - **Etapa 3**: intro jugable real (guion ya escrito en
