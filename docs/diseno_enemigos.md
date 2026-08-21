@@ -31,6 +31,17 @@ combate específica (referencia SLAIN/Volgarr — nada de hordas ni relleno).
   no-muertos "voluntarios" más adelante (fuera de alcance para esta demo, pero
   vale la pena no cerrar la puerta a esa distinción moral en el futuro).
 
+## Estado de implementación (Fase 5.3)
+Máquina de estados compartida implementada en `scripts/enemies/enemy_regular.gd`
+(un solo script + `@export`, tal como pedía este documento). Placeholder de
+arte temporal, igual que se hizo con Vaelith: Necromancer (`creativekind`,
+comercial OK) para el No-muerto errante, Ghost (`fatalaigaming`, gratis) para
+el Espíritu atado — ninguno es la asignación final. Validado headless:
+detección, aproximación, ataque, ventana vulnerable y muerte funcionan;
+`EspirituAtado` no persigue por diseño (confirmado: se queda en Alerta sin
+atacar si el jugador nunca entra en `attack_range`, tal como se especificó
+arriba).
+
 ## Reglas comunes a ambos
 - Ningún enemigo regular debe poder atacar dos veces seguidas sin una ventana de
   vulnerabilidad intermedia — es la garantía de que la demo se sienta "dura pero

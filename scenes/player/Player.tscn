@@ -39,7 +39,7 @@ position_smoothing_speed = 8.0
 [node name="AttackHighHitbox" type="Area2D" parent="."]
 position = Vector2(20, -10)
 collision_layer = 0
-collision_mask = 1
+collision_mask = 2
 script = ExtResource("2_hitbox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHighHitbox"]
@@ -48,7 +48,7 @@ shape = SubResource("RectangleShape2D_attack_high")
 [node name="AttackLowHitbox" type="Area2D" parent="."]
 position = Vector2(18, 12)
 collision_layer = 0
-collision_mask = 1
+collision_mask = 2
 script = ExtResource("2_hitbox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackLowHitbox"]
@@ -57,7 +57,7 @@ shape = SubResource("RectangleShape2D_attack_low")
 [node name="ShoveHitbox" type="Area2D" parent="."]
 position = Vector2(24, 0)
 collision_layer = 0
-collision_mask = 1
+collision_mask = 2
 script = ExtResource("2_hitbox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShoveHitbox"]

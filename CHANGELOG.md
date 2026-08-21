@@ -6,6 +6,28 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 
 ## [Unreleased]
 
+### Added — Enemigos regulares con IA real (Etapa 5, sandbox validado)
+- `scripts/enemies/enemy_regular.gd`: máquina de estados compartida
+  Idle→Alerta→Ataque→Vulnerable→Idle (tal como especifica
+  `diseno_enemigos.md`), un solo script con toda la diferencia entre
+  "No-muerto errante" y "Espíritu atado" resuelta por `@export` (patrulla en
+  tierra vs. vaivén flotante + lunge), sin duplicar código.
+- `scenes/enemies/NoMuertoErrante.tscn` / `EspirituAtado.tscn`: placeholder
+  de arte temporal (Necromancer CC0-compatible y Ghost gratis, ya
+  catalogados en `CREDITS.md`), igual criterio que el placeholder del
+  jugador — validar la IA sin esperar arte final.
+- **Bug real encontrado y corregido por testing headless:** todos los
+  Hurtbox compartían la misma capa de colisión, así que un enemigo podía
+  golpear a otro enemigo o al `TrainingDummy` por accidente (fuego amigo).
+  Se separó en dos capas (jugador vs. bando enemigo) en `Player.tscn`,
+  `TrainingDummy.tscn` y los dos enemigos nuevos.
+- **Segundo hallazgo (documentado, no bug):** si `attack_range` es menor que
+  la distancia física mínima alcanzable (otro cuerpo sólido en el camino),
+  `move_and_slide()` frena al enemigo antes de que la distancia lógica
+  dispare el ataque — se queda "pegado" sin atacar nunca. Anotado como
+  comentario en `enemy_regular.gd` para la próxima vez que se ajusten estos
+  valores en Level 1 real.
+
 ### Added — Preproducción (Etapa 0, completa)
 - Estructura base del proyecto Godot 4.7 (`project.godot`, carpetas de
   scenes/scripts/assets/docs/tools).
@@ -120,10 +142,14 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
   `docs/guion_intro.md`, sin implementar).
 - **Etapa 4**: construcción real de Level 1 sobre el layout ya diseñado
   (`docs/layout_level1.md`), reemplazando el sandbox de pruebas.
-- **Etapa 5**: enemigos regulares con IA real (hoy solo existe el dummy
-  de pruebas, no enemigos jugables).
-- **Etapa 6**: Boss 1 (diseño, arte, arena, IA, narrativa).
+- **Etapa 5**: IA (Fase 5.3) ya implementada y validada en el sandbox — falta
+  balance con playtesting real (Fase 5.4) y arte final (Fase 5.2, mismo
+  bloqueo narrativo/de tiempo que Vaelith).
+- **Etapa 6**: diseño de patrones cerrado (`docs/diseno_boss1.md`, Fase 6.1).
+  Faltan arte (6.2, bloqueada por compartir diseño con Vaelith), arena
+  (6.3), IA en Godot (6.4) e integración narrativa completa (6.5).
 - **Etapa 7**: desenlace de la demo.
 - **Etapa 8**: audio (composición vía Suno, SFX final, integración).
-- **Etapa 9**: UI/UX (HUD, menús, diálogo).
+- **Etapa 9**: HUD de vida ya implementado (Fase 9.1). Faltan menús (9.2) y
+  sistema de diálogo (9.3).
 - **Etapa 10-11**: QA, pulido, empaquetado.
