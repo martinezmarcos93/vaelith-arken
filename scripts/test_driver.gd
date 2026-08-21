@@ -38,7 +38,10 @@ func _run_test_sequence() -> void:
 	print("--- TEST: sin bloquear, absorber el proximo golpe del dummy ---")
 	await get_tree().create_timer(3.0).timeout
 
-	print("--- TEST: embestida (deberia alejar al dummy) ---")
+	print("--- TEST: seguir sin bloquear hasta morir (valida Fase 1.4: DEAD) ---")
+	await get_tree().create_timer(5.0).timeout
+
+	print("--- TEST: intentar embestida estando muerto (no deberia hacer nada) ---")
 	await _tap("shove")
 
 	print("--- TEST FIN ---")

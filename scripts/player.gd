@@ -4,7 +4,7 @@ extends CharacterBody2D
 ## Valores de referencia: docs/stats_personaje.md (ajustables como @export
 ## para tunear "feel" desde el editor sin tocar codigo).
 
-enum State { FREE, ATTACK_HIGH, ATTACK_LOW, BLOCK, SHOVE, HURT, STAGGERED }
+enum State { FREE, ATTACK_HIGH, ATTACK_LOW, BLOCK, SHOVE, HURT, STAGGERED, DEAD }
 
 # --- Movimiento ---
 @export_group("Movimiento")
@@ -115,6 +115,8 @@ func _physics_process(delta: float) -> void:
 			_process_timed_lock(delta, hurt_lock_time)
 		State.STAGGERED:
 			_process_timed_lock(delta, block_stagger_time)
+		State.DEAD:
+			_process_dead(delta)
 
 	move_and_slide()
 
@@ -224,6 +226,15 @@ func _process_timed_lock(delta: float, duration: float) -> void:
 		_state_timer = 0.0
 
 
+func _process_dead(delta: float) -> void:
+	# Sin timer: a diferencia de HURT/STAGGERED, DEAD no vence solo. Revertir
+	# a FREE automaticamente era el bug (Fase 1.4): un "cadaver" con 0 HP
+	# que seguia moviendose y peleando como si nada tras hurt_lock_time.
+	if not is_on_floor():
+		velocity.y += gravity * delta
+	velocity.x = move_toward(velocity.x, 0.0, friction * delta)
+
+
 func _update_camera_lookahead(delta: float) -> void:
 	var target_offset_x: float = camera_lookahead_distance * facing
 	var weight: float = clamp(camera_lookahead_lerp_speed * delta, 0.0, 1.0)
@@ -237,6 +248,8 @@ func _update_hitbox_facing() -> void:
 
 
 func _on_hurtbox_hurt(damage: int, direction: Vector2, knockback: float, stagger_time: float) -> void:
+	if state == State.DEAD:
+		return
 	if _iframe_timer > 0.0:
 		return
 	if state == State.BLOCK and damage > 0:
@@ -258,16 +271,22 @@ func _register_block() -> void:
 
 func _take_damage(damage: int, direction: Vector2, knockback: float, stagger_time: float) -> void:
 	health = max(health - damage, 0)
+	print("Vaelith: recibe %d de daño (vida=%d/%d)" % [damage, health, max_health])
+	if health <= 0:
+		_die(direction, knockback)
+		return
 	_iframe_timer = iframes_duration
 	velocity = direction * knockback
 	state = State.HURT
 	_state_timer = 0.0
-	print("Vaelith: recibe %d de daño (vida=%d/%d)" % [damage, health, max_health])
-	if health <= 0:
-		_die()
 
 
-func _die() -> void:
+func _die(direction: Vector2, knockback: float) -> void:
 	# Penitencia/respawn se implementa en la Etapa 4 junto con los
-	# checkpoints reales del nivel; por ahora solo se registra el evento.
-	print("Vaelith: HP a 0 - penitencia pendiente de implementar (Fase 4)")
+	# checkpoints reales del nivel; por ahora el estado queda trabado en
+	# DEAD (sin timer de reversion, ver _process_dead) para validar en
+	# Fase 1.5 que morir no deja bugs bloqueantes, sin necesitar todavia
+	# el sistema de checkpoints.
+	state = State.DEAD
+	velocity = direction * knockback
+	print("Vaelith: HP a 0 - estado DEAD (input bloqueado, penitencia pendiente de Fase 4)")
