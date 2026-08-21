@@ -6,6 +6,10 @@ extends CharacterBody2D
 
 enum State { FREE, ATTACK_HIGH, ATTACK_LOW, BLOCK, SHOVE, HURT, STAGGERED, DEAD }
 
+## Para que el HUD (Etapa 9.1) refleje la vida sin necesitar una referencia
+## directa al nodo Player -- se emite en _ready() y en cada cambio real.
+signal health_changed(current: int, max: int)
+
 # --- Movimiento ---
 @export_group("Movimiento")
 @export var speed: float = 90.0
@@ -78,7 +82,9 @@ const BUFFERABLE_ACTIONS := ["attack_high", "attack_low", "shove"]
 
 
 func _ready() -> void:
+	add_to_group("player")
 	health = max_health
+	health_changed.emit(health, max_health)
 	attack_high_hitbox.source = self
 	attack_high_hitbox.damage = attack_high_damage
 	attack_high_hitbox.knockback = 0.0
@@ -308,6 +314,7 @@ func _register_block() -> void:
 
 func _take_damage(damage: int, direction: Vector2, knockback: float, stagger_time: float) -> void:
 	health = max(health - damage, 0)
+	health_changed.emit(health, max_health)
 	print("Vaelith: recibe %d de daño (vida=%d/%d)" % [damage, health, max_health])
 	if health <= 0:
 		_die(direction, knockback)

@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_script"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_script")
+
+[node name="Margin" type="Control" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 216.0
+offset_bottom = 36.0
+
+[node name="HealthBar" type="Control" parent="Margin"]
+offset_right = 200.0
+offset_bottom = 20.0
+
+[node name="Background" type="ColorRect" parent="Margin/HealthBar"]
+offset_right = 200.0
+offset_bottom = 20.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="Fill" type="ColorRect" parent="Margin/HealthBar"]
+offset_right = 200.0
+offset_bottom = 20.0
+color = Color(0.706, 0.122, 0.11, 1)

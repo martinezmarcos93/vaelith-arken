@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/test_driver.gd" id="0_driver"]
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/TrainingDummy.tscn" id="2_dummy"]
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="3_hud"]
 
 [sub_resource type="RectangleShape2D" id="GroundShape"]
 size = Vector2(2000, 40)
@@ -45,3 +46,5 @@ limit_bottom = 560
 
 [node name="TrainingDummy" parent="." instance=ExtResource("2_dummy")]
 position = Vector2(185, 380)
+
+[node name="HUD" parent="." instance=ExtResource("3_hud")]
