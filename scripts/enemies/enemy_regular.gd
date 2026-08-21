@@ -213,6 +213,12 @@ func _on_hurt(damage: int, direction: Vector2, knockback: float, stagger_time: f
 func _die() -> void:
 	state = State.DEAD
 	attack_hitbox.deactivate()
+	# El cuerpo no se libera (queda como "cadaver" visual, coherente con
+	# que la muerte no es un game over generico) pero deja de bloquear
+	# fisicamente el paso -- sin esto, un enemigo derrotado en un pasillo
+	# angosto (ej. Intro, Escena 4) deja al jugador trabado para siempre.
+	collision_layer = 0
+	collision_mask = 0
 	sprite.play(anim_death)
 	print("%s: destruido" % name)
 
