@@ -169,6 +169,41 @@ algún momento conviene reevaluarlos — habría que volver a descargarlos.
   marrón-rojiza (tierra/carne corrupta), incompatible en dos ejes distintos
   con `docs/guia_estilo_visual.md`.
 
+### Tercera tanda — eliminados el 2026-08-21 (buscando textura de piso)
+Se bajaron a pedido explícito de una búsqueda de textura de piso real para
+Level 1. Ninguno resultó aplicable — medio equivocado en la mayoría de los
+casos, no un tema de curación fina como las tandas anteriores.
+- **Torment Textures.zip / Torment Textures 1.1.rar** — texturas de **Quake**
+  (`.wad`, paleta de Quake, `.bmp`). Formato/motor 3D viejo, no pixel art,
+  no aplica a un juego 2D en Godot.
+- **textures.zip** — mapas **PBR** (albedo/normal/roughness/metallic +
+  preview `.glb`) para render 3D realista. Choca por completo con la
+  estética pixel art del juego.
+- **PSD.zip** — 16 PSD (Brick, Stone, Marble, Grass, Dirt, Paving Tiles...).
+  No se pudo previsualizar el PSD directamente, pero los nombres apuntan al
+  mismo problema de medio equivocado (texturas pintadas/realistas, no
+  pixel art).
+- **256x256 Pixel Textures.rar** — la misma familia que `PSD.zip` (Brick,
+  Cement, Dirt, Carpet...) exportada a PNG plano. Instalado 7-Zip para poder
+  abrirlo (no había extractor de `.rar` en el sistema) y confirmado
+  visualmente: son texturas pintadas realistas y seamless, no pixel art —
+  sin borde de píxel duro, incompatibles con el filtro nearest-neighbor y
+  la paleta fría de `docs/guia_estilo_visual.md` aunque el nombre diga
+  "Pixel".
+- **Pixel Plants.zip** (Bushes/Flowers/Trees) — sí es pixel art, pero de
+  paleta muy saturada y vibrante (estilo granja/fantasía "cute"). No calza
+  con la paleta fría gótica de `docs/guia_estilo_visual.md`.
+- **free pack.zip** — sprite sheet de NPCs humanos y animales de granja
+  (vaca, cerdo, gallina). Fuera de tema por completo — el juego no tiene
+  NPCs ni animales en su alcance (`docs/GDD.md`).
+- **seamless patterns (1).zip** — duplicado byte a byte de
+  `seamless patterns.zip` (ya integrado como
+  `textures_seamless_unverified_license/`, licencia sin verificar).
+- **separate.zip** — mismo contenido de `seamless patterns.zip` desagregado
+  en 1218 archivos sueltos, ya descartado en la entrada original.
+- **Textures-16.png / textures_02_08_25.png** — vueltos a descargar sin
+  saberlo que ya estaban descartados (ver "Descartado", entrada original).
+
 ## Evaluado, sin uso actual (fuera de alcance de la demo)
 
 - **Free-Undead-Loot-Pixel-Art-Icons (CraftPix)** — 48 íconos de loot
