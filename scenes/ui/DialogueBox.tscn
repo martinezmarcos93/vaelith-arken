@@ -23,8 +23,22 @@ anchor_bottom = 1.0
 offset_left = 20.0
 offset_top = 16.0
 offset_right = -20.0
-offset_bottom = -16.0
+offset_bottom = -36.0
 theme_override_colors/font_color = Color(0.92, 0.92, 0.92, 1)
 theme_override_font_sizes/font_size = 20
 autowrap_mode = 3
 vertical_alignment = 1
+
+[node name="Hint" type="Label" parent="Panel"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -140.0
+offset_top = -26.0
+offset_right = -12.0
+offset_bottom = -6.0
+theme_override_colors/font_color = Color(0.541, 0.439, 0.251, 1)
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 2
+text = "[E] continuar"

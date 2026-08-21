@@ -25,6 +25,7 @@ InputSetup="*res://scripts/input_setup.gd"
 TransitionManager="*res://scenes/ui/TransitionManager.tscn"
 DialogueBox="*res://scenes/ui/DialogueBox.tscn"
 GameState="*res://scripts/game_state.gd"
+QuitHandler="*res://scripts/quit_handler.gd"
 
 [display]
 
