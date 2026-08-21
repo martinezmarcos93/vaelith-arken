@@ -44,6 +44,13 @@ func _run_test_sequence() -> void:
 	print("--- TEST: intentar embestida estando muerto (no deberia hacer nada) ---")
 	await _tap("shove")
 
+	print("--- TEST: esperar respawn automatico (valida Fase 4.3: checkpoint) ---")
+	await get_tree().create_timer(2.0).timeout
+	print("--- TEST: moverse tras respawn (confirma que volvio a FREE) ---")
+	Input.action_press("move_right")
+	await get_tree().create_timer(0.3).timeout
+	Input.action_release("move_right")
+
 	print("--- TEST FIN ---")
 
 

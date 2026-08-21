@@ -6,6 +6,24 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 
 ## [Unreleased]
 
+### Added — Checkpoint y respawn automático (Fase 4.3, penitencia parcial)
+- `scripts/level/checkpoint.gd` + `scenes/level/Checkpoint.tscn`: Area2D que
+  al ser tocada por el jugador (grupo `"player"`) actualiza su punto de
+  respawn. Reutilizable en cualquier nivel.
+- `player.gd`: `set_checkpoint()` (llamado por el checkpoint),
+  `respawn_delay`/`respawn_iframes` exportados, y `_process_dead()` ahora
+  dispara `_respawn()` automáticamente en vez de dejar `DEAD` como estado
+  terminal para siempre. Resuelve el "penitencia pendiente" que quedaba
+  abierto desde la Fase 1.4.
+- **Alcance explícito:** esto resuelve el respawn en sí. La corrupción de
+  nivel progresiva de "penitencia" (`docs/stats_personaje.md`: +1 nivel de
+  corrupción por muerte, más enemigos/menos luz) sigue sin implementar —
+  depende de tramos reales con dificultad ajustable, no del mecanismo de
+  respawn.
+- Validado headless: `test_driver.gd` ahora deja morir a Vaelith, espera el
+  respawn automático, y confirma que puede volver a moverse (vuelve a
+  `FREE`, vida restaurada al máximo).
+
 ### Added — Enemigos regulares con IA real (Etapa 5, sandbox validado)
 - `scripts/enemies/enemy_regular.gd`: máquina de estados compartida
   Idle→Alerta→Ataque→Vulnerable→Idle (tal como especifica
@@ -132,9 +150,13 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 - **Etapa 1: cerrada.** Movimiento, cámara, combate base y vida/muerte
   validados por testing headless (`scripts/test_driver.gd`); criterio de
   aceptación de la Fase 1.5 cumplido.
-- **Etapa 4** (no antes): mecánica de "penitencia" real (respawn en
-  checkpoint + corrupción de nivel), cuando exista el sistema de
-  checkpoints — hoy `DEAD` es terminal, sin respawn.
+- **Etapa 4**: respawn en checkpoint ya implementado (Fase 4.3, parcial).
+  Falta: TileMap real sobre `docs/layout_level1.md` (tramos A-F con arte,
+  no el sandbox actual), y la corrupción de nivel de "penitencia" —
+  requiere que existan tramos reales de dificultad ajustable. Construir
+  el greybox completo de Level 1 requiere tuneo visual de distancias de
+  salto en el editor, no solo colocación de coordenadas por script — mejor
+  hacerlo con feedback visual directo en vez de a ciegas.
 - **Etapa 2**: sprite sheet final del protagonista (Fases 2.1-2.3). La
   integración técnica (Fase 2.4) ya está resuelta con un placeholder —
   falta el arte real de Vaelith para reemplazar el pack temporal.

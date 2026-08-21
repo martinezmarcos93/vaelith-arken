@@ -53,6 +53,14 @@ signal health_changed(current: int, max: int)
 @export var block_max_consecutive: int = 3
 @export var block_stagger_time: float = 0.8
 
+@export_group("Penitencia")
+## Respawn automatico en el ultimo checkpoint (Fase 4.3). La corrupcion de
+## nivel de "penitencia" (docs/stats_personaje.md: +1 nivel por muerte)
+## queda fuera de alcance hasta que exista un Level 1 real con tramos de
+## dificultad ajustable -- esto solo resuelve el respawn en si.
+@export var respawn_delay: float = 1.5
+@export var respawn_iframes: float = 1.0
+
 ## Ventana de gracia para inputs de combate presionados justo antes de que
 ## el jugador pueda procesarlos (ej. un frame en el aire por el knockback
 ## de un golpe recibido). Sin esto, is_action_just_pressed() se pierde para
@@ -77,6 +85,8 @@ var _state_timer: float = 0.0
 var _consecutive_blocks: int = 0
 var _buffered_action: String = ""
 var _buffer_timer: float = 0.0
+var _respawn_position: Vector2
+var _respawn_timer: float = 0.0
 
 const BUFFERABLE_ACTIONS := ["attack_high", "attack_low", "shove"]
 
@@ -85,6 +95,7 @@ func _ready() -> void:
 	add_to_group("player")
 	health = max_health
 	health_changed.emit(health, max_health)
+	_respawn_position = global_position
 	attack_high_hitbox.source = self
 	attack_high_hitbox.damage = attack_high_damage
 	attack_high_hitbox.knockback = 0.0
@@ -235,12 +246,31 @@ func _process_timed_lock(delta: float, duration: float) -> void:
 
 
 func _process_dead(delta: float) -> void:
-	# Sin timer: a diferencia de HURT/STAGGERED, DEAD no vence solo. Revertir
-	# a FREE automaticamente era el bug (Fase 1.4): un "cadaver" con 0 HP
-	# que seguia moviendose y peleando como si nada tras hurt_lock_time.
+	# A diferencia de HURT/STAGGERED, DEAD no vuelve a FREE por vencimiento
+	# de timer solo -- revertir automaticamente ahi era el bug de la Fase
+	# 1.4 (un "cadaver" con 0 HP que seguia peleando). El unico camino de
+	# salida de DEAD es _respawn(), tras respawn_delay (Fase 4.3).
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	velocity.x = move_toward(velocity.x, 0.0, friction * delta)
+	_respawn_timer += delta
+	if _respawn_timer >= respawn_delay:
+		_respawn()
+
+
+func set_checkpoint(world_position: Vector2) -> void:
+	_respawn_position = world_position
+
+
+func _respawn() -> void:
+	global_position = _respawn_position
+	velocity = Vector2.ZERO
+	health = max_health
+	health_changed.emit(health, max_health)
+	_iframe_timer = respawn_iframes
+	_respawn_timer = 0.0
+	state = State.FREE
+	print("Vaelith: penitencia cumplida, respawn en %s" % _respawn_position)
 
 
 ## Placeholder temporal (Opcion A del roadmap de arte): reutiliza el pack
@@ -326,11 +356,11 @@ func _take_damage(damage: int, direction: Vector2, knockback: float, stagger_tim
 
 
 func _die(direction: Vector2, knockback: float) -> void:
-	# Penitencia/respawn se implementa en la Etapa 4 junto con los
-	# checkpoints reales del nivel; por ahora el estado queda trabado en
-	# DEAD (sin timer de reversion, ver _process_dead) para validar en
-	# Fase 1.5 que morir no deja bugs bloqueantes, sin necesitar todavia
-	# el sistema de checkpoints.
+	# DEAD no vuelve a FREE por vencimiento de timer (ver _process_dead) --
+	# el unico camino de salida es _respawn() tras respawn_delay. La
+	# corrupcion de nivel de "penitencia" (mas enemigos/menos luz por
+	# muerte, docs/stats_personaje.md) sigue pendiente: depende de tramos
+	# reales con dificultad ajustable, no del respawn en si.
 	state = State.DEAD
 	velocity = direction * knockback
-	print("Vaelith: HP a 0 - estado DEAD (input bloqueado, penitencia pendiente de Fase 4)")
+	print("Vaelith: HP a 0 - estado DEAD (input bloqueado, respawn en %.1fs)" % respawn_delay)
