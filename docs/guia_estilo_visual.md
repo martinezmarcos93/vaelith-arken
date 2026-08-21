@@ -61,3 +61,54 @@ de peligro. Ajustar con muestra real en Aseprite antes de fijarlo.
 - Blender (a instalar) reservado para props que se beneficien de un render 3D
   bajado a sprite (columnas, elementos arquitectónicos complejos), no para
   personajes ni animaciones de combate.
+
+## 6. Vocabulario de referencia y moodboards generados
+
+**Importante — esto es para *referencia visual*, no para sprites finales.** Un
+generador de imágenes (Midjourney, Leonardo.ai, Gemini) no produce grilla de
+píxeles limpia, fondo transparente ni frames de animación consistentes entre
+sí. El resultado se guarda en `Estetica ideal/` como moodboard, igual que las
+imágenes ya existentes ahí — el sprite jugable se sigue pixeleando a mano en
+LibreSprite (ver `docs/analisis_herramientas_ia_pixel_art.md` para el porqué
+se descartó automatizar esa parte).
+
+### Vocabulario de estilo
+Extraído y verificado de una guía de prompts de Dark Fantasy (Midjourney).
+Útil como lenguaje descriptivo tanto para prompts de IA como para briefings
+humanos:
+
+- **Referencias de artista:** Frank Frazetta (composiciones audaces, tonos
+  cálidos-dramáticos — usar con cuidado, choca con la regla de acento único
+  de la paleta), Zdzisław Beksiński (surreal, pesadillesco — útil para
+  horror eldritch si aparece más adelante en el lore), Caspar David Friedrich
+  (figura solitaria contra paisaje vasto — encaja con el tono "wanderer" de
+  Vaelith), Gustave Doré (grabados góticos detallados, blanco y negro).
+- **Combos de keywords:** "cinematic lighting, volumetric fog", "matte
+  painting, concept art", "chiaroscuro, dramatic shadows", "ancient,
+  weathered, moss-covered".
+
+### Cómo generar moodboards con herramientas gratuitas (sin Midjourney)
+Midjourney es pago y no está disponible. Alternativas evaluadas (agosto 2026):
+
+| Herramienta | Estado | Límite gratis | Notas |
+|---|---|---|---|
+| **Leonardo.ai** | ✅ Recomendado | 150 "fast tokens"/día (~25-35 imágenes con el modelo base) | Permite subir imagen de referencia (equivalente al `--profile` de Midjourney) para mantener consistencia visual entre generaciones. **Las imágenes del plan free son públicas** — no subir nada que no querés que se vea. |
+| **App de Gemini** (gemini.google.com) | ⚠️ Oportunista, no confiable para un flujo | Google no publica un número fijo; reportes de usuarios varían bastante | No planificar sesiones de trabajo asumiendo una cuota — probar el día que se necesite y ver si responde. |
+| **API de Gemini** (`ai.google.dev`) | ❌ Descartada | Generación de imágenes no disponible en tier gratuito (confirmado en docs oficiales) | No sirve para automatizar esto desde Claude Code sin pagar. |
+
+**Prompts de partida para Vaelith** (adaptar subject/scene/details, sin los
+parámetros de Midjourney tipo `--chaos`/`--profile`, que no aplican a
+Leonardo/Gemini):
+- *"A lone armored knight standing before a corrupted gothic gate, cracked
+  stone runes glowing faint red, blue-violet fog rolling at his feet,
+  cinematic lighting, volumetric fog, chiaroscuro, in the style of Caspar
+  David Friedrich, dark fantasy illustration, cold color palette with a
+  single warm red accent"*
+- *"Close-up of an undead knight's helmet, ivy and moss growing through the
+  cracks, faint golden light from a sacred symbol on the chestplate,
+  matte painting, concept art, ancient weathered moss-covered armor,
+  ominous atmosphere"*
+
+Subir como referencia una de las imágenes ya curadas en `Estetica ideal/`
+antes de generar, para mantener la paleta y atmósfera consistentes con lo
+que ya se aprobó.
