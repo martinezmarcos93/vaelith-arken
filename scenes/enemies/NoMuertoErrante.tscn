@@ -40,7 +40,7 @@ shape = SubResource("Body")
 scale = Vector2(0.85, 0.85)
 sprite_frames = ExtResource("4_frames")
 animation = &"idle"
-offset = Vector2(3, 25)
+offset = Vector2(-19, -26)
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2
