@@ -1,0 +1,110 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scripts/intro_controller.gd" id="0_controller"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/NoMuertoErrante.tscn" id="2_no_muerto"]
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="3_hud"]
+[ext_resource type="PackedScene" path="res://scenes/level/DialogueTrigger.tscn" id="4_dialogue_trigger"]
+[ext_resource type="PackedScene" path="res://scenes/level/SceneTransitionTrigger.tscn" id="5_exit_trigger"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Dark_totem_dark_shadow2.png" id="6_symbol"]
+[ext_resource type="Script" path="res://scripts/level/hazard.gd" id="7_hazard_script"]
+
+[sub_resource type="RectangleShape2D" id="Shape_ground_start"]
+size = Vector2(300, 40)
+
+[sub_resource type="RectangleShape2D" id="Shape_ground_path"]
+size = Vector2(1100, 40)
+
+[sub_resource type="RectangleShape2D" id="Shape_safety_floor"]
+size = Vector2(1600, 60)
+
+[sub_resource type="RectangleShape2D" id="Shape_killzone"]
+size = Vector2(1600, 150)
+
+[node name="Intro" type="Node2D"]
+script = ExtResource("0_controller")
+
+[node name="SafetyFloor" type="StaticBody2D" parent="."]
+position = Vector2(750, 700)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SafetyFloor"]
+shape = SubResource("Shape_safety_floor")
+
+[node name="Visual" type="ColorRect" parent="SafetyFloor"]
+offset_left = -800.0
+offset_top = -30.0
+offset_right = 800.0
+offset_bottom = 30.0
+color = Color(0.02, 0.02, 0.03, 1)
+
+[node name="KillZone" type="Area2D" parent="SafetyFloor"]
+position = Vector2(0, -105)
+script = ExtResource("7_hazard_script")
+damage = 99
+knockback = 0.0
+stagger_time = 0.0
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SafetyFloor/KillZone"]
+shape = SubResource("Shape_killzone")
+
+[node name="Ground_Start" type="StaticBody2D" parent="."]
+position = Vector2(150, 470)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground_Start"]
+shape = SubResource("Shape_ground_start")
+
+[node name="Visual" type="ColorRect" parent="Ground_Start"]
+offset_left = -150.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = 20.0
+color = Color(0.067, 0.133, 0.18, 1)
+
+[node name="Ground_Path" type="StaticBody2D" parent="."]
+position = Vector2(895, 460)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground_Path"]
+shape = SubResource("Shape_ground_path")
+
+[node name="Visual" type="ColorRect" parent="Ground_Path"]
+offset_left = -550.0
+offset_top = -20.0
+offset_right = 550.0
+offset_bottom = 20.0
+color = Color(0.067, 0.133, 0.18, 1)
+
+[node name="MemoryFlashTrigger" parent="." instance=ExtResource("4_dialogue_trigger")]
+position = Vector2(550, 400)
+lines = ["Una mujer.", "Un trono.", "Calaveras.", "Una rueda.", "La imagen desaparece antes de que puedas atraparla."]
+
+[node name="PropSymbol" type="Sprite2D" parent="."]
+position = Vector2(1080, 406)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_symbol")
+
+[node name="DoorVisual" type="ColorRect" parent="."]
+offset_left = 1040.0
+offset_top = 350.0
+offset_right = 1080.0
+offset_bottom = 440.0
+color = Color(0.11, 0.222, 0.29, 1)
+
+[node name="NoMuertoErrante1" parent="." instance=ExtResource("2_no_muerto")]
+position = Vector2(1000, 400)
+
+[node name="ExitTrigger" parent="." instance=ExtResource("5_exit_trigger")]
+position = Vector2(1400, 400)
+target_scene = "res://scenes/levels/Level1.tscn"
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(100, 410)
+
+[node name="Camera2D" parent="Player"]
+limit_left = 0
+limit_top = -400
+limit_right = 1500
+limit_bottom = 650
+
+[node name="HUD" parent="." instance=ExtResource("3_hud")]
