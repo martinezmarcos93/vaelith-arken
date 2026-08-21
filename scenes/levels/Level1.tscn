@@ -1,0 +1,303 @@
+[gd_scene load_steps=21 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/NoMuertoErrante.tscn" id="2_no_muerto"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/EspirituAtado.tscn" id="3_espiritu"]
+[ext_resource type="PackedScene" path="res://scenes/level/Checkpoint.tscn" id="4_checkpoint"]
+[ext_resource type="PackedScene" path="res://scenes/level/Hazard.tscn" id="5_hazard"]
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="6_hud"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/white_crystal_dark_shadow1.png" id="7_crystal_white"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Blue-green_crystal_dark_shadow1.png" id="8_crystal_blue"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/mushroom2_light_shadow1.png" id="9_mushroom"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Dark_totem_dark_shadow2.png" id="10_totem"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Demon_scull_dark_shadow.png" id="11_skull"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Dinosaur_skeleton_part1_dark_shadow.png" id="12_bones"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/caveman_statue_dark_shadow1.png" id="13_statue"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Gates_dark_shadow3.png" id="14_bonfire"]
+
+[sub_resource type="RectangleShape2D" id="Shape_220x24"]
+size = Vector2(220, 24)
+
+[sub_resource type="RectangleShape2D" id="Shape_200x24"]
+size = Vector2(200, 24)
+
+[sub_resource type="RectangleShape2D" id="Shape_180x24"]
+size = Vector2(180, 24)
+
+[sub_resource type="RectangleShape2D" id="Shape_160x24"]
+size = Vector2(160, 24)
+
+[sub_resource type="RectangleShape2D" id="Shape_140x24"]
+size = Vector2(140, 24)
+
+[sub_resource type="RectangleShape2D" id="Shape_500x40"]
+size = Vector2(500, 40)
+
+[sub_resource type="RectangleShape2D" id="Shape_520x40"]
+size = Vector2(520, 40)
+
+[sub_resource type="RectangleShape2D" id="Shape_680x40"]
+size = Vector2(680, 40)
+
+[sub_resource type="RectangleShape2D" id="Shape_300x40"]
+size = Vector2(300, 40)
+
+[sub_resource type="RectangleShape2D" id="Shape_safety_floor"]
+size = Vector2(3800, 60)
+
+[node name="Level1" type="Node2D"]
+
+[node name="SafetyFloor" type="StaticBody2D" parent="."]
+position = Vector2(1800, 650)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SafetyFloor"]
+shape = SubResource("Shape_safety_floor")
+
+[node name="Visual" type="ColorRect" parent="SafetyFloor"]
+offset_left = -1900.0
+offset_top = -30.0
+offset_right = 1900.0
+offset_bottom = 30.0
+color = Color(0.02, 0.02, 0.03, 1)
+
+[node name="TramoA_P1" type="StaticBody2D" parent="."]
+position = Vector2(150, 272)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TramoA_P1"]
+shape = SubResource("Shape_220x24")
+
+[node name="Visual" type="ColorRect" parent="TramoA_P1"]
+offset_left = -110.0
+offset_top = -12.0
+offset_right = 110.0
+offset_bottom = 12.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="TramoA_P2" type="StaticBody2D" parent="."]
+position = Vector2(430, 342)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TramoA_P2"]
+shape = SubResource("Shape_200x24")
+
+[node name="Visual" type="ColorRect" parent="TramoA_P2"]
+offset_left = -100.0
+offset_top = -12.0
+offset_right = 100.0
+offset_bottom = 12.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="TramoA_P3" type="StaticBody2D" parent="."]
+position = Vector2(680, 402)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TramoA_P3"]
+shape = SubResource("Shape_200x24")
+
+[node name="Visual" type="ColorRect" parent="TramoA_P3"]
+offset_left = -100.0
+offset_top = -12.0
+offset_right = 100.0
+offset_bottom = 12.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="TramoB_Ground" type="StaticBody2D" parent="."]
+position = Vector2(1090, 470)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TramoB_Ground"]
+shape = SubResource("Shape_500x40")
+
+[node name="Visual" type="ColorRect" parent="TramoB_Ground"]
+offset_left = -250.0
+offset_top = -20.0
+offset_right = 250.0
+offset_bottom = 20.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="TramoC_P1" type="StaticBody2D" parent="."]
+position = Vector2(1450, 442)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TramoC_P1"]
+shape = SubResource("Shape_180x24")
+
+[node name="Visual" type="ColorRect" parent="TramoC_P1"]
+offset_left = -90.0
+offset_top = -12.0
+offset_right = 90.0
+offset_bottom = 12.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="TramoC_HazardGround" type="StaticBody2D" parent="."]
+position = Vector2(1620, 442)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TramoC_HazardGround"]
+shape = SubResource("Shape_160x24")
+
+[node name="Visual" type="ColorRect" parent="TramoC_HazardGround"]
+offset_left = -80.0
+offset_top = -12.0
+offset_right = 80.0
+offset_bottom = 12.0
+color = Color(0.153, 0.055, 0.035, 1)
+
+[node name="Hazard" parent="." instance=ExtResource("5_hazard")]
+position = Vector2(1620, 442)
+
+[node name="TramoC_P2" type="StaticBody2D" parent="."]
+position = Vector2(1830, 442)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TramoC_P2"]
+shape = SubResource("Shape_200x24")
+
+[node name="Visual" type="ColorRect" parent="TramoC_P2"]
+offset_left = -100.0
+offset_top = -12.0
+offset_right = 100.0
+offset_bottom = 12.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="TramoD_Ground" type="StaticBody2D" parent="."]
+position = Vector2(2260, 470)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TramoD_Ground"]
+shape = SubResource("Shape_520x40")
+
+[node name="Visual" type="ColorRect" parent="TramoD_Ground"]
+offset_left = -260.0
+offset_top = -20.0
+offset_right = 260.0
+offset_bottom = 20.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="Checkpoint1" parent="." instance=ExtResource("4_checkpoint")]
+position = Vector2(2020, 410)
+
+[node name="NoMuertoErrante2" parent="." instance=ExtResource("2_no_muerto")]
+position = Vector2(2200, 410)
+
+[node name="EspirituAtado1" parent="." instance=ExtResource("3_espiritu")]
+position = Vector2(2310, 310)
+
+[node name="NoMuertoErrante3" parent="." instance=ExtResource("2_no_muerto")]
+position = Vector2(2420, 410)
+
+[node name="TramoE_P1" type="StaticBody2D" parent="."]
+position = Vector2(2600, 392)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TramoE_P1"]
+shape = SubResource("Shape_140x24")
+
+[node name="Visual" type="ColorRect" parent="TramoE_P1"]
+offset_left = -70.0
+offset_top = -12.0
+offset_right = 70.0
+offset_bottom = 12.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="TramoE_P2" type="StaticBody2D" parent="."]
+position = Vector2(2760, 322)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TramoE_P2"]
+shape = SubResource("Shape_140x24")
+
+[node name="Visual" type="ColorRect" parent="TramoE_P2"]
+offset_left = -70.0
+offset_top = -12.0
+offset_right = 70.0
+offset_bottom = 12.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="TramoE_P3_Recompensa" type="StaticBody2D" parent="."]
+position = Vector2(2920, 272)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TramoE_P3_Recompensa"]
+shape = SubResource("Shape_160x24")
+
+[node name="Visual" type="ColorRect" parent="TramoE_P3_Recompensa"]
+offset_left = -80.0
+offset_top = -12.0
+offset_right = 80.0
+offset_bottom = 12.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="MemoriaFragmentoPlaceholder" type="Marker2D" parent="."]
+position = Vector2(2920, 230)
+
+[node name="TramoF_Ground" type="StaticBody2D" parent="."]
+position = Vector2(2860, 470)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TramoF_Ground"]
+shape = SubResource("Shape_680x40")
+
+[node name="Visual" type="ColorRect" parent="TramoF_Ground"]
+offset_left = -340.0
+offset_top = -20.0
+offset_right = 340.0
+offset_bottom = 20.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="PropCrystalWhite" type="Sprite2D" parent="."]
+position = Vector2(460, 308)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_crystal_white")
+
+[node name="PropMushroom" type="Sprite2D" parent="."]
+position = Vector2(720, 368)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("9_mushroom")
+
+[node name="PropStatue" type="Sprite2D" parent="."]
+## Marca la entrada a la ruta opcional del Tramo E.
+position = Vector2(2560, 416)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("13_statue")
+
+[node name="PropDarkTotem" type="Sprite2D" parent="."]
+position = Vector2(2040, 406)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("10_totem")
+
+[node name="PropCrystalBlueGreen" type="Sprite2D" parent="."]
+position = Vector2(2620, 425)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_crystal_blue")
+
+[node name="PropDemonSkull" type="Sprite2D" parent="."]
+position = Vector2(2780, 406)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("11_skull")
+
+[node name="PropDinoBones" type="Sprite2D" parent="."]
+position = Vector2(2950, 406)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("12_bones")
+
+[node name="PropBonfire" type="Sprite2D" parent="."]
+position = Vector2(3140, 406)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("14_bonfire")
+
+[node name="Checkpoint2" parent="." instance=ExtResource("4_checkpoint")]
+position = Vector2(3160, 410)
+
+[node name="BossArenaStub" type="StaticBody2D" parent="."]
+position = Vector2(3350, 470)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossArenaStub"]
+shape = SubResource("Shape_300x40")
+
+[node name="Visual" type="ColorRect" parent="BossArenaStub"]
+offset_left = -150.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = 20.0
+color = Color(0.02, 0.02, 0.03, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(150, 230)
+
+[node name="Camera2D" parent="Player"]
+limit_left = 0
+limit_top = -400
+limit_right = 3500
+limit_bottom = 700
+
+[node name="HUD" parent="." instance=ExtResource("6_hud")]

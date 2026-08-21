@@ -6,6 +6,29 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 
 ## [Unreleased]
 
+### Added — Level 1 construido en Godot (Fase 4.3, greybox)
+- `docs/layout_level1.md` (Fase 4.1) ya existia completo de una sesion
+  anterior pero no estaba marcado en `docs/Roadmap.md` -- discrepancia
+  dice/hace detectada y corregida al retomar el trabajo.
+- `scenes/levels/Level1.tscn`: los 6 tramos A-F del layout, construidos como
+  greybox real (StaticBody2D con colision, sin TileMap/TileSet todavia --
+  los tilesets integrados siguen siendo PNGs sueltos, recortarlos en un
+  TileSet de Godot conviene hacerlo con el editor abierto, no a ciegas por
+  texto). Incluye los 2 checkpoints, los 3 enemigos regulares del Tramo B/D
+  (`docs/diseno_enemigos.md`), la rama opcional del Tramo E, y los 8 props
+  de `cave_props_craftpix_free` como decoracion (la fogata ritual marca el
+  umbral del Boss 1).
+- `scripts/level/hazard.gd` + `scenes/level/Hazard.tscn`: pieza nueva que
+  faltaba para el hazard estatico del Tramo C -- reutiliza `Hitbox` pero se
+  reactiva sola en ciclo (un hazard no tiene "dueño" que llame `activate()`
+  como un ataque puntual).
+- **Bug real encontrado y corregido por testing headless**
+  (`scripts/level1_test_driver.gd`, smoke test descartable): un salto
+  fallido hace caer al jugador para siempre -- el proyecto no tiene sistema
+  de muerte por caida. Se agrego un piso de seguridad continuo debajo de
+  todo el nivel y se ajusto el salto mas exigente (Tramo A -> B, gap de 80px
+  bajado a 60px) para no depender de ese piso de emergencia en el uso normal.
+
 ### Added — Curación de assets: cave props + evaluación de loot icons
 - Resuelta la decisión pendiente sobre `Free-Top-Down-Pixel-Art-Cave-Objects`:
   se evaluaron visualmente los props individuales (varios nombres de archivo
