@@ -49,6 +49,9 @@ size = Vector2(3800, 60)
 [sub_resource type="RectangleShape2D" id="Shape_60x24"]
 size = Vector2(60, 24)
 
+[sub_resource type="RectangleShape2D" id="Shape_killzone"]
+size = Vector2(3800, 180)
+
 [node name="Level1" type="Node2D"]
 
 [node name="SafetyFloor" type="StaticBody2D" parent="."]
@@ -65,6 +68,7 @@ offset_bottom = 30.0
 color = Color(0.02, 0.02, 0.03, 1)
 
 [node name="KillZone" type="Area2D" parent="SafetyFloor"]
+position = Vector2(0, -40)
 script = ExtResource("15_hazard_script")
 damage = 99
 knockback = 0.0
@@ -73,7 +77,7 @@ collision_layer = 0
 collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SafetyFloor/KillZone"]
-shape = SubResource("Shape_safety_floor")
+shape = SubResource("Shape_killzone")
 
 [node name="TramoA_P1" type="StaticBody2D" parent="."]
 position = Vector2(150, 272)
