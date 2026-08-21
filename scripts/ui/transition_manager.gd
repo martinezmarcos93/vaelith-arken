@@ -10,6 +10,11 @@ extends CanvasLayer
 
 func _ready() -> void:
 	layer = 100
+	# La escena de destino puede pausar el arbol en su propio _ready() (ej.
+	# Intro.tscn abre un dialogo apenas carga). Sin esto, el tween de
+	# fade_in queda congelado a mitad de camino -- pantalla negra fija
+	# para siempre, encontrado jugando de verdad la cadena Titulo -> Intro.
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	_rect.color = Color(0.0, 0.0, 0.0, 0.0)
 
 
