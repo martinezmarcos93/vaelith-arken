@@ -24,8 +24,8 @@ func _run() -> void:
 		await get_tree().create_timer(0.05).timeout
 		Input.action_release("jump")
 		jump_count += 1
-		print("t=%.1fs pos=%s on_floor=%s" % [jump_count * 0.4, player.global_position, player.is_on_floor()])
+		print("t=%.1fs pos=%s on_floor=%s vida=%d state=%s" % [jump_count * 0.4, player.global_position, player.is_on_floor(), player.health, player.state])
 	Input.action_release("move_right")
-	print("--- TEST LEVEL1: FIN (posicion jugador: %s) ---" % player.global_position)
+	print("--- TEST LEVEL1: FIN (posicion jugador: %s, vida=%d) ---" % [player.global_position, player.health])
 	if DisplayServer.get_name() == "headless":
 		get_tree().quit()
