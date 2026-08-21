@@ -182,12 +182,14 @@ func _poll_input_buffer(delta: float) -> void:
 
 
 func _process_free_inputs() -> void:
-	# Ataques/bloqueo/embestida solo en tierra: simplificacion deliberada
-	# para la primera pasada de combate (Vaelith es un tanque con armadura
-	# completa, no un duelista aereo).
-	if not is_on_floor():
-		return
-	if _buffered_action != "":
+	# Bloqueo y embestida siguen solo en tierra (necesitan apoyo/postura).
+	# Los ataques se habilitaron tambien en el aire a pedido explicito --
+	# rompe a proposito el pilar original de "sin duelista aereo", pero
+	# _enter_action() sigue poniendo velocity.x=0 al entrar en la accion,
+	# asi que atacar en el aire corta el impulso horizontal del salto: sigue
+	# siendo una decision con costo, no un combo gratis.
+	var action_needs_floor := _buffered_action == "shove"
+	if _buffered_action != "" and (is_on_floor() or not action_needs_floor):
 		var action := _buffered_action
 		_buffered_action = ""
 		_buffer_timer = 0.0
@@ -198,6 +200,8 @@ func _process_free_inputs() -> void:
 				_enter_action(State.ATTACK_LOW)
 			"shove":
 				_enter_action(State.SHOVE)
+		return
+	if not is_on_floor():
 		return
 	if Input.is_action_pressed("block"):
 		state = State.BLOCK

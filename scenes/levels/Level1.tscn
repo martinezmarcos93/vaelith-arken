@@ -46,6 +46,9 @@ size = Vector2(300, 40)
 [sub_resource type="RectangleShape2D" id="Shape_safety_floor"]
 size = Vector2(3800, 60)
 
+[sub_resource type="RectangleShape2D" id="Shape_60x24"]
+size = Vector2(60, 24)
+
 [node name="Level1" type="Node2D"]
 
 [node name="SafetyFloor" type="StaticBody2D" parent="."]
@@ -86,7 +89,7 @@ offset_bottom = 12.0
 color = Color(0.067, 0.133, 0.180, 1)
 
 [node name="TramoA_P2" type="StaticBody2D" parent="."]
-position = Vector2(430, 342)
+position = Vector2(405, 342)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoA_P2"]
 shape = SubResource("Shape_200x24")
@@ -99,7 +102,7 @@ offset_bottom = 12.0
 color = Color(0.067, 0.133, 0.180, 1)
 
 [node name="TramoA_P3" type="StaticBody2D" parent="."]
-position = Vector2(680, 402)
+position = Vector2(645, 402)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoA_P3"]
 shape = SubResource("Shape_200x24")
@@ -112,7 +115,7 @@ offset_bottom = 12.0
 color = Color(0.067, 0.133, 0.180, 1)
 
 [node name="TramoB_Ground" type="StaticBody2D" parent="."]
-position = Vector2(1090, 470)
+position = Vector2(1045, 470)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoB_Ground"]
 shape = SubResource("Shape_500x40")
@@ -125,7 +128,7 @@ offset_bottom = 20.0
 color = Color(0.067, 0.133, 0.180, 1)
 
 [node name="TramoC_P1" type="StaticBody2D" parent="."]
-position = Vector2(1450, 442)
+position = Vector2(1405, 442)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoC_P1"]
 shape = SubResource("Shape_180x24")
@@ -138,23 +141,23 @@ offset_bottom = 12.0
 color = Color(0.067, 0.133, 0.180, 1)
 
 [node name="TramoC_HazardGround" type="StaticBody2D" parent="."]
-position = Vector2(1620, 442)
+position = Vector2(1525, 442)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoC_HazardGround"]
-shape = SubResource("Shape_160x24")
+shape = SubResource("Shape_60x24")
 
 [node name="Visual" type="ColorRect" parent="TramoC_HazardGround"]
-offset_left = -80.0
+offset_left = -30.0
 offset_top = -12.0
-offset_right = 80.0
+offset_right = 30.0
 offset_bottom = 12.0
 color = Color(0.153, 0.055, 0.035, 1)
 
 [node name="Hazard" parent="." instance=ExtResource("5_hazard")]
-position = Vector2(1620, 442)
+position = Vector2(1525, 442)
 
 [node name="TramoC_P2" type="StaticBody2D" parent="."]
-position = Vector2(1830, 442)
+position = Vector2(1655, 442)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoC_P2"]
 shape = SubResource("Shape_200x24")
@@ -167,7 +170,7 @@ offset_bottom = 12.0
 color = Color(0.067, 0.133, 0.180, 1)
 
 [node name="TramoD_Ground" type="StaticBody2D" parent="."]
-position = Vector2(2260, 470)
+position = Vector2(2065, 470)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoD_Ground"]
 shape = SubResource("Shape_520x40")
@@ -180,19 +183,19 @@ offset_bottom = 20.0
 color = Color(0.067, 0.133, 0.180, 1)
 
 [node name="Checkpoint1" parent="." instance=ExtResource("4_checkpoint")]
-position = Vector2(2020, 410)
+position = Vector2(1825, 410)
 
 [node name="NoMuertoErrante2" parent="." instance=ExtResource("2_no_muerto")]
-position = Vector2(2200, 410)
+position = Vector2(2005, 410)
 
 [node name="EspirituAtado1" parent="." instance=ExtResource("3_espiritu")]
-position = Vector2(2310, 310)
+position = Vector2(2115, 310)
 
 [node name="NoMuertoErrante3" parent="." instance=ExtResource("2_no_muerto")]
-position = Vector2(2420, 410)
+position = Vector2(2225, 410)
 
 [node name="TramoE_P1" type="StaticBody2D" parent="."]
-position = Vector2(2600, 392)
+position = Vector2(2405, 392)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoE_P1"]
 shape = SubResource("Shape_140x24")
@@ -205,7 +208,7 @@ offset_bottom = 12.0
 color = Color(0.067, 0.133, 0.180, 1)
 
 [node name="TramoE_P2" type="StaticBody2D" parent="."]
-position = Vector2(2760, 322)
+position = Vector2(2565, 322)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoE_P2"]
 shape = SubResource("Shape_140x24")
@@ -218,7 +221,7 @@ offset_bottom = 12.0
 color = Color(0.067, 0.133, 0.180, 1)
 
 [node name="TramoE_P3_Recompensa" type="StaticBody2D" parent="."]
-position = Vector2(2920, 272)
+position = Vector2(2725, 272)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoE_P3_Recompensa"]
 shape = SubResource("Shape_160x24")
@@ -231,10 +234,10 @@ offset_bottom = 12.0
 color = Color(0.067, 0.133, 0.180, 1)
 
 [node name="MemoriaFragmentoPlaceholder" type="Marker2D" parent="."]
-position = Vector2(2920, 230)
+position = Vector2(2725, 230)
 
 [node name="TramoF_Ground" type="StaticBody2D" parent="."]
-position = Vector2(2860, 470)
+position = Vector2(2665, 470)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoF_Ground"]
 shape = SubResource("Shape_680x40")
@@ -247,51 +250,50 @@ offset_bottom = 20.0
 color = Color(0.067, 0.133, 0.180, 1)
 
 [node name="PropCrystalWhite" type="Sprite2D" parent="."]
-position = Vector2(460, 308)
+position = Vector2(435, 308)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("7_crystal_white")
 
 [node name="PropMushroom" type="Sprite2D" parent="."]
-position = Vector2(720, 368)
+position = Vector2(685, 368)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("9_mushroom")
 
 [node name="PropStatue" type="Sprite2D" parent="."]
-## Marca la entrada a la ruta opcional del Tramo E.
-position = Vector2(2560, 416)
+position = Vector2(2365, 416)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("13_statue")
 
 [node name="PropDarkTotem" type="Sprite2D" parent="."]
-position = Vector2(2040, 406)
+position = Vector2(1845, 406)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("10_totem")
 
 [node name="PropCrystalBlueGreen" type="Sprite2D" parent="."]
-position = Vector2(2620, 425)
+position = Vector2(2425, 425)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("8_crystal_blue")
 
 [node name="PropDemonSkull" type="Sprite2D" parent="."]
-position = Vector2(2780, 406)
+position = Vector2(2585, 406)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("11_skull")
 
 [node name="PropDinoBones" type="Sprite2D" parent="."]
-position = Vector2(2950, 406)
+position = Vector2(2755, 406)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("12_bones")
 
 [node name="PropBonfire" type="Sprite2D" parent="."]
-position = Vector2(3140, 406)
+position = Vector2(2945, 406)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("14_bonfire")
 
 [node name="Checkpoint2" parent="." instance=ExtResource("4_checkpoint")]
-position = Vector2(3160, 410)
+position = Vector2(2965, 410)
 
 [node name="BossArenaStub" type="StaticBody2D" parent="."]
-position = Vector2(3350, 470)
+position = Vector2(3155, 470)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossArenaStub"]
 shape = SubResource("Shape_300x40")
@@ -309,7 +311,7 @@ position = Vector2(150, 230)
 [node name="Camera2D" parent="Player"]
 limit_left = 0
 limit_top = -400
-limit_right = 3500
+limit_right = 3350
 limit_bottom = 700
 
 [node name="HUD" parent="." instance=ExtResource("6_hud")]
