@@ -1,14 +1,12 @@
 extends Control
 
 ## Etapa 7 - Epilogo, siguiendo los beats de docs/guion_desenlace.md:
-## silencio post-combate, fragmento de memoria ampliado (mismo motivo de la
-## intro + un elemento nuevo) y fundido lento a la pantalla de cierre. Todo
-## el texto nuevo es cita literal de "Despertar en la oscuridad.pdf"
-## (paginas 79-82, el mismo encuentro que origino al Boss 1) o el motivo ya
-## establecido en Level1 ("Una mujer. Un trono. Calaveras. Una rueda.") --
-## nada inventado. El guerrero-espejo no vuelve a hablar en persona: lo que
-## sigue es lo que queda de el en la memoria de Vaelith, coherente con que
-## el combate ya termino.
+## silencio post-combate, fragmento de memoria y fundido lento a la
+## pantalla de cierre. El guerrero-espejo ya dijo lo suyo en persona en
+## Level1 (level1_controller.gd) justo al rendirse -- este fragmento no
+## repite esas lineas, sigue el hilo de Vaelith mismo: no tiene respuesta
+## a por que fue condenado, pero sabe que algun dia la va a tener. Cita
+## literal de "Vaelith Arken -- Registro del Osario.pdf" (pag. 4-5).
 
 const CREDITS_SCENE := "res://scenes/ui/Credits.tscn"
 ## El "silencio total" post-combate (2-3s) ya lo espera Level1 mirando al
@@ -30,16 +28,11 @@ func _ready() -> void:
 	await get_tree().create_timer(SETTLE_DURATION).timeout
 	DialogueBox.finished.connect(_on_dialogue_finished, CONNECT_ONE_SHOT)
 	DialogueBox.show_lines([
-		"Una mujer.",
-		"Un trono.",
-		"Calaveras.",
-		"Una rueda.",
-		"\"Todavía hacés eso.\"",
-		"\"Pero nunca aprendiste a terminar la finta.\"",
-		"Tu cuerpo la reconoció.",
-		"\"¿Tomás te contó lo que hizo?\"",
-		"\"Tu padre no fue quien te mató, Vaelith.\"",
-		"\"Pero sí fue quien decidió qué debía pasar con tu cuerpo después.\"",
+		"No lo sé.",
+		"Y era cierto.",
+		"Vaelith todavía no sabía qué había hecho para merecer semejante condena.",
+		"Pero algún día lo descubriría.",
+		"Y cuando ese momento llegara, tendría que decidir qué hacer con la verdad.",
 	])
 
 

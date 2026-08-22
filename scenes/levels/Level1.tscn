@@ -367,6 +367,18 @@ position = Vector2(2945, 406)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("14_bonfire")
 
+[node name="DialogueTrigger5" parent="." instance=ExtResource("17_dialogue")]
+position = Vector2(720, 368)
+lines = ["El aire entra con dificultad.", "Huele a tierra húmeda, piedra y algo parecido a incienso apagado."]
+
+[node name="DialogueTrigger6" parent="." instance=ExtResource("17_dialogue")]
+position = Vector2(2320, 416)
+lines = ["Hay restos de arquitectura alrededor, pero nada que puedas identificar como una casa, un templo o una fortaleza."]
+
+[node name="DialogueTrigger7" parent="." instance=ExtResource("17_dialogue")]
+position = Vector2(2545, 406)
+lines = ["Sobre el marco hay un símbolo tallado.", "Sabés, sin saber cómo lo sabés, que ese símbolo está relacionado con la muerte."]
+
 [node name="DialogueTrigger3" parent="." instance=ExtResource("17_dialogue")]
 position = Vector2(2900, 418)
 lines = ["Una mujer.", "Un trono.", "Calaveras.", "Una rueda.", "Otra vez la misma imagen.", "¿Por qué no logro recordar más?"]
