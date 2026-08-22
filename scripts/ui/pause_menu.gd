@@ -8,6 +8,7 @@ extends CanvasLayer
 ## como para cerrar (ya pausado por este mismo menu).
 
 const TITLE_SCENE := "res://scenes/ui/TitleScreen.tscn"
+const CREDITS_SCENE := "res://scenes/ui/Credits.tscn"
 
 @onready var _continue_button: Button = $Center/Panel/VBox/ContinueButton
 @onready var _title_button: Button = $Center/Panel/VBox/TitleButton
@@ -31,11 +32,14 @@ func _process(_delta: float) -> void:
 
 func _try_open() -> void:
 	# No se abre encima de un dialogo (ya tiene su propia pausa/su propio
-	# uso de "avanzar") ni en el titulo mismo (no hay partida que pausar).
+	# uso de "avanzar") ni en el titulo o los creditos (no hay partida que
+	# pausar en ninguna pantalla de menu).
 	if DialogueBox.visible:
 		return
 	var current := get_tree().current_scene
-	if current == null or current.scene_file_path == TITLE_SCENE:
+	if current == null:
+		return
+	if current.scene_file_path == TITLE_SCENE or current.scene_file_path == CREDITS_SCENE:
 		return
 	visible = true
 	get_tree().paused = true
