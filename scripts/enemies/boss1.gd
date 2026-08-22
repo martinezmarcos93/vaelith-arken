@@ -8,12 +8,17 @@ extends CharacterBody2D
 ## (evil_wizard_2_CC0), autorizado explicitamente en diseno_boss1.md para
 ## probar la IA sin esperar el sprite final de Vaelith.
 
-signal died
+## En el material original (Despertar en la oscuridad.pdf, paginas 79-82)
+## el guerrero-espejo NO muere: baja el arma y se da una tregua con
+## Vaelith. Para no contradecir la fuente, al llegar a 0 de vida el boss
+## se RINDE (baja la guardia, deja de atacar) en vez de morir -- ver
+## _surrender().
+signal surrendered
 signal health_changed(current: int, max_health: int)
 signal phase_changed(new_phase: int)
 
 enum Phase { ONE, TWO }
-enum State { APPROACH, ATTACK_HIGH, ATTACK_LOW, SHOVE, BLOCK, VULNERABLE, TRANSITIONING, DEAD }
+enum State { APPROACH, ATTACK_HIGH, ATTACK_LOW, SHOVE, BLOCK, VULNERABLE, TRANSITIONING, SURRENDERED }
 
 @export_group("Vida")
 ## ~4x la vida de Vaelith (docs/diseno_boss1.md: "20 HP equivalentes a
@@ -63,7 +68,7 @@ enum State { APPROACH, ATTACK_HIGH, ATTACK_LOW, SHOVE, BLOCK, VULNERABLE, TRANSI
 @export var anim_attack_high: String = "attack1"
 @export var anim_attack_low: String = "attack2"
 @export var anim_hurt: String = "hurt"
-@export var anim_death: String = "dead"
+@export var anim_surrender: String = "idle"
 
 @onready var attack_high_hitbox: Hitbox = $AttackHighHitbox
 @onready var attack_low_hitbox: Hitbox = $AttackLowHitbox
@@ -103,7 +108,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if state == State.DEAD:
+	if state == State.SURRENDERED:
 		return
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -219,7 +224,7 @@ func _process_block(delta: float) -> void:
 
 
 func _on_hurt(damage: int, direction: Vector2, knockback: float, stagger_time: float) -> void:
-	if state == State.DEAD or state == State.TRANSITIONING:
+	if state == State.SURRENDERED or state == State.TRANSITIONING:
 		return
 	if state == State.BLOCK and damage > 0:
 		_register_block()
@@ -243,7 +248,7 @@ func _take_damage(damage: int, direction: Vector2, knockback: float, stagger_tim
 	velocity = direction * knockback
 	print("Guerrero-Espejo: recibe %d de daño (vida=%d/%d)" % [damage, health, max_health])
 	if health <= 0:
-		_die()
+		_surrender()
 		return
 	if phase == Phase.ONE and float(health) / float(max_health) <= phase_two_threshold:
 		_enter_transition()
@@ -270,18 +275,18 @@ func _process_transition(delta: float) -> void:
 		_state_timer = 0.0
 
 
-func _die() -> void:
-	state = State.DEAD
+func _surrender() -> void:
+	state = State.SURRENDERED
 	attack_high_hitbox.deactivate()
 	attack_low_hitbox.deactivate()
 	shove_hitbox.deactivate()
-	# Mismo fix que enemy_regular.gd: sin esto el cadaver queda solido
-	# para siempre y puede trabar al jugador contra el borde de la arena.
-	collision_layer = 0
-	collision_mask = 0
-	sprite.play(anim_death)
-	print("Guerrero-Espejo: derrotado")
-	died.emit()
+	velocity = Vector2.ZERO
+	# A diferencia de enemy_regular.gd, el boss NO muere (ver comentario en
+	# el enum State): sigue de pie, la colision queda solida a proposito.
+	sprite.play(anim_surrender)
+	sprite.modulate = Color(0.6, 0.6, 0.6, 1.0)
+	print("Guerrero-Espejo: se rinde, baja el arma")
+	surrendered.emit()
 
 
 func _update_hitbox_facing() -> void:

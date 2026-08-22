@@ -30,7 +30,7 @@ func _ready() -> void:
 	if boss != null:
 		boss_bar.visible = true
 		boss.health_changed.connect(_on_boss_health_changed)
-		boss.died.connect(_on_boss_died)
+		boss.surrendered.connect(_on_boss_surrendered)
 		_on_boss_health_changed(boss.health, boss.max_health)
 
 
@@ -48,5 +48,5 @@ func _on_boss_health_changed(current: int, max_health: int) -> void:
 	boss_fill.size.x = boss_background.size.x * clamp(ratio, 0.0, 1.0)
 
 
-func _on_boss_died() -> void:
+func _on_boss_surrendered() -> void:
 	boss_bar.visible = false

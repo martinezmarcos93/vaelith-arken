@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/epilogue_controller.gd" id="1_script"]
+
+[node name="Epilogue" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.02, 0.03, 1)
+
+[node name="ClosingLabel" type="Label" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_colors/font_color = Color(0.92, 0.92, 0.92, 1)
+theme_override_font_sizes/font_size = 28
+text = "El umbral continúa."
+
+[node name="Hint" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -140.0
+offset_top = -48.0
+offset_right = 140.0
+offset_bottom = -20.0
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.541, 0.439, 0.251, 1)
+theme_override_font_sizes/font_size = 14
+text = "[E] volver al menú"

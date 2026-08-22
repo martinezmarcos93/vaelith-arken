@@ -1,6 +1,7 @@
-[gd_scene load_steps=27 format=3]
+[gd_scene load_steps=28 format=3]
 
 [ext_resource type="Script" path="res://scripts/level/hazard.gd" id="15_hazard_script"]
+[ext_resource type="Script" path="res://scripts/level1_controller.gd" id="21_controller"]
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/NoMuertoErrante.tscn" id="2_no_muerto"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/EspirituAtado.tscn" id="3_espiritu"]
@@ -60,6 +61,7 @@ size = Vector2(60, 24)
 size = Vector2(3800, 180)
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("21_controller")
 
 [node name="SafetyFloor" type="StaticBody2D" parent="."]
 position = Vector2(1800, 650)
