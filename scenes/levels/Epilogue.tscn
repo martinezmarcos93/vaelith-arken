@@ -35,4 +35,4 @@ offset_bottom = -20.0
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.541, 0.439, 0.251, 1)
 theme_override_font_sizes/font_size = 14
-text = "[E] volver al menú"
+text = "[E] continuar"

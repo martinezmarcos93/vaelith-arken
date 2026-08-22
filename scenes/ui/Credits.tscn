@@ -1,0 +1,86 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/credits_controller.gd" id="1_script"]
+
+[node name="Credits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.004, 0.035, 0.004, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="Center"]
+alignment = 1
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="Center/VBox"]
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.92, 0.92, 0.92, 1)
+theme_override_font_sizes/font_size = 36
+text = "VAELITH ARKEN"
+
+[node name="Subtitle" type="Label" parent="Center/VBox"]
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.463, 0.42, 0.502, 1)
+theme_override_font_sizes/font_size = 16
+text = "créditos"
+
+[node name="Spacer1" type="Control" parent="Center/VBox"]
+custom_minimum_size = Vector2(0, 8)
+
+[node name="AuthorLabel" type="Label" parent="Center/VBox"]
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.92, 0.92, 0.92, 1)
+theme_override_font_sizes/font_size = 16
+text = "Un juego de Marcos"
+
+[node name="Spacer2" type="Control" parent="Center/VBox"]
+custom_minimum_size = Vector2(0, 8)
+
+[node name="AssetsHeader" type="Label" parent="Center/VBox"]
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.541, 0.439, 0.251, 1)
+theme_override_font_sizes/font_size = 15
+text = "Arte placeholder en uso en esta demo"
+
+[node name="AssetsList" type="Label" parent="Center/VBox"]
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.72, 0.72, 0.72, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_constants/line_spacing = 6
+text = "Evil Wizard 2 — CC0
+Necromancer — creativekind (uso libre, no redistribuir)
+Ghost + Skull — Fatal AI Gaming (uso libre)
+Cave Props — CraftPix (uso libre)
+Ícono de calavera — CraftPix (uso libre)"
+
+[node name="Spacer3" type="Control" parent="Center/VBox"]
+custom_minimum_size = Vector2(0, 8)
+
+[node name="EngineLabel" type="Label" parent="Center/VBox"]
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.72, 0.72, 0.72, 1)
+theme_override_font_sizes/font_size = 14
+text = "Motor: Godot 4.7"
+
+[node name="ThanksLabel" type="Label" parent="Center/VBox"]
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.92, 0.92, 0.92, 1)
+theme_override_font_sizes/font_size = 16
+text = "Gracias por jugar."
+
+[node name="Spacer4" type="Control" parent="Center/VBox"]
+custom_minimum_size = Vector2(0, 16)
+
+[node name="BackButton" type="Button" parent="Center/VBox"]
+custom_minimum_size = Vector2(220, 48)
+theme_override_colors/font_color = Color(0.541, 0.439, 0.251, 1)
+theme_override_font_sizes/font_size = 20
+text = "Volver al título"

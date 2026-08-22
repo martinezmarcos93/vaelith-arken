@@ -10,7 +10,7 @@ extends Control
 ## sigue es lo que queda de el en la memoria de Vaelith, coherente con que
 ## el combate ya termino.
 
-const TITLE_SCENE := "res://scenes/ui/TitleScreen.tscn"
+const CREDITS_SCENE := "res://scenes/ui/Credits.tscn"
 ## El "silencio total" post-combate (2-3s) ya lo espera Level1 mirando al
 ## boss caido, antes de disparar la transicion -- esta pausa corta es solo
 ## para dejar asentar el fundido de entrada, no repetir el beat.
@@ -55,4 +55,4 @@ func _on_dialogue_finished() -> void:
 func _process(_delta: float) -> void:
 	if _closing_shown and not _returning and Input.is_action_just_pressed("interact"):
 		_returning = true
-		TransitionManager.goto_scene(TITLE_SCENE)
+		TransitionManager.goto_scene(CREDITS_SCENE)
