@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3]
+[gd_scene load_steps=27 format=3]
 
 [ext_resource type="Script" path="res://scripts/level/hazard.gd" id="15_hazard_script"]
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" path="res://scenes/level/MemoryFragment.tscn" id="16_memory"]
 [ext_resource type="PackedScene" path="res://scenes/level/DialogueTrigger.tscn" id="17_dialogue"]
 [ext_resource type="PackedScene" path="res://scenes/level/SkullCollectible.tscn" id="19_skull"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/Boss1.tscn" id="20_boss1"]
 
 [sub_resource type="RectangleShape2D" id="Shape_220x24"]
 size = Vector2(220, 24)
@@ -371,18 +372,25 @@ lines = ["Una mujer.", "Un trono.", "Calaveras.", "Una rueda.", "Otra vez la mis
 [node name="Checkpoint2" parent="." instance=ExtResource("4_checkpoint")]
 position = Vector2(2965, 410)
 
-[node name="BossArenaStub" type="StaticBody2D" parent="."]
-position = Vector2(3155, 470)
+[node name="BossArena" type="StaticBody2D" parent="."]
+position = Vector2(3345, 470)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BossArenaStub"]
-shape = SubResource("Shape_300x40")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossArena"]
+shape = SubResource("Shape_680x40")
 
-[node name="Visual" type="ColorRect" parent="BossArenaStub"]
-offset_left = -150.0
+[node name="Visual" type="ColorRect" parent="BossArena"]
+offset_left = -340.0
 offset_top = -20.0
-offset_right = 150.0
+offset_right = 340.0
 offset_bottom = 20.0
 color = Color(0.02, 0.02, 0.03, 1)
+
+[node name="DialogueTrigger4" parent="." instance=ExtResource("17_dialogue")]
+position = Vector2(3060, 418)
+lines = ["Todavía hacés eso.", "Siempre cargabas primero."]
+
+[node name="Boss1" parent="." instance=ExtResource("20_boss1")]
+position = Vector2(3550, 410)
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector2(150, 230)
@@ -390,7 +398,7 @@ position = Vector2(150, 230)
 [node name="Camera2D" parent="Player"]
 limit_left = 0
 limit_top = -400
-limit_right = 3350
+limit_right = 3730
 limit_bottom = 700
 
 [node name="HUD" parent="." instance=ExtResource("6_hud")]

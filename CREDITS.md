@@ -52,7 +52,11 @@ externo (ver `docs/lista_assets_pixel_art.md` y `docs/lista_audio.md`).
   y `evil_wizard_2_CC0/`
   Licencia: **CC-0** confirmada (License.txt incluido en ambos packs).
   Mago encapuchado con bastón de fuego violeta — encaja tonalmente. Candidato
-  a enemigo/mini-jefe tipo "acólito corrupto".
+  a enemigo/mini-jefe tipo "acólito corrupto". Evil Wizard 2 es el placeholder
+  ya usado en `Player.tscn` (`_placeholder_evil_wizard2_frames.tres`); Boss 1
+  (`Boss1.tscn`) reutiliza ese mismo `SpriteFrames` para su arte temporal,
+  autorizado en `docs/diseno_boss1.md` para probar la IA sin esperar el
+  sprite final de Vaelith.
 
 - **Necromancer sprite (creativekind)** — `assets/sprites/enemies/necromancer_creativekind_free_commercial_ok/`
   Fuente: https://creativekind.itch.io/necromancer-free ("Necromancer (Free)")
