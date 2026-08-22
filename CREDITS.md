@@ -209,11 +209,20 @@ casos, no un tema de curación fina como las tandas anteriores.
 - **Free-Undead-Loot-Pixel-Art-Icons (CraftPix)** — 48 íconos de loot
   (calaveras, corazones, pociones, huesos, trofeos). Calidad y licencia
   igual de válidas que el resto de CraftPix (uso comercial OK, sin
-  atribución), pero `docs/GDD.md` deja explícito que el sistema de
-  inventario está **fuera de alcance de esta demo**. No se integró a
-  `assets/` por ese motivo, no por calidad. Se conserva extraído en
-  `Herramientas/Pixelherramientas/_extracted/free-undead-loot-pixel-art-icons/`
-  para cuando el juego completo (post-demo) sume inventario/objetos.
+  atribución). `docs/GDD.md` sigue excluyendo un sistema de **inventario**
+  de esta demo, pero un coleccionable de puntaje (sin equipar/usar items)
+  no es eso — ver entrada de `skull_icon.png` en "Nueva tanda" mas abajo,
+  que sí se integró. El resto de los 47 íconos (corazones, pociones,
+  huesos, trofeos) sigue sin uso, se conserva extraído en
+  `Herramientas/Pixelherramientas/_extracted/free-undead-loot-pixel-art-icons/`.
+
+## Coleccionables de Level1 (integrado)
+
+- **Ícono de calavera (CraftPix, mismo pack que arriba)** —
+  `assets/sprites/ui/skull_collectible_craftpix_free/skull_icon.png`
+  (`Icon1.png` del pack original). Usado como coleccionable de puntaje en
+  ramas opcionales de plataformeo — no es un ítem de inventario, solo
+  suma a un contador visible en el HUD.
 
 ## Pendientes de descarga manual (bloqueados por flujo de compra de itch.io)
 

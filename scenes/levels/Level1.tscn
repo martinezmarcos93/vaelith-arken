@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3]
+[gd_scene load_steps=26 format=3]
 
 [ext_resource type="Script" path="res://scripts/level/hazard.gd" id="15_hazard_script"]
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Gates_dark_shadow3.png" id="14_bonfire"]
 [ext_resource type="PackedScene" path="res://scenes/level/MemoryFragment.tscn" id="16_memory"]
 [ext_resource type="PackedScene" path="res://scenes/level/DialogueTrigger.tscn" id="17_dialogue"]
+[ext_resource type="PackedScene" path="res://scenes/level/SkullCollectible.tscn" id="19_skull"]
 
 [sub_resource type="RectangleShape2D" id="Shape_220x24"]
 size = Vector2(220, 24)
@@ -32,6 +33,9 @@ size = Vector2(160, 24)
 
 [sub_resource type="RectangleShape2D" id="Shape_140x24"]
 size = Vector2(140, 24)
+
+[sub_resource type="RectangleShape2D" id="Shape_100x24"]
+size = Vector2(100, 24)
 
 [sub_resource type="RectangleShape2D" id="Shape_500x40"]
 size = Vector2(500, 40)
@@ -141,6 +145,48 @@ offset_right = 250.0
 offset_bottom = 20.0
 color = Color(0.067, 0.133, 0.180, 1)
 
+[node name="BranchB_P1" type="StaticBody2D" parent="."]
+position = Vector2(920, 392)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BranchB_P1"]
+shape = SubResource("Shape_100x24")
+
+[node name="Visual" type="ColorRect" parent="BranchB_P1"]
+offset_left = -50.0
+offset_top = -12.0
+offset_right = 50.0
+offset_bottom = 12.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="BranchB_P2" type="StaticBody2D" parent="."]
+position = Vector2(1050, 322)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BranchB_P2"]
+shape = SubResource("Shape_100x24")
+
+[node name="Visual" type="ColorRect" parent="BranchB_P2"]
+offset_left = -50.0
+offset_top = -12.0
+offset_right = 50.0
+offset_bottom = 12.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="BranchB_P3_Recompensa" type="StaticBody2D" parent="."]
+position = Vector2(1180, 262)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BranchB_P3_Recompensa"]
+shape = SubResource("Shape_100x24")
+
+[node name="Visual" type="ColorRect" parent="BranchB_P3_Recompensa"]
+offset_left = -50.0
+offset_top = -12.0
+offset_right = 50.0
+offset_bottom = 12.0
+color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="Skull1" parent="." instance=ExtResource("19_skull")]
+position = Vector2(1180, 220)
+
 [node name="TramoC_P1" type="StaticBody2D" parent="."]
 position = Vector2(1405, 442)
 
@@ -182,6 +228,9 @@ offset_top = -12.0
 offset_right = 100.0
 offset_bottom = 12.0
 color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="Skull2" parent="." instance=ExtResource("19_skull")]
+position = Vector2(1655, 370)
 
 [node name="TramoD_Ground" type="StaticBody2D" parent="."]
 position = Vector2(2065, 470)
@@ -254,6 +303,9 @@ offset_top = -12.0
 offset_right = 80.0
 offset_bottom = 12.0
 color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="Skull3" parent="." instance=ExtResource("19_skull")]
+position = Vector2(2690, 230)
 
 [node name="MemoryFragment1" parent="." instance=ExtResource("16_memory")]
 position = Vector2(2725, 230)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/skull_collectible_craftpix_free/skull_icon.png" id="2_skull"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_script")
@@ -24,3 +25,20 @@ color = Color(0.067, 0.133, 0.180, 1)
 offset_right = 200.0
 offset_bottom = 20.0
 color = Color(0.706, 0.122, 0.11, 1)
+
+[node name="SkullIcon" type="TextureRect" parent="Margin"]
+offset_top = 28.0
+offset_right = 24.0
+offset_bottom = 52.0
+texture = ExtResource("2_skull")
+stretch_mode = 5
+
+[node name="SkullCount" type="Label" parent="Margin"]
+offset_left = 28.0
+offset_top = 28.0
+offset_right = 90.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(0.92, 0.92, 0.92, 1)
+theme_override_font_sizes/font_size = 18
+vertical_alignment = 1
+text = "x0"
