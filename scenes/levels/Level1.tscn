@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3]
+[gd_scene load_steps=24 format=3]
 
 [ext_resource type="Script" path="res://scripts/level/hazard.gd" id="15_hazard_script"]
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/caveman_statue_dark_shadow1.png" id="13_statue"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Gates_dark_shadow3.png" id="14_bonfire"]
 [ext_resource type="PackedScene" path="res://scenes/level/MemoryFragment.tscn" id="16_memory"]
+[ext_resource type="PackedScene" path="res://scenes/level/DialogueTrigger.tscn" id="17_dialogue"]
 
 [sub_resource type="RectangleShape2D" id="Shape_220x24"]
 size = Vector2(220, 24)
@@ -80,6 +81,10 @@ collision_mask = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SafetyFloor/KillZone"]
 shape = SubResource("Shape_killzone")
 
+[node name="DialogueTrigger1" parent="." instance=ExtResource("17_dialogue")]
+position = Vector2(220, 228)
+lines = ["No recuerdo este lugar.", "Pero mis manos saben qué hacer con esta espada.", "Como si el cuerpo recordara lo que la mente olvidó."]
+
 [node name="TramoA_P1" type="StaticBody2D" parent="."]
 position = Vector2(150, 272)
 
@@ -92,6 +97,10 @@ offset_top = -12.0
 offset_right = 110.0
 offset_bottom = 12.0
 color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="MemoryFragment2" parent="." instance=ExtResource("16_memory")]
+position = Vector2(480, 290)
+lines = ["Una mujer.", "Un trono.", "Calaveras.", "Una rueda.", "La imagen desaparece antes de que puedas atraparla."]
 
 [node name="TramoA_P2" type="StaticBody2D" parent="."]
 position = Vector2(405, 342)
@@ -186,6 +195,14 @@ offset_top = -20.0
 offset_right = 260.0
 offset_bottom = 20.0
 color = Color(0.067, 0.133, 0.180, 1)
+
+[node name="DialogueTrigger2" parent="." instance=ExtResource("17_dialogue")]
+position = Vector2(1880, 418)
+lines = ["Algo se mueve ahí.", "No es un recuerdo.", "Es conocimiento."]
+
+[node name="MemoryFragment3" parent="." instance=ExtResource("16_memory")]
+position = Vector2(1950, 410)
+lines = ["Una mujer.", "Un trono.", "Calaveras.", "Una rueda.", "La imagen desaparece antes de que puedas atraparla."]
 
 [node name="Checkpoint1" parent="." instance=ExtResource("4_checkpoint")]
 position = Vector2(1825, 410)
@@ -294,6 +311,10 @@ texture = ExtResource("12_bones")
 position = Vector2(2945, 406)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("14_bonfire")
+
+[node name="DialogueTrigger3" parent="." instance=ExtResource("17_dialogue")]
+position = Vector2(2900, 418)
+lines = ["Una mujer.", "Un trono.", "Calaveras.", "Una rueda.", "Otra vez la misma imagen.", "¿Por qué no logro recordar más?"]
 
 [node name="Checkpoint2" parent="." instance=ExtResource("4_checkpoint")]
 position = Vector2(2965, 410)
