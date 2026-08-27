@@ -22,6 +22,7 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 [autoload]
 
 InputSetup="*res://scripts/input_setup.gd"
+AudioManager="*res://scripts/audio_manager.gd"
 TransitionManager="*res://scenes/ui/TransitionManager.tscn"
 DialogueBox="*res://scenes/ui/DialogueBox.tscn"
 GameState="*res://scripts/game_state.gd"

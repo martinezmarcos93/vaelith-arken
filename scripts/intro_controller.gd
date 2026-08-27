@@ -9,6 +9,10 @@ extends Node2D
 ## identidad.
 
 func _ready() -> void:
+	# Escena 1 empieza en silencio: "no hay música. Solo viento, respiración."
+	# La música vuelve a entrar recién en Level 1 ("la música comienza por
+	# primera vez", Escena 8 del guion).
+	AudioManager.stop_music(3.0)
 	DialogueBox.show_lines([
 		"La oscuridad no desaparece cuando abrís los ojos.",
 		"Primero sentís frío.",

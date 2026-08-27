@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=3]
+[gd_scene load_steps=29 format=3]
 
 [ext_resource type="Script" path="res://scripts/level/hazard.gd" id="15_hazard_script"]
+[ext_resource type="PackedScene" path="res://scenes/level/MusicTrigger.tscn" id="40_music"]
 [ext_resource type="Script" path="res://scripts/level1_controller.gd" id="21_controller"]
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/NoMuertoErrante.tscn" id="2_no_muerto"]
@@ -524,6 +525,11 @@ modulate = Color(0.55, 0.55, 0.6, 1)
 [node name="DialogueTrigger4" parent="." instance=ExtResource("17_dialogue")]
 position = Vector2(3060, 418)
 lines = ["Cadáveres. Cortados con precisión, sin rabia.", "Exactamente donde los cortarías vos."]
+
+[node name="BossMusicTrigger" parent="." instance=ExtResource("40_music")]
+position = Vector2(3160, 400)
+track_path = "res://assets/audio/music/boss.mp3"
+volume_db = -5.0
 
 [node name="BossIntroTrigger" parent="." instance=ExtResource("17_dialogue")]
 position = Vector2(3235, 418)

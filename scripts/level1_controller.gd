@@ -18,12 +18,16 @@ extends Node2D
 ## revelacion del constructo-espejo.
 
 const EPILOGUE_SCENE := "res://scenes/levels/Epilogue.tscn"
+const LEVEL_MUSIC := "res://assets/audio/music/level1.mp3"
 const POST_SURRENDER_SILENCE := 2.5
 const PRE_MEMORY_SILENCE := 1.5
 const PRE_EPILOGUE_SILENCE := 1.5
 
 
 func _ready() -> void:
+	# "La música comienza por primera vez" al entrar a Level 1 (guion, Esc 8).
+	# El tema del boss lo cambia MusicTrigger a la entrada de la arena.
+	AudioManager.play_music(LEVEL_MUSIC, 2.5, -7.0)
 	var boss := get_tree().get_first_node_in_group("boss")
 	if boss == null:
 		return
@@ -45,6 +49,8 @@ func _on_boss_phase_changed(_new_phase: int) -> void:
 ## Rendicion -> "La identidad": el guerrero deja de atacar, la mascara
 ## empieza a caer, pero no se revela el rostro.
 func _on_boss_surrendered() -> void:
+	# "Silencio total (corte de música) por 2-3 segundos" (guion).
+	AudioManager.stop_music(1.5)
 	await get_tree().create_timer(POST_SURRENDER_SILENCE).timeout
 	DialogueBox.finished.connect(_on_identity_finished, CONNECT_ONE_SHOT)
 	DialogueBox.show_lines([
