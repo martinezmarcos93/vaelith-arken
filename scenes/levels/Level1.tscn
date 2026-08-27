@@ -30,9 +30,9 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_rocks_craftpix_free/cave_rock3.png" id="27_rock2"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_51.png" id="28_shelf1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_platformer_craftpix_free/Tiles_rock/tile2.png" id="29_tile_rock"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/nivel1_custom_parallax/capa1.png" id="30_bg_sky"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/nivel1_custom_parallax/capa2.png" id="31_bg_ruinsbg"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/nivel1_custom_parallax/capa3.png" id="32_bg_ruins"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/level1_parallax/sky_bloodmoon.png" id="30_bg_sky"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/level1_parallax/ridge_silhouette.png" id="31_bg_ruinsbg"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/level1_parallax/clouds_far.png" id="32_bg_ruins"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_09.png" id="34_stump1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_30.png" id="35_book1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_47.png" id="36_plant1"]
@@ -81,33 +81,45 @@ size = Vector2(3800, 180)
 [node name="Level1" type="Node2D"]
 script = ExtResource("21_controller")
 
+[node name="SkyFill" type="CanvasLayer" parent="."]
+layer = -200
+
+[node name="ColorRect" type="ColorRect" parent="SkyFill"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.055, 0.03, 0.09, 1)
+
 [node name="Background" type="ParallaxBackground" parent="."]
 
 [node name="Sky" type="ParallaxLayer" parent="Background"]
-motion_scale = Vector2(0.05, 0.05)
-motion_mirroring = Vector2(1285, 0)
+motion_scale = Vector2(0.04, 0.04)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Sky"]
-position = Vector2(640, 300)
-scale = Vector2(5, 5)
+texture_filter = 1
+position = Vector2(560, 250)
+scale = Vector2(2.6, 2.6)
 texture = ExtResource("30_bg_sky")
 
-[node name="RuinsFar" type="ParallaxLayer" parent="Background"]
-motion_scale = Vector2(0.2, 0.2)
-motion_mirroring = Vector2(1330, 0)
+[node name="Ridge" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2(0.18, 0.12)
+motion_mirroring = Vector2(2405, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Background/RuinsFar"]
-position = Vector2(640, 300)
-scale = Vector2(5, 5)
+[node name="Sprite2D" type="Sprite2D" parent="Background/Ridge"]
+texture_filter = 1
+position = Vector2(560, 430)
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("31_bg_ruinsbg")
 
-[node name="RuinsNear" type="ParallaxLayer" parent="Background"]
-motion_scale = Vector2(0.4, 0.4)
-motion_mirroring = Vector2(1265, 0)
+[node name="Clouds" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2(0.26, 0.14)
+motion_mirroring = Vector2(1140, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Background/RuinsNear"]
-position = Vector2(640, 300)
-scale = Vector2(5, 5)
+[node name="Sprite2D" type="Sprite2D" parent="Background/Clouds"]
+texture_filter = 1
+modulate = Color(1, 1, 1, 0.75)
+position = Vector2(560, 250)
+scale = Vector2(1.4, 1.4)
 texture = ExtResource("32_bg_ruins")
 
 [node name="SafetyFloor" type="StaticBody2D" parent="."]
