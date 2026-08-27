@@ -27,7 +27,7 @@ shape = SubResource("RectangleShape2D_body")
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("4_placeholder_frames")
 animation = &"idle"
-offset = Vector2(0, -31)
+offset = Vector2(0, -25)
 
 [node name="AttackHighHitbox" type="Area2D" parent="."]
 position = Vector2(20, -10)
