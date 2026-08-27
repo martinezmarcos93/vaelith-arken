@@ -1,0 +1,12 @@
+Placas de menu (header + botones) para TitleScreen y PauseMenu.
+
+Origen: arte propio del proyecto. Marcos genero con IA (fuera de este
+repo) una hoja unica de 6 placas sobre fondo blanco plano
+(1536x1024, sin canal alfa). Cada placa se separo con un script
+propio (Python/PIL): mascara de fondo por cercania al blanco +
+flood-fill desde los bordes del recorte para volver transparente
+solo el fondo exterior (sin tocar el panel oscuro interior ni el
+texto dorado), despeckle de motas sueltas y recorte al bounding box
+del alfa. El texto va horneado en la imagen.
+
+No es arte de terceros con licencia: no requiere atribucion.
