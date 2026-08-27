@@ -32,8 +32,19 @@ func show_lines(lines: Array[String]) -> void:
 	_display_current()
 
 
+## Narracion en gris frio; voz hablada (la linea empieza con guion largo)
+## en tono calido dorado -- el guion mezcla las dos y sin distincion se leen
+## igual. Es solo color, no cambia el flujo.
+const COLOR_NARRATION := Color(0.86, 0.86, 0.82)
+const COLOR_VOICE := Color(0.82, 0.62, 0.35)
+
+
 func _display_current() -> void:
-	_label.text = _lines[_index]
+	var line := _lines[_index]
+	_label.text = line
+	_label.add_theme_color_override(
+		"font_color", COLOR_VOICE if line.begins_with("—") else COLOR_NARRATION
+	)
 
 
 func _process(_delta: float) -> void:

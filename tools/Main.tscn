@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://tools/test_driver.gd" id="0_driver"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/TrainingDummy.tscn" id="2_dummy"]
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="3_hud"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/NoMuertoErrante.tscn" id="4_no_muerto"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/EspirituAtado.tscn" id="5_espiritu"]
+[ext_resource type="PackedScene" path="res://scenes/level/Checkpoint.tscn" id="6_checkpoint"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(2000, 40)
+
+[sub_resource type="RectangleShape2D" id="PlatformShapeSmall"]
+size = Vector2(140, 24)
+
+[sub_resource type="RectangleShape2D" id="PlatformShapeMed"]
+size = Vector2(160, 24)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("0_driver")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(1000, 460)
+
+[node name="GroundShape" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("GroundShape")
+
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(420, 360)
+
+[node name="Platform1Shape" type="CollisionShape2D" parent="Platform1"]
+shape = SubResource("PlatformShapeSmall")
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(650, 280)
+
+[node name="Platform2Shape" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource("PlatformShapeMed")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(150, 380)
+
+[node name="Camera2D" parent="Player"]
+limit_left = 0
+limit_top = -2000
+limit_right = 2000
+limit_bottom = 560
+
+[node name="TrainingDummy" parent="." instance=ExtResource("2_dummy")]
+position = Vector2(185, 380)
+
+[node name="HUD" parent="." instance=ExtResource("3_hud")]
+
+[node name="Checkpoint" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(130, 380)
+
+[node name="NoMuertoErrante" parent="." instance=ExtResource("4_no_muerto")]
+position = Vector2(350, 380)
+
+[node name="EspirituAtado" parent="." instance=ExtResource("5_espiritu")]
+position = Vector2(300, 300)

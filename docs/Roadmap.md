@@ -14,6 +14,28 @@
 
 ---
 
+## Estado 2026-08-27 — la producción pasa a driverse por el brief
+
+Este roadmap por Etapas (0–11) sirvió para llegar al **prototipo greybox de
+punta a punta** que existe hoy: Etapas 0–3, 9 y buena parte de 4–7 están
+construidas a nivel prototipo (ver detalle en `CHANGELOG.md`). Etapas 8 (audio),
+10 (QA) y 11 (empaquetado) siguen sin empezar; muchas fases de 4–7 están a nivel
+greybox, no producción.
+
+A partir de acá la producción se conduce por dos documentos nuevos, que son la
+fuente de verdad operativa:
+
+- **`docs/BRIEF_IMPLEMENTACION.md`** — objetivo, identidad, principios (lore ↔
+  gameplay integrado), alcance y prioridades.
+- **`docs/AUDITORIA_2026-08-27.md`** — diagnóstico del código actual (qué
+  funciona / parcial / roto / falta / preservar) + **plan por Fases 0–11** que
+  reordena el trabajo restante por prioridad de vertical slice.
+
+Este roadmap por Etapas queda como referencia histórica del diseño. El trabajo
+activo se sigue en la tabla de Fases de la auditoría.
+
+---
+
 ## ETAPA 0 — Preproducción
 
 **Objetivo:** dejar por escrito las decisiones de diseño antes de tocar el motor, para que Claude Code tenga un documento de referencia fijo en vez de decisiones que cambian sobre la marcha.

@@ -1,32 +1,38 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/dialogue_box.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/dialogue/options_frame.png" id="2_frame"]
 
 [node name="DialogueBox" type="CanvasLayer"]
 layer = 90
 script = ExtResource("1_script")
 
-[node name="Panel" type="ColorRect" parent="."]
+[node name="Panel" type="NinePatchRect" parent="."]
+texture = ExtResource("2_frame")
+patch_margin_left = 80
+patch_margin_top = 56
+patch_margin_right = 80
+patch_margin_bottom = 70
 anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 40.0
-offset_top = -160.0
-offset_right = -40.0
-offset_bottom = -20.0
-color = Color(0.067, 0.133, 0.18, 0.92)
+offset_left = 24.0
+offset_top = -244.0
+offset_right = -24.0
+offset_bottom = -12.0
 
 [node name="Label" type="Label" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 16.0
-offset_right = -20.0
-offset_bottom = -36.0
-theme_override_colors/font_color = Color(0.92, 0.92, 0.92, 1)
+offset_left = 96.0
+offset_top = 50.0
+offset_right = -96.0
+offset_bottom = -66.0
+theme_override_colors/font_color = Color(0.86, 0.86, 0.82, 1)
 theme_override_font_sizes/font_size = 20
 autowrap_mode = 3
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Hint" type="Label" parent="Panel"]
@@ -34,12 +40,12 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -140.0
-offset_top = -26.0
-offset_right = -12.0
-offset_bottom = -6.0
-theme_override_colors/font_color = Color(0.541, 0.439, 0.251, 1)
-theme_override_font_sizes/font_size = 14
+offset_left = -210.0
+offset_top = -84.0
+offset_right = -96.0
+offset_bottom = -62.0
+theme_override_colors/font_color = Color(0.5, 0.42, 0.3, 1)
+theme_override_font_sizes/font_size = 13
 horizontal_alignment = 2
 text = "[E] continuar"
 
@@ -47,9 +53,9 @@ text = "[E] continuar"
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 12.0
-offset_right = -20.0
-offset_bottom = -12.0
+offset_left = 104.0
+offset_top = 42.0
+offset_right = -104.0
+offset_bottom = -56.0
 alignment = 1
 theme_override_constants/separation = 6

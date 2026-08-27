@@ -6,6 +6,65 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 
 ## [Unreleased]
 
+### 2026-08-27 — Arte de UI propio, rework narrativo y arranque de producción
+
+- **UI con arte propio**: `title_logo` + 6 placas de menú extraídas de una hoja
+  única; `TitleScreen.tscn` y `PauseMenu.tscn` pasan de `Label`/`Button` a
+  `TextureRect`/`TextureButton`. `CREDITS.md` actualizado.
+- **Rework narrativo (Fases 1–3 de la auditoría)**: `guion_intro_reescrito.md` →
+  `guion_demo.md`, ahora fuente de verdad de toda la demo. Se descarta el canon
+  de la sesión de mesa (Pharasma como visión, Tomás, el padre).
+  - Intro: Escena 1 "El despertar", Fragmento I (la creación del constructo),
+    triggers de símbolo/post-combate/descenso.
+  - Level 1: fuera la visión de Pharasma ×3; `MemoryFragment2` → Fragmento II
+    (la obediencia), `MemoryFragment1` → Fragmento III (el propósito); triggers
+    de huellas del constructo.
+  - Boss "El Espejo": `BossIntroTrigger`, `phase_changed` → "Lo que Vaelith
+    olvidó", `surrendered` → "La identidad" + recuerdo "El último día".
+  - Epílogo "Regreso al presente" + pantalla de cierre en tres tiempos
+    ("La deuda continúa." → "VAELITH ARKEN" → "El muerto recuerda.").
+- **Bugs**:
+  - "Dos Vaeliths" al atacar: `attack1_1.png` era una doble figura de la
+    extracción IA — frame reconstruido.
+  - Sprites flotando sobre el suelo: `offset` del `AnimatedSprite2D` de Vaelith
+    y del Boss `-31` → `-25` (falta confirmación fina en editor; los otros
+    personajes quedan pendientes).
+  - "Siempre la misma memoria": era que todos los nodos tenían el mismo texto
+    placeholder — resuelto con el rework de textos.
+- **Assets**: 47 hojas de arte propio traídas a `assets/source_sheets/`
+  (organizadas por categoría, `.gdignore`) como material fuente sin extraer.
+- **Producción**: `docs/BRIEF_IMPLEMENTACION.md`, `docs/AUDITORIA_2026-08-27.md`
+  y `CLAUDE.md` de proyecto. El roadmap por Etapas queda como referencia
+  histórica; el trabajo activo sigue el plan por Fases de la auditoría.
+- `docs/guion_intro.md` y `docs/guion_desenlace.md` marcados como obsoletos.
+
+### 2026-08-27 (cont.) — Producción vertical slice, Fases 0–1 y prep 7/9
+
+Trabajo hecho en `feature/produccion-vertical-slice`, mergeado a `main` con
+autorización de Marcos. **Pendiente de verificación visual** (no se pudo abrir
+el editor en la sesión).
+
+- **Fase 0**: brief + auditoría + `CLAUDE.md`. `Main.tscn` + test drivers →
+  `tools/`.
+- **Fase 1 — re-extracción de sprites** desde las hojas nuevas de
+  `source_sheets/`:
+  - **Vaelith** (`vaelith_knight_sheet`): arregla el mapeo roto de
+    `_frames.tres` (jump=idle, fall=attack1, attack2=idle, hurt=death). 13
+    animaciones, canvas 320×240, `offset` `-50`. `player.gd` usa `block`/`shove`.
+  - **Boss El Espejo** (`spectral_knight_violet_sheet`): mismo arreglo. 12
+    animaciones. `boss1.gd`: `shove`/`block`/`stagger` con anim propia.
+  - Los 2 enemigos regulares: re-extracción **diferida** (no tienen el bug de
+    mapeo; sus hojas resisten el recorte automático).
+- **Fase 9 (prep)**: `DialogueBox` con marco propio (`options_frame` como
+  `NinePatchRect`, extraído de `dialogue_box_frames`) + narración (gris) vs.
+  voz hablada (dorado). `narration_frame` extraído para Fase 8.
+- **Fase 7 (base)**: `InteractableArea` (Area2D + prompt `[E]` + señal
+  `interacted` + `one_shot`) y `RecognitionPoint` (reconocimiento → señal
+  `acted` → memoria opcional), con escenas base. Nada lo instancia todavía.
+- **Fase 8 (prep)**: autoload `MemoryFlash` — flash pálido + drenaje de color
+  al recoger un fragmento (escucha `GameState.memory_collected`), para que los
+  recuerdos se sientan como escenas y no como texto.
+
 ### Added — Level 1 construido en Godot (Fase 4.3, greybox)
 - `docs/layout_level1.md` (Fase 4.1) ya existia completo de una sesion
   anterior pero no estaba marcado en `docs/Roadmap.md` -- discrepancia

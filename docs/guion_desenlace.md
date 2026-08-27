@@ -1,5 +1,12 @@
 # Guion del Desenlace de la Demo (borrador)
 
+> **⚠️ OBSOLETO (2026-08-27).** Reemplazado por [`guion_demo.md`](guion_demo.md)
+> (secciones "Recuerdo final de la demo", "Regreso al presente" y "Pantalla final
+> de la demo"), ya cableado en `epilogue_controller.gd` y `Epilogue.tscn`. El
+> fragmento de memoria ya no es la visión de Pharasma sino "El último día"; la
+> pantalla de cierre es "La deuda continúa." → "VAELITH ARKEN" → "El muerto
+> recuerda.". Se conserva solo como referencia histórica.
+
 **Estado:** borrador temprano — depende del diseño narrativo final del Boss 1
 (Fase 6.5, todavía no resuelta). Este documento fija la intención, no el texto
 final.
