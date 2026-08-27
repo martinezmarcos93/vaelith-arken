@@ -4,8 +4,8 @@ extends Control
 
 const START_SCENE := "res://scenes/levels/Intro.tscn"
 
-@onready var _start_button: Button = $Center/VBox/StartButton
-@onready var _quit_button: Button = $Center/VBox/QuitButton
+@onready var _start_button: TextureButton = $Center/VBox/StartButton
+@onready var _quit_button: TextureButton = $Center/VBox/QuitButton
 
 
 func _ready() -> void:

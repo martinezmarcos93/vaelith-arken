@@ -453,6 +453,26 @@ mood), y `Puerta de la cripta 2.png` (variantes/desglose adicional de la
 puerta). La carpeta `Sprites/Base/` (renombrada por Marcos a `descarte/`)
 se ignoró a propósito, a pedido explícito.
 
+**UI de menús** (de `PHARASMA/Sprites/`, tanda del 2026-08-27):
+- `assets/sprites/ui/title/title_logo.png` — emblema "Vaelith Arken" (RGBA
+  2167×725, ya venía con alfa). Reemplaza el `Label` de texto plano
+  `"VAELITH ARKEN"` en `scenes/ui/TitleScreen.tscn` por un `TextureRect`.
+- `assets/sprites/ui/menu_plates/` — 6 placas góticas (header + botones),
+  con el texto horneado en la imagen. Se separaron de una hoja única sobre
+  fondo blanco plano (1536×1024, sin alfa) con un script propio (Python/PIL):
+  máscara de fondo por cercanía al blanco + flood-fill desde los bordes del
+  recorte (transparenta solo el fondo exterior, no el panel oscuro interior
+  ni el texto dorado), despeckle y recorte al bbox del alfa. Ver
+  `menu_plates/FUENTE.txt`.
+  - `TitleScreen.tscn`: `iniciar_partida` / `salir_del_juego` reemplazan los
+    `Button` con texto (`StartButton` / `QuitButton` → `TextureButton`).
+    `menu_principal` queda extraída pero sin usar (redundante con el logo).
+  - `PauseMenu.tscn`: `menu_de_pausa` (header), `continuar_partida` /
+    `regresar_menu_principal` (botones). El `Panel` `ColorRect` azul plano
+    pasó a `Control` transparente (las placas traen su propio marco).
+- Import con `mipmaps/generate=true` + `texture_filter` linear-mipmap en los
+  nodos, para que el downscale de estas texturas grandes se vea nítido.
+
 ## Pendientes de descarga manual (bloqueados por flujo de compra de itch.io)
 
 El resto de los candidatos de `docs/lista_assets_pixel_art.md` y

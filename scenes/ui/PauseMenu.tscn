@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/menu_plates/menu_de_pausa.png" id="2_header"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/menu_plates/continuar_partida.png" id="3_continue"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/menu_plates/regresar_menu_principal.png" id="4_title"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 layer = 95
@@ -15,34 +18,30 @@ color = Color(0, 0, 0, 0.6)
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Panel" type="ColorRect" parent="Center"]
-custom_minimum_size = Vector2(300, 220)
-color = Color(0.067, 0.133, 0.18, 0.97)
+[node name="Panel" type="Control" parent="Center"]
+custom_minimum_size = Vector2(460, 560)
 
 [node name="VBox" type="VBoxContainer" parent="Center/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = -20.0
 alignment = 1
-theme_override_constants/separation = 16
+theme_override_constants/separation = 8
 
-[node name="Title" type="Label" parent="Center/Panel/VBox"]
-horizontal_alignment = 1
-theme_override_colors/font_color = Color(0.92, 0.92, 0.92, 1)
-theme_override_font_sizes/font_size = 28
-text = "Pausa"
+[node name="Title" type="TextureRect" parent="Center/Panel/VBox"]
+custom_minimum_size = Vector2(460, 219)
+texture = ExtResource("2_header")
+expand_mode = 3
+stretch_mode = 5
+texture_filter = 4
 
-[node name="ContinueButton" type="Button" parent="Center/Panel/VBox"]
-custom_minimum_size = Vector2(0, 44)
-theme_override_colors/font_color = Color(0.541, 0.439, 0.251, 1)
-theme_override_font_sizes/font_size = 18
-text = "Continuar"
+[node name="ContinueButton" type="TextureButton" parent="Center/Panel/VBox"]
+custom_minimum_size = Vector2(420, 150)
+texture_normal = ExtResource("3_continue")
+ignore_texture_size = true
+stretch_mode = 5
 
-[node name="TitleButton" type="Button" parent="Center/Panel/VBox"]
-custom_minimum_size = Vector2(0, 44)
-theme_override_colors/font_color = Color(0.541, 0.439, 0.251, 1)
-theme_override_font_sizes/font_size = 18
-text = "Menú principal"
+[node name="TitleButton" type="TextureButton" parent="Center/Panel/VBox"]
+custom_minimum_size = Vector2(420, 157)
+texture_normal = ExtResource("4_title")
+ignore_texture_size = true
+stretch_mode = 5

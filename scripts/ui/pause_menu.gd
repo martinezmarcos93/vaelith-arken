@@ -10,8 +10,8 @@ extends CanvasLayer
 const TITLE_SCENE := "res://scenes/ui/TitleScreen.tscn"
 const CREDITS_SCENE := "res://scenes/ui/Credits.tscn"
 
-@onready var _continue_button: Button = $Center/Panel/VBox/ContinueButton
-@onready var _title_button: Button = $Center/Panel/VBox/TitleButton
+@onready var _continue_button: TextureButton = $Center/Panel/VBox/ContinueButton
+@onready var _title_button: TextureButton = $Center/Panel/VBox/TitleButton
 
 
 func _ready() -> void:
