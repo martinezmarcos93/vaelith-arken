@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/title_screen.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ui/title/title_logo.png" id="2_logo"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/title/subtitle_pharasma.png" id="5_subtitle"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ui/menu_plates/iniciar_partida.png" id="3_start"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ui/menu_plates/salir_del_juego.png" id="4_quit"]
 
@@ -21,23 +22,24 @@ anchor_bottom = 1.0
 
 [node name="VBox" type="VBoxContainer" parent="Center"]
 alignment = 1
-theme_override_constants/separation = 20
+theme_override_constants/separation = 10
 
 [node name="Title" type="TextureRect" parent="Center/VBox"]
-custom_minimum_size = Vector2(600, 0)
+custom_minimum_size = Vector2(560, 187)
 texture = ExtResource("2_logo")
-expand_mode = 3
+expand_mode = 1
 stretch_mode = 5
 texture_filter = 4
 
-[node name="Subtitle" type="Label" parent="Center/VBox"]
-horizontal_alignment = 1
-theme_override_colors/font_color = Color(0.463, 0.42, 0.502, 1)
-theme_override_font_sizes/font_size = 16
-text = "La espada de Pharasma"
+[node name="Subtitle" type="TextureRect" parent="Center/VBox"]
+custom_minimum_size = Vector2(424, 148)
+texture = ExtResource("5_subtitle")
+expand_mode = 1
+stretch_mode = 5
+texture_filter = 4
 
 [node name="Spacer" type="Control" parent="Center/VBox"]
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 6)
 
 [node name="StartButton" type="TextureButton" parent="Center/VBox"]
 custom_minimum_size = Vector2(420, 146)

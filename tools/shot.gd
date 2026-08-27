@@ -83,6 +83,11 @@ func _ready() -> void:
 		bg.queue_free(); strip.queue_free()
 		var sc: Node = load(mode).instantiate()
 		add_child(sc)
+		# una escena de UI (root Control) necesita tamaño de viewport para que
+		# anclas/CenterContainer resuelvan bien fuera del arbol principal.
+		if sc is Control:
+			(sc as Control).set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			(sc as Control).size = Vector2(get_viewport().size)
 		for i in 150:
 			await get_tree().process_frame
 		# líneas de debug: pie del jugador (verde) y tope de colisión más cercano (rojo)
