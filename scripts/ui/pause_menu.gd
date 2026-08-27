@@ -9,6 +9,7 @@ extends CanvasLayer
 
 const TITLE_SCENE := "res://scenes/ui/TitleScreen.tscn"
 const CREDITS_SCENE := "res://scenes/ui/Credits.tscn"
+const EPILOGUE_SCENE := "res://scenes/levels/Epilogue.tscn"
 
 @onready var _continue_button: TextureButton = $Center/Panel/VBox/ContinueButton
 @onready var _title_button: TextureButton = $Center/Panel/VBox/TitleButton
@@ -39,7 +40,10 @@ func _try_open() -> void:
 	var current := get_tree().current_scene
 	if current == null:
 		return
-	if current.scene_file_path == TITLE_SCENE or current.scene_file_path == CREDITS_SCENE:
+	# No se pausa sobre pantallas de menú/cutscene (no hay partida que pausar,
+	# y el fondo negro del Epílogo hacía que el menú pareciera un rectángulo
+	# negro gigante -- informe visual 2026-08-27, bug 13).
+	if current.scene_file_path in [TITLE_SCENE, CREDITS_SCENE, EPILOGUE_SCENE]:
 		return
 	visible = true
 	get_tree().paused = true
