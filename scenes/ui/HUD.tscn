@@ -1,184 +1,81 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/skull_collectible_craftpix_free/skull_icon.png" id="2_skull"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/hud/gem.png" id="3_gem"]
-
-[sub_resource type="StyleBoxFlat" id="SB_frame"]
-content_margin_left = 5.0
-content_margin_top = 4.0
-content_margin_right = 5.0
-content_margin_bottom = 4.0
-bg_color = Color(0.086, 0.074, 0.078, 0.92)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.44, 0.35, 0.2, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-shadow_color = Color(0, 0, 0, 0.45)
-shadow_size = 3
-
-[sub_resource type="StyleBoxFlat" id="SB_track"]
-bg_color = Color(0.05, 0.045, 0.05, 0.9)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-
-[sub_resource type="StyleBoxFlat" id="SB_hp_fill"]
-bg_color = Color(0.56, 0.11, 0.09, 1)
-border_width_top = 1
-border_color = Color(0.78, 0.24, 0.18, 1)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-
-[sub_resource type="StyleBoxFlat" id="SB_boss_frame"]
-content_margin_left = 6.0
-content_margin_top = 4.0
-content_margin_right = 6.0
-content_margin_bottom = 5.0
-bg_color = Color(0.082, 0.066, 0.072, 0.94)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 3
-border_color = Color(0.46, 0.37, 0.22, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-shadow_color = Color(0, 0, 0, 0.5)
-shadow_size = 4
-
-[sub_resource type="StyleBoxFlat" id="SB_boss_fill"]
-bg_color = Color(0.5, 0.08, 0.11, 1)
-border_width_top = 1
-border_color = Color(0.72, 0.16, 0.16, 1)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/hud/hud_bar_frame.png" id="2_frame"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/hud/hud_bar_track.png" id="3_track"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/hud/hud_bar_fill_gold.png" id="4_gold"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/hud/hud_bar_fill_violet.png" id="5_violet"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/skull_collectible_craftpix_free/skull_icon.png" id="6_skull"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_script")
 
 [node name="PlayerBlock" type="Control" parent="."]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 264.0
-offset_bottom = 74.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 280.0
+offset_bottom = 110.0
 
-[node name="HealthFrame" type="Panel" parent="PlayerBlock"]
-offset_right = 244.0
-offset_bottom = 26.0
-theme_override_styles/panel = SubResource("SB_frame")
-
-[node name="Bar" type="ProgressBar" parent="PlayerBlock/HealthFrame"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = 4.0
-offset_right = -5.0
-offset_bottom = -4.0
-theme_override_styles/background = SubResource("SB_track")
-theme_override_styles/fill = SubResource("SB_hp_fill")
+[node name="HealthBar" type="TextureProgressBar" parent="PlayerBlock"]
+texture_filter = 1
+scale = Vector2(0.6, 0.6)
 max_value = 5.0
 value = 5.0
-show_percentage = false
-
-[node name="Gem" type="TextureRect" parent="PlayerBlock/HealthFrame"]
-offset_left = -9.0
-offset_top = 3.0
-offset_right = 11.0
-offset_bottom = 21.0
-texture = ExtResource("3_gem")
-expand_mode = 1
-stretch_mode = 5
+nine_patch_stretch = false
+texture_under = ExtResource("3_track")
+texture_over = ExtResource("2_frame")
+texture_progress = ExtResource("4_gold")
+texture_progress_offset = Vector2i(92, 46)
 
 [node name="SkullIcon" type="TextureRect" parent="PlayerBlock"]
-offset_left = 2.0
-offset_top = 34.0
+texture_filter = 1
+offset_left = 4.0
+offset_top = 62.0
 offset_right = 22.0
-offset_bottom = 54.0
-texture = ExtResource("2_skull")
+offset_bottom = 80.0
+texture = ExtResource("6_skull")
 stretch_mode = 5
 
 [node name="SkullCount" type="Label" parent="PlayerBlock"]
 offset_left = 28.0
-offset_top = 33.0
-offset_right = 110.0
-offset_bottom = 55.0
-theme_override_colors/font_color = Color(0.85, 0.72, 0.42, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6)
+offset_top = 60.0
+offset_right = 130.0
+offset_bottom = 82.0
+theme_override_colors/font_color = Color(0.86, 0.75, 0.48, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.65)
 theme_override_constants/shadow_offset_y = 1
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 18
 vertical_alignment = 1
 text = "×0"
 
 [node name="BossBar" type="Control" parent="."]
 visible = false
-anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.0
 anchor_right = 0.5
-anchor_bottom = 0.0
-offset_left = -210.0
-offset_top = 18.0
-offset_right = 210.0
-offset_bottom = 66.0
+offset_left = -164.0
+offset_top = 16.0
+offset_right = 164.0
+offset_bottom = 92.0
 grow_horizontal = 2
 
 [node name="Name" type="Label" parent="BossBar"]
 anchor_right = 1.0
-offset_bottom = 22.0
-theme_override_colors/font_color = Color(0.8, 0.62, 0.38, 1)
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.83, 0.66, 0.42, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
 theme_override_constants/shadow_offset_y = 1
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
 text = "GUERRERO-ESPEJO"
 
-[node name="BossFrame" type="Panel" parent="BossBar"]
-anchor_right = 1.0
-offset_top = 24.0
-offset_bottom = 48.0
-theme_override_styles/panel = SubResource("SB_boss_frame")
-
-[node name="Bar" type="ProgressBar" parent="BossBar/BossFrame"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = 4.0
-offset_right = -6.0
-offset_bottom = -5.0
-theme_override_styles/background = SubResource("SB_track")
-theme_override_styles/fill = SubResource("SB_boss_fill")
+[node name="HealthBar" type="TextureProgressBar" parent="BossBar"]
+texture_filter = 1
+offset_top = 20.0
+scale = Vector2(0.828, 0.828)
 max_value = 20.0
 value = 20.0
-show_percentage = false
-
-[node name="GemL" type="TextureRect" parent="BossBar/BossFrame"]
-offset_left = -11.0
-offset_top = 2.0
-offset_right = 11.0
-offset_bottom = 22.0
-texture = ExtResource("3_gem")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="GemR" type="TextureRect" parent="BossBar/BossFrame"]
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -11.0
-offset_top = 2.0
-offset_right = 11.0
-offset_bottom = 22.0
-texture = ExtResource("3_gem")
-expand_mode = 1
-stretch_mode = 5
+nine_patch_stretch = false
+texture_under = ExtResource("3_track")
+texture_over = ExtResource("2_frame")
+texture_progress = ExtResource("5_violet")
+texture_progress_offset = Vector2i(92, 46)

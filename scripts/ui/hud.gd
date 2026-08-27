@@ -6,15 +6,16 @@ extends CanvasLayer
 ## que player.gd se agrega en _ready(). La barra del boss sigue el mismo
 ## patron: busca por grupo "boss" y queda oculta si el nivel no tiene ninguno.
 ##
-## Estetica alineada con el cuadro de dialogo / menu (informe visual P2):
-## marco de piedra + borde bronce (StyleBoxFlat), relleno rojo sangre,
-## acento de gema violeta. Las barras son ProgressBar; el HUD solo mueve
-## value/max_value.
+## Estetica: laminas de la hoja "penitencia / corrupcion" (medallon de la
+## dama velada + marco dorado + engarce). Descompuestas en 3 texturas
+## (marco calado / track vacio / relleno) sobre un TextureProgressBar; el HUD
+## solo mueve value/max_value. Relleno dorado para Vaelith (penitencia),
+## violeta para el Guerrero-Espejo (corrupcion).
 
-@onready var health_bar: ProgressBar = $PlayerBlock/HealthFrame/Bar
+@onready var health_bar: TextureProgressBar = $PlayerBlock/HealthBar
 @onready var skull_label: Label = $PlayerBlock/SkullCount
 @onready var boss_root: Control = $BossBar
-@onready var boss_bar: ProgressBar = $BossBar/BossFrame/Bar
+@onready var boss_bar: TextureProgressBar = $BossBar/HealthBar
 
 
 func _ready() -> void:
