@@ -83,6 +83,7 @@ var _coyote_timer: float = 0.0
 var _iframe_timer: float = 0.0
 var _state_timer: float = 0.0
 var _consecutive_blocks: int = 0
+var _stagger_duration: float = 0.0
 var _buffered_action: String = ""
 var _buffer_timer: float = 0.0
 var _respawn_position: Vector2
@@ -132,7 +133,7 @@ func _physics_process(delta: float) -> void:
 		State.HURT:
 			_process_timed_lock(delta, hurt_lock_time)
 		State.STAGGERED:
-			_process_timed_lock(delta, block_stagger_time)
+			_process_timed_lock(delta, _stagger_duration)
 		State.DEAD:
 			_process_dead(delta)
 
@@ -329,10 +330,18 @@ func _on_hurtbox_hurt(damage: int, direction: Vector2, knockback: float, stagger
 		return
 	if _iframe_timer > 0.0:
 		return
-	if state == State.BLOCK and damage > 0:
+	if state == State.BLOCK and damage > 0 and _is_frontal_hit(direction):
 		_register_block()
 		return
 	_take_damage(damage, direction, knockback, stagger_time)
+
+
+## El bloqueo es frontal, no omnidireccional (GDD.md/stats_personaje.md):
+## un golpe que llega desde la espalda (mismo lado que facing) ignora la
+## guardia y pasa como daño normal.
+func _is_frontal_hit(direction: Vector2) -> bool:
+	var attack_side := signf(direction.x)
+	return attack_side == 0.0 or int(attack_side) != facing
 
 
 func _register_block() -> void:
@@ -341,6 +350,7 @@ func _register_block() -> void:
 		_consecutive_blocks = 0
 		state = State.STAGGERED
 		_state_timer = 0.0
+		_stagger_duration = block_stagger_time
 		print("Vaelith: postura rota tras bloquear %d golpes seguidos" % block_max_consecutive)
 	else:
 		print("Vaelith: golpe bloqueado (%d/%d)" % [_consecutive_blocks, block_max_consecutive])
@@ -355,7 +365,11 @@ func _take_damage(damage: int, direction: Vector2, knockback: float, stagger_tim
 		return
 	_iframe_timer = iframes_duration
 	velocity = direction * knockback
-	state = State.HURT
+	if stagger_time > 0.0:
+		state = State.STAGGERED
+		_stagger_duration = stagger_time
+	else:
+		state = State.HURT
 	_state_timer = 0.0
 
 

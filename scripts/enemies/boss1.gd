@@ -226,10 +226,17 @@ func _process_block(delta: float) -> void:
 func _on_hurt(damage: int, direction: Vector2, knockback: float, stagger_time: float) -> void:
 	if state == State.SURRENDERED or state == State.TRANSITIONING:
 		return
-	if state == State.BLOCK and damage > 0:
+	if state == State.BLOCK and damage > 0 and _is_frontal_hit(direction):
 		_register_block()
 		return
 	_take_damage(damage, direction, knockback, stagger_time)
+
+
+## Mismo criterio que player.gd: la guardia especular solo cubre el frente,
+## un golpe que le llega por la espalda (mismo lado que facing) no bloquea.
+func _is_frontal_hit(direction: Vector2) -> bool:
+	var attack_side := signf(direction.x)
+	return attack_side == 0.0 or int(attack_side) != facing
 
 
 func _register_block() -> void:
@@ -252,6 +259,17 @@ func _take_damage(damage: int, direction: Vector2, knockback: float, stagger_tim
 		return
 	if phase == Phase.ONE and float(health) / float(max_health) <= phase_two_threshold:
 		_enter_transition()
+		return
+	# Un golpe con stagger_time (ej. la Embestida del jugador) rompe
+	# cualquier accion en curso -- mismo trato que la guardia rota, ver
+	# _register_block().
+	if stagger_time > 0.0:
+		attack_high_hitbox.deactivate()
+		attack_low_hitbox.deactivate()
+		shove_hitbox.deactivate()
+		state = State.VULNERABLE
+		_state_timer = 0.0
+		_vulnerable_duration = stagger_time
 
 
 func _enter_transition() -> void:
