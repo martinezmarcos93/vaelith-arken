@@ -517,6 +517,12 @@ se ignoró a propósito, a pedido explícito.
     pasó a `Control` transparente (las placas traen su propio marco).
 - Import con `mipmaps/generate=true` + `texture_filter` linear-mipmap en los
   nodos, para que el downscale de estas texturas grandes se vea nítido.
+- `assets/sprites/ui/cursor/` — cursor de mouse propio, extraído de
+  `PHARASMA/Sprites/Puntero.png` (hoja con alfa, generada por Marcos con IA).
+  8 estados (normal / hover / click / precisión / ocupado / interactuable /
+  enemigo / no-disponible), recortados y escalados a 44–62 px. `CursorManager`
+  (autoload) los asigna a los shapes de Godot. **Contenido propio, sin
+  atribución.**
 - `assets/sprites/ui/dialogue/` — 2 marcos de caja de diálogo extraídos de
   `source_sheets/ui/dialogue_box_frames.png` (fondo blanco, mismo key por
   flood-fill que las placas). `options_frame.png` (barra ancha) reemplaza el

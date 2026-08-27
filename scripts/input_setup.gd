@@ -5,11 +5,8 @@ extends Node
 ## Referencia de controles: docs/GDD.md seccion 5.
 
 func _ready() -> void:
-	# El juego es 100% teclado -> ocultar el cursor del SO durante el juego
-	# (P0 del informe visual 2026-08-27: no debe verse el puntero en una
-	# build de presentación). Vuelve visible solo si hace falta debug.
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-
+	# (El puntero del SO se reemplaza por el cursor propio -- ver
+	# scripts/cursor_manager.gd. Antes acá se ocultaba con MOUSE_MODE_HIDDEN.)
 	_ensure_action("move_left", [KEY_A, KEY_LEFT])
 	_ensure_action("move_right", [KEY_D, KEY_RIGHT])
 	_ensure_action("jump", [KEY_SPACE])
