@@ -15,6 +15,8 @@ func _ready() -> void:
 	_ensure_action("block", [KEY_L])
 	_ensure_action("shove", [KEY_I])
 	_ensure_action("interact", [KEY_E])
+	# Ataque principal también con clic izquierdo del mouse (el teclado J sigue valiendo).
+	_ensure_mouse_button("attack_high", MOUSE_BUTTON_LEFT)
 
 
 func _ensure_action(action_name: String, keys: Array) -> void:
@@ -32,3 +34,14 @@ func _action_has_key(action_name: String, keycode: int) -> bool:
 		if ev is InputEventKey and ev.physical_keycode == keycode:
 			return true
 	return false
+
+
+func _ensure_mouse_button(action_name: String, button_index: int) -> void:
+	if not InputMap.has_action(action_name):
+		InputMap.add_action(action_name)
+	for ev in InputMap.action_get_events(action_name):
+		if ev is InputEventMouseButton and ev.button_index == button_index:
+			return
+	var mb := InputEventMouseButton.new()
+	mb.button_index = button_index
+	InputMap.action_add_event(action_name, mb)
