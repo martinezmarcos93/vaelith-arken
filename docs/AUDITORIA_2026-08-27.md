@@ -122,3 +122,20 @@ enemigos → interacción → memoria → narrativa → boss → pulido). Regla 
   Infra lista; la primera instancia concreta se pone cuando una sección del
   nivel la necesite (brief §16). `Corpse` / `BoundSpirit` /
   `NecromanticMechanism` pendientes, mismo criterio.
+
+---
+
+## Rework Level 1 largo (2026-08-27, aprobado)
+
+La visión de la Escena 1 se amplió: torre del nigromante → gauntlet de undead
+en el bosque (≥10 enemigos, 3 clases, 2 golpes) → travesía recolectando
+memorias → 2ª torre → arena del constructo. Plan por fases y mapa asset→sector
+en **`docs/roadmap_level1_largo.md`**.
+
+**Fase 0 en curso:**
+- ✅ **Zombi devorado** extraído (`zombi_devorado_custom`, 7 anims, `Zombi.tscn`)
+  — 3ª clase de undead. Hoja `Zombie.png` bien maquetada (48×64), extracción
+  limpia.
+- Pendiente Fase 0: `TileSet` 32×32 de `level1_ruins_tileset`, atlas de
+  props/VFX (árboles, huesos, arquitectura, cementerio, fuego, decals, arena,
+  combat_vfx).
