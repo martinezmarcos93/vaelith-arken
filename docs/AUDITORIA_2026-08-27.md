@@ -91,3 +91,25 @@ enemigos → interacción → memoria → narrativa → boss → pulido). Regla 
 | **9 · Narrativa** | `DialogueBox` con marco real (`dialogue_box_frames`) + distinción narración vs. voz (color/sangría/prefijo `—`) · verificar el hilo completo contra `guion_demo.md` · Esc 6/7 de la Intro con nodos reales (presencia espectral pasiva; círculo ritual desde `supernatural_corruption_atlas`) · pickup de armas en la Intro (`dark_weapons_and_armor_catalog`) | bajo |
 | **10 · Boss** | contador de comportamientos del jugador (bloqueos seguidos, spam de ataque alto, uso de shove) → callouts no bloqueantes en fase 2 (líneas ya en el guion: "La espada." / "El escudo." / "La distancia.") · opcional: finta (telegrafiar y cancelar) como variante de fase 2, sin moveset nuevo · re-extraer `spectral_knight_violet_sheet` | medio |
 | **11 · Pulido AV** | corrupción/penitencia **solo si lo anterior es sólido** (§11): UI desde `penitence_corruption_ui_sheet` + efecto de nivel (más enemigos / menos luz) + `arcane_corruption_floor_tiles` como decoración progresiva · audio (buses sagrado/corrupto, SFX mínimos, música) · decals/agua/ítems como dressing final | medio |
+
+## Progreso
+
+**2026-08-27 (misma sesión):**
+- Fase 0 completa. `Main.tscn` + test drivers → `tools/`.
+- **Vaelith re-extraído** (`vaelith_knight_sheet`) — arregla el mapeo roto de
+  `_frames.tres` (jump=idle, fall=attack1, attack2=idle, hurt=death). 13
+  animaciones, canvas 320×240, offset `-50`. `player.gd` usa `block`/`shove`.
+- **Boss re-extraído** (`spectral_knight_violet_sheet`) — mismo arreglo. 12
+  animaciones. `boss1.gd`: `shove`/`block`/`stagger` con anim propia.
+- **2 enemigos regulares: re-extracción DIFERIDA.** Se intentó 3 pasadas
+  (huecos de columna y división en N). Las hojas `wandering_undead_sheet` y
+  `bound_spirit_sheet` empaquetan las figuras muy juntas, con estela/FX que
+  puentea frames vecinos, y tienen secciones de referencia laterales (HITBOX,
+  DETALLE, PALETA) que caen dentro de las cajas de fila. Ninguna pasada dio
+  frames promocionables. Como estos enemigos **no tienen el bug de mapeo** que
+  tenían Vaelith y el boss (`enemy_regular.gd` ya mapea bien; solo `hurt`
+  reusa `idle`), y por la regla del brief §15 ("no rehacer lo que funciona"),
+  se dejan los frames actuales. Retomar cuando haya tiempo para un framing
+  manual fila por fila (o con el editor para recortar visualmente).
+- **Pendiente sin editor**: confirmar alineación de pie de Vaelith y boss en
+  movimiento. Bloquea el cierre formal de Fase 1 pero no el avance.
