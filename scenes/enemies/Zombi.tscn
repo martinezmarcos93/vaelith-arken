@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy_regular.gd" id="1_script"]
+[ext_resource type="Script" path="res://scripts/combat/hitbox.gd" id="2_hitbox"]
+[ext_resource type="Script" path="res://scripts/combat/hurtbox.gd" id="3_hurtbox"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/enemies/zombi_devorado_custom/_frames.tres" id="4_frames"]
+
+[sub_resource type="RectangleShape2D" id="Body"]
+size = Vector2(26, 42)
+
+[sub_resource type="RectangleShape2D" id="Attack"]
+size = Vector2(24, 20)
+
+[node name="Zombi" type="CharacterBody2D"]
+script = ExtResource("1_script")
+move_mode = "ground_patrol"
+detection_range = 200.0
+attack_range = 46.0
+approach_speed = 32.0
+patrol_distance = 50.0
+patrol_speed = 16.0
+attack_hitbox_offset_x = 20.0
+max_health = 4
+attack_windup = 0.5
+attack_active_duration = 0.28
+attack_damage = 1
+attack_knockback = 150.0
+vulnerable_duration = 0.6
+anim_idle = "idle"
+anim_move = "walk"
+anim_attack = "attack_claw"
+anim_vulnerable = "hurt"
+anim_hurt = "hurt"
+anim_death = "die"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Body")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+sprite_frames = ExtResource("4_frames")
+animation = &"idle"
+offset = Vector2(0, -23)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("3_hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("Body")
+
+[node name="AttackHitbox" type="Area2D" parent="."]
+position = Vector2(20, 0)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("2_hitbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+shape = SubResource("Attack")

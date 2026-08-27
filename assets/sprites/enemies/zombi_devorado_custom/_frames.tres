@@ -1,0 +1,170 @@
+[gd_resource type="SpriteFrames" load_steps=33 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/idle_0.png" id="1_idle_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/idle_1.png" id="2_idle_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/idle_2.png" id="3_idle_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/walk_0.png" id="4_walk_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/walk_1.png" id="5_walk_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/walk_2.png" id="6_walk_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/walk_3.png" id="7_walk_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/walk_4.png" id="8_walk_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/walk_5.png" id="9_walk_5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/walk_6.png" id="10_walk_6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/walk_7.png" id="11_walk_7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/attack_claw_0.png" id="12_attack_claw_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/attack_claw_1.png" id="13_attack_claw_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/attack_claw_2.png" id="14_attack_claw_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/attack_bite_0.png" id="15_attack_bite_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/attack_bite_1.png" id="16_attack_bite_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/attack_bite_2.png" id="17_attack_bite_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/attack_bite_3.png" id="18_attack_bite_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/attack_bite_4.png" id="19_attack_bite_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/hurt_0.png" id="20_hurt_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/hurt_1.png" id="21_hurt_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/hurt_2.png" id="22_hurt_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/die_0.png" id="23_die_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/die_1.png" id="24_die_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/die_2.png" id="25_die_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/die_3.png" id="26_die_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/die_4.png" id="27_die_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/dissolve_0.png" id="28_dissolve_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/dissolve_1.png" id="29_dissolve_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/dissolve_2.png" id="30_dissolve_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/dissolve_3.png" id="31_dissolve_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/zombi_devorado_custom/dissolve_4.png" id="32_dissolve_4"]
+
+[resource]
+animations = [
+{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_idle_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_idle_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_idle_2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_walk_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_walk_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_walk_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_walk_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_walk_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_walk_5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_walk_6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_walk_7")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_attack_claw_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_attack_claw_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_attack_claw_2")
+}],
+"loop": false,
+"name": &"attack_claw",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_attack_bite_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_attack_bite_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_attack_bite_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_attack_bite_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_attack_bite_4")
+}],
+"loop": false,
+"name": &"attack_bite",
+"speed": 11.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_hurt_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_hurt_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_hurt_2")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_die_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_die_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_die_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_die_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_die_4")
+}],
+"loop": false,
+"name": &"die",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("28_dissolve_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_dissolve_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_dissolve_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_dissolve_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_dissolve_4")
+}],
+"loop": false,
+"name": &"dissolve",
+"speed": 7.0
+}
+]
