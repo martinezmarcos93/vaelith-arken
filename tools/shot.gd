@@ -8,8 +8,11 @@ extends Node2D
 
 func _ready() -> void:
 	var mode := "dialogue"
-	for a in OS.get_cmdline_user_args():
-		mode = a
+	var args := OS.get_cmdline_user_args()
+	var clean := args.has("clean")  # "clean" => sin lineas de debug (para capturas de entrega)
+	for a in args:
+		if a != "clean":
+			mode = a
 
 	# fondo tipo gameplay para que se vea el contraste real
 	var bg := ColorRect.new()
@@ -84,7 +87,7 @@ func _ready() -> void:
 			await get_tree().process_frame
 		# líneas de debug: pie del jugador (verde) y tope de colisión más cercano (rojo)
 		var pl2: Node2D = sc.get_node_or_null("Player")
-		if pl2 != null:
+		if pl2 != null and not clean:
 			var spr2: AnimatedSprite2D = pl2.get_node("AnimatedSprite2D")
 			var tex2: Texture2D = spr2.sprite_frames.get_frame_texture(spr2.animation, spr2.frame)
 			var feet_y: float = pl2.global_position.y + (tex2.get_size().y - tex2.get_size().y * 0.5 + spr2.offset.y) * spr2.scale.y

@@ -1,18 +1,20 @@
 extends CanvasLayer
 
-## Etapa 9.1 - HUD minimo: barra de vida conectada a Player.health_changed
-## y contador de calaveras conectado a GameState.skull_collected. No busca
-## al jugador por ruta fija (para poder instanciarse en cualquier nivel)
-## sino por el grupo "player" que player.gd se agrega en _ready(). La
-## barra del boss sigue el mismo patron: busca por grupo "boss" (boss1.gd
-## se agrega ahi) y queda oculta si el nivel actual no tiene ninguno.
+## HUD minimo. Barra de vida conectada a Player.health_changed y contador de
+## calaveras a GameState.skull_collected. No busca al jugador por ruta fija
+## (para poder instanciarse en cualquier nivel) sino por el grupo "player"
+## que player.gd se agrega en _ready(). La barra del boss sigue el mismo
+## patron: busca por grupo "boss" y queda oculta si el nivel no tiene ninguno.
+##
+## Estetica alineada con el cuadro de dialogo / menu (informe visual P2):
+## marco de piedra + borde bronce (StyleBoxFlat), relleno rojo sangre,
+## acento de gema violeta. Las barras son ProgressBar; el HUD solo mueve
+## value/max_value.
 
-@onready var health_fill: ColorRect = $Margin/HealthBar/Fill
-@onready var health_background: ColorRect = $Margin/HealthBar/Background
-@onready var skull_label: Label = $Margin/SkullCount
-@onready var boss_bar: Control = $BossBar
-@onready var boss_fill: ColorRect = $BossBar/Fill
-@onready var boss_background: ColorRect = $BossBar/Background
+@onready var health_bar: ProgressBar = $PlayerBlock/HealthFrame/Bar
+@onready var skull_label: Label = $PlayerBlock/SkullCount
+@onready var boss_root: Control = $BossBar
+@onready var boss_bar: ProgressBar = $BossBar/BossFrame/Bar
 
 
 func _ready() -> void:
@@ -28,25 +30,25 @@ func _ready() -> void:
 
 	var boss := get_tree().get_first_node_in_group("boss")
 	if boss != null:
-		boss_bar.visible = true
+		boss_root.visible = true
 		boss.health_changed.connect(_on_boss_health_changed)
 		boss.surrendered.connect(_on_boss_surrendered)
 		_on_boss_health_changed(boss.health, boss.max_health)
 
 
 func _on_health_changed(current: int, max_health: int) -> void:
-	var ratio := float(current) / float(max_health) if max_health > 0 else 0.0
-	health_fill.size.x = health_background.size.x * clamp(ratio, 0.0, 1.0)
+	health_bar.max_value = maxi(max_health, 1)
+	health_bar.value = clampi(current, 0, max_health)
 
 
 func _on_skull_collected(total: int) -> void:
-	skull_label.text = "x%d" % total
+	skull_label.text = "×%d" % total
 
 
 func _on_boss_health_changed(current: int, max_health: int) -> void:
-	var ratio := float(current) / float(max_health) if max_health > 0 else 0.0
-	boss_fill.size.x = boss_background.size.x * clamp(ratio, 0.0, 1.0)
+	boss_bar.max_value = maxi(max_health, 1)
+	boss_bar.value = clampi(current, 0, max_health)
 
 
 func _on_boss_surrendered() -> void:
-	boss_bar.visible = false
+	boss_root.visible = false
