@@ -1,65 +1,88 @@
 extends Node2D
 
-## Etapa 7: cuando el Boss 1 se rinde, la demo pasa al Epilogo
-## (docs/guion_desenlace.md, beat 1: "el boss cae, la mascara termina de
-## caer, silencio total por 2-3 segundos" antes de cualquier corte -- el
-## guerrero-espejo no muere, ver boss1.gd, pero el beat de silencio es el
-## mismo). Este script vive en Level1, no en boss1.gd -- el boss solo
-## emite `surrendered`, el nivel decide que pasa despues, asi boss1.gd no
-## queda acoplado a una escena de destino fija.
+## Rework narrativo (docs/guion_demo.md) -- Boss "El Espejo".
 ##
-## El intercambio post-rendicion (tregua, reconocimiento y la revelacion
-## sobre Tomas) es cita literal de "Despertar en la oscuridad.pdf"
-## (pag. 79-83, el mismo encuentro que origino al Boss 1) y ahora se dice
-## EN PERSONA aca -- antes vivia como eco de memoria en el Epilogo, pero
-## en la fuente real es el guerrero-espejo quien lo dice directamente,
-## no Vaelith recordandolo despues. La pregunta final ("Pregunta lo que
-## quieras... elegi bien") queda sin responder en la fuente -- la sesion
-## de mesa termino justo ahi. Por eso elegir entre las 3 preguntas no
-## cambia el desenlace: es agencia real en QUE se pregunta, fiel al
-## hecho de que ninguna respuesta llego a escribirse nunca.
+## boss1.gd no muere: emite `phase_changed` (la mascara se agrieta al 50%
+## de vida) y `surrendered` (a 0 de vida baja el arma). Este script cuelga
+## de Level1 y traduce esos dos momentos + el cierre a los beats del guion:
+##
+##   fase 2      -> "Lo que Vaelith olvido"
+##   rendicion   -> "La identidad" + el recuerdo final "El ultimo dia"
+##
+## La linea de aparicion del boss ("Todavia haces eso / Cargas primero") no
+## va aca: la dispara BossIntroTrigger al entrar a la arena, antes de que
+## empiece el combate.
+##
+## Ya no hay eleccion de pregunta ni el intercambio sobre Tomas/el padre:
+## guion_demo.md reemplaza ese canon (venia de una sesion de mesa) por la
+## revelacion del constructo-espejo.
 
 const EPILOGUE_SCENE := "res://scenes/levels/Epilogue.tscn"
 const POST_SURRENDER_SILENCE := 2.5
+const PRE_MEMORY_SILENCE := 1.5
 const PRE_EPILOGUE_SILENCE := 1.5
 
 
 func _ready() -> void:
 	var boss := get_tree().get_first_node_in_group("boss")
-	if boss != null:
-		boss.surrendered.connect(_on_boss_surrendered)
+	if boss == null:
+		return
+	boss.phase_changed.connect(_on_boss_phase_changed)
+	boss.surrendered.connect(_on_boss_surrendered)
 
 
+## Fase 2 ("Lo que Vaelith olvido"): el espejo empieza a usar tecnicas que
+## Vaelith todavia no conoce. No corta el combate como beat aparte -- es un
+## comentario al vuelo (DialogueBox pausa el arbol unos segundos igual).
+func _on_boss_phase_changed(_new_phase: int) -> void:
+	DialogueBox.show_lines([
+		"El espejo cambia. Ataca con cosas que no sabés hacer.",
+		"—Eso también lo sabías.",
+		"—Solo que ya no lo recordás.",
+	])
+
+
+## Rendicion -> "La identidad": el guerrero deja de atacar, la mascara
+## empieza a caer, pero no se revela el rostro.
 func _on_boss_surrendered() -> void:
 	await get_tree().create_timer(POST_SURRENDER_SILENCE).timeout
-	DialogueBox.finished.connect(_on_exchange_finished, CONNECT_ONE_SHOT)
+	DialogueBox.finished.connect(_on_identity_finished, CONNECT_ONE_SHOT)
 	DialogueBox.show_lines([
-		"Bien.",
-		"Eso es nuevo.",
-		"No voy a atacarte mientras vos no me ataques.",
-		"Pero tampoco voy a confiar en vos.",
-		"Y vos tampoco deberías confiar en mí.",
-		"La máscara finalmente se levanta unos centímetros.",
-		"Reconocés la cicatriz.",
-		"No sabés de dónde.",
-		"No. No la recordaste. Tu cuerpo la reconoció.",
-		"Todo sigue ahí.",
-		"¿Tomás te contó lo que hizo?",
-		"Entonces todavía está mintiéndote.",
-		"Tu padre no fue quien te mató, Vaelith.",
-		"Pero sí fue quien decidió qué debía pasar con tu cuerpo después.",
-		"Podés hablar.",
-		"Preguntame lo que quieras. Pero elegí bien.",
-		"Porque algunas respuestas pueden devolverte recuerdos.",
-		"Y otras pueden hacer que desees no haberlos recuperado nunca.",
+		"El guerrero deja de atacar. La máscara empieza a caer.",
+		"No llega a mostrar el rostro.",
+		"—¿No sabés quién soy?",
+		"—No.",
+		"Baja la espada.",
+		"—Claro.",
+		"—Te aseguraste de eso.",
+		"—¿Quién sos?",
+		"—Eso es lo que viniste a recordar.",
 	])
 
 
-func _on_exchange_finished() -> void:
-	await DialogueBox.ask_choice([
-		"¿Quién sos?",
-		"¿Qué le pasó a mi padre?",
-		"¿Por qué peleás igual que yo?",
+## "Recuerdo final de la demo" (El ultimo dia): recien despues del silencio
+## aparece el fragmento. GameState.collect_memory() lo cuenta igual que un
+## MemoryFragment del nivel (el Epilogo ya no llama a collect_memory()).
+func _on_identity_finished() -> void:
+	await get_tree().create_timer(PRE_MEMORY_SILENCE).timeout
+	GameState.collect_memory()
+	DialogueBox.finished.connect(_on_memory_finished, CONNECT_ONE_SHOT)
+	DialogueBox.show_lines([
+		"El guerrero cae. La máscara toca el suelo. Silencio total.",
+		"Una fortaleza. Sirenas. Gritos. Fuego.",
+		"El constructo observa desde una habitación.",
+		"—¡Señor! ¡Nos están rodeando!",
+		"—Entonces que entren.",
+		"La puerta se abre. Entrás herido. Te arrodillás frente a la criatura.",
+		"—Escuchame.",
+		"—Si alguna vez regreso...",
+		"—No me dejes recordar.",
+		"—¿Por qué?",
+		"—Porque si recuerdo lo que hice, voy a tener que decidir si todavía soy el mismo.",
+		"La visión se corta.",
 	])
+
+
+func _on_memory_finished() -> void:
 	await get_tree().create_timer(PRE_EPILOGUE_SILENCE).timeout
 	TransitionManager.goto_scene(EPILOGUE_SCENE)

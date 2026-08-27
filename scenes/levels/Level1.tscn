@@ -525,6 +525,10 @@ modulate = Color(0.55, 0.55, 0.6, 1)
 position = Vector2(3060, 418)
 lines = ["Cadáveres. Cortados con precisión, sin rabia.", "Exactamente donde los cortarías vos."]
 
+[node name="BossIntroTrigger" parent="." instance=ExtResource("17_dialogue")]
+position = Vector2(3235, 418)
+lines = ["Adoptás una posición defensiva.", "El guerrero-espejo hace exactamente lo mismo. Silencio.", "—Todavía hacés eso.", "—¿Qué?", "—Cargás primero."]
+
 [node name="PropCryptDoor" type="Sprite2D" parent="."]
 position = Vector2(3550, 290)
 scale = Vector2(0.45, 0.45)
