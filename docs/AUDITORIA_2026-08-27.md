@@ -113,3 +113,12 @@ enemigos → interacción → memoria → narrativa → boss → pulido). Regla 
   manual fila por fila (o con el editor para recortar visualmente).
 - **Pendiente sin editor**: confirmar alineación de pie de Vaelith y boss en
   movimiento. Bloquea el cierre formal de Fase 1 pero no el avance.
+- **Fase 9 (prep)**: `DialogueBox` con marco propio (`options_frame` como
+  `NinePatchRect`) + narración (gris) vs. voz (dorado). `narration_frame`
+  extraído para Fase 8.
+- **Fase 7 (base)**: `InteractableArea` (Area2D + prompt `[E]` + señal
+  `interacted` + `one_shot`) y `RecognitionPoint` (el verbo distintivo:
+  reconocimiento → señal `acted` → memoria opcional). Con escenas base.
+  Infra lista; la primera instancia concreta se pone cuando una sección del
+  nivel la necesite (brief §16). `Corpse` / `BoundSpirit` /
+  `NecromanticMechanism` pendientes, mismo criterio.
