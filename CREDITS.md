@@ -70,10 +70,13 @@ externo (ver `docs/lista_assets_pixel_art.md` y `docs/lista_audio.md`).
   revisar su juego "Pixel Mage Survival" en Play Store — sin costo, no es
   un requisito de uso.
   Animaciones disponibles: Idle/Run (8f), Attack 1/2 (13f), Attack 3 (17f,
-  con hechizo de calavera), Hurt (5f), Death (10f). 128x128 por frame —
-  ya viene con set de ataques más completo que los otros placeholders de
-  enemigos, buen candidato a subir de "referencia" a "enemigo real" del
-  Level 1 o incluso a base visual de un mini-jefe.
+  con hechizo de calavera), Hurt (5f), Death (10f). 128x128 por frame.
+  **Reemplazado el 2026-08-26** en `NoMuertoErrante.tscn` por Skeleton Warrior
+  (CraftPix, ver "Nueva tanda" más abajo) — silueta ósea es más legible como
+  "no-muerto errante" que un mago. Ya no se usa en ninguna escena; se conserva
+  extraído en `Herramientas/Pixelherramientas/` por si se reconsidera para
+  otro rol (el set de ataques 1/2/3 sigue siendo más completo que el del
+  esqueleto).
 
 - **GothicVania Town (Ansimuz)** — `assets/sprites/tilesets/gothicvania_town_CC0/`
   Licencia: **CC0** confirmada (`public-license.pdf` incluido, sin
@@ -141,6 +144,130 @@ externo (ver `docs/lista_assets_pixel_art.md` y `docs/lista_audio.md`).
   lateral. Fuente completa se conserva en
   `Herramientas/Pixelherramientas/_extracted/Free-Top-Down-Cave-Objects/`
   por si hace falta revisar más props a futuro.
+
+## Tercera tanda (2026-08-26) — escaneo de ~35 packs nuevos en Herramientas/,
+## integración selectiva (Marcos pidió no ser tan estricto descartando: hace
+## falta variedad para decorar/cubrir todo el nivel, el desafío actual es
+## estético). Duplicados exactos de packs ya integrados y packs ya rechazados
+## (top-down, etc.) se dejaron sin borrar a propósito, a pedido explícito.
+
+- **Skeleton Warrior (CraftPix, "Free Skeleton Pixel Art Sprite Sheets")** —
+  `assets/sprites/enemies/skeleton_warrior_craftpix_free/`
+  ✅ **Integrado y wireado**: reemplaza a Necromancer como arte del "No-muerto
+  errante" en `NoMuertoErrante.tscn` (ver entrada de Necromancer arriba).
+  Animaciones: Idle (7f), Walk (7f), Attack 1/2/3 (5/6/4f), Hurt (2f), Dead
+  (4f), 128x128 por frame, `_frames.tres` armado a mano (mismo patrón
+  `AtlasTexture` que ya usaban Necromancer/Boss1). Offset/escala del
+  `AnimatedSprite2D` recalculados con la misma técnica de `getbbox()` de PIL
+  que Boss1/Necromancer (ver `docs/vaelith_arken_godot_gotchas` en memoria):
+  el sprite queda perfectamente centrado en X (bbox casi exacto al centro de
+  la celda) y con los pies tocando el borde inferior de la celda — offset
+  final `(0, -38)`, escala `0.8`. Verificado headless (las 5 escenas de la
+  demo + `NoMuertoErrante.tscn` cargan sin error), **falta la confirmación
+  visual de Marcos jugando** (mismo paso final que todo sprite nuevo previo).
+  Licencia CraftPix Free: comercial OK, sin atribución, no revender fuente.
+  El pack trae además Skeleton_Archer y Skeleton_Spearman sin usar todavía
+  (extraídos en `Herramientas/Pixelherramientas/_extracted/`).
+
+- **Dungeon props (CraftPix, "Free Pixel Dungeon Props and Objects")** —
+  `assets/sprites/tilesets/dungeon_props_craftpix_free/`
+  ✅ Integrado como decoración de `Level1.tscn` (props nuevos: raíces/árbol
+  muerto, mesa con velas, jarrón de cristal, estantería con libros/frascos —
+  ver nodos `PropRoot1/2`, `PropTable1`, `PropJar1/2`, `PropShelf1` en
+  `Level1.tscn`, distribuidos en los tramos B, C, F y la aproximación a
+  BossArena que estaban visualmente vacíos). El pack original venía como
+  hojas compuestas (`Objects.png`, etc.), no piezas sueltas — se cortaron
+  automáticamente por detección de componentes conexos (script ad-hoc con
+  PIL/numpy) en 67 piezas individuales (`obj_01.png`...`obj_67.png`),
+  revisadas visualmente en conjunto (contact sheet) antes de copiar: raíces,
+  frascos/cristales, mesas/estanterías, libros, pociones, plantas — paleta
+  azul-teal/madera oscura que calza directo con `guia_estilo_visual.md`, sin
+  necesitar recoloreo. Solo se usó una selección en esta pasada; el resto
+  queda disponible para seguir decorando. Licencia CraftPix Free (comercial
+  OK, sin atribución, no revender fuente suelta).
+
+- **Rocas de cueva (CraftPix, subset "cave_rocks" de "Free Rocks Pixel Art
+  Asset Pack")** — `assets/sprites/tilesets/cave_rocks_craftpix_free/`
+  ✅ Integrado (`PropRockPile1/2` en `Level1.tscn`, tramo F). Gris-azulado
+  oscuro, encaja directo con el núcleo de la paleta. El pack completo trae
+  además variantes canyon/desert/ice/snowy (paleta cálida o fuera de tono)
+  que no se integraron. Licencia CraftPix Free.
+
+- **Bringer-of-Death (Clembod, itch.io)** —
+  `assets/sprites/enemies/bringer_of_death_clembod_free/`
+  Segador encapuchado, paleta violeta/gris/humo — encaja muy bien con
+  `guia_estilo_visual.md` (violeta `#766DBC` de magia/brillo sobrenatural) y
+  temáticamente con el motivo de muerte/no-muerte del juego. Animaciones
+  completas: Idle (7f), Attack (10f), Cast (9f), Hurt (3f), Death (10f).
+  ✅ **Licencia confirmada** (`License.txt` del pack): uso comercial y
+  personal permitido, modificable, crédito no obligatorio (agradecido),
+  prohibida la reventa/redistribución.
+  ✅ **Wireado 2026-08-26** como `scenes/enemies/BringerOfDeath.tscn` (mismo
+  script compartido `enemy_regular.gd`, sin animación de caminar propia en el
+  pack — `anim_move` reutiliza `idle`, mismo patrón que `anim_vulnerable`).
+  Colocado como aparición **única** en `Level1.tscn` (`BringerOfDeath1`,
+  x=3220, en la aproximación a BossArena, antes del Boss1) con vida/daño
+  ligeramente mayores que los enemigos regulares (max_health=6 vs 4) para que
+  se lea como un guardián especial, no un tercer enemigo genérico repetido —
+  atenúa a propósito la tensión con la filosofía "pocos enemigos, nada de
+  relleno" de `docs/diseno_enemigos.md` (una única aparición, no una
+  población nueva). Offset/escala calculados igual que el Skeleton
+  (`getbbox()` de PIL): el canvas de 140x93 por frame NO está centrado en el
+  personaje (queda corrido a la derecha, para que Attack/Cast no salten al
+  cambiar de frame) — offset final `(-36, -21)`, escala `0.85`. Verificado
+  headless (escena individual + `Level1.tscn` cargan sin error), **falta
+  confirmación visual jugando**.
+
+- **Dungeon Platformer Tileset (CraftPix, "Free Dungeon Platformer Pixel Art
+  Tileset")** — `assets/sprites/tilesets/dungeon_platformer_craftpix_free/`
+  Único tileset **side-scroller** nuevo de esta tanda (todo lo demás
+  encontrado en `Herramientas/` es top-down o ya estaba integrado). Se
+  copiaron las 36 piezas de `Tiles_rock/` más `chest.png`/`door.png`/
+  `bridge1-3.png` de `Details/`. Se descartó `Tiles_lava/` (paleta
+  naranja-cálida incompatible) y los fondos `Background/Bright,Pale`.
+  ✅ **Recoloreado y aplicado 2026-08-26**: en vez de LibreSprite manual, se
+  armó un script ad-hoc (PIL/numpy) que remapea cada píxel de las 41 piezas
+  copiadas a la paleta más cercana de `guia_estilo_visual.md` (núcleo +
+  extendida, excluyendo los 3 acentos cálidos a propósito, para no diluirlos)
+  por distancia euclídea en RGB — resultado revisado visualmente antes de
+  aplicar (piedra tostada → piedra azul-violeta/índigo, coherente con el
+  resto del elenco). `tile2.png` (recolored) reemplaza el `ColorRect` plano
+  de las 14 plataformas normales de `Level1.tscn` (todas menos
+  `TramoC_HazardGround`, que mantiene el rojo de advertencia, y `SafetyFloor`)
+  vía `TextureRect` + `stretch_mode=TILE`, sin tocar ninguna `CollisionShape2D`
+  — cero riesgo para la física. `BossArena` usa la misma textura con
+  `modulate` más oscuro para diferenciarse como piso especial. Licencia
+  CraftPix Free.
+
+- **Fondo de nivel — Fantasy 2D Battlegrounds, "Battleground1" variante Pale
+  (CraftPix)** — `assets/sprites/backgrounds/battleground1_pale_craftpix_free/`
+  ✅ **Integrado 2026-08-26** como `ParallaxBackground` en `Level1.tscn`
+  (nodo `Background`, 3 capas: `sky.png`, `ruins_bg.png`, `ruins.png` con
+  `motion_scale` 0.05/0.2/0.4 y `motion_mirroring` horizontal para repetir sin
+  cortes a lo largo de los ~3700px del nivel). Es un cementerio con lápidas y
+  árboles muertos en tonos teal/verde oscuro **ya alineado** con la paleta de
+  `guia_estilo_visual.md` — no necesitó recoloreo, a diferencia del tileset.
+  El pack completo trae 4 battlegrounds (interiores/exteriores, variantes
+  Bright/Pale); solo se usó Battleground1/Pale. Licencia CraftPix Free.
+
+- **Props chicos adicionales (mismo pack `dungeon_props_craftpix_free` de
+  arriba)** — `obj_09` (tocón/raíz), `obj_30` (libro), `obj_47` (planta),
+  `obj_44` (poción) — sumados en `Level1.tscn` (`PropStump1`, `PropBook1`,
+  `PropPlant1`, `PropPotion1`) en el Tramo A y zona D/E que seguían con poca
+  decoración.
+
+**Limpieza 2026-08-26**: se borraron de `Herramientas/Pixelherramientas/`
+(zip + carpeta extraída) los packs que eran duplicados exactos de assets ya
+integrados (Evil Wizard, Evil Wizard 2, Necromancer suelto, Ghost and Skull,
+GothicVania Town ×2, Kenney 1-bit, Effect and Bullet 16x16, dungeon
+sidescroller Raou, Tilemap_less_definition, seamless patterns,
+free-undead-loot-icons) o packs con motivo de rechazo ya confirmado sin
+ambigüedad (FreeKnight_v1 sin licencia, el kit roguelike top-down, el
+undead-tileset top-down ya rechazado dos veces). Se conservó todo lo demás
+(bosques, Mossy Assets, Plant Animations, Legacy-Dungeon, Slimes, Undead
+executioner, wizard/knight/vampire-locations de CraftPix, `tilemap.zip`,
+Skeletons_Free_Pack) a pedido explícito de Marcos — variedad disponible para
+seguir decorando/cubriendo el nivel aunque hoy no se haya usado.
 
 ## Descartado (evaluado y NO integrado — eliminado de Herramientas/ el 2026-08-19)
 

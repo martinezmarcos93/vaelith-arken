@@ -54,6 +54,7 @@ quedar genérico.
 - [ ] Muerte
 
 **Candidatos encontrados:**
+- ✅ [Free Skeleton Pixel Art Sprite Sheets (CraftPix)](https://craftpix.net/freebies/free-skeleton-pixel-art-sprite-sheets/) — **integrado** en `assets/sprites/enemies/skeleton_warrior_craftpix_free/`, reemplaza al Necromancer en `NoMuertoErrante.tscn` (2026-08-26, ver CREDITS.md).
 - [Skeleton Warriors Pixel Art Monster Asset (sanctumpixel)](https://sanctumpixel.itch.io/skeleton-warriors-pixel-art-monster-asset)
 - [2D Pixel Art Skeletal Warrior (Elthen's Pixel Art Shop)](https://elthen.itch.io/2d-pixel-art-skeletal-warrior)
 - [Free Enemy Sprite Sheets Pixel Art](https://free-game-assets.itch.io/free-enemy-sprite-sheets-pixel-art)
@@ -102,6 +103,8 @@ lo resuelva sin romper la premisa del personaje.
 
 **Candidatos encontrados:**
 - ✅ [Dungeon Tileset (Golopin) — gratis](https://golopin.itch.io/dungeon-tileset) — **integrado** en `assets/sprites/tilesets/dungeon_golopin_free/` (81 piezas individuales + hoja compacta). Pendiente recolorear a la paleta propia en LibreSprite antes de usar en producción.
+- ✅ [Free Dungeon Platformer Pixel Art Tileset (CraftPix)](https://craftpix.net/freebies/free-dungeon-platformer-pixel-art-tileset/) — **integrado y recoloreado** en `assets/sprites/tilesets/dungeon_platformer_craftpix_free/` (2026-08-26, recoloreo automático por script contra la paleta de `guia_estilo_visual.md`), reemplaza el `ColorRect` plano de las plataformas normales de `Level1.tscn`. Ver CREDITS.md.
+- ✅ [Free Pixel Art Fantasy 2D Battlegrounds (CraftPix)](https://craftpix.net/freebies/free-pixel-art-fantasy-2d-battlegrounds/) — **integrado** (Battleground1/Pale) como fondo de parallax (`Fondo lejano`/`Fondo medio`, ítems de este checklist) en `Level1.tscn`. Cementerio con lápidas, ya en tonos teal/verde compatibles, sin recoloreo. Ver CREDITS.md.
 - [Gothicvania Cold Corridors — gratis](https://itch.io/game-assets/free/tag-gothic/tag-pixel-art) (buscar en el tag Gothic+Pixel Art de itch.io)
 - Tag general para seguir explorando: [Gothic + Pixel Art + Tileset, gratis](https://itch.io/game-assets/free/tag-gothic/tag-pixel-art/tag-tileset)
 - Opción paga de calidad superior si el gratuito no alcanza: [Candle Cathedral - 16x16 Gothic Dungeon Tileset ($7.99)](https://itch.io/game-assets/tag-gothic/tag-pixel-art) (buscar por nombre en itch.io)

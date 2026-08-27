@@ -33,14 +33,28 @@ combate específica (referencia SLAIN/Volgarr — nada de hordas ni relleno).
 
 ## Estado de implementación (Fase 5.3)
 Máquina de estados compartida implementada en `scripts/enemies/enemy_regular.gd`
-(un solo script + `@export`, tal como pedía este documento). Placeholder de
-arte temporal, igual que se hizo con Vaelith: Necromancer (`creativekind`,
-comercial OK) para el No-muerto errante, Ghost (`fatalaigaming`, gratis) para
-el Espíritu atado — ninguno es la asignación final. Validado headless:
-detección, aproximación, ataque, ventana vulnerable y muerte funcionan;
-`EspirituAtado` no persigue por diseño (confirmado: se queda en Alerta sin
-atacar si el jugador nunca entra en `attack_range`, tal como se especificó
-arriba).
+(un solo script + `@export`, tal como pedía este documento). Validado
+headless: detección, aproximación, ataque, ventana vulnerable y muerte
+funcionan; `EspirituAtado` no persigue por diseño (confirmado: se queda en
+Alerta sin atacar si el jugador nunca entra en `attack_range`, tal como se
+especificó arriba).
+
+Arte: Skeleton Warrior (CraftPix Free) para el No-muerto errante — reemplazo
+2026-08-26 del placeholder anterior (Necromancer, `creativekind`), que ya no
+se usa en ninguna escena (queda documentado en CREDITS.md como "evaluado, sin
+uso actual"). Ghost (`fatalaigaming`, gratis) sigue para el Espíritu atado.
+Ninguno de los dos es necesariamente la asignación final.
+
+## Nota 2026-08-26: tercer enemigo excepcional (Bringer-of-Death)
+Se sumó `scenes/enemies/BringerOfDeath.tscn` (mismo script/máquina de estados
+de arriba) como aparición **única** en `Level1.tscn`, guardando la
+aproximación a BossArena. Esto tensiona a propósito la regla "pocos enemigos,
+nada de relleno": la mitigación elegida es que NO es una población nueva que
+se repite por el nivel como los otros dos, sino un único encuentro puntual
+(vida/daño algo mayores, lectura de "guardián especial"). Si en algún momento
+se decide que rompe el ritmo de la demo, es fácil de sacar (un solo nodo en
+`Level1.tscn`) sin tocar el resto del diseño. Ver CREDITS.md para detalle de
+arte/licencia.
 
 ## Reglas comunes a ambos
 - Ningún enemigo regular debe poder atacar dos veces seguidas sin una ventana de

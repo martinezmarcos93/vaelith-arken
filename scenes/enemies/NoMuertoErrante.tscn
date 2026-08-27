@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemies/enemy_regular.gd" id="1_script"]
 [ext_resource type="Script" path="res://scripts/combat/hitbox.gd" id="2_hitbox"]
 [ext_resource type="Script" path="res://scripts/combat/hurtbox.gd" id="3_hurtbox"]
-[ext_resource type="SpriteFrames" path="res://assets/sprites/enemies/necromancer_creativekind_free_commercial_ok/_frames.tres" id="4_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/enemies/skeleton_warrior_craftpix_free/_frames.tres" id="4_frames"]
 
 [sub_resource type="RectangleShape2D" id="Body"]
 size = Vector2(26, 42)
@@ -27,7 +27,7 @@ attack_damage = 2
 attack_knockback = 180.0
 vulnerable_duration = 0.6
 anim_idle = "idle"
-anim_move = "run"
+anim_move = "walk"
 anim_attack = "attack1"
 anim_vulnerable = "idle"
 anim_hurt = "hurt"
@@ -37,10 +37,10 @@ anim_death = "death"
 shape = SubResource("Body")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.85, 0.85)
+scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("4_frames")
 animation = &"idle"
-offset = Vector2(-19, -26)
+offset = Vector2(0, -38)
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2

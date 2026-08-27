@@ -56,9 +56,13 @@ theme_override_colors/font_color = Color(0.72, 0.72, 0.72, 1)
 theme_override_font_sizes/font_size = 14
 theme_override_constants/line_spacing = 6
 text = "Evil Wizard 2 — CC0
-Necromancer — creativekind (uso libre, no redistribuir)
+Skeleton Warrior — CraftPix (uso libre)
+Bringer of Death — Clembod (uso libre)
 Ghost + Skull — Fatal AI Gaming (uso libre)
 Cave Props — CraftPix (uso libre)
+Dungeon Props + Rocas de cueva — CraftPix (uso libre)
+Tileset de mazmorra (recoloreado) — CraftPix (uso libre)
+Fondo de cementerio — CraftPix (uso libre)
 Ícono de calavera — CraftPix (uso libre)"
 
 [node name="Spacer3" type="Control" parent="Center/VBox"]

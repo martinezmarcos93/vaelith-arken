@@ -20,6 +20,22 @@
 [ext_resource type="PackedScene" path="res://scenes/level/DialogueTrigger.tscn" id="17_dialogue"]
 [ext_resource type="PackedScene" path="res://scenes/level/SkullCollectible.tscn" id="19_skull"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/Boss1.tscn" id="20_boss1"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/BringerOfDeath.tscn" id="33_bringer"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_01.png" id="22_root1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_02.png" id="23_root2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_60.png" id="24_table1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_05.png" id="25_jar1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_rocks_craftpix_free/cave_rock1.png" id="26_rock1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_rocks_craftpix_free/cave_rock3.png" id="27_rock2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_51.png" id="28_shelf1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_platformer_craftpix_free/Tiles_rock/tile2.png" id="29_tile_rock"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/battleground1_pale_craftpix_free/sky.png" id="30_bg_sky"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/battleground1_pale_craftpix_free/ruins_bg.png" id="31_bg_ruinsbg"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/battleground1_pale_craftpix_free/ruins.png" id="32_bg_ruins"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_09.png" id="34_stump1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_30.png" id="35_book1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_47.png" id="36_plant1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_44.png" id="37_potion1"]
 
 [sub_resource type="RectangleShape2D" id="Shape_220x24"]
 size = Vector2(220, 24)
@@ -63,6 +79,32 @@ size = Vector2(3800, 180)
 [node name="Level1" type="Node2D"]
 script = ExtResource("21_controller")
 
+[node name="Background" type="ParallaxBackground" parent="."]
+
+[node name="Sky" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2(0.05, 0.05)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/Sky"]
+position = Vector2(960, 300)
+texture = ExtResource("30_bg_sky")
+
+[node name="RuinsFar" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/RuinsFar"]
+position = Vector2(960, 300)
+texture = ExtResource("31_bg_ruinsbg")
+
+[node name="RuinsNear" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2(0.4, 0.4)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/RuinsNear"]
+position = Vector2(960, 300)
+texture = ExtResource("32_bg_ruins")
+
 [node name="SafetyFloor" type="StaticBody2D" parent="."]
 position = Vector2(1800, 650)
 
@@ -98,12 +140,13 @@ position = Vector2(150, 272)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoA_P1"]
 shape = SubResource("Shape_220x24")
 
-[node name="Visual" type="ColorRect" parent="TramoA_P1"]
+[node name="Visual" type="TextureRect" parent="TramoA_P1"]
 offset_left = -110.0
 offset_top = -12.0
 offset_right = 110.0
 offset_bottom = 12.0
-color = Color(0.067, 0.133, 0.180, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
 
 [node name="MemoryFragment2" parent="." instance=ExtResource("16_memory")]
 position = Vector2(480, 290)
@@ -115,12 +158,13 @@ position = Vector2(405, 342)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoA_P2"]
 shape = SubResource("Shape_200x24")
 
-[node name="Visual" type="ColorRect" parent="TramoA_P2"]
+[node name="Visual" type="TextureRect" parent="TramoA_P2"]
 offset_left = -100.0
 offset_top = -12.0
 offset_right = 100.0
 offset_bottom = 12.0
-color = Color(0.067, 0.133, 0.180, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
 
 [node name="TramoA_P3" type="StaticBody2D" parent="."]
 position = Vector2(645, 402)
@@ -128,12 +172,13 @@ position = Vector2(645, 402)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoA_P3"]
 shape = SubResource("Shape_200x24")
 
-[node name="Visual" type="ColorRect" parent="TramoA_P3"]
+[node name="Visual" type="TextureRect" parent="TramoA_P3"]
 offset_left = -100.0
 offset_top = -12.0
 offset_right = 100.0
 offset_bottom = 12.0
-color = Color(0.067, 0.133, 0.180, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
 
 [node name="TramoB_Ground" type="StaticBody2D" parent="."]
 position = Vector2(1045, 470)
@@ -141,12 +186,13 @@ position = Vector2(1045, 470)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoB_Ground"]
 shape = SubResource("Shape_500x40")
 
-[node name="Visual" type="ColorRect" parent="TramoB_Ground"]
+[node name="Visual" type="TextureRect" parent="TramoB_Ground"]
 offset_left = -250.0
 offset_top = -20.0
 offset_right = 250.0
 offset_bottom = 20.0
-color = Color(0.067, 0.133, 0.180, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
 
 [node name="BranchB_P1" type="StaticBody2D" parent="."]
 position = Vector2(920, 392)
@@ -154,12 +200,13 @@ position = Vector2(920, 392)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BranchB_P1"]
 shape = SubResource("Shape_100x24")
 
-[node name="Visual" type="ColorRect" parent="BranchB_P1"]
+[node name="Visual" type="TextureRect" parent="BranchB_P1"]
 offset_left = -50.0
 offset_top = -12.0
 offset_right = 50.0
 offset_bottom = 12.0
-color = Color(0.067, 0.133, 0.180, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
 
 [node name="BranchB_P2" type="StaticBody2D" parent="."]
 position = Vector2(1050, 322)
@@ -167,12 +214,13 @@ position = Vector2(1050, 322)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BranchB_P2"]
 shape = SubResource("Shape_100x24")
 
-[node name="Visual" type="ColorRect" parent="BranchB_P2"]
+[node name="Visual" type="TextureRect" parent="BranchB_P2"]
 offset_left = -50.0
 offset_top = -12.0
 offset_right = 50.0
 offset_bottom = 12.0
-color = Color(0.067, 0.133, 0.180, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
 
 [node name="BranchB_P3_Recompensa" type="StaticBody2D" parent="."]
 position = Vector2(1180, 262)
@@ -180,12 +228,13 @@ position = Vector2(1180, 262)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BranchB_P3_Recompensa"]
 shape = SubResource("Shape_100x24")
 
-[node name="Visual" type="ColorRect" parent="BranchB_P3_Recompensa"]
+[node name="Visual" type="TextureRect" parent="BranchB_P3_Recompensa"]
 offset_left = -50.0
 offset_top = -12.0
 offset_right = 50.0
 offset_bottom = 12.0
-color = Color(0.067, 0.133, 0.180, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
 
 [node name="Skull1" parent="." instance=ExtResource("19_skull")]
 position = Vector2(1180, 220)
@@ -196,12 +245,13 @@ position = Vector2(1405, 442)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoC_P1"]
 shape = SubResource("Shape_180x24")
 
-[node name="Visual" type="ColorRect" parent="TramoC_P1"]
+[node name="Visual" type="TextureRect" parent="TramoC_P1"]
 offset_left = -90.0
 offset_top = -12.0
 offset_right = 90.0
 offset_bottom = 12.0
-color = Color(0.067, 0.133, 0.180, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
 
 [node name="TramoC_HazardGround" type="StaticBody2D" parent="."]
 position = Vector2(1525, 442)
@@ -225,12 +275,13 @@ position = Vector2(1655, 442)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoC_P2"]
 shape = SubResource("Shape_200x24")
 
-[node name="Visual" type="ColorRect" parent="TramoC_P2"]
+[node name="Visual" type="TextureRect" parent="TramoC_P2"]
 offset_left = -100.0
 offset_top = -12.0
 offset_right = 100.0
 offset_bottom = 12.0
-color = Color(0.067, 0.133, 0.180, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
 
 [node name="Skull2" parent="." instance=ExtResource("19_skull")]
 position = Vector2(1655, 370)
@@ -241,12 +292,13 @@ position = Vector2(2065, 470)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoD_Ground"]
 shape = SubResource("Shape_520x40")
 
-[node name="Visual" type="ColorRect" parent="TramoD_Ground"]
+[node name="Visual" type="TextureRect" parent="TramoD_Ground"]
 offset_left = -260.0
 offset_top = -20.0
 offset_right = 260.0
 offset_bottom = 20.0
-color = Color(0.067, 0.133, 0.180, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
 
 [node name="DialogueTrigger2" parent="." instance=ExtResource("17_dialogue")]
 position = Vector2(1880, 418)
@@ -274,12 +326,13 @@ position = Vector2(2405, 392)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoE_P1"]
 shape = SubResource("Shape_140x24")
 
-[node name="Visual" type="ColorRect" parent="TramoE_P1"]
+[node name="Visual" type="TextureRect" parent="TramoE_P1"]
 offset_left = -70.0
 offset_top = -12.0
 offset_right = 70.0
 offset_bottom = 12.0
-color = Color(0.067, 0.133, 0.180, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
 
 [node name="TramoE_P2" type="StaticBody2D" parent="."]
 position = Vector2(2565, 322)
@@ -287,12 +340,13 @@ position = Vector2(2565, 322)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoE_P2"]
 shape = SubResource("Shape_140x24")
 
-[node name="Visual" type="ColorRect" parent="TramoE_P2"]
+[node name="Visual" type="TextureRect" parent="TramoE_P2"]
 offset_left = -70.0
 offset_top = -12.0
 offset_right = 70.0
 offset_bottom = 12.0
-color = Color(0.067, 0.133, 0.180, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
 
 [node name="TramoE_P3_Recompensa" type="StaticBody2D" parent="."]
 position = Vector2(2725, 272)
@@ -300,12 +354,13 @@ position = Vector2(2725, 272)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoE_P3_Recompensa"]
 shape = SubResource("Shape_160x24")
 
-[node name="Visual" type="ColorRect" parent="TramoE_P3_Recompensa"]
+[node name="Visual" type="TextureRect" parent="TramoE_P3_Recompensa"]
 offset_left = -80.0
 offset_top = -12.0
 offset_right = 80.0
 offset_bottom = 12.0
-color = Color(0.067, 0.133, 0.180, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
 
 [node name="Skull3" parent="." instance=ExtResource("19_skull")]
 position = Vector2(2690, 230)
@@ -320,12 +375,13 @@ position = Vector2(2665, 470)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TramoF_Ground"]
 shape = SubResource("Shape_680x40")
 
-[node name="Visual" type="ColorRect" parent="TramoF_Ground"]
+[node name="Visual" type="TextureRect" parent="TramoF_Ground"]
 offset_left = -340.0
 offset_top = -20.0
 offset_right = 340.0
 offset_bottom = 20.0
-color = Color(0.067, 0.133, 0.180, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
 
 [node name="PropCrystalWhite" type="Sprite2D" parent="."]
 position = Vector2(435, 308)
@@ -367,6 +423,66 @@ position = Vector2(2945, 406)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("14_bonfire")
 
+[node name="PropStump1" type="Sprite2D" parent="."]
+position = Vector2(250, 245)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("34_stump1")
+
+[node name="PropBook1" type="Sprite2D" parent="."]
+position = Vector2(600, 375)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("35_book1")
+
+[node name="PropPlant1" type="Sprite2D" parent="."]
+position = Vector2(2150, 420)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("36_plant1")
+
+[node name="PropPotion1" type="Sprite2D" parent="."]
+position = Vector2(2500, 300)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("37_potion1")
+
+[node name="PropRoot1" type="Sprite2D" parent="."]
+position = Vector2(850, 410)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("22_root1")
+
+[node name="PropTable1" type="Sprite2D" parent="."]
+position = Vector2(1220, 410)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("24_table1")
+
+[node name="PropRoot2" type="Sprite2D" parent="."]
+position = Vector2(1450, 400)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("23_root2")
+
+[node name="PropJar1" type="Sprite2D" parent="."]
+position = Vector2(1630, 400)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("25_jar1")
+
+[node name="PropRockPile1" type="Sprite2D" parent="."]
+position = Vector2(2450, 410)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("26_rock1")
+
+[node name="PropRockPile2" type="Sprite2D" parent="."]
+position = Vector2(2800, 420)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("27_rock2")
+
+[node name="PropShelf1" type="Sprite2D" parent="."]
+position = Vector2(3150, 410)
+scale = Vector2(1.0, 1.0)
+texture = ExtResource("28_shelf1")
+
+[node name="PropJar2" type="Sprite2D" parent="."]
+position = Vector2(3480, 400)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("25_jar1")
+
 [node name="DialogueTrigger5" parent="." instance=ExtResource("17_dialogue")]
 position = Vector2(720, 368)
 lines = ["El aire entra con dificultad.", "Huele a tierra húmeda, piedra y algo parecido a incienso apagado."]
@@ -392,16 +508,21 @@ position = Vector2(3345, 470)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossArena"]
 shape = SubResource("Shape_680x40")
 
-[node name="Visual" type="ColorRect" parent="BossArena"]
+[node name="Visual" type="TextureRect" parent="BossArena"]
 offset_left = -340.0
 offset_top = -20.0
 offset_right = 340.0
 offset_bottom = 20.0
-color = Color(0.02, 0.02, 0.03, 1)
+texture = ExtResource("29_tile_rock")
+stretch_mode = 1
+modulate = Color(0.55, 0.55, 0.6, 1)
 
 [node name="DialogueTrigger4" parent="." instance=ExtResource("17_dialogue")]
 position = Vector2(3060, 418)
 lines = ["Todavía hacés eso.", "Siempre cargabas primero."]
+
+[node name="BringerOfDeath1" parent="." instance=ExtResource("33_bringer")]
+position = Vector2(3220, 410)
 
 [node name="Boss1" parent="." instance=ExtResource("20_boss1")]
 position = Vector2(3550, 410)

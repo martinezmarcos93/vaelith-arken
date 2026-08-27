@@ -6,9 +6,9 @@ extends CharacterBody2D
 ## Idle, y solo cambian los @export de esta clase entre "No-muerto errante"
 ## (move_mode="ground_patrol") y "Espiritu atado" (move_mode="float_sway").
 ##
-## Placeholder de arte: reutiliza packs CC0/gratuitos ya catalogados en
-## CREDITS.md (necromancer para el no-muerto, ghost para el espiritu) solo
-## para validar la IA -- no son la asignacion final de arte.
+## Arte: packs gratuitos catalogados en CREDITS.md (Skeleton Warrior para el
+## no-muerto errante, ghost para el espiritu atado) -- ninguno es
+## necesariamente la asignacion final de arte.
 
 enum State { IDLE, ALERT, ATTACK, VULNERABLE, DEAD }
 
