@@ -93,7 +93,52 @@ externo (ver `docs/lista_assets_pixel_art.md` y `docs/lista_audio.md`).
   Licencia: **libre con atribución obligatoria** ("free to use... as long as
   you give appropriate credit"). Tono de pueblo/aldea — no calza con el tono
   de combate/exploración de cripta definido en `docs/GDD.md`; se deja
-  disponible como referencia/placeholder de ambiente, no como música final.
+  disponible como referencia/placeholder de ambiente, **superado por la música
+  propia de Suno** (abajo), no como música final.
+
+- **Música propia (Suno) — 2026-08-27** — `assets/audio/music/` (`intro*.mp3`,
+  `level1*.mp3`, `boss*.mp3`).
+  Generada por Marcos con Suno a partir de los prompts de `docs/lista_audio.md`
+  §1. **Contenido propio del proyecto**, no de terceros. Cada tema con 2
+  versiones hasta elegir la definitiva (ver `assets/audio/README.md`).
+  Nota de licencia de Suno: la propiedad/uso comercial de las generaciones
+  depende del plan de la cuenta de Suno al generarlas — Marcos lo tiene
+  presente.
+
+### SFX — selección curada de 3 packs gratuitos de itch.io (2026-08-27)
+
+Solo se trajeron al repo los archivos que usa la demo (ver `docs/lista_audio.md`
+y `assets/audio/sfx/`), renombrados por función. **No se sube el pack completo.**
+Los `.zip` originales quedan fuera del repo (`PHARASMA/Sound Effects/`).
+
+- **Free Fantasy SFX Pack (TomMusic)** — `tommusic.itch.io/free-fantasy-200-sfx-pack`
+  Usado: pasos en piedra (Stone Chain), salto/caída, swings y bloqueos de
+  espada, parry, impactos, puertas/rejas/cerrojo, "mine", loops de cueva /
+  antorcha / arroyo. Archivos en `assets/audio/sfx/{player,combat,world,ambient}/`.
+  Licencia (página de itch): **royalty-free, uso comercial permitido, crédito
+  apreciado pero no obligatorio; prohibido reventa/redistribución del pack.**
+
+- **Sword Combat Sound Effects Pack — FREE VERSION (Hove Audio)** —
+  `hoveaudio.itch.io/sword-combat-sound-effects-pack-free-version`
+  Usado: choque de hojas metálicas, estocada con "gore", whooshes, ring FX de
+  telegrafiado, y **voicelines** (gruñidos de esfuerzo y de daño) para Vaelith
+  y el boss. En `assets/audio/sfx/{combat,player}/`.
+  Licencia: tag **"Royalty Free"** de itch + el autor confirmó en comentarios
+  que no hace falta crédito. **Sin texto de licencia formal en el pack** — para
+  uso comercial serio conviene confirmar con el autor (`kade@hoveaudio.com`).
+
+- **Horror Ambiences SFX Pack — FREE VERSION (Hove Audio)** —
+  `hoveaudio.itch.io/horror-ambiences-sound-effects-pack-free-version`
+  Usado: 1 archivo — "Not Alone" (versión dry) como drone de presencia
+  (`assets/audio/sfx/ambient/presence_drone.wav`). La versión free trae solo 3
+  ambiences, poco aprovechables para fantasía gótica. Misma nota de licencia
+  que el pack de espadas de Hove (royalty-free por tag, sin texto formal).
+
+**Redistribución en repo público**: se sigue el mismo criterio que con los
+sprites de packs (CraftPix Free, etc.) ya integrados — se commitean solo los
+archivos usados en el juego, documentados acá, no el pack fuente. Si hiciera
+falta ser más estricto se puede `gitignore` `assets/audio/sfx/` y mantenerlo
+local.
 
 - **Effect and Bullet 16x16 (BDragon1727)** — `assets/vfx/effect_bullet_16x16_bdragon1727_donationware/`
   Fuente: https://bdragon1727.itch.io/free-effect-and-bullet-16x16
