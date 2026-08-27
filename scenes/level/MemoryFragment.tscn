@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/level/memory_fragment.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/white_crystal_dark_shadow1.png" id="2_crystal"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/props/memory_fragment_custom/_frames.tres" id="2_frames"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_area"]
 size = Vector2(28, 28)
@@ -14,7 +14,8 @@ script = ExtResource("1_script")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_area")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.463, 0.427, 0.737, 1)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("2_crystal")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+sprite_frames = ExtResource("2_frames")
+animation = &"idle"
+autoplay = "idle"

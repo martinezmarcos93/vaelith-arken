@@ -20,22 +20,28 @@ atribución) antes de bajarlos.
 
 ---
 
-## 1. Protagonista — Vaelith Arken 🔴 Custom obligatorio
-No hay alternativa: es el personaje central de la historia, con diseño y
-animaciones que dependen de su lore específico (armadura, escudo con símbolo de
-Pharasma, daga ceremonial). Ningún pack genérico de "knight" lo resuelve sin
-quedar genérico.
+## 1. Protagonista — Vaelith Arken 🟡 Custom con IA, integrado 2026-08-27
+Ya no es un hueco sin cubrir: Marcos generó una hoja de referencia con IA
+(`Sprites/Vaelith.png`) con animaciones etiquetadas, extraídas e integradas
+en `assets/sprites/player/vaelith_custom/` (ver CREDITS.md para el detalle
+técnico completo). Sigue siendo candidato a reemplazo por arte 100% original
+en LibreSprite más adelante si Marcos lo decide — no se cierra la puerta,
+pero deja de ser un bloqueante.
 
-- [ ] Idle
-- [ ] Correr
-- [ ] Salto (subida / apex / caída)
-- [ ] Aterrizaje
-- [ ] Ataque alto (espada larga)
-- [ ] Ataque bajo (espada larga)
-- [ ] Bloqueo / levantar escudo
-- [ ] Embestida (Shove)
-- [ ] Recibir daño
-- [ ] Muerte / resurrección (animación única, ligada al lore de Returned)
+- [x] Idle — 4 frames
+- [x] Correr — 8 frames
+- [ ] Salto (subida / apex / caída) — reutiliza los frames de correr, no
+      extraído todavía de la hoja (sí existe ahí: fila "SALTO (5)")
+- [ ] Aterrizaje — no extraído (existe en la hoja: fila "ATERRIZAJE (4)")
+- [x] Ataque alto (espada larga) — 5 frames
+- [ ] Ataque bajo (espada larga) — reutiliza el ataque alto, no extraído
+      todavía (existe en la hoja: fila "ATAQUE BAJO (8)")
+- [ ] Bloqueo / levantar escudo — sin animación propia en `player.gd`
+      (no aplica extraer todavía)
+- [ ] Embestida (Shove) — ídem, sin animación propia en el código
+- [ ] Recibir daño — reutiliza idle, no extraído todavía (existe en la
+      hoja: fila "RECIBIR DAÑO (4)")
+- [x] Muerte — 6 frames (resurrección no extraída, existe en la hoja)
 
 **Referencia útil (no para usar directo, solo de estilo/proporción):**
 [FREE - Knight 2D Pixel Art (Mattz Art)](https://xzany.itch.io/free-knight-2d-pixel-art)
@@ -45,49 +51,60 @@ quedar genérico.
 
 ## 2. Enemigos regulares 🟡 Placeholder viable → reskin recomendado
 
-### No-muerto errante (melee lento)
-- [ ] Idle/patrulla
-- [ ] Caminar
-- [ ] Anticipación de ataque
-- [ ] Ataque
-- [ ] Recibir daño / vulnerable
-- [ ] Muerte
+### No-muerto errante (melee lento) 🟡 Custom con IA, integrado 2026-08-27
+- [x] Idle/patrulla — 7 frames
+- [x] Caminar — 9 frames
+- [ ] Anticipación de ataque — sin uso separado (`enemy_regular.gd` no tiene
+      estado propio de telegraph, usa `attack_windup` sobre la misma anim)
+- [x] Ataque — 6 frames
+- [x] Vulnerable (post-ataque) — 7 frames
+- [x] Muerte — 7 frames
 
-**Candidatos encontrados:**
-- ✅ [Free Skeleton Pixel Art Sprite Sheets (CraftPix)](https://craftpix.net/freebies/free-skeleton-pixel-art-sprite-sheets/) — **integrado** en `assets/sprites/enemies/skeleton_warrior_craftpix_free/`, reemplaza al Necromancer en `NoMuertoErrante.tscn` (2026-08-26, ver CREDITS.md).
+Reemplaza a Skeleton Warrior (CraftPix, integrado ayer 2026-08-26). Fuente:
+`Sprites/No muerto errante.png` (arte con IA de Marcos). Ver CREDITS.md.
+
+**Candidatos previos (ya no en uso, quedan documentados por si se reconsidera):**
+- ✅ [Free Skeleton Pixel Art Sprite Sheets (CraftPix)](https://craftpix.net/freebies/free-skeleton-pixel-art-sprite-sheets/) — integrado 2026-08-26, reemplazado 2026-08-27.
 - [Skeleton Warriors Pixel Art Monster Asset (sanctumpixel)](https://sanctumpixel.itch.io/skeleton-warriors-pixel-art-monster-asset)
 - [2D Pixel Art Skeletal Warrior (Elthen's Pixel Art Shop)](https://elthen.itch.io/2d-pixel-art-skeletal-warrior)
 - [Free Enemy Sprite Sheets Pixel Art](https://free-game-assets.itch.io/free-enemy-sprite-sheets-pixel-art)
 
-### Espíritu atado (errático/aéreo)
-- [ ] Idle/flotar
-- [ ] Lunge (ataque)
-- [ ] Recibir daño / vulnerable
-- [ ] Muerte
+### Espíritu atado (errático/aéreo) 🟡 Custom con IA, integrado 2026-08-27
+- [x] Idle/flotar — 8 frames
+- [x] Lunge (ataque) — 6 frames
+- [x] Vulnerable — 4 frames
+- [x] Muerte — 4 frames
 
-**Candidatos encontrados:**
-- ✅ [Pixel Art Ghost Sprite (OpenGameArt)](https://opengameart.org/content/pixel-art-ghost-sprite) — **integrado** en `assets/sprites/enemies/ghost_opengameart_CC-BY4.0/` (CC-BY 4.0).
-- ✅ [Pixel Art - Simple Ghost and Skull Sprite sheet (Fatal)](https://fatalaigaming.itch.io/pixelghostskull) — **integrado** en `assets/sprites/enemies/ghost_skull_fatalaigaming_free/` (gratis, sin atribución).
+Reemplaza a Ghost+Skull (Fatal AI Gaming). Fuente: `Sprites/espiritu
+atado.png`. Extracción menos precisa que los otros 3 personajes (silueta de
+humo, los frames se tocan entre sí — ver nota técnica en CREDITS.md). Sin
+animación de "recibir daño / movimiento" separada — reutiliza idle.
+
+**Candidatos previos (ya no en uso):**
+- ✅ [Pixel Art Ghost Sprite (OpenGameArt)](https://opengameart.org/content/pixel-art-ghost-sprite) — integrado, reemplazado 2026-08-27.
+- ✅ [Pixel Art - Simple Ghost and Skull Sprite sheet (Fatal)](https://fatalaigaming.itch.io/pixelghostskull) — integrado, reemplazado 2026-08-27.
 - [Free Ghost Pixel Art Sprite Sheets (CraftPix)](https://craftpix.net/freebies/free-ghost-pixel-art-sprite-sheets/) — 3 fantasmas con movimiento, ataque, muerte, grito. Pendiente.
-
-**Recomendación:** usar estos packs como placeholder para poblar Level 1 y
-validar el diseño de comportamiento (Fase 5.1/5.3) ya mismo, sin esperar arte
-final. Decidir el reskin recién cuando el resto de la paleta/estilo esté
-asentado — puede que ni haga falta si el pack calza bien con la guía de estilo.
 
 ---
 
-## 3. Boss 1 — Guerrero-espejo 🔴 Custom obligatorio
-Igual que el protagonista: narrativamente **debe** parecerse visualmente a
-Vaelith (comparte diseño de armadura/pose), así que no hay pack de terceros que
-lo resuelva sin romper la premisa del personaje.
+## 3. Boss 1 — Guerrero-espejo 🟡 Custom con IA, integrado 2026-08-27
+Igual que el protagonista, ya no es un hueco sin cubrir. Fuente:
+`Sprites/Espejo.png` (arte con IA de Marcos, mismo diseño de armadura que
+Vaelith en violeta en vez de rojo, cumple la premisa narrativa de "reflejo").
+Reemplaza el placeholder de Evil Wizard 2 en `Boss1.tscn`. Ver CREDITS.md.
 
-- [ ] Idle
-- [ ] Caminar
-- [ ] 2-3 patrones de ataque distintos (con anticipación clara)
-- [ ] Transición de fase
-- [ ] Aturdido / vulnerable
-- [ ] Muerte / diálogo final (máscara cayendo, ver `guion_desenlace.md`)
+- [x] Idle — 4 frames
+- [x] Caminar — 7 frames
+- [ ] 2-3 patrones de ataque distintos — solo 1 patrón por ahora: `attack1`
+      y `attack2` usan el mismo set de 6 frames (la hoja no separaba
+      claramente "ataque alto" de "ataque bajo")
+- [ ] Transición de fase — sin animación dedicada (el código ya maneja la
+      transición de fase por lógica/telegraphs, no por sprite)
+- [x] Aturdido / vulnerable — `hurt`, 4 frames (existe además una fila
+      "ATURDIDO" en la hoja original sin extraer todavía)
+- [ ] Muerte / diálogo final — no aplica: el Boss 1 se RINDE, no muere
+      (`boss1.gd` ya lo maneja con tinte gris sobre `idle`, ver
+      `vaelith_arken_demo_plan` en memoria)
 
 ---
 
@@ -184,15 +201,18 @@ del HUD antes de confirmar.
 
 | Categoría | Estado | Acción sugerida |
 |---|---|---|
-| Protagonista | 🔴 Custom | Producción en LibreSprite desde cero |
-| Boss 1 | 🔴 Custom | Producción en LibreSprite desde cero (comparte base con protagonista) |
-| Enemigos regulares | 🟡 Placeholder | Bajar packs de esqueleto/fantasma ya, decidir reskin después |
-| Tileset/entorno | 🟢 Pack | Bajar "Dungeon Tileset" (Golopin) + explorar tag Gothic de itch.io |
-| Props narrativos | 🔴 Custom (parcial) | Solo puerta/checkpoint/fragmento; el resto sale del tileset |
-| UI/HUD | 🟢 Pack (parcial) | Pack genérico + indicador de penitencia a medida |
+| Protagonista | 🟡 Custom con IA (2026-08-27) | Integrado y jugable; falta confirmación visual real y completar salto/aterrizaje/ataque bajo/recibir daño/resurrección |
+| Boss 1 | 🟡 Custom con IA (2026-08-27) | Integrado y jugable; ataque alto y bajo comparten el mismo set de frames por ahora |
+| Enemigos regulares | 🟡 Custom con IA (2026-08-27) | Ambos integrados; Espíritu atado con extracción menos prolija (silueta de humo) |
+| Tileset/entorno | 🟢 Pack + fondo custom | Tileset recoloreado (CraftPix) ya aplicado a las plataformas; fondo de parallax reemplazado por el custom de `Sprites/` |
+| Props narrativos | 🟡 Parcial custom con IA | Checkpoint y Fragmento de memoria integrados; puerta de la cripta como decoración de fondo sin lógica real; piso agrietado e indicador de penitencia sin integrar |
+| UI/HUD | 🟢 Pack (parcial) | Pack genérico + indicador de penitencia a medida (arte ya existe en `Sprites/Penitencia corrupcion.png`, falta el sistema en código) |
 | VFX | 🟢 Pack (parcial) | Pack genérico + telegrafiado de ataque y memoria a medida |
 | Tipografía | 🟢 Pack | "Gothic Pixels" de Akezhar |
 
-**Con esto, el trabajo de pixel art 100% original queda acotado a:** Vaelith,
-Boss 1, y 4-5 props/VFX narrativos puntuales — todo lo demás puede arrancar
-como pack de terceros y evaluarse después si necesita reskin.
+**Estado actual (2026-08-27):** los 4 personajes principales y varios props
+narrativos dejaron de ser huecos de arte gracias a hojas de referencia
+generadas con IA por Marcos — quedan integrados y jugables, pero con
+recorte de alcance real (ver detalle por personaje arriba y en CREDITS.md).
+Sigue abierta la decisión de si esto es el arte final o un paso intermedio
+antes de producción 100% original en LibreSprite.

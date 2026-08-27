@@ -29,13 +29,14 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_rocks_craftpix_free/cave_rock3.png" id="27_rock2"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_51.png" id="28_shelf1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_platformer_craftpix_free/Tiles_rock/tile2.png" id="29_tile_rock"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/battleground1_pale_craftpix_free/sky.png" id="30_bg_sky"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/battleground1_pale_craftpix_free/ruins_bg.png" id="31_bg_ruinsbg"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/battleground1_pale_craftpix_free/ruins.png" id="32_bg_ruins"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/nivel1_custom_parallax/capa1.png" id="30_bg_sky"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/nivel1_custom_parallax/capa2.png" id="31_bg_ruinsbg"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/nivel1_custom_parallax/capa3.png" id="32_bg_ruins"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_09.png" id="34_stump1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_30.png" id="35_book1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_47.png" id="36_plant1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_44.png" id="37_potion1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/crypt_door_custom/door_closed.png" id="38_cryptdoor"]
 
 [sub_resource type="RectangleShape2D" id="Shape_220x24"]
 size = Vector2(220, 24)
@@ -83,26 +84,29 @@ script = ExtResource("21_controller")
 
 [node name="Sky" type="ParallaxLayer" parent="Background"]
 motion_scale = Vector2(0.05, 0.05)
-motion_mirroring = Vector2(1920, 0)
+motion_mirroring = Vector2(1285, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Sky"]
-position = Vector2(960, 300)
+position = Vector2(640, 300)
+scale = Vector2(5, 5)
 texture = ExtResource("30_bg_sky")
 
 [node name="RuinsFar" type="ParallaxLayer" parent="Background"]
 motion_scale = Vector2(0.2, 0.2)
-motion_mirroring = Vector2(1920, 0)
+motion_mirroring = Vector2(1330, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/RuinsFar"]
-position = Vector2(960, 300)
+position = Vector2(640, 300)
+scale = Vector2(5, 5)
 texture = ExtResource("31_bg_ruinsbg")
 
 [node name="RuinsNear" type="ParallaxLayer" parent="Background"]
 motion_scale = Vector2(0.4, 0.4)
-motion_mirroring = Vector2(1920, 0)
+motion_mirroring = Vector2(1265, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/RuinsNear"]
-position = Vector2(960, 300)
+position = Vector2(640, 300)
+scale = Vector2(5, 5)
 texture = ExtResource("32_bg_ruins")
 
 [node name="SafetyFloor" type="StaticBody2D" parent="."]
@@ -520,6 +524,12 @@ modulate = Color(0.55, 0.55, 0.6, 1)
 [node name="DialogueTrigger4" parent="." instance=ExtResource("17_dialogue")]
 position = Vector2(3060, 418)
 lines = ["Todavía hacés eso.", "Siempre cargabas primero."]
+
+[node name="PropCryptDoor" type="Sprite2D" parent="."]
+position = Vector2(3550, 290)
+scale = Vector2(0.45, 0.45)
+z_index = -1
+texture = ExtResource("38_cryptdoor")
 
 [node name="BringerOfDeath1" parent="." instance=ExtResource("33_bringer")]
 position = Vector2(3220, 410)

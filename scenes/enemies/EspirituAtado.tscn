@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemies/enemy_regular.gd" id="1_script"]
 [ext_resource type="Script" path="res://scripts/combat/hitbox.gd" id="2_hitbox"]
 [ext_resource type="Script" path="res://scripts/combat/hurtbox.gd" id="3_hurtbox"]
-[ext_resource type="SpriteFrames" path="res://assets/sprites/enemies/ghost_skull_fatalaigaming_free/_frames.tres" id="4_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/enemies/espiritu_atado_custom/_frames.tres" id="4_frames"]
 
 [sub_resource type="RectangleShape2D" id="Body"]
 size = Vector2(18, 26)
@@ -28,19 +28,19 @@ attack_knockback = 160.0
 vulnerable_duration = 0.5
 anim_idle = "idle"
 anim_move = "idle"
-anim_attack = "idle"
-anim_vulnerable = "idle"
+anim_attack = "attack1"
+anim_vulnerable = "vulnerable"
 anim_hurt = "idle"
-anim_death = "idle"
+anim_death = "death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("Body")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.6, 0.6)
 sprite_frames = ExtResource("4_frames")
 animation = &"idle"
-offset = Vector2(-2, 0)
+offset = Vector2(0, -38)
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2

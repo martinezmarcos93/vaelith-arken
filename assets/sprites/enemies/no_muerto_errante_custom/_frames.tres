@@ -1,0 +1,174 @@
+[gd_resource type="SpriteFrames" load_steps=37 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/idle_0.png" id="1_idle_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/idle_1.png" id="2_idle_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/idle_2.png" id="3_idle_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/idle_3.png" id="4_idle_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/idle_4.png" id="5_idle_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/idle_5.png" id="6_idle_5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/idle_6.png" id="7_idle_6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/walk_0.png" id="8_walk_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/walk_1.png" id="9_walk_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/walk_2.png" id="10_walk_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/walk_3.png" id="11_walk_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/walk_4.png" id="12_walk_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/walk_5.png" id="13_walk_5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/walk_6.png" id="14_walk_6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/walk_7.png" id="15_walk_7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/walk_8.png" id="16_walk_8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/attack1_0.png" id="17_attack1_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/attack1_1.png" id="18_attack1_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/attack1_2.png" id="19_attack1_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/attack1_3.png" id="20_attack1_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/attack1_4.png" id="21_attack1_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/attack1_5.png" id="22_attack1_5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/vulnerable_0.png" id="23_vulnerable_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/vulnerable_1.png" id="24_vulnerable_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/vulnerable_2.png" id="25_vulnerable_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/vulnerable_3.png" id="26_vulnerable_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/vulnerable_4.png" id="27_vulnerable_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/vulnerable_5.png" id="28_vulnerable_5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/vulnerable_6.png" id="29_vulnerable_6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/death_0.png" id="30_death_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/death_1.png" id="31_death_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/death_2.png" id="32_death_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/death_3.png" id="33_death_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/death_4.png" id="34_death_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/death_5.png" id="35_death_5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/no_muerto_errante_custom/death_6.png" id="36_death_6"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_idle_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_idle_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_idle_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_idle_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_idle_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_idle_5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_idle_6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_walk_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_walk_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_walk_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_walk_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_walk_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_walk_5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_walk_6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_walk_7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_walk_8")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_attack1_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_attack1_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_attack1_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_attack1_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_attack1_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_attack1_5")
+}],
+"loop": false,
+"name": &"attack1",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_vulnerable_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_vulnerable_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_vulnerable_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_vulnerable_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_vulnerable_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_vulnerable_5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_vulnerable_6")
+}],
+"loop": true,
+"name": &"vulnerable",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_death_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_death_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_death_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_death_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_death_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_death_5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_death_6")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
+}]

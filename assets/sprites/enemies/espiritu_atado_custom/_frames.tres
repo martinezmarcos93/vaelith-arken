@@ -1,0 +1,113 @@
+[gd_resource type="SpriteFrames" load_steps=23 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/idle_0.png" id="1_idle_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/idle_1.png" id="2_idle_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/idle_2.png" id="3_idle_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/idle_3.png" id="4_idle_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/idle_4.png" id="5_idle_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/idle_5.png" id="6_idle_5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/idle_6.png" id="7_idle_6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/idle_7.png" id="8_idle_7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/attack1_0.png" id="9_attack1_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/attack1_1.png" id="10_attack1_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/attack1_2.png" id="11_attack1_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/attack1_3.png" id="12_attack1_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/attack1_4.png" id="13_attack1_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/attack1_5.png" id="14_attack1_5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/vulnerable_0.png" id="15_vulnerable_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/vulnerable_1.png" id="16_vulnerable_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/vulnerable_2.png" id="17_vulnerable_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/vulnerable_3.png" id="18_vulnerable_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/death_0.png" id="19_death_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/death_1.png" id="20_death_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/death_2.png" id="21_death_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/espiritu_atado_custom/death_3.png" id="22_death_3"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_idle_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_idle_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_idle_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_idle_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_idle_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_idle_5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_idle_6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_idle_7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_attack1_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_attack1_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_attack1_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_attack1_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_attack1_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_attack1_5")
+}],
+"loop": false,
+"name": &"attack1",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_vulnerable_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_vulnerable_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_vulnerable_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_vulnerable_3")
+}],
+"loop": true,
+"name": &"vulnerable",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_death_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_death_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_death_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_death_3")
+}],
+"loop": false,
+"name": &"death",
+"speed": 6.0
+}]

@@ -355,6 +355,104 @@ casos, no un tema de curación fina como las tandas anteriores.
   ramas opcionales de plataformeo — no es un ítem de inventario, solo
   suma a un contador visible en el HUD.
 
+## Arte propio generado por IA (2026-08-27) — reemplaza los 4 placeholders
+## de terceros de personajes principales
+
+Marcos generó (fuera de este chat, con otra herramienta) hojas de referencia
+en `Pixel Art Proyect/Sprites/` para Vaelith, el Boss (guerrero-espejo), el
+No-muerto errante y el Espíritu atado, con animaciones etiquetadas que
+calzan con `docs/lista_assets_pixel_art.md` y `docs/diseno_enemigos.md`.
+**No es arte de terceros con licencia — es contenido propio del proyecto**,
+pero se documenta acá por la misma razón que el resto de este archivo: dejar
+constancia de dónde salió cada sprite y qué tan "terminado" está.
+
+**Advertencia técnica importante**: estas hojas son composiciones de IA
+(lienzo 1536×1024, sin grid real), no spritesheets recortados. Cada
+animación se extrajo con un script propio (Python/PIL): detección de
+componentes conexos por canal alpha para separar cada pose, más un paso que
+**re-ancla cada frame a un mismo pie/centro fijo** (en vez de confiar en la
+alineación del lienzo original) — esto es lo que evita el "tembleque" de
+1-2px o peor que se veía al medir las hojas a ojo. Verificado headless en las
+12 escenas relevantes (jugador, los 4 enemigos, los 5 pasos de la demo,
+Checkpoint y MemoryFragment) sin errores de carga.
+
+**Recorte de alcance de esta pasada** (no se extrajo cada animación de cada
+hoja, ver detalle por personaje): se priorizaron las animaciones que los
+scripts (`player.gd`, `boss1.gd`, `enemy_regular.gd`) realmente reproducen.
+Donde la hoja no traía una animación necesaria, se reutilizó otra ya
+extraída (ej. "salto" y "caída" de Vaelith reusan los mismos frames) — es
+una mejora real sobre el placeholder anterior, no el resultado final.
+
+- **Vaelith** — `assets/sprites/player/vaelith_custom/`. Extraído de
+  `Sprites/Vaelith.png`: `idle`(4), `run`/caminar(8), `attack1`/ataque
+  alto(5, recortado de 8 por arcos de espada rojos que se fusionaban con el
+  personaje en la detección automática), `dead`/muerte(6, se descartaron 2
+  frames finales que en realidad eran del inicio de "Resurrección"
+  contaminando el recorte). `jump`, `fall`, `attack2` y `hurt` reutilizan
+  `run`/`idle`/`attack1` respectivamente (sin extraer todavía). Reemplaza
+  `_placeholder_evil_wizard2_frames.tres` en `Player.tscn`. Offset/escala:
+  `(0,-31)` / `0.5`, calculado (no medido a ojo) para que el pie caiga
+  exacto en el borde de la `CollisionShape2D` (28×44).
+
+- **Boss 1 / guerrero-espejo** — `assets/sprites/enemies/espejo_boss_custom/`.
+  De `Sprites/Espejo.png`: `idle`(4), `run`(7), `hurt`(4). `attack1` y
+  `attack2` son el MISMO set de 6 frames (la hoja no separaba claramente
+  "ataque alto" de "ataque bajo" como sí hacía la de Vaelith — se prefirió
+  un ataque único limpio antes que dos ataques con frames rotos). Reemplaza
+  el mismo placeholder de Evil Wizard 2 que antes compartía con el jugador.
+  Offset/escala: `(0,-31)` / `0.5` (misma fórmula, colisión 28×44).
+
+- **No-muerto errante** — `assets/sprites/enemies/no_muerto_errante_custom/`.
+  De `Sprites/No muerto errante.png` (que además ya traía una etiqueta
+  "SPRITE SHEET 32×48" — aspiracional, la hoja real es de mucho más
+  detalle/resolución que eso): `idle`(7), `walk`(9), `attack1`/espadazo(6),
+  `vulnerable`/post-ataque(7), `death`(7). Reemplaza a Skeleton Warrior
+  (CraftPix, integrado ayer) — ver su propia entrada arriba, que ya quedó
+  documentada como "reemplazada" una vez más. Offset/escala: `(0,-35)` /
+  `0.6` (colisión 26×42).
+
+- **Espíritu atado** — `assets/sprites/enemies/espiritu_atado_custom/`. De
+  `Sprites/espiritu atado.png`: `idle`(8), `attack1`/lunge(6),
+  `vulnerable`(4), `death`(4). Esta hoja usa siluetas fantasmales con humo
+  que SE TOCAN entre frames vecinos (a diferencia de las armaduras sólidas
+  de los otros 3 personajes) — la detección automática de componentes
+  conexos fusionaba filas enteras en un solo blob, así que se usó división
+  por ancho fijo en su lugar (menos precisa, puede haber leve sangrado de
+  un frame al de al lado). Reemplaza a Ghost+Skull (Fatal AI Gaming).
+  Offset/escala: `(0,-38)` / `0.6` (colisión 18×26).
+
+**Entorno** (de `Sprites/Nivel 1 II.png`, `Puerta de la cripta 1.png`,
+`Checkpoint altar de penitenci.png`, `Fragmento de memoria.png`):
+- Fondo de parallax de `Level1.tscn` reemplazado: las 3 capas de
+  `battleground1_pale_craftpix_free/` (CraftPix, integrado ayer) por
+  `assets/sprites/backgrounds/nivel1_custom_parallax/capa{1,2,3}.png` —
+  un castillo bajo la luna específicamente pensado para este nivel, en vez
+  de un cementerio genérico. El pack de CraftPix queda sin uso pero no se
+  borró.
+- `scenes/level/Checkpoint.tscn`: ya no tenía ningún sprite (solo el
+  `Area2D` de colisión) — se agregó `assets/sprites/props/
+  checkpoint_altar_custom/altar.png` como primer sprite visual real del
+  checkpoint.
+- `scenes/level/MemoryFragment.tscn`: pasó de un cristal estático
+  (`cave_props_craftpix_free`, teñido violeta a mano) a una animación real
+  de 4 frames (`assets/sprites/props/memory_fragment_custom/`).
+- `PropCryptDoor` nuevo en `Level1.tscn`: la puerta de la cripta (con el
+  símbolo de Pharasma) como decoración de fondo (`z_index=-1`) detrás del
+  Boss1 en BossArena — puramente visual, sin colisión ni lógica de puerta
+  real todavía.
+
+**Sin usar todavía de esta tanda** (quedan en `Sprites/`, no se tocaron):
+el resto de animaciones no listadas arriba de cada personaje (salto/ataque2/
+aturdido/resurrección reales, no reutilizados), el piso agrietado completo
+(`Piso agrietado.png` — hoy el hazard del Tramo C sigue siendo el
+`ColorRect` rojo original), el indicador de Penitencia/Corrupción
+(`Penitencia corrupcion.png` — no existe ese sistema en el código todavía,
+es UI para una mecánica no implementada), la Arena del Boss como set
+completo (`Arena del boss.png`, se usó implícitamente solo referencia de
+mood), y `Puerta de la cripta 2.png` (variantes/desglose adicional de la
+puerta). La carpeta `Sprites/Base/` (renombrada por Marcos a `descarte/`)
+se ignoró a propósito, a pedido explícito.
+
 ## Pendientes de descarga manual (bloqueados por flujo de compra de itch.io)
 
 El resto de los candidatos de `docs/lista_assets_pixel_art.md` y

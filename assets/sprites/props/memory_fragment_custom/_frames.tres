@@ -1,0 +1,26 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/props/memory_fragment_custom/idle_0.png" id="1_idle_0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/memory_fragment_custom/idle_1.png" id="2_idle_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/memory_fragment_custom/idle_2.png" id="3_idle_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/memory_fragment_custom/idle_3.png" id="4_idle_3"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_idle_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_idle_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_idle_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_idle_3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]

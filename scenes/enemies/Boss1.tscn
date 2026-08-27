@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemies/boss1.gd" id="1_script"]
 [ext_resource type="Script" path="res://scripts/combat/hitbox.gd" id="2_hitbox"]
 [ext_resource type="Script" path="res://scripts/combat/hurtbox.gd" id="3_hurtbox"]
-[ext_resource type="SpriteFrames" path="res://assets/sprites/player/_placeholder_evil_wizard2_frames.tres" id="4_placeholder_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/enemies/espejo_boss_custom/_frames.tres" id="4_placeholder_frames"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(28, 44)
@@ -27,7 +27,7 @@ shape = SubResource("RectangleShape2D_body")
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("4_placeholder_frames")
 animation = &"idle"
-offset = Vector2(-11.5, 5.5)
+offset = Vector2(0, -31)
 
 [node name="AttackHighHitbox" type="Area2D" parent="."]
 position = Vector2(20, -10)
