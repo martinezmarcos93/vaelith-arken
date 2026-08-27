@@ -77,7 +77,7 @@ color = Color(0.067, 0.133, 0.18, 1)
 
 [node name="MemoryFlashTrigger" parent="." instance=ExtResource("4_dialogue_trigger")]
 position = Vector2(550, 400)
-lines = ["Una mujer.", "Un trono.", "Calaveras.", "Una rueda.", "La imagen desaparece antes de que puedas atraparla."]
+lines = ["La empuñadura encaja en tu mano. Demasiado bien.", "Tus dedos encuentran el lugar exacto. El peso no te resulta extraño.", "Lo extraño es no recordar haber aprendido a usarla.", "Pantalla negra. Una respiración.", "—¿Qué querés que sea?", "Una habitación. Una mesa de piedra.", "Sobre ella yace una criatura incompleta. Carne. Metal. Hueso.", "Una figura permanece frente a ella. No se ve su rostro.", "—Yo.", "La criatura abre los ojos.", "—No. Mejor que yo.", "Volvés. Respirás agitado. Mirás la espada.", "No comprendés lo que acabás de ver."]
 
 [node name="PropSymbol" type="Sprite2D" parent="."]
 position = Vector2(1080, 406)
@@ -91,8 +91,20 @@ offset_right = 1080.0
 offset_bottom = 440.0
 color = Color(0.11, 0.222, 0.29, 1)
 
+[node name="DoorSymbolTrigger" parent="." instance=ExtResource("4_dialogue_trigger")]
+position = Vector2(915, 400)
+lines = ["Sobre el marco hay un símbolo tallado.", "No sabés qué significa. Pero lo reconocés.", "La sensación dura apenas un instante:", "Una habitación. Una voz. El olor de la sangre sobre piedra.", "Y algo peor: la certeza de que alguna vez lo entendiste perfectamente."]
+
 [node name="NoMuertoErrante1" parent="." instance=ExtResource("2_no_muerto")]
 position = Vector2(1000, 400)
+
+[node name="PostCombatTrigger" parent="." instance=ExtResource("4_dialogue_trigger")]
+position = Vector2(1180, 400)
+lines = ["Sabés qué está pasando. No sabés cómo lo sabés.", "Pero sabés que eso no debería estar caminando.", "Y una pregunta te resulta insoportable: ¿por qué lo reconocés?"]
+
+[node name="DescentTrigger" parent="." instance=ExtResource("4_dialogue_trigger")]
+position = Vector2(1330, 400)
+lines = ["El camino baja hacia la niebla. A lo lejos, una estructura enorme, medio oculta.", "No recordás haber estado aquí.", "Pero algo en estas ruinas te resulta familiar.", "No como un lugar que hayas visitado.", "Como una herida que todavía reconoce el cuchillo."]
 
 [node name="ExitTrigger" parent="." instance=ExtResource("5_exit_trigger")]
 position = Vector2(1400, 400)
