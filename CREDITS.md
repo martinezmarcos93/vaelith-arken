@@ -472,6 +472,12 @@ se ignoró a propósito, a pedido explícito.
     pasó a `Control` transparente (las placas traen su propio marco).
 - Import con `mipmaps/generate=true` + `texture_filter` linear-mipmap en los
   nodos, para que el downscale de estas texturas grandes se vea nítido.
+- `assets/sprites/ui/dialogue/` — 2 marcos de caja de diálogo extraídos de
+  `source_sheets/ui/dialogue_box_frames.png` (fondo blanco, mismo key por
+  flood-fill que las placas). `options_frame.png` (barra ancha) reemplaza el
+  `ColorRect` plano de `DialogueBox.tscn` como `NinePatchRect`;
+  `narration_frame.png` (caja alta con calavera) queda para los momentos de
+  narración/fragmento de memoria (Fase 8).
 
 ## Pendientes de descarga manual (bloqueados por flujo de compra de itch.io)
 
