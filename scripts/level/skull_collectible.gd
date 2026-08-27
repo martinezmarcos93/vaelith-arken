@@ -19,4 +19,5 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	already_active = true
 	GameState.collect_skull()
+	AudioManager.play_sfx("res://assets/audio/sfx/world/stone_impact_01.ogg", "SFX", -8.0)
 	queue_free()

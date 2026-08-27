@@ -53,6 +53,12 @@ enum State { IDLE, ALERT, ATTACK, VULNERABLE, DEAD }
 @onready var attack_hitbox: Hitbox = $AttackHitbox
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+# --- Audio (SFX en assets/audio/sfx/, ver docs/lista_audio.md §3) ---
+const SFX_SWING := ["res://assets/audio/sfx/combat/sword_swing_01.ogg", "res://assets/audio/sfx/combat/sword_swing_02.ogg", "res://assets/audio/sfx/combat/sword_swing_03.ogg"]
+const SFX_WHOOSH := ["res://assets/audio/sfx/player/whoosh_01.wav", "res://assets/audio/sfx/player/whoosh_02.wav"]
+const SFX_IMPACT := ["res://assets/audio/sfx/combat/impact_flesh_01.ogg", "res://assets/audio/sfx/combat/impact_flesh_02.ogg", "res://assets/audio/sfx/combat/impact_flesh_03.ogg"]
+const SFX_DEATH := ["res://assets/audio/sfx/combat/impact_gore_01.wav", "res://assets/audio/sfx/combat/impact_gore_02.wav"]
+
 var state: State = State.IDLE
 var health: int
 var facing: int = 1
@@ -143,6 +149,10 @@ func _enter_attack() -> void:
 	state = State.ATTACK
 	_state_timer = 0.0
 	print("%s: ataca" % name)
+	if move_mode == "float_sway":
+		AudioManager.play_sfx_random(SFX_WHOOSH, "SFX", -8.0, 0.14)
+	else:
+		AudioManager.play_sfx_random(SFX_SWING, "SFX", -7.0, 0.12)
 	var player := get_tree().get_first_node_in_group("player")
 	_lunge_target = player.global_position if player else global_position
 
@@ -206,6 +216,7 @@ func _on_hurt(damage: int, direction: Vector2, knockback: float, stagger_time: f
 	health = max(health - damage, 0)
 	velocity = direction * knockback
 	print("%s: recibe %d de daño (vida=%d/%d)" % [name, damage, health, max_health])
+	AudioManager.play_sfx_random(SFX_IMPACT, "SFX", -3.0)
 	if health <= 0:
 		_die()
 
@@ -220,6 +231,7 @@ func _die() -> void:
 	collision_layer = 0
 	collision_mask = 0
 	sprite.play(anim_death)
+	AudioManager.play_sfx_random(SFX_DEATH, "SFX", -4.0)
 	print("%s: destruido" % name)
 
 

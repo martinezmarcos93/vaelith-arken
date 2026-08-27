@@ -91,6 +91,50 @@ var _respawn_timer: float = 0.0
 
 const BUFFERABLE_ACTIONS := ["attack_high", "attack_low", "shove"]
 
+# --- Audio (SFX ya en assets/audio/sfx/, ver docs/lista_audio.md) ---
+const SFX_FOOTSTEP := [
+	"res://assets/audio/sfx/player/footstep_stone_01.ogg",
+	"res://assets/audio/sfx/player/footstep_stone_02.ogg",
+	"res://assets/audio/sfx/player/footstep_stone_03.ogg",
+	"res://assets/audio/sfx/player/footstep_stone_04.ogg",
+]
+const SFX_JUMP := "res://assets/audio/sfx/player/jump.ogg"
+const SFX_LAND := "res://assets/audio/sfx/player/land.ogg"
+const SFX_SWING := [
+	"res://assets/audio/sfx/combat/sword_swing_01.ogg",
+	"res://assets/audio/sfx/combat/sword_swing_02.ogg",
+	"res://assets/audio/sfx/combat/sword_swing_03.ogg",
+]
+const SFX_GRUNT_ATTACK := [
+	"res://assets/audio/sfx/player/grunt_attack_01.wav",
+	"res://assets/audio/sfx/player/grunt_attack_02.wav",
+	"res://assets/audio/sfx/player/grunt_attack_03.wav",
+]
+const SFX_WHOOSH := [
+	"res://assets/audio/sfx/player/whoosh_01.wav",
+	"res://assets/audio/sfx/player/whoosh_02.wav",
+]
+const SFX_GRUNT_HURT := [
+	"res://assets/audio/sfx/player/grunt_hurt_01.wav",
+	"res://assets/audio/sfx/player/grunt_hurt_02.wav",
+	"res://assets/audio/sfx/player/grunt_hurt_03.wav",
+]
+const SFX_IMPACT_BLOCK := [
+	"res://assets/audio/sfx/combat/impact_block_01.ogg",
+	"res://assets/audio/sfx/combat/impact_block_02.ogg",
+	"res://assets/audio/sfx/combat/impact_block_03.ogg",
+]
+const SFX_PARRY := [
+	"res://assets/audio/sfx/combat/parry_01.ogg",
+	"res://assets/audio/sfx/combat/parry_02.ogg",
+	"res://assets/audio/sfx/combat/parry_03.ogg",
+]
+const FOOTSTEP_INTERVAL := 0.34
+
+var _footstep_timer: float = 0.0
+var _was_on_floor: bool = true
+var _prev_velocity_y: float = 0.0
+
 
 func _ready() -> void:
 	add_to_group("player")
@@ -137,8 +181,14 @@ func _physics_process(delta: float) -> void:
 		State.DEAD:
 			_process_dead(delta)
 
+	_prev_velocity_y = velocity.y
 	_update_sprite_animation()
 	move_and_slide()
+
+	# Aterrizaje: se estaba en el aire cayendo y ahora hay piso.
+	if is_on_floor() and not _was_on_floor and _prev_velocity_y > 120.0:
+		AudioManager.play_sfx(SFX_LAND, "SFX", -2.0)
+	_was_on_floor = is_on_floor()
 
 
 func _process_movement(delta: float) -> void:
@@ -154,6 +204,15 @@ func _process_movement(delta: float) -> void:
 	if input_dir != 0.0:
 		facing = 1 if input_dir > 0.0 else -1
 
+	# Pasos: solo en piso y con velocidad real, cada FOOTSTEP_INTERVAL.
+	if on_floor and absf(velocity.x) > 12.0:
+		_footstep_timer -= delta
+		if _footstep_timer <= 0.0:
+			_footstep_timer = FOOTSTEP_INTERVAL
+			AudioManager.play_sfx_random(SFX_FOOTSTEP, "SFX", -6.0)
+	else:
+		_footstep_timer = 0.0
+
 	if on_floor:
 		if input_dir != 0.0:
 			velocity.x = move_toward(velocity.x, input_dir * speed, acceleration * delta)
@@ -167,6 +226,7 @@ func _process_movement(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and _coyote_timer > 0.0:
 		velocity.y = jump_velocity
 		_coyote_timer = 0.0
+		AudioManager.play_sfx(SFX_JUMP, "SFX", -4.0)
 
 
 func _poll_input_buffer(delta: float) -> void:
@@ -197,10 +257,15 @@ func _process_free_inputs() -> void:
 		match action:
 			"attack_high":
 				_enter_action(State.ATTACK_HIGH)
+				AudioManager.play_sfx_random(SFX_SWING, "SFX", -3.0)
+				AudioManager.play_sfx_random(SFX_GRUNT_ATTACK, "SFX", -8.0)
 			"attack_low":
 				_enter_action(State.ATTACK_LOW)
+				AudioManager.play_sfx_random(SFX_SWING, "SFX", -5.0)
 			"shove":
 				_enter_action(State.SHOVE)
+				AudioManager.play_sfx_random(SFX_WHOOSH, "SFX", -3.0)
+				AudioManager.play_sfx_random(SFX_GRUNT_ATTACK, "SFX", -6.0)
 		return
 	if not is_on_floor():
 		return
@@ -349,8 +414,10 @@ func _register_block() -> void:
 		state = State.STAGGERED
 		_state_timer = 0.0
 		_stagger_duration = block_stagger_time
+		AudioManager.play_sfx_random(SFX_PARRY, "SFX", 0.0)
 		print("Vaelith: postura rota tras bloquear %d golpes seguidos" % block_max_consecutive)
 	else:
+		AudioManager.play_sfx_random(SFX_IMPACT_BLOCK, "SFX", -2.0)
 		print("Vaelith: golpe bloqueado (%d/%d)" % [_consecutive_blocks, block_max_consecutive])
 
 
@@ -361,6 +428,7 @@ func _take_damage(damage: int, direction: Vector2, knockback: float, stagger_tim
 	if health <= 0:
 		_die(direction, knockback)
 		return
+	AudioManager.play_sfx_random(SFX_GRUNT_HURT, "SFX", -1.0)
 	_iframe_timer = iframes_duration
 	velocity = direction * knockback
 	if stagger_time > 0.0:
@@ -379,4 +447,7 @@ func _die(direction: Vector2, knockback: float) -> void:
 	# reales con dificultad ajustable, no del respawn en si.
 	state = State.DEAD
 	velocity = direction * knockback
+	# Placeholder: la muerte de Vaelith es un momento narrativo (Pharasma lo
+	# devuelve), pendiente de SFX custom -- ver docs/lista_audio.md §2.
+	AudioManager.play_sfx_random(SFX_GRUNT_HURT, "SFX", 2.0)
 	print("Vaelith: HP a 0 - estado DEAD (input bloqueado, respawn en %.1fs)" % respawn_delay)

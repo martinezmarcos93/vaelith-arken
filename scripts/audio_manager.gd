@@ -19,11 +19,31 @@ const MUSIC_FADE := 1.5
 const SFX_POOL := 12
 
 var _music: Array[AudioStreamPlayer] = []
+var _music_tweens: Array[Tween] = [null, null]
 var _music_active: int = 0
 var _music_path: String = ""
 var _sfx: Array[AudioStreamPlayer] = []
 var _sfx_next: int = 0
+var _ambient: AudioStreamPlayer
+var _ambient_tween: Tween = null
+var _ambient_path: String = ""
 var _rng := RandomNumberGenerator.new()
+
+
+## Arranca un fade de `volume_db` en `player`, matando cualquier fade previo
+## sobre el mismo player (llamadas rápidas a play_music no deben apilar tweens).
+func _fade(player: AudioStreamPlayer, slot: int, target_db: float, dur: float, stop_at_end: bool) -> void:
+	var prev: Tween = _ambient_tween if slot < 0 else _music_tweens[slot]
+	if prev != null and prev.is_valid():
+		prev.kill()
+	var tw := create_tween()
+	tw.tween_property(player, "volume_db", target_db, dur)
+	if stop_at_end:
+		tw.tween_callback(player.stop)
+	if slot < 0:
+		_ambient_tween = tw
+	else:
+		_music_tweens[slot] = tw
 
 
 func _ready() -> void:
@@ -39,6 +59,10 @@ func _ready() -> void:
 		p.bus = "SFX"
 		add_child(p)
 		_sfx.append(p)
+	_ambient = AudioStreamPlayer.new()
+	_ambient.bus = "Ambient"
+	_ambient.volume_db = -80.0
+	add_child(_ambient)
 
 
 ## Cambia el tema con crossfade. `path` puede ser "" para cortar la música.
@@ -46,14 +70,13 @@ func play_music(path: String, fade: float = MUSIC_FADE, volume_db: float = -6.0)
 	if path == _music_path:
 		return
 	_music_path = path
-	var from := _music[_music_active]
+	var from_slot := _music_active
+	var from := _music[from_slot]
 	_music_active = 1 - _music_active
 	var to := _music[_music_active]
 
 	if from.playing:
-		var out_tw := create_tween()
-		out_tw.tween_property(from, "volume_db", -80.0, fade)
-		out_tw.finished.connect(from.stop)
+		_fade(from, from_slot, -80.0, fade, true)
 
 	if path == "":
 		return
@@ -65,11 +88,34 @@ func play_music(path: String, fade: float = MUSIC_FADE, volume_db: float = -6.0)
 	to.stream = stream
 	to.volume_db = -80.0
 	to.play()
-	create_tween().tween_property(to, "volume_db", volume_db, fade)
+	_fade(to, _music_active, volume_db, fade, false)
 
 
 func stop_music(fade: float = MUSIC_FADE) -> void:
 	play_music("", fade)
+
+
+## Cama de ambiente (loop) en el bus Ambient. "" para cortarla.
+func play_ambient(path: String, fade: float = 2.0, volume_db: float = -14.0) -> void:
+	if path == _ambient_path:
+		return
+	_ambient_path = path
+	if path == "":
+		_fade(_ambient, -1, -80.0, fade, true)
+		return
+	var stream: AudioStream = load(path)
+	if stream == null:
+		push_warning("AudioManager: no se pudo cargar el ambiente '%s'" % path)
+		return
+	_set_stream_loop(stream, true)
+	_ambient.stream = stream
+	_ambient.volume_db = -80.0
+	_ambient.play()
+	_fade(_ambient, -1, volume_db, fade, false)
+
+
+func stop_ambient(fade: float = 2.0) -> void:
+	play_ambient("", fade)
 
 
 ## SFX one-shot. `bus` normalmente "SFX" o "UI". `pitch_var` = ± semitonos

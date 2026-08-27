@@ -43,12 +43,14 @@ func _try_open() -> void:
 		return
 	visible = true
 	get_tree().paused = true
+	AudioManager.play_sfx("res://assets/audio/sfx/world/lock_unlock.ogg", "UI", -8.0, 0.0)
 	_continue_button.grab_focus()
 
 
 func _close() -> void:
 	visible = false
 	get_tree().paused = false
+	AudioManager.play_sfx("res://assets/audio/sfx/world/lock_unlock.ogg", "UI", -10.0, 0.0)
 
 
 func _on_continue_pressed() -> void:

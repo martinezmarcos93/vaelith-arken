@@ -40,3 +40,6 @@ func flash() -> void:
 	var d := create_tween()
 	d.tween_property(_drain, "color:a", 0.34, 0.12)
 	d.tween_property(_drain, "color:a", 0.0, 0.95)
+	# Sting frío placeholder (ring metálico grave). El jingle de memoria es
+	# 🔴 custom pendiente, ver docs/lista_audio.md §5.
+	AudioManager.play_sfx("res://assets/audio/sfx/combat/telegraph_ring_01.wav", "UI", -4.0, 0.0)

@@ -20,7 +20,11 @@ func _ready() -> void:
 	AudioManager.play_music(MENU_MUSIC, 2.0, -14.0)
 
 
+const SFX_CONFIRM := "res://assets/audio/sfx/world/lock_unlock.ogg"
+
+
 func _on_start_pressed() -> void:
+	AudioManager.play_sfx(SFX_CONFIRM, "UI", -6.0, 0.0)
 	TransitionManager.goto_scene(START_SCENE)
 
 

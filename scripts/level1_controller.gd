@@ -19,6 +19,7 @@ extends Node2D
 
 const EPILOGUE_SCENE := "res://scenes/levels/Epilogue.tscn"
 const LEVEL_MUSIC := "res://assets/audio/music/level1.mp3"
+const LEVEL_AMBIENT := "res://assets/audio/sfx/ambient/cave_loop.ogg"
 const POST_SURRENDER_SILENCE := 2.5
 const PRE_MEMORY_SILENCE := 1.5
 const PRE_EPILOGUE_SILENCE := 1.5
@@ -28,6 +29,7 @@ func _ready() -> void:
 	# "La música comienza por primera vez" al entrar a Level 1 (guion, Esc 8).
 	# El tema del boss lo cambia MusicTrigger a la entrada de la arena.
 	AudioManager.play_music(LEVEL_MUSIC, 2.5, -7.0)
+	AudioManager.play_ambient(LEVEL_AMBIENT, 3.0, -16.0)
 	var boss := get_tree().get_first_node_in_group("boss")
 	if boss == null:
 		return

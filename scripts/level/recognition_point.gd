@@ -33,6 +33,8 @@ signal acted
 
 
 func _do_interact() -> void:
+	# Pulso sordo -- "tu cuerpo sabe". Placeholder (impacto de piedra grave).
+	AudioManager.play_sfx("res://assets/audio/sfx/world/stone_impact_02.ogg", "UI", -6.0, 0.0)
 	if recognition_lines.is_empty():
 		_after_recognition()
 		return

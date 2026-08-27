@@ -24,8 +24,9 @@ var _returning: bool = false
 
 
 func _ready() -> void:
-	# El epílogo va sin música (guion: fundido lento, sin música nueva).
+	# El epílogo va sin música ni ambiente (guion: fundido lento, silencio).
 	AudioManager.stop_music(2.0)
+	AudioManager.stop_ambient(2.0)
 	closing_label.visible = false
 	title_label.visible = false
 	sub_label.visible = false

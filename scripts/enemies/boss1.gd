@@ -82,6 +82,16 @@ enum State { APPROACH, ATTACK_HIGH, ATTACK_LOW, SHOVE, BLOCK, VULNERABLE, TRANSI
 @onready var hurtbox: Hurtbox = $Hurtbox
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+# --- Audio (ver docs/lista_audio.md §4). Los momentos 🔴 (mascara se agrieta,
+# rendicion) usan placeholders hasta tener los SFX custom. ---
+const SFX_SWING := ["res://assets/audio/sfx/combat/sword_swing_01.ogg", "res://assets/audio/sfx/combat/sword_swing_02.ogg", "res://assets/audio/sfx/combat/sword_swing_03.ogg"]
+const SFX_WHOOSH := ["res://assets/audio/sfx/player/whoosh_01.wav", "res://assets/audio/sfx/player/whoosh_02.wav"]
+const SFX_TELEGRAPH := "res://assets/audio/sfx/combat/telegraph_ring_01.wav"
+const SFX_BLOCK := ["res://assets/audio/sfx/combat/blade_clash_01.wav", "res://assets/audio/sfx/combat/blade_clash_02.wav"]
+const SFX_IMPACT := ["res://assets/audio/sfx/combat/impact_flesh_01.ogg", "res://assets/audio/sfx/combat/impact_flesh_02.ogg", "res://assets/audio/sfx/combat/impact_flesh_03.ogg"]
+const SFX_TRANSITION := "res://assets/audio/sfx/combat/blade_ring_01.wav"
+const SFX_SURRENDER := "res://assets/audio/sfx/combat/blade_clash_01.wav"
+
 var phase: Phase = Phase.ONE
 var state: State = State.APPROACH
 var health: int
@@ -189,6 +199,14 @@ func _enter_action(new_state: State) -> void:
 	state = new_state
 	_state_timer = 0.0
 	velocity.x = 0.0
+	match new_state:
+		State.ATTACK_HIGH:
+			AudioManager.play_sfx(SFX_TELEGRAPH, "SFX", -10.0)
+			AudioManager.play_sfx_random(SFX_SWING, "SFX", -5.0)
+		State.ATTACK_LOW:
+			AudioManager.play_sfx_random(SFX_SWING, "SFX", -6.0)
+		State.SHOVE:
+			AudioManager.play_sfx_random(SFX_WHOOSH, "SFX", -5.0)
 
 
 func _process_attack(delta: float, hitbox: Hitbox, windup: float, punish: float) -> void:
@@ -246,6 +264,7 @@ func _is_frontal_hit(direction: Vector2) -> bool:
 
 
 func _register_block() -> void:
+	AudioManager.play_sfx_random(SFX_BLOCK, "SFX", -4.0)
 	_consecutive_blocks += 1
 	if _consecutive_blocks > block_max_consecutive:
 		_consecutive_blocks = 0
@@ -260,6 +279,7 @@ func _take_damage(damage: int, direction: Vector2, knockback: float, stagger_tim
 	health_changed.emit(health, max_health)
 	velocity = direction * knockback
 	print("Guerrero-Espejo: recibe %d de daño (vida=%d/%d)" % [damage, health, max_health])
+	AudioManager.play_sfx_random(SFX_IMPACT, "SFX", -3.0)
 	if health <= 0:
 		_surrender()
 		return
@@ -284,6 +304,8 @@ func _enter_transition() -> void:
 	attack_high_hitbox.deactivate()
 	attack_low_hitbox.deactivate()
 	shove_hitbox.deactivate()
+	# Placeholder: "la mascara se agrieta" es un momento 🔴 custom pendiente.
+	AudioManager.play_sfx(SFX_TRANSITION, "SFX", 2.0, 0.0)
 	print("Guerrero-Espejo: la mascara se agrieta -- fase 2")
 
 
@@ -309,6 +331,9 @@ func _surrender() -> void:
 	# el enum State): sigue de pie, la colision queda solida a proposito.
 	sprite.play(anim_surrender)
 	sprite.modulate = Color(0.6, 0.6, 0.6, 1.0)
+	# Placeholder: el arma cayendo (metal contra piedra). El silencio total
+	# posterior lo maneja level1_controller (stop_music). SFX 🔴 custom pendiente.
+	AudioManager.play_sfx(SFX_SURRENDER, "SFX", 3.0, 0.0)
 	print("Guerrero-Espejo: se rinde, baja el arma")
 	surrendered.emit()
 

@@ -19,4 +19,6 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	already_active = true
 	body.set_checkpoint(global_position)
+	# Tono resonante -- "Pharasma te marca". Placeholder hasta un SFX propio.
+	AudioManager.play_sfx("res://assets/audio/sfx/combat/blade_ring_01.wav", "UI", -10.0, 0.0)
 	print("Checkpoint activado en %s" % global_position)
