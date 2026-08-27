@@ -34,7 +34,7 @@ texture_filter = 4
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.463, 0.42, 0.502, 1)
 theme_override_font_sizes/font_size = 16
-text = "demo — el umbral"
+text = "La espada de Pharasma"
 
 [node name="Spacer" type="Control" parent="Center/VBox"]
 custom_minimum_size = Vector2(0, 16)
