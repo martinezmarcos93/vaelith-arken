@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/memory_flash.gd" id="1_script"]
+
+[node name="MemoryFlash" type="CanvasLayer"]
+layer = 88
+script = ExtResource("1_script")
+
+[node name="Drain" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.35, 0.38, 0.46, 0)
+mouse_filter = 2
+
+[node name="Flash" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.93, 0.92, 0.96, 0)
+mouse_filter = 2
