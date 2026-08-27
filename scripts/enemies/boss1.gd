@@ -62,12 +62,18 @@ enum State { APPROACH, ATTACK_HIGH, ATTACK_LOW, SHOVE, BLOCK, VULNERABLE, TRANSI
 @export var transition_invuln_time: float = 1.0
 @export var shove_chance_phase_two: float = 0.25
 
-@export_group("Animacion (placeholder, mismo pack que Player.tscn)")
+@export_group("Animacion")
+## Arte propio: assets/sprites/enemies/espejo_boss_custom/_frames.tres,
+## extraido de source_sheets/characters/boss/spectral_knight_violet_sheet.png
+## (Fase 1 de la auditoria). Todas las acciones tienen animacion propia.
 @export var anim_idle: String = "idle"
 @export var anim_move: String = "run"
 @export var anim_attack_high: String = "attack1"
 @export var anim_attack_low: String = "attack2"
+@export var anim_shove: String = "shove"
+@export var anim_block: String = "block"
 @export var anim_hurt: String = "hurt"
+@export var anim_stagger: String = "stagger"
 @export var anim_surrender: String = "idle"
 
 @onready var attack_high_hitbox: Hitbox = $AttackHighHitbox
@@ -331,12 +337,14 @@ func _update_sprite() -> void:
 			target_anim = anim_move if absf(velocity.x) > 5.0 else anim_idle
 		State.ATTACK_HIGH:
 			target_anim = anim_attack_high
-		State.ATTACK_LOW, State.SHOVE:
+		State.ATTACK_LOW:
 			target_anim = anim_attack_low
+		State.SHOVE:
+			target_anim = anim_shove
 		State.BLOCK:
-			target_anim = anim_idle
+			target_anim = anim_block
 		State.VULNERABLE:
-			target_anim = anim_hurt
+			target_anim = anim_stagger
 		State.TRANSITIONING:
 			target_anim = anim_idle
 	if sprite.animation != target_anim:
