@@ -2,7 +2,7 @@ extends Node2D
 
 ## Smoke test headless de Level1 (Fase 4.3): mantiene "correr a la derecha" y
 ## saltea cada tanto para cruzar el nivel de punta a punta sin un humano
-## jugando, igual que scripts/test_driver.gd hace con el sandbox de Etapa
+## jugando, igual que tools/test_driver.gd hace con el sandbox de Etapa
 ## 1.5. No valida ritmo/dificultad (eso es Fase 4.6) -- solo confirma que
 ## nada explota: colisiones, hazard, checkpoints, enemigos, respawn.
 
