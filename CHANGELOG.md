@@ -6,6 +6,38 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 
 ## [Unreleased]
 
+### 2026-08-27 — Arte de UI propio, rework narrativo y arranque de producción
+
+- **UI con arte propio**: `title_logo` + 6 placas de menú extraídas de una hoja
+  única; `TitleScreen.tscn` y `PauseMenu.tscn` pasan de `Label`/`Button` a
+  `TextureRect`/`TextureButton`. `CREDITS.md` actualizado.
+- **Rework narrativo (Fases 1–3 de la auditoría)**: `guion_intro_reescrito.md` →
+  `guion_demo.md`, ahora fuente de verdad de toda la demo. Se descarta el canon
+  de la sesión de mesa (Pharasma como visión, Tomás, el padre).
+  - Intro: Escena 1 "El despertar", Fragmento I (la creación del constructo),
+    triggers de símbolo/post-combate/descenso.
+  - Level 1: fuera la visión de Pharasma ×3; `MemoryFragment2` → Fragmento II
+    (la obediencia), `MemoryFragment1` → Fragmento III (el propósito); triggers
+    de huellas del constructo.
+  - Boss "El Espejo": `BossIntroTrigger`, `phase_changed` → "Lo que Vaelith
+    olvidó", `surrendered` → "La identidad" + recuerdo "El último día".
+  - Epílogo "Regreso al presente" + pantalla de cierre en tres tiempos
+    ("La deuda continúa." → "VAELITH ARKEN" → "El muerto recuerda.").
+- **Bugs**:
+  - "Dos Vaeliths" al atacar: `attack1_1.png` era una doble figura de la
+    extracción IA — frame reconstruido.
+  - Sprites flotando sobre el suelo: `offset` del `AnimatedSprite2D` de Vaelith
+    y del Boss `-31` → `-25` (falta confirmación fina en editor; los otros
+    personajes quedan pendientes).
+  - "Siempre la misma memoria": era que todos los nodos tenían el mismo texto
+    placeholder — resuelto con el rework de textos.
+- **Assets**: 47 hojas de arte propio traídas a `assets/source_sheets/`
+  (organizadas por categoría, `.gdignore`) como material fuente sin extraer.
+- **Producción**: `docs/BRIEF_IMPLEMENTACION.md`, `docs/AUDITORIA_2026-08-27.md`
+  y `CLAUDE.md` de proyecto. El roadmap por Etapas queda como referencia
+  histórica; el trabajo activo sigue el plan por Fases de la auditoría.
+- `docs/guion_intro.md` y `docs/guion_desenlace.md` marcados como obsoletos.
+
 ### Added — Level 1 construido en Godot (Fase 4.3, greybox)
 - `docs/layout_level1.md` (Fase 4.1) ya existia completo de una sesion
   anterior pero no estaba marcado en `docs/Roadmap.md` -- discrepancia

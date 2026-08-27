@@ -1,5 +1,12 @@
 # Guion de Intro Jugable
 
+> **⚠️ OBSOLETO (2026-08-27).** Reemplazado por [`guion_demo.md`](guion_demo.md),
+> que es la fuente de verdad narrativa de toda la demo (intro + fragmentos de
+> Level 1 + Boss El Espejo + cierre) y ya está cableado en código (Fases 1–3 del
+> rework). El canon de la sesión de mesa (Pharasma como visión, Tomás, el padre)
+> quedó descartado. Se conserva este archivo solo como referencia histórica.
+> Ver `docs/AUDITORIA_2026-08-27.md`.
+
 Adaptación de "Despertar en la oscuridad" (`Ideas base para el juego/`) a una
 secuencia de plataformas lineal — se abandona la estructura de elección múltiple
 (A/B/C/D) del original porque esta demo no es un CYOA, pero se conserva el tono,
