@@ -278,12 +278,10 @@ func _respawn() -> void:
 	print("Vaelith: penitencia cumplida, respawn en %s" % _respawn_position)
 
 
-## Placeholder temporal (Opcion A del roadmap de arte): reutiliza el pack
-## CC0 "Evil Wizard 2" (pensado como enemigo, ver CREDITS.md) solo para
-## validar que AnimationPlayer/AnimatedSprite2D sincroniza bien con la
-## maquina de estados ANTES de invertir tiempo en el sprite sheet final de
-## Vaelith (Etapa 2.1-2.3). shove y block no tienen animacion propia en el
-## pack -- se reutilizan attack2/idle a proposito, no es un mapeo definitivo.
+## Arte propio: `assets/sprites/player/vaelith_custom/_frames.tres`, extraido
+## de `source_sheets/characters/vaelith/vaelith_knight_sheet.png` (Fase 1 de
+## la auditoria). Todas las acciones tienen animacion propia ahora --
+## `jump`/`fall` salen de la fila SALTO (frames 0-2 subida, 3-4 apex/caida).
 func _update_sprite_animation() -> void:
 	sprite.flip_h = facing < 0
 	var target_anim: String
@@ -296,13 +294,13 @@ func _update_sprite_animation() -> void:
 			else:
 				target_anim = "idle"
 		State.BLOCK:
-			target_anim = "idle"
+			target_anim = "block"
 		State.ATTACK_HIGH:
 			target_anim = "attack1"
 		State.ATTACK_LOW:
 			target_anim = "attack2"
 		State.SHOVE:
-			target_anim = "attack2"
+			target_anim = "shove"
 		State.HURT, State.STAGGERED:
 			target_anim = "hurt"
 		State.DEAD:
