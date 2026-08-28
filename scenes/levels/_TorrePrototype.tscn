@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="TileSet" path="res://assets/sprites/tilesets/dungeon_raou_free_commercial_ok/raou_tileset.tres" id="1_tileset"]
+[ext_resource type="Script" path="res://scripts/level/tower_room_builder.gd" id="2_builder"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_raou_free_commercial_ok/Tilesetv3.png" id="3_tex"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="4_player"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/EspirituAtado.tscn" id="5_espiritu"]
+
+[sub_resource type="Gradient" id="Gradient_violet"]
+colors = PackedColorArray(0.6, 0.3, 0.95, 1, 0.6, 0.3, 0.95, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_violet"]
+gradient = SubResource("Gradient_violet")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="TorrePrototype" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+scale = Vector2(2, 2)
+tile_set = ExtResource("1_tileset")
+script = ExtResource("2_builder")
+
+[node name="ColumnProp" type="Sprite2D" parent="TileMapLayer"]
+position = Vector2(152, 32)
+centered = false
+texture = ExtResource("3_tex")
+region_enabled = true
+region_rect = Rect2(160, 32, 32, 64)
+
+[node name="ArchProp" type="Sprite2D" parent="TileMapLayer"]
+position = Vector2(192, 48)
+centered = false
+texture = ExtResource("3_tex")
+region_enabled = true
+region_rect = Rect2(192, 48, 32, 48)
+
+[node name="DoorLight" type="PointLight2D" parent="TileMapLayer"]
+position = Vector2(224, 72)
+color = Color(0.65, 0.35, 0.95, 1)
+energy = 1.6
+texture = SubResource("GradientTexture2D_violet")
+texture_scale = 0.6
+
+[node name="Player" parent="." instance=ExtResource("4_player")]
+position = Vector2(96, 170)
+
+[node name="Espiritu1" parent="." instance=ExtResource("5_espiritu")]
+position = Vector2(280, 110)
