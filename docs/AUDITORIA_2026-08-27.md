@@ -38,7 +38,7 @@ Diagnóstico de solo lectura del estado del repo contra
 
 | # | Bug | Estado |
 |---|---|---|
-| 1 | **Alineación de pie con el suelo** | Vaelith y boss corregidos (offset `-31` → `-25`). No-muerto (`-35`) y espíritu (`-38`) sin tocar (cálculo < 1 px, pero el reporte fue "nadie"); Bringer sin verificar. **Falta confirmación visual en editor.** |
+| 1 | **Alineación de pie con el suelo** | **Cerrado (confirmado visualmente).** Vaelith y boss corregidos (offset `-31` → `-25`). No-muerto: `-35` → `-34` (~1 px, cálculo confirmaba "nadie" pero se ajustó igual). Bringer: `-21` → `-18.6` (gap real de ~5 px, visible en captura). Espíritu (`espiritu_atado_custom`, offset `-38`) es `move_mode = float_sway` -- no tiene "pie" que alinear contra el piso, no aplica. Verificado con una escena de prueba descartable (piso rojo de referencia + captura de pantalla), no commiteada. |
 | 2 | **"Dos Vaeliths" al atacar** | Corregido: `attack1_1.png` era una doble figura de la extracción. **Causa raíz = el pipeline**: las composiciones IA no tienen grid y el etiquetado de componentes conexos fusiona poses adyacentes. Las hojas nuevas repetirán esta clase de bug al re-extraer. |
 | 3 | **Animaciones de Vaelith mal mapeadas** en `_frames.tres` | `jump` = frames de `idle`; `fall` = frames de **`attack1`** (saltar/caer muestra un tajo); `attack2` / shove = `idle` (sin ataque visible); `hurt` = frames de **`death`**. Visible en juego. El `vaelith_knight_sheet` nuevo trae jump/block/attack2 reales → re-extracción lo resuelve. |
 | 4 | **Boss `fall` = `attack1`** | Mismo problema en `espejo_boss_custom`. |
