@@ -13,7 +13,7 @@ const SHOTS := [
 	["c_gauntlet",     Vector2(1250, 380), 0.0],
 	["d_totem_cp",     Vector2(1860, 390), 0.0],
 	["e_cristal_azul", Vector2(2430, 390), 0.0],
-	["f_hoguera_boss", Vector2(2960, 370), 0.0],
+	["f_hoguera_boss", Vector2(3350, 340), 0.0],
 	["g_wide",         Vector2(1400, 340), 1.4],
 ]
 
