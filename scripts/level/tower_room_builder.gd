@@ -22,14 +22,24 @@ func _ready() -> void:
 	_build_room()
 
 
+const WALL_ALT := Vector2i(6, 15)
+
+
 func _build_room() -> void:
 	clear()
 	for x in width:
-		set_cell(Vector2i(x, 0), 0, WALL)
+		set_cell(Vector2i(x, 0), 0, _wall_variant(x))
 	for y in range(1, height - 1):
-		set_cell(Vector2i(0, y), 0, WALL)
+		set_cell(Vector2i(0, y), 0, _wall_variant(y))
 		if y not in door_rows:
-			set_cell(Vector2i(width - 1, y), 0, WALL)
+			set_cell(Vector2i(width - 1, y), 0, _wall_variant(y + width))
 	for x in width:
 		var tile := FLOOR_ACCENT if x % 4 == 2 else FLOOR
 		set_cell(Vector2i(x, height - 1), 0, tile)
+
+
+## Variacion sutil de mamposteria (sin textura nueva, misma hoja) para que
+## la pared no se lea como un repeat perfecto -- regla "todo el espacio
+## aprovechado" del roadmap sin generar arte nuevo.
+func _wall_variant(seed: int) -> Vector2i:
+	return WALL_ALT if seed % 3 == 0 else WALL
