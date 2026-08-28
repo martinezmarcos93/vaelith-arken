@@ -1,7 +1,8 @@
 extends CanvasLayer
 
-## HUD minimo. Barra de vida conectada a Player.health_changed y contador de
-## calaveras a GameState.skull_collected. No busca al jugador por ruta fija
+## HUD minimo. Barra de vida conectada a Player.health_changed, contador de
+## calaveras a GameState.skull_collected y pips de GameState.corruption_changed
+## (roadmap_level1_largo.md Fase 4). No busca al jugador por ruta fija
 ## (para poder instanciarse en cualquier nivel) sino por el grupo "player"
 ## que player.gd se agrega en _ready(). La barra del boss sigue el mismo
 ## patron: busca por grupo "boss" y queda oculta si el nivel no tiene ninguno.
@@ -14,6 +15,7 @@ extends CanvasLayer
 
 @onready var health_bar: TextureProgressBar = $PlayerBlock/HealthBar
 @onready var skull_label: Label = $PlayerBlock/SkullCount
+@onready var corruption_label: Label = $PlayerBlock/CorruptionLabel
 @onready var boss_root: Control = $BossBar
 @onready var boss_bar: TextureProgressBar = $BossBar/HealthBar
 
@@ -28,6 +30,9 @@ func _ready() -> void:
 
 	GameState.skull_collected.connect(_on_skull_collected)
 	_on_skull_collected(GameState.skulls_collected)
+
+	GameState.corruption_changed.connect(_on_corruption_changed)
+	_on_corruption_changed(GameState.corruption)
 
 	var boss := get_tree().get_first_node_in_group("boss")
 	if boss != null:
@@ -44,6 +49,15 @@ func _on_health_changed(current: int, max_health: int) -> void:
 
 func _on_skull_collected(total: int) -> void:
 	skull_label.text = "×%d" % total
+
+
+## Indicador minimo (texto, sin arte custom todavia -- ver AUDITORIA_2026-08-27
+## §4, penitence_corruption_ui_sheet sin extraer). Pips llenos = nivel actual.
+func _on_corruption_changed(level: int) -> void:
+	var pips := ""
+	for i in GameState.MAX_CORRUPTION:
+		pips += "●" if i < level else "○"
+	corruption_label.text = "Corrupción %s" % pips
 
 
 func _on_boss_health_changed(current: int, max_health: int) -> void:

@@ -54,10 +54,10 @@ signal health_changed(current: int, max: int)
 @export var block_stagger_time: float = 0.8
 
 @export_group("Penitencia")
-## Respawn automatico en el ultimo checkpoint (Fase 4.3). La corrupcion de
-## nivel de "penitencia" (docs/stats_personaje.md: +1 nivel por muerte)
-## queda fuera de alcance hasta que exista un Level 1 real con tramos de
-## dificultad ajustable -- esto solo resuelve el respawn en si.
+## Respawn automatico en el ultimo checkpoint (Fase 4.3). GameState.corruption
+## sube en _die() (ver roadmap_level1_largo.md Fase 4); el efecto ambiental
+## por tramo (+1 enemigo, -luz) todavia depende de que existan tramos reales
+## de dificultad ajustable en el Level 1 largo.
 @export var respawn_delay: float = 1.5
 @export var respawn_iframes: float = 1.0
 
@@ -441,12 +441,10 @@ func _take_damage(damage: int, direction: Vector2, knockback: float, stagger_tim
 
 func _die(direction: Vector2, knockback: float) -> void:
 	# DEAD no vuelve a FREE por vencimiento de timer (ver _process_dead) --
-	# el unico camino de salida es _respawn() tras respawn_delay. La
-	# corrupcion de nivel de "penitencia" (mas enemigos/menos luz por
-	# muerte, docs/stats_personaje.md) sigue pendiente: depende de tramos
-	# reales con dificultad ajustable, no del respawn en si.
+	# el unico camino de salida es _respawn() tras respawn_delay.
 	state = State.DEAD
 	velocity = direction * knockback
+	GameState.register_death()
 	# Placeholder: la muerte de Vaelith es un momento narrativo (Pharasma lo
 	# devuelve), pendiente de SFX custom -- ver docs/lista_audio.md §2.
 	AudioManager.play_sfx_random(SFX_GRUNT_HURT, "SFX", 2.0)
