@@ -15,8 +15,15 @@ Todos: PNG RGBA, fondo transparente, recortados por pieza.
 ## `props/` — de `dark_fantasy_props_bodies_sheet.png`
 12 piezas: `ritual_table_01/02`, `failed_experiment_corpse_01/02`, `skull_01`,
 `skull_bones_cluster_01`, `bone_pile_01`, `stone_blocks_01/02`, `stone_rubble_03`,
-`rubble_pile_01/02`. Algunas traen una tira lateral menor (tolerable como
-decoración de fondo).
+`rubble_pile_01/02`.
+
+Batch de la 1ª pasada de Marcos (sin re-cortar). Limpias y usables:
+`ritual_table_01/02`, `failed_experiment_corpse_01/02`, `skull_bones_cluster_01`,
+`stone_blocks_02`. **Recortadas por Claude (2026-08-28)** para sacarles una
+banda superior con figura humanoide / franja de gore de la lámina original:
+`rubble_pile_01`, `rubble_pile_02` (quedó muy fina, casi no se usa),
+`stone_rubble_03`, `bone_pile_01`. `stone_blocks_01` y `skull_01` traen huesos
+extra pegados arriba — usar recortadas o de fondo.
 
 ## `fire/` — de `fire_and_particles_sheet.png` (batch `recut_final` + trim)
 6 piezas: `candelabrum`, `candle_group`, `wall_torch`, `floor_brazier_warm`,
