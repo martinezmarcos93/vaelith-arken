@@ -1,0 +1,21 @@
+Vaelith Arken — Torre — Gothic architecture extraction batch 01
+Source: gothic_architecture_atlas.png
+Format: PNG RGBA, transparent background, trimmed per piece.
+
+Files:
+- vaelith_gothic_arch_arched_door_01.png
+- vaelith_gothic_arch_ruined_arch_01.png
+- vaelith_gothic_arch_tall_arch_01.png
+- vaelith_gothic_arch_column_plain_01.png
+- vaelith_gothic_arch_column_twisted_01.png
+- vaelith_gothic_arch_column_draped_01.png
+- vaelith_gothic_arch_barred_gate_01.png
+- vaelith_gothic_arch_barred_gate_02.png
+- vaelith_gothic_arch_barred_gate_03.png
+- vaelith_gothic_arch_spiral_staircase_01.png
+- vaelith_gothic_arch_altar_01.png
+- vaelith_gothic_arch_altar_02.png
+- vaelith_gothic_arch_balcony_segment_01.png
+- vaelith_gothic_arch_gargoyle_01.png
+- vaelith_gothic_arch_rubble_pile_01.png
+- vaelith_gothic_arch_rubble_pile_02.png

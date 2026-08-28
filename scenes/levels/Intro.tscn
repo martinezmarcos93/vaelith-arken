@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3]
+[gd_scene load_steps=34 format=3]
 
 [ext_resource type="Script" path="res://scripts/intro_controller.gd" id="0_controller"]
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
@@ -15,6 +15,18 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/props/crypt_door_custom/door_closed.png" id="12_door"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Demon_scull_dark_shadow.png" id="13_skull"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Dinosaur_skeleton_part1_dark_shadow.png" id="14_bones"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_column_plain_01.png" id="15_col_plain"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_column_twisted_01.png" id="16_col_twisted"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_column_draped_01.png" id="17_col_draped"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_ruined_arch_01.png" id="18_ruined_arch"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_tall_arch_01.png" id="19_tall_arch"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_gargoyle_01.png" id="20_gargoyle"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/props/vaelith_torre_rubble_pile_01.png" id="21_rubble"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/props/vaelith_torre_stone_rubble_03.png" id="22_stone_rubble"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/props/vaelith_torre_skull_bones_cluster_01.png" id="23_skull_cluster"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/fire/vaelith_torre_floor_brazier_warm.png" id="24_brazier_warm"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/fire/vaelith_torre_wall_torch.png" id="25_wall_torch"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/fire/vaelith_torre_floor_brazier_violet.png" id="26_brazier_violet"]
 
 [sub_resource type="RectangleShape2D" id="Shape_ground_start"]
 size = Vector2(300, 40)
@@ -28,8 +40,22 @@ size = Vector2(1600, 60)
 [sub_resource type="RectangleShape2D" id="Shape_killzone"]
 size = Vector2(1600, 150)
 
+[sub_resource type="Gradient" id="Gradient_glow"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_glow"]
+gradient = SubResource("Gradient_glow")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
 [node name="Intro" type="Node2D"]
 script = ExtResource("0_controller")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.58, 0.55, 0.64, 1)
 
 [node name="Background" type="ParallaxBackground" parent="."]
 
@@ -38,6 +64,7 @@ motion_scale = Vector2(0.05, 0.05)
 motion_mirroring = Vector2(1285, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Sky"]
+modulate = Color(0.2, 0.21, 0.28, 1)
 position = Vector2(640, 300)
 scale = Vector2(5, 5)
 texture = ExtResource("8_bg_sky")
@@ -47,6 +74,7 @@ motion_scale = Vector2(0.2, 0.2)
 motion_mirroring = Vector2(1330, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/RuinsFar"]
+modulate = Color(0.22, 0.22, 0.29, 1)
 position = Vector2(640, 300)
 scale = Vector2(5, 5)
 texture = ExtResource("9_bg_far")
@@ -56,9 +84,66 @@ motion_scale = Vector2(0.4, 0.4)
 motion_mirroring = Vector2(1265, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/RuinsNear"]
+modulate = Color(0.22, 0.21, 0.28, 1)
 position = Vector2(640, 300)
 scale = Vector2(5, 5)
 texture = ExtResource("10_bg_near")
+
+[node name="TowerBackdrop" type="Node2D" parent="."]
+z_index = -3
+
+[node name="Arch1" type="Sprite2D" parent="TowerBackdrop"]
+modulate = Color(0.36, 0.35, 0.46, 1)
+position = Vector2(330, 320)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("18_ruined_arch")
+
+[node name="Arch2" type="Sprite2D" parent="TowerBackdrop"]
+modulate = Color(0.38, 0.36, 0.48, 1)
+position = Vector2(620, 290)
+scale = Vector2(2.6, 2.6)
+texture = ExtResource("19_tall_arch")
+
+[node name="Arch3" type="Sprite2D" parent="TowerBackdrop"]
+modulate = Color(0.4, 0.38, 0.5, 1)
+position = Vector2(1080, 300)
+scale = Vector2(2.2, 2.2)
+flip_h = true
+texture = ExtResource("18_ruined_arch")
+
+[node name="ColumnsBack" type="Node2D" parent="."]
+z_index = -1
+
+[node name="ColB1" type="Sprite2D" parent="ColumnsBack"]
+modulate = Color(0.78, 0.76, 0.84, 1)
+position = Vector2(250, 372)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("15_col_plain")
+
+[node name="ColB2" type="Sprite2D" parent="ColumnsBack"]
+modulate = Color(0.72, 0.7, 0.8, 1)
+position = Vector2(475, 378)
+scale = Vector2(0.78, 0.78)
+texture = ExtResource("17_col_draped")
+
+[node name="ColB3" type="Sprite2D" parent="ColumnsBack"]
+modulate = Color(0.78, 0.76, 0.84, 1)
+position = Vector2(775, 368)
+scale = Vector2(0.95, 0.95)
+texture = ExtResource("16_col_twisted")
+
+[node name="ColB4" type="Sprite2D" parent="ColumnsBack"]
+modulate = Color(0.72, 0.7, 0.8, 1)
+position = Vector2(1180, 376)
+scale = Vector2(0.8, 0.8)
+flip_h = true
+texture = ExtResource("15_col_plain")
+
+[node name="Gargoyle1" type="Sprite2D" parent="ColumnsBack"]
+modulate = Color(0.8, 0.78, 0.86, 1)
+position = Vector2(600, 400)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("20_gargoyle")
 
 [node name="SafetyFloor" type="StaticBody2D" parent="."]
 position = Vector2(750, 700)
@@ -92,6 +177,7 @@ position = Vector2(150, 470)
 shape = SubResource("Shape_ground_start")
 
 [node name="Visual" type="TextureRect" parent="Ground_Start"]
+self_modulate = Color(0.3, 0.29, 0.38, 1)
 offset_left = -150.0
 offset_top = -20.0
 offset_right = 150.0
@@ -106,12 +192,29 @@ position = Vector2(895, 460)
 shape = SubResource("Shape_ground_path")
 
 [node name="Visual" type="TextureRect" parent="Ground_Path"]
+self_modulate = Color(0.3, 0.29, 0.38, 1)
 offset_left = -550.0
 offset_top = -20.0
 offset_right = 550.0
 offset_bottom = 90.0
 texture = ExtResource("11_tile_rock")
 stretch_mode = 1
+
+[node name="RubbleBlockLeft" type="Sprite2D" parent="."]
+position = Vector2(30, 418)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("21_rubble")
+
+[node name="RubblePath1" type="Sprite2D" parent="."]
+position = Vector2(430, 424)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("22_stone_rubble")
+
+[node name="RubblePath2" type="Sprite2D" parent="."]
+position = Vector2(860, 426)
+scale = Vector2(0.42, 0.42)
+flip_h = true
+texture = ExtResource("22_stone_rubble")
 
 [node name="PropBones1" type="Sprite2D" parent="."]
 position = Vector2(360, 432)
@@ -123,9 +226,74 @@ position = Vector2(690, 438)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("13_skull")
 
-[node name="MemoryFlashTrigger" parent="." instance=ExtResource("4_dialogue_trigger")]
-position = Vector2(550, 400)
-lines = ["La empuñadura encaja en tu mano. Demasiado bien.", "Tus dedos encuentran el lugar exacto. El peso no te resulta extraño.", "Lo extraño es no recordar haber aprendido a usarla.", "Pantalla negra. Una respiración.", "—¿Qué querés que sea?", "Una habitación. Una mesa de piedra.", "Sobre ella yace una criatura incompleta. Carne. Metal. Hueso.", "Una figura permanece frente a ella. No se ve su rostro.", "—Yo.", "La criatura abre los ojos.", "—No. Mejor que yo.", "Volvés. Respirás agitado. Mirás la espada.", "No comprendés lo que acabás de ver."]
+[node name="SkullCluster1" type="Sprite2D" parent="."]
+position = Vector2(505, 424)
+scale = Vector2(0.34, 0.34)
+texture = ExtResource("23_skull_cluster")
+
+[node name="ColFront1" type="Sprite2D" parent="."]
+z_index = 1
+modulate = Color(0.62, 0.6, 0.7, 1)
+position = Vector2(70, 360)
+scale = Vector2(1.15, 1.15)
+texture = ExtResource("16_col_twisted")
+
+[node name="ColFront2" type="Sprite2D" parent="."]
+z_index = 1
+modulate = Color(0.62, 0.6, 0.7, 1)
+position = Vector2(1340, 352)
+scale = Vector2(1.25, 1.25)
+flip_h = true
+texture = ExtResource("15_col_plain")
+
+[node name="Brazier1" type="Sprite2D" parent="."]
+position = Vector2(196, 408)
+scale = Vector2(0.46, 0.46)
+texture = ExtResource("24_brazier_warm")
+
+[node name="Brazier1Light" type="PointLight2D" parent="Brazier1"]
+position = Vector2(0, -30)
+color = Color(1, 0.62, 0.32, 1)
+energy = 1.0
+texture = SubResource("GradientTexture2D_glow")
+texture_scale = 1.1
+
+[node name="Brazier2" type="Sprite2D" parent="."]
+position = Vector2(745, 408)
+scale = Vector2(0.46, 0.46)
+texture = ExtResource("24_brazier_warm")
+
+[node name="Brazier2Light" type="PointLight2D" parent="Brazier2"]
+position = Vector2(0, -30)
+color = Color(1, 0.62, 0.32, 1)
+energy = 1.0
+texture = SubResource("GradientTexture2D_glow")
+texture_scale = 1.1
+
+[node name="Torch1" type="Sprite2D" parent="."]
+position = Vector2(262, 330)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("25_wall_torch")
+
+[node name="Torch1Light" type="PointLight2D" parent="Torch1"]
+position = Vector2(-6, -30)
+color = Color(1, 0.66, 0.36, 1)
+energy = 0.85
+texture = SubResource("GradientTexture2D_glow")
+texture_scale = 0.9
+
+[node name="Torch2" type="Sprite2D" parent="."]
+position = Vector2(788, 330)
+scale = Vector2(0.6, 0.6)
+flip_h = true
+texture = ExtResource("25_wall_torch")
+
+[node name="Torch2Light" type="PointLight2D" parent="Torch2"]
+position = Vector2(6, -30)
+color = Color(1, 0.66, 0.36, 1)
+energy = 0.85
+texture = SubResource("GradientTexture2D_glow")
+texture_scale = 0.9
 
 [node name="PropCryptDoor" type="Sprite2D" parent="."]
 position = Vector2(1075, 355)
@@ -137,6 +305,25 @@ texture = ExtResource("12_door")
 position = Vector2(1075, 410)
 scale = Vector2(0.42, 0.42)
 texture = ExtResource("6_symbol")
+
+[node name="BrazierViolet" type="Sprite2D" parent="."]
+position = Vector2(1180, 410)
+scale = Vector2(0.44, 0.44)
+texture = ExtResource("26_brazier_violet")
+
+[node name="CryptDoorLight" type="PointLight2D" parent="."]
+position = Vector2(1075, 372)
+color = Color(0.6, 0.35, 0.95, 1)
+energy = 1.3
+texture = SubResource("GradientTexture2D_glow")
+texture_scale = 0.7
+
+[node name="BrazierVioletLight" type="PointLight2D" parent="."]
+position = Vector2(1180, 388)
+color = Color(0.62, 0.36, 0.98, 1)
+energy = 1.0
+texture = SubResource("GradientTexture2D_glow")
+texture_scale = 0.75
 
 [node name="DoorSymbolTrigger" parent="." instance=ExtResource("4_dialogue_trigger")]
 position = Vector2(915, 400)
@@ -155,7 +342,7 @@ lines = ["El camino baja hacia la niebla. A lo lejos, una estructura enorme, med
 
 [node name="ExitTrigger" parent="." instance=ExtResource("5_exit_trigger")]
 position = Vector2(1400, 400)
-target_scene = "res://scenes/levels/Level1.tscn"
+target_scene = "res://scenes/levels/TorreSector.tscn"
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector2(100, 410)

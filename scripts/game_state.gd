@@ -19,6 +19,12 @@ var skulls_collected: int = 0
 ## CorruptionController de tramo -- este autoload solo lleva el numero.
 var corruption: int = 0
 
+## Corrupcion con la que Vaelith TERMINO el nivel. `complete_level()` lo
+## congela justo antes del reset; el Epilogo lo puede consultar para
+## bifurcar el cierre (roadmap_level1_largo.md "Abierto: la corrupcion
+## tambien cambia el epilogo?"). -1 = el nivel no se completo en esta corrida.
+var final_corruption: int = -1
+
 
 func collect_memory() -> void:
 	memories_collected += 1
@@ -37,6 +43,15 @@ func register_death() -> void:
 
 func reset_corruption() -> void:
 	_set_corruption(0)
+
+
+## Nivel completado: congela la corrupcion final para que el Epilogo la
+## pueda leer, y despues resetea el contador vivo. Llamar UNA vez, al
+## cerrar el nivel (antes de ir al Epilogo). No escribe narrativa: solo
+## deja el numero disponible.
+func complete_level() -> void:
+	final_corruption = corruption
+	reset_corruption()
 
 
 func _set_corruption(value: int) -> void:
