@@ -37,7 +37,7 @@ Reglas transversales:
 |---|---|---|
 | **0 · Extracción** | ~~`level1_ruins_tileset` → `TileSet` 32×32~~ · `zombie` → AnimatedSprite2D · atlas de props/VFX (árboles, huesos, arquitectura, cementerio, fuego, decals, arena, combat_vfx) a carpetas. Doc roadmap + update auditoría. | zombi ✅ · TileSet Raou ✅ · **arquitectura + props + fire + vfx de la Torre integrados** (`assets/sprites/props/vaelith_torre/`, 2026-08-28) ✅ · árboles/cementerio/arena/combat_vfx pendientes |
 | **1 · Parallax + Intro re-vestida** | 5 capas de parallax propias. Intro: mismo guion/frames, escenario = interior de torre (columnas rotas, mesas rituales, cadáver en losa, braseros violetas). | parallax ✅ · **Intro re-vestida ✅** (dressing con arte propio de la Torre; guion/timings/triggers intactos; CanvasModulate placeholder para el pase de gameplay) |
-| **2 · Sector Torre** | Tilemap de la torre con el TileSet nuevo. Vaelith arranca dentro/al pie. Puerta con brillo violeta = umbral al bosque. 1-2 espíritus. Fragmento I. | ✅ **`TorreSector.tscn`**: cuarto + pasillo + umbral (barred_gate + luz violeta + `floor_projection_violet`) + 2 espíritus + HUD + safety floor + cámara. Fragmento I = `RecognitionPoint` en la mesa ritual (press-E, cuenta en GameState). Flujo: **Intro → TorreSector → Level1.tscn**. ⚠ Fragmento I ahora existe en la Intro (`MemoryFlashTrigger`, walk-through) **y** en TorreSector (press-E): Marcos decide cuál se queda al fijar el corte Intro/Torre. Pendiente pase visual (float de props, zoom, oscuridad del `CanvasModulate` a jugar). |
+| **2 · Sector Torre** | Tilemap de la torre con el TileSet nuevo. Vaelith arranca dentro/al pie. Puerta con brillo violeta = umbral al bosque. 1-2 espíritus. Fragmento I. | ✅ **`TorreSector.tscn`**: cuarto + pasillo + umbral (barred_gate + luz violeta + `floor_projection_violet`) + 2 espíritus + HUD + safety floor + cámara. Fragmento I = `RecognitionPoint` en la mesa ritual (press-E, único que cuenta en GameState). Flujo: **Intro → TorreSector → Level1.tscn**. El `MemoryFlashTrigger` de la Intro se eliminó (decisión Marcos 2026-08-28): la Intro conserva su narrativa visual pero ya no dispara ni cuenta el Fragmento — vive solo en TorreSector. **Pendiente: pasada visual de Marcos en Godot** — oscuridad del `CanvasModulate`, zoom de cámara, alineación vertical de props con el piso (~30px de float). No se cierra por headless. |
 | **3 · Sector Bosque + gauntlet** | Cementerio del bosque: tumbas/ataúdes abiertos = spawns. ≥10 undead, 3 clases, 2 golpes = muerte. Árboles corruptos, troncos, huesos, decals de sangre/huellas. Fragmentos II-III. | bloqueado por asset de árboles (ver Progreso) |
 | **4 · Loop corrupción ↔ cráneos** | `GameState.corruption` (0-3). `_die` → +1. `collect_skull()` → −1. `CorruptionController` por tramo: +1 enemigo, baja `PointLight2D`, sube fuego violeta, viñeta. Reset al fin de nivel. Indicador en HUD. | 🟡 núcleo ✅ (GameState + HUD) · `CorruptionController` por tramo pendiente (depende de que existan tramos reales) |
 | **5 · Sector 2ª Torre** | Columnas de basalto, mausoleo grande de base, estructuras corruptas. Combate denso (3 clases). Fragmentos IV-VI. Rastro de huellas hacia la arena. | — |
@@ -119,3 +119,42 @@ no se propone la fase siguiente.
   Windows) en vez de captura de pantalla completa -- evita fotografiar
   otras ventanas del escritorio por error (pasó una vez con WhatsApp Web,
   corregido en la misma sesión).
+
+**2026-08-28 (sesión "cerrá Fase 1 → Fase 2"):** rama
+`feature/level1-sector-torre`, mergeada a `main`.
+- **Assets de la Torre**: Marcos preparó externamente y entregó 4 batches
+  (arquitectura / props / fire / vfx) a partir de las láminas IA. La
+  arquitectura vino limpia; props y fire/vfx necesitaron varias vueltas de
+  re-corte (venían con banners de categoría y objetos vecinos horneados).
+  38 PNG integrados en `assets/sprites/props/vaelith_torre/{architecture,
+  props,fire,vfx}/`. A 6 fire/vfx y 4 props se les hizo un recorte
+  rectangular manual para dejar un solo objeto — detalle en
+  `docs/ASSETS_PENDIENTES.md §2a-§2f`. **No hay tira de frames** de la llama
+  de corrupción (la fuente no la tiene): la animación queda como
+  `PointLight2D` pulsante.
+- **Fase 1 cerrada**: `Intro.tscn` re-vestida con el arte propio de la
+  Torre (columnas, mesa ritual, braseros/antorchas con `PointLight2D`,
+  brillo violeta en la puerta-cripta). Guion, timings, triggers y lógica
+  intactos salvo el punto siguiente.
+- **Fase 2 cerrada**: `_TorrePrototype.tscn` → `scenes/levels/TorreSector.tscn`.
+  Cuarto + pasillo + umbral (`barred_gate` + luz violeta + `floor_projection_violet`
+  + brasero violeta) → `SceneTransitionTrigger` a `Level1.tscn`. HUD, safety
+  floor + `KillZone`, límites de cámara. Flujo nuevo: **Intro → TorreSector
+  → Level1**.
+- **Fragmento I**: ahora vive SOLO en TorreSector, como `RecognitionPoint`
+  en la mesa ritual (press-E → recuerdo de `guion_demo.md` + `collect_memory()`).
+  Se eliminó el `MemoryFlashTrigger` de la Intro (era un `DialogueTrigger`
+  que mostraba el texto sin contar). Verificado: sin refs colgadas, las 4
+  escenas (`Intro`/`TorreSector`/`Level1`/`Epilogue`) cargan headless
+  exit 0, contadores y transiciones intactos.
+- **Hook epílogo/corrupción**: `GameState.final_corruption` +
+  `GameState.complete_level()` (congela el valor antes del reset).
+  `level1_controller._on_memory_finished()` lo usa. Sin diálogos nuevos —
+  solo deja el número disponible para bifurcar el epílogo más adelante.
+- **Pendiente de Marcos (pasada visual en Godot, jugando TorreSector)**:
+  oscuridad del `CanvasModulate` (placeholder en Intro y TorreSector),
+  zoom de cámara, alineación vertical de props con el piso (~30px de
+  float visible en captura). NO se cierra por headless.
+- **Fase 3**: sigue congelada. `gothicvania-cemetery-files.zip` está
+  descargado en la carpeta externa de Marcos pero NO se integró (su
+  instrucción explícita).

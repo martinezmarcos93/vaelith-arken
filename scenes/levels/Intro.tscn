@@ -295,10 +295,6 @@ energy = 0.85
 texture = SubResource("GradientTexture2D_glow")
 texture_scale = 0.9
 
-[node name="MemoryFlashTrigger" parent="." instance=ExtResource("4_dialogue_trigger")]
-position = Vector2(550, 400)
-lines = ["La empuñadura encaja en tu mano. Demasiado bien.", "Tus dedos encuentran el lugar exacto. El peso no te resulta extraño.", "Lo extraño es no recordar haber aprendido a usarla.", "Pantalla negra. Una respiración.", "—¿Qué querés que sea?", "Una habitación. Una mesa de piedra.", "Sobre ella yace una criatura incompleta. Carne. Metal. Hueso.", "Una figura permanece frente a ella. No se ve su rostro.", "—Yo.", "La criatura abre los ojos.", "—No. Mejor que yo.", "Volvés. Respirás agitado. Mirás la espada.", "No comprendés lo que acabás de ver."]
-
 [node name="PropCryptDoor" type="Sprite2D" parent="."]
 position = Vector2(1075, 355)
 scale = Vector2(0.42, 0.42)
