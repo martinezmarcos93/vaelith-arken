@@ -3,8 +3,7 @@ extends Area2D
 ## Pickup de fragmento de memoria: mismo esqueleto que checkpoint.gd y
 ## dialogue_trigger.gd (Area2D + body_entered + already_active). Al
 ## tocarlo registra el progreso en GameState y muestra el recuerdo con
-## DialogueBox -- el texto sale de "Ideas base para el juego/Despertar en
-## la oscuridad.pdf", no se inventa.
+## DialogueBox -- el texto sale de docs/guion_demo.md, no se inventa.
 
 @export var lines: Array[String] = []
 @export var already_active: bool = false

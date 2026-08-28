@@ -4,15 +4,11 @@ extends CharacterBody2D
 ## Concepto central del documento: "imita, no inventa" -- sus ataques son
 ## versiones espejadas del kit de Vaelith, con el MISMO daño/knockback/
 ## logica de guardia rota que player.gd, no un moveset inventado. Arte
-## placeholder con el mismo SpriteFrames que ya usa Player.tscn
-## (evil_wizard_2_CC0), autorizado explicitamente en diseno_boss1.md para
-## probar la IA sin esperar el sprite final de Vaelith.
+## propio (espejo_boss_custom, re-extraido de spectral_knight_violet_sheet).
 
-## En el material original (Despertar en la oscuridad.pdf, paginas 79-82)
-## el guerrero-espejo NO muere: baja el arma y se da una tregua con
-## Vaelith. Para no contradecir la fuente, al llegar a 0 de vida el boss
-## se RINDE (baja la guardia, deja de atacar) en vez de morir -- ver
-## _surrender().
+## Por guion (docs/guion_demo.md, "BOSS -- EL ESPEJO") el guerrero-espejo
+## NO muere: al llegar a 0 de vida se RINDE (baja la guardia, deja de
+## atacar) y da paso al recuerdo "El ultimo dia" -- ver _surrender().
 signal surrendered
 signal health_changed(current: int, max_health: int)
 signal phase_changed(new_phase: int)

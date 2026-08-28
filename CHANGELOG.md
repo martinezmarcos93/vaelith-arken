@@ -6,6 +6,25 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 
 ## [Unreleased]
 
+### 2026-08-27 (cont. 2) — Audio, UI con arte propio, ataque con mouse, arranque de Level 1 largo
+
+- **Audio (Etapa 8, completa)**: buses sagrado/corrupto + `AudioManager`
+  (música por escena) + SFX curados (Suno) cableados a las señales de juego
+  (golpes, pasos, salto, aterrizaje). `docs/lista_audio.md` reescrito al
+  estado real.
+- **UI/UX**: cursor de mouse propio (`CursorManager`), HUD rehecho con la
+  estética del diálogo/menú + láminas de penitencia/corrupción (todavía sin
+  lógica de corrupción detrás — solo el visual), logo + subtítulo "La espada
+  de Pharasma" en el menú principal.
+- **Combate**: atacar con clic izquierdo del mouse como ataque principal.
+- **Fixes**: pase de arte de la Intro (fuera el escenario gris/debug), cursor
+  y caja de diálogo y pausa sobre negro (informe visual P0).
+- **Level 1 largo (aprobado, ver `docs/roadmap_level1_largo.md`)**: arranca
+  el reemplazo del Level 1 greybox por el recorrido completo torre → bosque
+  → 2ª torre → arena. Fase 0: zombi devorado extraído (3ª clase de undead).
+  Fase 1: parallax con `Nuevo cielo.png` (reemplaza los paneles chicos
+  borrosos).
+
 ### 2026-08-27 — Arte de UI propio, rework narrativo y arranque de producción
 
 - **UI con arte propio**: `title_logo` + 6 placas de menú extraídas de una hoja
@@ -242,32 +261,13 @@ el editor en la sesión).
   `main` (la rama de trabajo `feature/vertical-slice-demo` se mergeó y
   borró tras cerrar la Etapa 1).
 
-### Pending — próximos pasos por etapa (ver `docs/Roadmap.md`)
-- **Etapa 1: cerrada.** Movimiento, cámara, combate base y vida/muerte
-  validados por testing headless (`scripts/test_driver.gd`); criterio de
-  aceptación de la Fase 1.5 cumplido.
-- **Etapa 4**: respawn en checkpoint ya implementado (Fase 4.3, parcial).
-  Falta: TileMap real sobre `docs/layout_level1.md` (tramos A-F con arte,
-  no el sandbox actual), y la corrupción de nivel de "penitencia" —
-  requiere que existan tramos reales de dificultad ajustable. Construir
-  el greybox completo de Level 1 requiere tuneo visual de distancias de
-  salto en el editor, no solo colocación de coordenadas por script — mejor
-  hacerlo con feedback visual directo en vez de a ciegas.
-- **Etapa 2**: sprite sheet final del protagonista (Fases 2.1-2.3). La
-  integración técnica (Fase 2.4) ya está resuelta con un placeholder —
-  falta el arte real de Vaelith para reemplazar el pack temporal.
-- **Etapa 3**: intro jugable real (guion ya escrito en
-  `docs/guion_intro.md`, sin implementar).
-- **Etapa 4**: construcción real de Level 1 sobre el layout ya diseñado
-  (`docs/layout_level1.md`), reemplazando el sandbox de pruebas.
-- **Etapa 5**: IA (Fase 5.3) ya implementada y validada en el sandbox — falta
-  balance con playtesting real (Fase 5.4) y arte final (Fase 5.2, mismo
-  bloqueo narrativo/de tiempo que Vaelith).
-- **Etapa 6**: diseño de patrones cerrado (`docs/diseno_boss1.md`, Fase 6.1).
-  Faltan arte (6.2, bloqueada por compartir diseño con Vaelith), arena
-  (6.3), IA en Godot (6.4) e integración narrativa completa (6.5).
-- **Etapa 7**: desenlace de la demo.
-- **Etapa 8**: audio (composición vía Suno, SFX final, integración).
-- **Etapa 9**: HUD de vida ya implementado (Fase 9.1). Faltan menús (9.2) y
-  sistema de diálogo (9.3).
-- **Etapa 10-11**: QA, pulido, empaquetado.
+### Pending — trackers vivos
+
+Esta sección por Etapas quedó desactualizada (ver `docs/Roadmap.md`, marcado
+como referencia histórica desde el 2026-08-27). El trabajo pendiente real se
+sigue en dos documentos que SÍ se mantienen al día:
+
+- **`docs/AUDITORIA_2026-08-27.md`** — estado actual del código (qué
+  funciona / parcial / roto / falta) + plan por Fases 0–11 de producción.
+- **`docs/roadmap_level1_largo.md`** — plan de fases del rediseño de Level 1
+  (torre → bosque → 2ª torre → arena), con su propia sección de Progreso.

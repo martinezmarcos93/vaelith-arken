@@ -68,11 +68,10 @@ func _close() -> void:
 	finished.emit()
 
 
-## Muestra N botones y espera a que se elija uno -- para el momento del
-## guerrero-espejo "Pregunta lo que quieras... elegi bien" (Despertar en
-## la oscuridad.pdf, pag. 82-83): en la fuente esa pregunta nunca llega a
-## responderse (la sesion de mesa termino ahi), asi que la eleccion real
-## esta en QUE pregunta se hace, no en una respuesta distinta por opcion.
+## Muestra N botones y espera a que se elija uno. Sin llamador todavia
+## (el guion_demo.md actual no tiene un momento de eleccion) -- se
+## preserva como parte de la API del autoload (ver AUDITORIA_2026-08-27
+## §5) para cuando la capa de interaccion narrativa la necesite.
 func ask_choice(options: Array[String]) -> int:
 	visible = true
 	get_tree().paused = true
