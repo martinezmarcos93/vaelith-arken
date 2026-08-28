@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3]
+[gd_scene load_steps=31 format=3]
 
 [ext_resource type="Script" path="res://scripts/level/hazard.gd" id="15_hazard_script"]
 [ext_resource type="PackedScene" path="res://scenes/level/MusicTrigger.tscn" id="40_music"]
@@ -78,8 +78,22 @@ size = Vector2(60, 24)
 [sub_resource type="RectangleShape2D" id="Shape_killzone"]
 size = Vector2(3800, 180)
 
+[sub_resource type="Gradient" id="Gradient_glow"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_glow"]
+gradient = SubResource("Gradient_glow")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
 [node name="Level1" type="Node2D"]
 script = ExtResource("21_controller")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.62, 0.58, 0.66, 1)
 
 [node name="SkyFill" type="CanvasLayer" parent="."]
 layer = -200
@@ -97,6 +111,7 @@ motion_scale = Vector2(0.04, 0.04)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Sky"]
 texture_filter = 1
+modulate = Color(0.5, 0.48, 0.6, 1)
 position = Vector2(560, 250)
 scale = Vector2(2.6, 2.6)
 texture = ExtResource("30_bg_sky")
@@ -107,6 +122,7 @@ motion_mirroring = Vector2(2405, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Ridge"]
 texture_filter = 1
+modulate = Color(0.5, 0.48, 0.56, 1)
 position = Vector2(560, 430)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("31_bg_ruinsbg")
@@ -117,7 +133,7 @@ motion_mirroring = Vector2(1140, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Clouds"]
 texture_filter = 1
-modulate = Color(1, 1, 1, 0.75)
+modulate = Color(0.52, 0.5, 0.6, 0.5)
 position = Vector2(560, 250)
 scale = Vector2(1.4, 1.4)
 texture = ExtResource("32_bg_ruins")
@@ -404,11 +420,21 @@ stretch_mode = 1
 position = Vector2(435, 308)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("7_crystal_white")
+[node name="CrystalWhiteLight" type="PointLight2D" parent="PropCrystalWhite"]
+color = Color(0.7, 0.78, 0.95, 1)
+energy = 0.7
+texture = SubResource("GradientTexture2D_glow")
+texture_scale = 1.6
 
 [node name="PropMushroom" type="Sprite2D" parent="."]
 position = Vector2(685, 368)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("9_mushroom")
+[node name="MushroomLight" type="PointLight2D" parent="PropMushroom"]
+color = Color(0.45, 0.6, 0.7, 1)
+energy = 0.25
+texture = SubResource("GradientTexture2D_glow")
+texture_scale = 0.9
 
 [node name="PropStatue" type="Sprite2D" parent="."]
 position = Vector2(2365, 416)
@@ -419,11 +445,21 @@ texture = ExtResource("13_statue")
 position = Vector2(1845, 406)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("10_totem")
+[node name="TotemLight" type="PointLight2D" parent="PropDarkTotem"]
+color = Color(0.55, 0.35, 0.85, 1)
+energy = 0.5
+texture = SubResource("GradientTexture2D_glow")
+texture_scale = 1.4
 
 [node name="PropCrystalBlueGreen" type="Sprite2D" parent="."]
 position = Vector2(2425, 425)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("8_crystal_blue")
+[node name="CrystalBlueLight" type="PointLight2D" parent="PropCrystalBlueGreen"]
+color = Color(0.4, 0.8, 0.75, 1)
+energy = 0.7
+texture = SubResource("GradientTexture2D_glow")
+texture_scale = 1.6
 
 [node name="PropDemonSkull" type="Sprite2D" parent="."]
 position = Vector2(2585, 406)
@@ -439,6 +475,12 @@ texture = ExtResource("12_bones")
 position = Vector2(2945, 406)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("14_bonfire")
+[node name="BonfireLight" type="PointLight2D" parent="PropBonfire"]
+position = Vector2(0, -20)
+color = Color(1, 0.58, 0.28, 1)
+energy = 1.6
+texture = SubResource("GradientTexture2D_glow")
+texture_scale = 2.9
 
 [node name="PropStump1" type="Sprite2D" parent="."]
 position = Vector2(250, 245)
@@ -561,6 +603,13 @@ position = Vector2(3550, 410)
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector2(150, 230)
+
+[node name="RimLight" type="PointLight2D" parent="Player"]
+position = Vector2(0, -20)
+color = Color(0.55, 0.6, 0.72, 1)
+energy = 0.28
+texture = SubResource("GradientTexture2D_glow")
+texture_scale = 1.1
 
 [node name="Camera2D" parent="Player"]
 limit_left = 0
