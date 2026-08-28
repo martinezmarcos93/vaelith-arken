@@ -93,6 +93,7 @@ func _on_identity_finished() -> void:
 
 func _on_memory_finished() -> void:
 	await get_tree().create_timer(PRE_EPILOGUE_SILENCE).timeout
-	# Nivel completo -> la corrupcion acumulada resetea (roadmap Fase 4).
-	GameState.reset_corruption()
+	# Nivel completo -> congela la corrupcion final (para variantes del
+	# Epilogo) y despues resetea el contador vivo (roadmap Fase 4).
+	GameState.complete_level()
 	TransitionManager.goto_scene(EPILOGUE_SCENE)
