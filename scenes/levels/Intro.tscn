@@ -346,7 +346,7 @@ lines = ["El camino baja hacia la niebla. A lo lejos, una estructura enorme, med
 
 [node name="ExitTrigger" parent="." instance=ExtResource("5_exit_trigger")]
 position = Vector2(1400, 400)
-target_scene = "res://scenes/levels/Level1.tscn"
+target_scene = "res://scenes/levels/TorreSector.tscn"
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector2(100, 410)
