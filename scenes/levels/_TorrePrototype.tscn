@@ -69,6 +69,23 @@ energy = 1.6
 texture = SubResource("GradientTexture2D_glow")
 texture_scale = 0.6
 
+[node name="Corridor" type="TileMapLayer" parent="."]
+position = Vector2(448, 0)
+scale = Vector2(2, 2)
+tile_set = ExtResource("1_tileset")
+script = ExtResource("2_builder")
+width = 10
+height = 7
+door_rows = Array[int]([1, 2, 3, 4, 5])
+draw_left_wall = false
+
+[node name="ExitLight" type="PointLight2D" parent="Corridor"]
+position = Vector2(150, 72)
+color = Color(0.78, 0.82, 0.95, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_glow")
+texture_scale = 1.1
+
 [node name="Player" parent="." instance=ExtResource("4_player")]
 position = Vector2(96, 170)
 

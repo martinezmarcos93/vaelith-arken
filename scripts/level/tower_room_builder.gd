@@ -13,9 +13,12 @@ const FLOOR_ACCENT := Vector2i(5, 21)
 
 @export var width: int = 14
 @export var height: int = 7
-## Filas (desde arriba, 0-indexed) donde la pared derecha se abre --
-## el umbral hacia el bosque.
+## Filas (desde arriba, 0-indexed) donde la pared derecha se abre -- un
+## umbral (a otro tramo, o al bosque en el ultimo tramo del pasillo).
 @export var door_rows: Array[int] = [3, 4]
+## false = el tramo se abre directo al anterior (sin pared izquierda) --
+## para encadenar tramos como un pasillo continuo.
+@export var draw_left_wall: bool = true
 
 
 func _ready() -> void:
@@ -30,7 +33,8 @@ func _build_room() -> void:
 	for x in width:
 		set_cell(Vector2i(x, 0), 0, _wall_variant(x))
 	for y in range(1, height - 1):
-		set_cell(Vector2i(0, y), 0, _wall_variant(y))
+		if draw_left_wall:
+			set_cell(Vector2i(0, y), 0, _wall_variant(y))
 		if y not in door_rows:
 			set_cell(Vector2i(width - 1, y), 0, _wall_variant(y + width))
 	for x in width:
