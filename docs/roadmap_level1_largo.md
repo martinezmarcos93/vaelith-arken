@@ -35,10 +35,10 @@ Reglas transversales:
 
 | Fase | Objetivo | Estado |
 |---|---|---|
-| **0 · Extracción** | ~~`level1_ruins_tileset` → `TileSet` 32×32~~ · `zombie` → AnimatedSprite2D · atlas de props/VFX (árboles, huesos, arquitectura, cementerio, fuego, decals, arena, combat_vfx) a carpetas. Doc roadmap + update auditoría. | zombi ✅ · TileSet Raou ✅ · **arquitectura + props + fire + vfx de la Torre integrados** (`assets/sprites/props/vaelith_torre/`, 2026-08-28) ✅ · árboles/cementerio/arena/combat_vfx pendientes |
+| **0 · Extracción** | ~~`level1_ruins_tileset` → `TileSet` 32×32~~ · `zombie` → AnimatedSprite2D · atlas de props/VFX (árboles, huesos, arquitectura, cementerio, fuego, decals, arena, combat_vfx) a carpetas. Doc roadmap + update auditoría. | zombi ✅ · TileSet Raou ✅ · **arquitectura + props + fire + vfx de la Torre integrados** (`assets/sprites/props/vaelith_torre/`, 2026-08-28) ✅ · **árboles/cementerio integrados** (`assets/sprites/tilesets/gothicvania_cemetery_CC0/`, 2026-08-28) ✅ · arena/combat_vfx pendientes |
 | **1 · Parallax + Intro re-vestida** | 5 capas de parallax propias. Intro: mismo guion/frames, escenario = interior de torre (columnas rotas, mesas rituales, cadáver en losa, braseros violetas). | parallax ✅ · **Intro re-vestida ✅** (dressing con arte propio de la Torre; guion/timings/triggers intactos; CanvasModulate placeholder para el pase de gameplay) |
 | **2 · Sector Torre** | Tilemap de la torre con el TileSet nuevo. Vaelith arranca dentro/al pie. Puerta con brillo violeta = umbral al bosque. 1-2 espíritus. Fragmento I. | ✅ **`TorreSector.tscn`**: cuarto + pasillo + umbral (barred_gate + luz violeta + `floor_projection_violet`) + 2 espíritus + HUD + safety floor + cámara. Fragmento I = `RecognitionPoint` en la mesa ritual (press-E, único que cuenta en GameState). Flujo: **Intro → TorreSector → Level1.tscn**. El `MemoryFlashTrigger` de la Intro se eliminó (decisión Marcos 2026-08-28): la Intro conserva su narrativa visual pero ya no dispara ni cuenta el Fragmento — vive solo en TorreSector. **Pendiente: pasada visual de Marcos en Godot** — oscuridad del `CanvasModulate`, zoom de cámara, alineación vertical de props con el piso (~30px de float). No se cierra por headless. |
-| **3 · Sector Bosque + gauntlet** | Cementerio del bosque: tumbas/ataúdes abiertos = spawns. ≥10 undead, 3 clases, 2 golpes = muerte. Árboles corruptos, troncos, huesos, decals de sangre/huellas. Fragmentos II-III. | bloqueado por asset de árboles (ver Progreso) |
+| **3 · Sector Bosque + gauntlet** | Cementerio del bosque: tumbas/ataúdes abiertos = spawns. ≥10 undead, 3 clases, 2 golpes = muerte. Árboles corruptos, troncos, huesos, decals de sangre/huellas. Fragmentos II-III. | 🟡 **desbloqueada** (asset `gothicvania_cemetery_CC0` integrado 2026-08-28) · diseño del sector (tilemap + spawns + gauntlet) todavía sin empezar |
 | **4 · Loop corrupción ↔ cráneos** | `GameState.corruption` (0-3). `_die` → +1. `collect_skull()` → −1. `CorruptionController` por tramo: +1 enemigo, baja `PointLight2D`, sube fuego violeta, viñeta. Reset al fin de nivel. Indicador en HUD. | 🟡 núcleo ✅ (GameState + HUD) · `CorruptionController` por tramo pendiente (depende de que existan tramos reales) |
 | **5 · Sector 2ª Torre** | Columnas de basalto, mausoleo grande de base, estructuras corruptas. Combate denso (3 clases). Fragmentos IV-VI. Rastro de huellas hacia la arena. | — |
 | **6 · Arena del constructo** | `mirror_warrior_arena_sheet`: plataforma circular, estatuas-espejo, escaleras, eclipse corrupto, cara-portal de entrada. Boss `espejo_boss_custom`. "El último día" → Epílogo. | — |
@@ -74,10 +74,8 @@ no se propone la fase siguiente.
 - ¿La corrupción también cambia el epílogo / diálogo final?
 - ~~v1 vs v2 de `level1_ruins_tileset`~~ — no aplica: se descartó como fuente del
   `TileSet` (ver Progreso 2026-08-28).
-- Descargar `gothicvania-cemetery-files.zip` (CC0, $0) desde
-  `ansimuz.itch.io/gothicvania-cemetery` — bloquea la Fase 3. itch.io no
-  permite descarga directa por link (protegido contra scraping); pendiente
-  de que Marcos lo baje.
+- ~~Descargar `gothicvania-cemetery-files.zip`~~ — resuelto 2026-08-28, ver
+  Progreso e integrado en `assets/sprites/tilesets/gothicvania_cemetery_CC0/`.
 - Nivel de oscuridad del `CanvasModulate` del prototipo de Torre es de
   muestra — a jugar y ajustar en el editor, no solo evaluar por captura.
 
@@ -158,3 +156,30 @@ no se propone la fase siguiente.
 - **Fase 3**: sigue congelada. `gothicvania-cemetery-files.zip` está
   descargado en la carpeta externa de Marcos pero NO se integró (su
   instrucción explícita).
+
+**2026-08-28 (sesión "integra todo" — asset del bosque + tipografía):**
+- **GothicVania Cemetery integrado**: `assets/sprites/tilesets/
+  gothicvania_cemetery_CC0/` (parallax `layers/{background,mountains,
+  graveyard}.png`, props ya recortados en `sliced-objects/` — 3 árboles, 2
+  arbustos, 4 plataformas de piedra, 1 estatua encapuchada — y `tileset.png`/
+  `tileset-sliced.png` sin armar como `TileSet` de Godot todavía). A diferencia
+  de las láminas IA de la Torre, este pack CC0 de Ansimuz venía profesionalmente
+  pre-recortado (mismo autor que `gothicvania_town_CC0`, ya integrado antes) —
+  no hizo falta pipeline de extracción, solo copiar y organizar en `layers/`
+  siguiendo la misma convención. **Fase 3 desbloqueada**, pero el diseño del
+  sector (tilemap, spawns, gauntlet de ≥10 undead) es un paso aparte, no hecho
+  en esta sesión.
+- **Tipografía Gothic Pixels integrada**: `assets/fonts/Gothic Pixels.ttf`
+  (Akezhar, CC0), aplicada project-wide via `[gui] theme/custom_font` en
+  `project.godot` — reemplaza la fuente default de Godot en todos los
+  `Control` sin tocar cada escena de UI una por una. Import headless
+  reconfigurado a mano (`antialiasing=0`, `hinting=0`,
+  `subpixel_positioning=0`, `oversampling=1.0`) porque el importador de TTF
+  de Godot por defecto suaviza el font como si fuera tipografía normal,
+  lo que arruina el look de pixel art de una fuente diseñada a resolución
+  fija.
+- Verificado headless: import sin errores + las 5 escenas de la cadena
+  (`TitleScreen`, `Intro`, `TorreSector`, `Level1`, `Credits`) cargan sin
+  errores de parseo/script con la fuente nueva puesta. **Falta confirmación
+  visual de Marcos jugando** (ver la fuente real en las cajas de diálogo/menús,
+  no solo que cargue).
