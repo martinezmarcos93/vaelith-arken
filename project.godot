@@ -30,6 +30,10 @@ GameState="*res://scripts/game_state.gd"
 MemoryFlash="*res://scenes/ui/MemoryFlash.tscn"
 PauseMenu="*res://scenes/ui/PauseMenu.tscn"
 
+[gui]
+
+theme/custom_font="res://assets/fonts/Gothic Pixels.ttf"
+
 [display]
 
 window/size/viewport_width=1280

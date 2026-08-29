@@ -18,16 +18,6 @@ el tamaño de celda y Claude la corta.
 
 ## Bloqueantes activos
 
-### 1. Bosque / cementerio — `gothicvania-cemetery-files.zip`
-- **Estado:** pendiente de descarga manual de Marcos.
-- **Fuente:** `ansimuz.itch.io/gothicvania-cemetery` (CC0, $0). itch.io no permite
-  descarga por link directo (protección anti-scraping).
-- **Bloquea:** Fase 3 del `roadmap_level1_largo` (Sector Bosque + gauntlet).
-- **Qué trae:** árboles retorcidos, lápidas, plataformas de piedra, columnas —
-  reemplazo ya recortado de `dead_trees_atlas.png`.
-- **Nota:** no reconstruir árboles desde `dead_trees_atlas.png` ni improvisar un
-  bosque sustituto. Fase 3 queda congelada hasta que el zip esté en el proyecto.
-
 ### 2. Torre del nigromante — batches preparados por Marcos (2026-08-28)
 
 Marcos preparó 4 zips en `Documents/Marcos/PHARASMA/Sprites/`
@@ -112,6 +102,18 @@ tener una tira de frames real.
 
 ## Resueltos / sin acción
 
+- **Bosque / cementerio — `gothicvania-cemetery-files.zip` (resuelto 2026-08-28).**
+  Marcos lo bajó de `ansimuz.itch.io/gothicvania-cemetery` (CC0) e integrado en
+  `assets/sprites/tilesets/gothicvania_cemetery_CC0/` (parallax en `layers/`,
+  props ya recortados en `sliced-objects/`, tileset sin armar todavía). Detalle
+  en el `README.md` de esa carpeta. **Desbloquea la Fase 3** del
+  `roadmap_level1_largo` — falta diseñar el sector en sí (tilemap + spawns +
+  gauntlet), no es parte de este paso.
+- **Tipografía Gothic Pixels (Akezhar, CC0) — integrada 2026-08-28.** Bajada
+  por Marcos, en `assets/fonts/Gothic Pixels.ttf`, aplicada como fuente global
+  del proyecto (`project.godot` → `[gui] theme/custom_font`). Import con
+  antialiasing/hinting/subpixel desactivados para que se vea nítida como
+  fuente de pixel art (no lo hace por defecto el importador de Godot).
 - `level1_ruins_tileset.png` / `_v2` — referencia de Marcos, no grid. Reemplazado
   por `dungeon_raou_free_commercial_ok/raou_tileset.tres`.
 - `funerary_ruins_tileset.png` — misma clase. Cubierto por Raou para el piso/muro

@@ -530,11 +530,37 @@ se ignoró a propósito, a pedido explícito.
   `narration_frame.png` (caja alta con calavera) queda para los momentos de
   narración/fragmento de memoria (Fase 8).
 
+## Cuarta tanda (2026-08-28) — GothicVania Cemetery + tipografía
+
+- **GothicVania Cemetery (Ansimuz)** — `assets/sprites/tilesets/gothicvania_cemetery_CC0/`
+  Fuente: `ansimuz.itch.io/gothicvania-cemetery`.
+  Licencia: **CC0** confirmada (`public-license.pdf` incluido, sin
+  restricciones de uso ni atribución) — mismo autor y misma licencia que
+  `gothicvania_town_CC0` (arriba). Resuelve el bloqueante de
+  `docs/ASSETS_PENDIENTES.md` (reemplazo de `dead_trees_atlas.png`, que no
+  era recortable) y desbloquea la Fase 3 de `docs/roadmap_level1_largo.md`.
+  Se integraron `layers/` (parallax: cielo+luna, montañas, silueta de
+  cementerio), `sliced-objects/` (árboles, arbustos, plataformas de piedra,
+  estatua — ya venían recortados por el autor) y `tileset.png`/
+  `tileset-sliced.png` (sin armar como `TileSet` todavía). Se descartaron
+  `Characters/` (el proyecto usa su propio elenco), `PSD/` y `Phaser Demo/`.
+  Detalle completo en el `README.md` de la carpeta.
+
+- **Gothic Pixels (Akezhar)** — `assets/fonts/Gothic Pixels.ttf`
+  Fuente: `akezhar.itch.io/gothic-pixels`.
+  Licencia: **CC0** confirmada en la página del producto ("puede usarse
+  como quieras, para uso comercial y no comercial").
+  Aplicada como fuente global del proyecto (`project.godot` →
+  `[gui] theme/custom_font`), reemplaza la fuente default de Godot en toda
+  la UI sin tocar cada escena. Import ajustado a mano (antialiasing/hinting/
+  subpixel desactivados) para que se vea nítida como pixel art — el
+  importador de Godot por defecto la suaviza como tipografía normal.
+
 ## Pendientes de descarga manual (bloqueados por flujo de compra de itch.io)
 
 El resto de los candidatos de `docs/lista_assets_pixel_art.md` y
-`docs/lista_audio.md` (UI, VFX, fuente Gothic Pixels, SFX, tileset alternativo
-gótico, etc.) siguen pendientes de que se bajen manualmente — itch.io y
-CraftPix gatean la descarga detrás de un flujo JS con sesión de navegador que
-no es scripteable de forma confiable. A medida que se agreguen a
-`Herramientas/Pixelherramientas/`, se integran y documentan acá.
+`docs/lista_audio.md` (UI, VFX, SFX, tileset alternativo gótico, etc.) siguen
+pendientes de que se bajen manualmente — itch.io y CraftPix gatean la
+descarga detrás de un flujo JS con sesión de navegador que no es scripteable
+de forma confiable. A medida que se agreguen a `Herramientas/Pixelherramientas/`,
+se integran y documentan acá.
