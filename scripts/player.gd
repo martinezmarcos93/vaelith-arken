@@ -32,6 +32,13 @@ signal health_changed(current: int, max: int)
 ## Player.tscn se reutiliza entre niveles con distintos limites.
 @export var camera_lookahead_distance: float = 60.0
 @export var camera_lookahead_lerp_speed: float = 4.0
+## Screen shake sobrio (referencia SLAIN/Volgarr, no Vlambeer): "trauma" 0..1
+## que decae, offset = trauma^2 * max. Se suma en aterrizaje pesado y al recibir
+## daño. Bajar shake_max_offset a 0 lo desactiva sin tocar codigo.
+## VALORES DE ARRANQUE -- ajustar en playtest (docs/stats_personaje.md).
+## Con estos: aterrizaje fuerte ~2.4px de pico, golpe recibido ~4px, cola ~200ms.
+@export var shake_max_offset: float = 12.0
+@export var shake_decay: float = 3.0
 
 # --- Combate ---
 @export_group("Combate")
@@ -87,6 +94,8 @@ var health: int
 var _coyote_timer: float = 0.0
 var _jump_buffer_timer: float = 0.0
 var _iframe_timer: float = 0.0
+var _cam_base_offset_x: float = 0.0
+var _trauma: float = 0.0
 var _state_timer: float = 0.0
 var _consecutive_blocks: int = 0
 var _stagger_duration: float = 0.0
@@ -166,6 +175,7 @@ func _physics_process(delta: float) -> void:
 
 	_update_hitbox_facing()
 	_update_camera_lookahead(delta)
+	_update_camera_shake(delta)
 	_poll_input_buffer(delta)
 	_poll_jump_buffer(delta)
 
@@ -195,6 +205,9 @@ func _physics_process(delta: float) -> void:
 	# Aterrizaje: se estaba en el aire cayendo y ahora hay piso.
 	if is_on_floor() and not _was_on_floor and _prev_velocity_y > 120.0:
 		AudioManager.play_sfx(SFX_LAND, "SFX", -2.0)
+		# shake proporcional a la velocidad de impacto: nada en caidas cortas,
+		# ~0.45 de trauma en una caida fuerte (>~700 px/s).
+		add_trauma(clamp(remap(_prev_velocity_y, 120.0, 700.0, 0.0, 0.45), 0.0, 0.45))
 	_was_on_floor = is_on_floor()
 
 
@@ -396,7 +409,24 @@ func _update_sprite_animation() -> void:
 func _update_camera_lookahead(delta: float) -> void:
 	var target_offset_x: float = camera_lookahead_distance * facing
 	var weight: float = clamp(camera_lookahead_lerp_speed * delta, 0.0, 1.0)
-	camera.offset.x = lerp(camera.offset.x, target_offset_x, weight)
+	_cam_base_offset_x = lerp(_cam_base_offset_x, target_offset_x, weight)
+	camera.offset.x = _cam_base_offset_x
+	camera.offset.y = 0.0
+
+
+## Suma un shake decreciente sobre el offset base de la camara. El offset usa
+## trauma^2 (Eiserloh): el shake fuerte cae rapido, la cola es suave.
+func _update_camera_shake(delta: float) -> void:
+	if _trauma <= 0.0:
+		return
+	_trauma = max(_trauma - shake_decay * delta, 0.0)
+	var amount: float = _trauma * _trauma * shake_max_offset
+	camera.offset.x += randf_range(-amount, amount)
+	camera.offset.y += randf_range(-amount, amount)
+
+
+func add_trauma(amount: float) -> void:
+	_trauma = clamp(_trauma + amount, 0.0, 1.0)
 
 
 func _update_hitbox_facing() -> void:
@@ -446,6 +476,7 @@ func _take_damage(damage: int, direction: Vector2, knockback: float, stagger_tim
 		_die(direction, knockback)
 		return
 	AudioManager.play_sfx_random(SFX_GRUNT_HURT, "SFX", -1.0)
+	add_trauma(0.5)
 	_iframe_timer = iframes_duration
 	velocity = direction * knockback
 	if stagger_time > 0.0:
