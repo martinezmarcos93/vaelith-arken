@@ -6,6 +6,39 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 
 ## [Unreleased]
 
+### 2026-09-09 (cont.) — Recolor del catálogo de arte de entorno
+
+- Pasada sistemática de recolor a la paleta canónica con
+  `tools/img_pipeline/recolor.py --no-accents` sobre 4 packs de terceros
+  (202 PNG en total), con revisión visual pack por pack:
+  - `dungeon_golopin_free` (83) — antes "pendiente recolor".
+  - `dungeon_props_craftpix_free` (69).
+  - `cave_props_craftpix_free` (8).
+  - `dungeon_platformer_craftpix_free` (42) — rehace el remapeo ad-hoc del
+    2026-08-26; `Level1.tscn` usa estos assets.
+- Sin tocar: `cave_rocks_craftpix_free` (perdía sombreado, 4→2 colores) y
+  `dungeon_raou_free_commercial_ok` (ya calzaba).
+- Herramienta: `recolor.py` gana `--no-accents` (quita el rojo de peligro
+  `#B41F1C` para arte de entorno) y recorrido recursivo de carpetas.
+
+### 2026-09-09 — Pipeline local de reparación/recolor de imagen
+
+- **`tools/img_pipeline/`**: entorno offline para bajar packs de terceros y
+  referencias de IA a la paleta canónica sin recolorear a mano.
+  - `recolor.py` (sobre **pyxelate**, MIT): cuantiza a los 14 colores de
+    `docs/guia_estilo_visual.md` + dithering opcional; preserva alpha; `--check`
+    valida que la salida use sólo colores de la paleta.
+  - `fix_ai.py` (sobre **pixelfixer**, Retro Diffusion, MIT, vendorizado en
+    `vendor/pixel-art-fixer/`): reconstruye "falso pixel art" a grilla real.
+  - `palette_canon.hex` / `palette_extended.hex` volcados de la guía de estilo;
+    `_compat.py` (shim skimage para correr pyxelate en Python 3.9);
+    `make_cert_bundle.ps1` (workaround SSL: la red intercepta TLS con la CA de
+    Avast — anotado en el vault `Leyes/Red-y-SSL.md`).
+  - `.venv/`, `.certs/`, `_samples/` quedan fuera de git.
+- Descartadas en la evaluación previa: PixelRenderUnity3D (Unity, 2016, no
+  comercial), blender-pixelart (sólo referencia), proper-pixel-art (exige
+  Python ≥3.10). Detalle en `docs/analisis_herramientas_ia_pixel_art.md`.
+
 ### 2026-08-27 (cont. 2) — Audio, UI con arte propio, ataque con mouse, arranque de Level 1 largo
 
 - **Audio (Etapa 8, completa)**: buses sagrado/corrupto + `AudioManager`

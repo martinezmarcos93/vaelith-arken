@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pixelfixer"
+version = "0.1.0"
+description = "Convert fake pixel art into real, grid-aligned pixel art (image processing, no model)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Astropulse, LLC" }]
+keywords = ["pixel art", "image processing", "grid detection", "downscaling", "retro diffusion"]
+dependencies = [
+    "numpy>=1.21",
+    "scipy>=1.7",
+    "opencv-python>=4.5",
+    "Pillow>=9.0",
+]
+
+[project.urls]
+Homepage = "https://retrodiffusion.ai"
+"Neural Pixel Art Fixer" = "https://retrodiffusion.ai/pixel-art-fixer"
+
+[project.scripts]
+pixelfixer = "pixelfixer.cli:main"
+
+[tool.setuptools]
+packages = ["pixelfixer"]

@@ -14,3 +14,8 @@ Thumbs.db
 # Python (por tools/extract_palette.py)
 __pycache__/
 *.pyc
+
+# tools/img_pipeline/ — entorno local, no se versiona
+tools/img_pipeline/.venv/
+tools/img_pipeline/.certs/
+tools/img_pipeline/_samples/

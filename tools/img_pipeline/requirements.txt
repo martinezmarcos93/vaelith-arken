@@ -1,0 +1,39 @@
+# Pipeline de reparacion/recolor de imagen - dependencias del venv.
+# Intérprete: miniconda Python 3.9.x  (NO el 3.13 del sistema).
+#
+# Recrear el entorno desde cero (PowerShell), con el workaround SSL del estudio:
+#   & "C:\tools\miniconda3\python.exe" -m venv tools\img_pipeline\.venv
+#   $env:PIP_CERT       = "tools\img_pipeline\.certs\win-root-bundle.pem"
+#   $env:GIT_SSL_CAINFO = $env:PIP_CERT
+#   tools\img_pipeline\.venv\Scripts\python.exe -m pip install -r tools\img_pipeline\requirements.txt
+#
+# El bundle de certificados se regenera con tools/img_pipeline/make_cert_bundle.ps1
+# (exporta el store de raices de Windows, que incluye la CA de Avast que intercepta TLS).
+
+# --- pyxelate: cuantizacion a paleta fija + dithering ---
+# HEAD de sedthh/pyxelate, pineado al commit probado. El paquete "pyxelate" de
+# PyPI es un placeholder vacio: hay que instalar desde git.
+# Requiere el shim de tools/img_pipeline/_compat.py para correr en 3.9
+# (usa skimage.morphology.footprint_rectangle, que recien existe en skimage>=0.25 / py>=3.10).
+pyxelate @ git+https://github.com/sedthh/pyxelate.git@f4a046b8b148370a20ab7681fce160551e5fc49b
+
+# --- pixelfixer (reparacion de grilla): vendorizado, NO se instala por pip ---
+# El codigo vive en tools/img_pipeline/vendor/pixel-art-fixer/ (Retro Diffusion, MIT).
+# Su unica dependencia que no trae pyxelate es opencv-python:
+opencv-python>=4.5
+
+# --- resto: lo resuelve pip como dependencias de pyxelate, se listan pineadas ---
+imageio==2.37.2
+joblib==1.5.3
+lazy-loader==0.5
+llvmlite==0.43.0
+networkx==3.2.1
+numba==0.60.0
+numpy==2.0.2
+packaging==26.3
+pillow==11.3.0
+scikit-image==0.24.0
+scikit-learn==1.6.1
+scipy==1.13.1
+threadpoolctl==3.6.0
+tifffile==2024.8.30
