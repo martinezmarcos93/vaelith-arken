@@ -19,6 +19,11 @@ signal health_changed(current: int, max: int)
 @export var gravity: float = 1400.0
 @export var air_control_factor: float = 0.1
 @export var coyote_time: float = 0.08
+## Ventana para "recordar" un salto presionado un pelo antes de tocar piso.
+## Igual que coyote_time: no es parte del "peso" del salto, es anti-frustracion
+## de input (antes, un salto pulsado ~0.1s antes de aterrizar se perdia). No
+## permite doble salto: el salto sigue gateado por _coyote_timer.
+@export var jump_buffer_time: float = 0.1
 
 @export_group("Camara")
 ## Cuanto se adelanta la camara en la direccion en la que mira Vaelith
@@ -80,6 +85,7 @@ var state: State = State.FREE
 var facing: int = 1
 var health: int
 var _coyote_timer: float = 0.0
+var _jump_buffer_timer: float = 0.0
 var _iframe_timer: float = 0.0
 var _state_timer: float = 0.0
 var _consecutive_blocks: int = 0
@@ -161,6 +167,7 @@ func _physics_process(delta: float) -> void:
 	_update_hitbox_facing()
 	_update_camera_lookahead(delta)
 	_poll_input_buffer(delta)
+	_poll_jump_buffer(delta)
 
 	match state:
 		State.FREE:
@@ -223,10 +230,20 @@ func _process_movement(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, input_dir * speed, acceleration * air_control_factor * delta)
 		# Sin input en el aire no se aplica friccion: conserva el impulso del salto.
 
-	if Input.is_action_just_pressed("jump") and _coyote_timer > 0.0:
+	if _jump_buffer_timer > 0.0 and _coyote_timer > 0.0:
 		velocity.y = jump_velocity
 		_coyote_timer = 0.0
+		_jump_buffer_timer = 0.0
 		AudioManager.play_sfx(SFX_JUMP, "SFX", -4.0)
+
+
+## Se consulta SIEMPRE (como _poll_input_buffer) para no perder el frame exacto
+## de is_action_just_pressed aunque el estado no sea FREE (ej. knockback aereo).
+func _poll_jump_buffer(delta: float) -> void:
+	if Input.is_action_just_pressed("jump"):
+		_jump_buffer_timer = jump_buffer_time
+	elif _jump_buffer_timer > 0.0:
+		_jump_buffer_timer = max(_jump_buffer_timer - delta, 0.0)
 
 
 func _poll_input_buffer(delta: float) -> void:
