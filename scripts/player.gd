@@ -40,6 +40,17 @@ signal health_changed(current: int, max: int)
 @export var shake_max_offset: float = 12.0
 @export var shake_decay: float = 3.0
 
+@export_group("Game feel")
+## Congelamiento breve al conectar un golpe de espada (o embestida). Da "peso"
+## al impacto sin tocar el timing real del combate (usa un timer en tiempo real,
+## no depende de time_scale). 0 lo desactiva. Valor de arranque -- tunear jugando.
+@export var hitstop_duration: float = 0.06
+## Squash & stretch del sprite en salto (estira) y aterrizaje pesado (aplasta).
+## Es un tween sobre la escala del AnimatedSprite2D, no toca la animacion.
+@export var squash_stretch_enabled: bool = true
+@export var stretch_on_jump: Vector2 = Vector2(0.85, 1.15)
+@export var squash_on_land: Vector2 = Vector2(1.15, 0.85)
+
 # --- Combate ---
 @export_group("Combate")
 @export var max_health: int = 5
@@ -96,6 +107,9 @@ var _jump_buffer_timer: float = 0.0
 var _iframe_timer: float = 0.0
 var _cam_base_offset_x: float = 0.0
 var _trauma: float = 0.0
+var _hitstop_active: bool = false
+var _sprite_base_scale: Vector2 = Vector2.ONE
+var _ss_tween: Tween = null
 var _state_timer: float = 0.0
 var _consecutive_blocks: int = 0
 var _stagger_duration: float = 0.0
@@ -167,6 +181,10 @@ func _ready() -> void:
 	shove_hitbox.knockback = shove_knockback
 	shove_hitbox.stagger_time = shove_stagger_time
 	hurtbox.hurt.connect(_on_hurtbox_hurt)
+	_sprite_base_scale = sprite.scale
+	attack_high_hitbox.hit_connected.connect(_on_hit_connected)
+	attack_low_hitbox.hit_connected.connect(_on_hit_connected)
+	shove_hitbox.hit_connected.connect(_on_hit_connected)
 
 
 func _physics_process(delta: float) -> void:
@@ -208,6 +226,9 @@ func _physics_process(delta: float) -> void:
 		# shake proporcional a la velocidad de impacto: nada en caidas cortas,
 		# ~0.45 de trauma en una caida fuerte (>~700 px/s).
 		add_trauma(clamp(remap(_prev_velocity_y, 120.0, 700.0, 0.0, 0.45), 0.0, 0.45))
+		# squash proporcional: caida floja apenas se nota, caida fuerte aplasta.
+		var land_t: float = clamp(remap(_prev_velocity_y, 120.0, 700.0, 0.0, 1.0), 0.0, 1.0)
+		_pop_scale(lerp(Vector2.ONE, squash_on_land, land_t), 0.22)
 	_was_on_floor = is_on_floor()
 
 
@@ -248,6 +269,7 @@ func _process_movement(delta: float) -> void:
 		_coyote_timer = 0.0
 		_jump_buffer_timer = 0.0
 		AudioManager.play_sfx(SFX_JUMP, "SFX", -4.0)
+		_pop_scale(stretch_on_jump, 0.16)
 
 
 ## Se consulta SIEMPRE (como _poll_input_buffer) para no perder el frame exacto
@@ -427,6 +449,38 @@ func _update_camera_shake(delta: float) -> void:
 
 func add_trauma(amount: float) -> void:
 	_trauma = clamp(_trauma + amount, 0.0, 1.0)
+
+
+func _on_hit_connected(_target: Node) -> void:
+	if hitstop_duration > 0.0:
+		_do_hitstop()
+
+
+## Congelamiento breve global. Usa un SceneTreeTimer en tiempo real
+## (ignore_time_scale=true) para no depender de si mismo mientras time_scale=0.
+## _hitstop_active evita apilar freezes si dos golpes conectan casi juntos.
+func _do_hitstop() -> void:
+	if _hitstop_active:
+		return
+	_hitstop_active = true
+	Engine.time_scale = 0.0
+	await get_tree().create_timer(hitstop_duration, true, false, true).timeout
+	Engine.time_scale = 1.0
+	_hitstop_active = false
+
+
+## "Golpe" de escala sobre el sprite que vuelve a la escala base con rebote.
+## mult es relativo (Vector2.ONE = sin cambio); se aplica sobre _sprite_base_scale
+## (el sprite del player esta a 0.5, no a 1).
+func _pop_scale(mult: Vector2, back_time: float) -> void:
+	if not squash_stretch_enabled:
+		return
+	if _ss_tween != null and _ss_tween.is_valid():
+		_ss_tween.kill()
+	sprite.scale = _sprite_base_scale * mult
+	_ss_tween = create_tween()
+	_ss_tween.tween_property(sprite, "scale", _sprite_base_scale, back_time) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
 func _update_hitbox_facing() -> void:

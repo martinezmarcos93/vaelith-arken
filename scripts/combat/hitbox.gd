@@ -10,6 +10,10 @@ class_name Hitbox
 @export var knockback: float = 200.0
 @export var stagger_time: float = 0.0
 
+## Se emite cuando este hitbox conecta un golpe en un Hurtbox (util para game
+## feel del lado del dueño: hitstop, VFX de impacto, etc). No decide reglas.
+signal hit_connected(target: Node)
+
 ## Quien genera el golpe, para no autoimpactarse y para calcular la
 ## direccion del knockback. Se asigna desde el dueño (ej. player.gd).
 var source: Node2D = null
@@ -56,3 +60,4 @@ func _try_hit(area: Area2D) -> void:
 		if direction == Vector2.ZERO:
 			direction = Vector2.RIGHT
 	area.receive_hit(damage, direction, knockback, stagger_time)
+	hit_connected.emit(target)
