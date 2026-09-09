@@ -6,6 +6,21 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 
 ## [Unreleased]
 
+### 2026-09-09 (cont.) — Recolor del catálogo de arte de entorno
+
+- Pasada sistemática de recolor a la paleta canónica con
+  `tools/img_pipeline/recolor.py --no-accents` sobre 4 packs de terceros
+  (202 PNG en total), con revisión visual pack por pack:
+  - `dungeon_golopin_free` (83) — antes "pendiente recolor".
+  - `dungeon_props_craftpix_free` (69).
+  - `cave_props_craftpix_free` (8).
+  - `dungeon_platformer_craftpix_free` (42) — rehace el remapeo ad-hoc del
+    2026-08-26; `Level1.tscn` usa estos assets.
+- Sin tocar: `cave_rocks_craftpix_free` (perdía sombreado, 4→2 colores) y
+  `dungeon_raou_free_commercial_ok` (ya calzaba).
+- Herramienta: `recolor.py` gana `--no-accents` (quita el rojo de peligro
+  `#B41F1C` para arte de entorno) y recorrido recursivo de carpetas.
+
 ### 2026-09-09 — Pipeline local de reparación/recolor de imagen
 
 - **`tools/img_pipeline/`**: entorno offline para bajar packs de terceros y

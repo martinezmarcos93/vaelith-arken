@@ -16,6 +16,26 @@ externo (ver `docs/lista_assets_pixel_art.md` y `docs/lista_audio.md`).
   Fuente: https://github.com/sedthh/pyxelate · Licencia: **MIT**.
   Uso: motor de `tools/img_pipeline/recolor.py`.
 
+### Recolor a la paleta canónica (2026-09-09)
+
+Pasada sistemática con `tools/img_pipeline/recolor.py --no-accents` (motor
+pyxelate) sobre packs de entorno de terceros que traían su propia paleta. El
+flag `--no-accents` quita el rojo de peligro `#B41F1C` para que no se filtre a
+la escenografía (`guia_estilo_visual.md` §1.2). Cada salida se revisó
+visualmente antes de aplicar in-place; se verificó que sólo usa colores de la
+paleta y que tamaño + alpha quedan intactos.
+
+- `dungeon_golopin_free` (83 PNG) — recoloreado.
+- `dungeon_props_craftpix_free` (69 PNG) — recoloreado (reemplaza el remapeo RGB
+  ad-hoc previo).
+- `cave_props_craftpix_free` (8 PNG) — recoloreado.
+- `dungeon_platformer_craftpix_free` (42 PNG) — **rehecho** con la herramienta;
+  supersede el script ad-hoc del 2026-08-26. `Level1.tscn` usa estos assets.
+- **No tocados**: `cave_rocks_craftpix_free` (colapsaba de 4 a 2 colores, perdía
+  el sombreado) y `dungeon_raou_free_commercial_ok` (ya calzaba; pyxelate emitió
+  warning de asignación de color). `gothicvania_*` y `battleground1_pale` ya eran
+  compatibles.
+
 ## Arte
 
 - **Ghost sprite (89x88, 2 variantes)** — `assets/sprites/enemies/ghost_opengameart_CC-BY4.0/`
@@ -43,9 +63,9 @@ externo (ver `docs/lista_assets_pixel_art.md` y `docs/lista_audio.md`).
   `preview_example.png` (referencia visual del autor) y 81 piezas
   individuales de 128x128 en `tilemap_objects/` (paredes, puertas, tumbas,
   murciélago, fantasma, cofres, rieles de carrito).
-  Estado: candidato principal para el tileset de Level 1 — falta recolorear
-  a la paleta de `docs/guia_estilo_visual.md` en LibreSprite (viene con su
-  propia paleta, no la nuestra).
+  Estado: candidato principal para el tileset de Level 1. **Recoloreado a la
+  paleta canónica el 2026-09-09** con `tools/img_pipeline/recolor.py --no-accents`
+  (ver nota "Recolor a la paleta canónica" más abajo).
 
 ## Nueva tanda (revisada, integrada selectivamente)
 

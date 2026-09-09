@@ -119,7 +119,7 @@ Reemplaza el placeholder de Evil Wizard 2 en `Boss1.tscn`. Ver CREDITS.md.
 - [ ] Decoración: lápidas, árboles muertos, huesos, niebla
 
 **Candidatos encontrados:**
-- ✅ [Dungeon Tileset (Golopin) — gratis](https://golopin.itch.io/dungeon-tileset) — **integrado** en `assets/sprites/tilesets/dungeon_golopin_free/` (81 piezas individuales + hoja compacta). Pendiente recolorear a la paleta propia en LibreSprite antes de usar en producción.
+- ✅ [Dungeon Tileset (Golopin) — gratis](https://golopin.itch.io/dungeon-tileset) — **integrado** en `assets/sprites/tilesets/dungeon_golopin_free/` (81 piezas individuales + hoja compacta). **Recoloreado a la paleta canónica el 2026-09-09** con `tools/img_pipeline/recolor.py --no-accents` (ver `CREDITS.md`).
 - ✅ [Free Dungeon Platformer Pixel Art Tileset (CraftPix)](https://craftpix.net/freebies/free-dungeon-platformer-pixel-art-tileset/) — **integrado y recoloreado** en `assets/sprites/tilesets/dungeon_platformer_craftpix_free/` (2026-08-26, recoloreo automático por script contra la paleta de `guia_estilo_visual.md`), reemplaza el `ColorRect` plano de las plataformas normales de `Level1.tscn`. Ver CREDITS.md.
 - ✅ [Free Pixel Art Fantasy 2D Battlegrounds (CraftPix)](https://craftpix.net/freebies/free-pixel-art-fantasy-2d-battlegrounds/) — **integrado** (Battleground1/Pale) como fondo de parallax (`Fondo lejano`/`Fondo medio`, ítems de este checklist) en `Level1.tscn`. Cementerio con lápidas, ya en tonos teal/verde compatibles, sin recoloreo. Ver CREDITS.md.
 - [Gothicvania Cold Corridors — gratis](https://itch.io/game-assets/free/tag-gothic/tag-pixel-art) (buscar en el tag Gothic+Pixel Art de itch.io)
