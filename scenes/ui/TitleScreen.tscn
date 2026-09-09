@@ -22,33 +22,33 @@ anchor_bottom = 1.0
 
 [node name="VBox" type="VBoxContainer" parent="Center"]
 alignment = 1
-theme_override_constants/separation = 10
+theme_override_constants/separation = 6
 
 [node name="Title" type="TextureRect" parent="Center/VBox"]
-custom_minimum_size = Vector2(560, 187)
+custom_minimum_size = Vector2(240, 80)
 texture = ExtResource("2_logo")
 expand_mode = 1
 stretch_mode = 5
 texture_filter = 4
 
 [node name="Subtitle" type="TextureRect" parent="Center/VBox"]
-custom_minimum_size = Vector2(424, 148)
+custom_minimum_size = Vector2(170, 60)
 texture = ExtResource("5_subtitle")
 expand_mode = 1
 stretch_mode = 5
 texture_filter = 4
 
 [node name="Spacer" type="Control" parent="Center/VBox"]
-custom_minimum_size = Vector2(0, 6)
+custom_minimum_size = Vector2(0, 2)
 
 [node name="StartButton" type="TextureButton" parent="Center/VBox"]
-custom_minimum_size = Vector2(420, 146)
+custom_minimum_size = Vector2(210, 73)
 texture_normal = ExtResource("3_start")
 ignore_texture_size = true
 stretch_mode = 5
 
 [node name="QuitButton" type="TextureButton" parent="Center/VBox"]
-custom_minimum_size = Vector2(420, 157)
+custom_minimum_size = Vector2(210, 78)
 texture_normal = ExtResource("4_quit")
 ignore_texture_size = true
 stretch_mode = 5
