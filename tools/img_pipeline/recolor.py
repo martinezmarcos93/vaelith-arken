@@ -9,6 +9,9 @@ Uso:
     python tools/img_pipeline/recolor.py ENTRADA SALIDA [opciones]
     python tools/img_pipeline/recolor.py carpeta_in/ carpeta_out/ [opciones]
 
+Con carpeta recorre recursivamente y replica la estructura de subcarpetas en
+la salida. Toda salida se escribe como .png.
+
 Opciones:
     --dither {none,naive,bayer,floyd,atkinson}  algoritmo de tramado (def: none)
     --extended            suma palette_extended.hex al nucleo
@@ -120,10 +123,12 @@ def recolor_one(src: str, dst: str, palette: List[str], dither: str,
 
 def iter_jobs(inp: str, outp: str):
     if os.path.isdir(inp):
-        for name in sorted(os.listdir(inp)):
-            if name.lower().endswith(IMG_EXT):
-                stem = os.path.splitext(name)[0]
-                yield os.path.join(inp, name), os.path.join(outp, stem + ".png")
+        for root, _dirs, names in os.walk(inp):
+            for name in sorted(names):
+                if name.lower().endswith(IMG_EXT):
+                    rel = os.path.relpath(os.path.join(root, name), inp)
+                    stem = os.path.splitext(rel)[0]
+                    yield os.path.join(root, name), os.path.join(outp, stem + ".png")
     else:
         if os.path.isdir(outp) or outp.endswith(("/", "\\")):
             stem = os.path.splitext(os.path.basename(inp))[0]
