@@ -17,8 +17,10 @@ var _context: Dictionary = {}
 
 
 func _ready() -> void:
-	# El cursor custom sólo se ve con el mouse visible.
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	# Por defecto oculto: gameplay y cutscenes van sin cursor (el clic
+	# izquierdo es un ataque alternativo, no apunta). Los menús lo muestran
+	# explícitamente con menu(). Ver AUDITORIA_TECNICA_2026-09-09 §8.
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 	var arrow: Texture2D = load(DIR + "normal.png")
 	var hover: Texture2D = load(DIR + "hover.png")
@@ -39,6 +41,16 @@ func _ready() -> void:
 		"blocked": load(DIR + "blocked.png"),
 		"click": load(DIR + "click.png"),
 	}
+
+
+## Menús (TitleScreen, PauseMenu, Credits): cursor custom visible.
+func menu() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+## Gameplay y cutscenes (Intro, TorreSector, Level1, Epilogue): cursor oculto.
+func gameplay() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 
 ## Fuerza un cursor de contexto ("interact" / "enemy" / "blocked" / "" para

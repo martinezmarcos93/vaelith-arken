@@ -10,6 +10,7 @@ const TITLE_SCENE := "res://scenes/ui/TitleScreen.tscn"
 
 
 func _ready() -> void:
+	CursorManager.menu()
 	_back_button.pressed.connect(_on_back_pressed)
 	_back_button.grab_focus()
 

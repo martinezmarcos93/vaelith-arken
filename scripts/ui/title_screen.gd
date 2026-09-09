@@ -12,6 +12,7 @@ const MENU_MUSIC := "res://assets/audio/music/intro.mp3"
 
 
 func _ready() -> void:
+	CursorManager.menu()
 	_start_button.pressed.connect(_on_start_pressed)
 	_quit_button.pressed.connect(_on_quit_pressed)
 	_start_button.grab_focus()
