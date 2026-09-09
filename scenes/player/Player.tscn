@@ -42,7 +42,7 @@ offset = Vector2(0, -50)
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(1, 1)
 
 [node name="AttackHighHitbox" type="Area2D" parent="."]
 position = Vector2(20, -10)
