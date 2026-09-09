@@ -1,0 +1,30 @@
+# Variantes extendidas de la paleta - se SUMAN al nucleo con el flag --extended.
+# Fuente unica: docs/guia_estilo_visual.md secciones 1.1 y 1.2.
+# Usar para fondos, iluminacion puntual o props donde conviene variar el tono
+# sin salirse de la familia. Para assets que definen identidad (protagonista,
+# boss, UI) usar solo el nucleo (palette_canon.hex).
+
+# -- Negros (rango tonal) --
+#0f1f12
+#181d14
+#161f13
+#09160b
+#000a01
+
+# -- Azul-indigo --
+#313682
+#4947a7
+#4c4793
+#205188
+
+# -- Teal --
+#10423b
+
+# -- Violeta (solo picos de intensidad magica, no ambiental) --
+#7a36a2
+
+# -- Acento calido ambiental: oxido, sangre seca, brasas apagadas (rol fijo, guia 1.2) --
+#4d1409
+
+# Nota: el "dorado apagado" (~#8A7040) de la guia 1.2 esta "a definir en
+# produccion con muestra real en Aseprite" - no se incluye hasta fijarlo.
