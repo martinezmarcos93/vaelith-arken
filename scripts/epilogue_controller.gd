@@ -24,6 +24,10 @@ var _returning: bool = false
 
 
 func _ready() -> void:
+	# Cursor oculto en todo el desenlace (AUDITORIA_TECNICA_2026-09-09 §8: el
+	# cursor sobre negro rompía la ilusión). Redundante con el default de
+	# CursorManager, explícito acá porque es el bug puntual reportado.
+	CursorManager.gameplay()
 	# El epílogo va sin música ni ambiente (guion: fundido lento, silencio).
 	AudioManager.stop_music(2.0)
 	AudioManager.stop_ambient(2.0)
