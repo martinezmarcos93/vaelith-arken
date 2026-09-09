@@ -17,6 +17,13 @@ Opciones:
     --upscale N           re-escala el resultado por N con nearest (def: 1)
     --alpha-threshold T   corte 0-255 para binarizar el canal alpha (def: 128;
                           usar 0 para conservar el alpha original tal cual)
+    --no-accents          quita los calidos de rol fijo (rojo de peligro #B41F1C)
+                          de la paleta antes de cuantizar. USAR para arte de
+                          entorno/tileset: si no, pyxelate mapea cualquier tono
+                          calido del pack al rojo de peligro, que la guia de
+                          estilo reserva para amenazas activas (§1.2). El
+                          rojo-oxido ambiental (#4d1409) NO se quita: la guia lo
+                          permite como textura de fondo.
     --check               verifica que la salida use SOLO colores de la paleta
 
 Requiere el venv de tools/img_pipeline/requirements.txt y corre en Python 3.9
@@ -40,6 +47,13 @@ from pyxelate import Pal, Pyx  # noqa: E402
 HERE = os.path.dirname(os.path.abspath(__file__))
 HEX_RE = re.compile(r"^#[0-9A-Fa-f]{6}$")
 IMG_EXT = (".png", ".jpg", ".jpeg", ".bmp", ".gif", ".webp")
+
+# Calidos de rol fijo que --no-accents descarta. Ver docs/guia_estilo_visual.md
+# §1.2: el rojo de peligro va SOLO ligado a una amenaza activa; no debe salir de
+# un recolor de tileset. El rojo-oxido #4d1409 NO esta aca a proposito (la guia
+# lo admite como desgaste ambiental). El dorado ~#8A7040 se sumara si algun dia
+# entra a los .hex.
+RESERVED_ACCENTS = {"#B41F1C"}
 
 
 def load_palette(paths: List[str]) -> List[str]:
@@ -129,6 +143,8 @@ def main(argv=None) -> int:
     ap.add_argument("--factor", type=int, default=1)
     ap.add_argument("--upscale", type=int, default=1)
     ap.add_argument("--alpha-threshold", type=int, default=128, dest="alpha_threshold")
+    ap.add_argument("--no-accents", action="store_true", dest="no_accents",
+                    help="quita los calidos de rol fijo (#B41F1C) - usar para tileset/fondo")
     ap.add_argument("--check", action="store_true")
     args = ap.parse_args(argv)
 
@@ -137,6 +153,11 @@ def main(argv=None) -> int:
         pal_files.append(os.path.join(HERE, "palette_extended.hex"))
     pal_files.extend(args.palette)
     palette = load_palette(pal_files)
+    if args.no_accents:
+        dropped = [c for c in palette if c in RESERVED_ACCENTS]
+        palette = [c for c in palette if c not in RESERVED_ACCENTS]
+        if dropped:
+            print("--no-accents: quitado(s) {}".format(", ".join(dropped)))
     print("Paleta: {} colores ({})".format(len(palette), ", ".join(os.path.basename(p) for p in pal_files)))
 
     jobs = list(iter_jobs(args.entrada, args.salida))

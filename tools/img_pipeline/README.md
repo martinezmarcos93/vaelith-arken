@@ -12,7 +12,7 @@ Decidido y montado el 2026-09-09 (ver
 
 | Archivo | Qué es |
 |---|---|
-| `recolor.py` | Recolorea una imagen (o carpeta) a `palette_canon.hex` — los 14 colores núcleo de `docs/guia_estilo_visual.md`. Envoltorio sobre **pyxelate**. `--dither`, `--extended`, `--factor`, `--check`. |
+| `recolor.py` | Recolorea una imagen (o carpeta) a `palette_canon.hex` — los 14 colores núcleo de `docs/guia_estilo_visual.md`. Envoltorio sobre **pyxelate**. `--dither`, `--extended`, `--factor`, `--no-accents`, `--check`. |
 | `fix_ai.py` | Convierte "falso pixel art" (renders de IA, upscales, JPG) en pixel art real con grilla alineada. Envoltorio sobre **pixelfixer** (vendorizado). `--colors`, `--grid-from`, `--json`. |
 | `palette_canon.hex` | Los 14 hex del núcleo. Fuente única: `docs/guia_estilo_visual.md` §1. |
 | `palette_extended.hex` | Variantes de §1.1–1.2. Se suman con `--extended`. |
@@ -65,6 +65,12 @@ $py = "tools\img_pipeline\.venv\Scripts\python.exe"
   API. La única fase con red es instalar los paquetes.
 - `recolor.py` preserva el canal alpha (lo binariza en 128 por defecto,
   `--alpha-threshold 0` lo deja tal cual).
+- **Para tileset / fondo usar siempre `--no-accents`.** pyxelate mapea cada
+  color de origen al más cercano de la paleta, y sin ese flag cualquier tono
+  cálido del pack termina en el rojo de peligro `#B41F1C`, que `guia_estilo_visual.md`
+  §1.2 reserva para amenazas activas. El flag lo quita de la paleta antes de
+  cuantizar (el rojo-óxido ambiental `#4d1409` se conserva). Ejemplo real:
+  `dungeon_golopin_free` sin el flag metía ~1776 px de rojo de peligro en la hoja.
 - `fix_ai.py` informa `consensus`/`confidence` por archivo: `unanimous/high` es
   fiable, `arbitrated/low` conviene mirarlo a ojo. La detección tarda segundos a
   decenas de segundos por imagen grande.
