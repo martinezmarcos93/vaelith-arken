@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=3]
+[gd_scene load_steps=32 format=3]
 
 [ext_resource type="Script" path="res://scripts/level/hazard.gd" id="15_hazard_script"]
 [ext_resource type="PackedScene" path="res://scenes/level/MusicTrigger.tscn" id="40_music"]
 [ext_resource type="Script" path="res://scripts/level1_controller.gd" id="21_controller"]
+[ext_resource type="Script" path="res://scripts/systems/boss_fight_controller.gd" id="41_bossfight"]
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/NoMuertoErrante.tscn" id="2_no_muerto"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/EspirituAtado.tscn" id="3_espiritu"]
@@ -737,10 +738,21 @@ lines = ["Cadáveres. Cortados con precisión, sin rabia.", "Exactamente donde l
 position = Vector2(3160, 400)
 track_path = "res://assets/audio/music/boss.mp3"
 volume_db = -5.0
+already_active = true
 
 [node name="BossIntroTrigger" parent="." instance=ExtResource("17_dialogue")]
 position = Vector2(3235, 418)
 lines = ["Adoptás una posición defensiva.", "El guerrero-espejo hace exactamente lo mismo. Silencio.", "—Todavía hacés eso.", "—¿Qué?", "—Cargás primero."]
+already_active = true
+
+[node name="BossFightController" type="Node2D" parent="."]
+script = ExtResource("41_bossfight")
+trigger_x = 3280.0
+arena_left = 3010.0
+arena_right = 3680.0
+intro_lines = Array[String](["Adoptás una posición defensiva.", "El guerrero-espejo hace exactamente lo mismo. Silencio.", "—Todavía hacés eso.", "—¿Qué?", "—Cargás primero."])
+boss_music = "res://assets/audio/music/boss.mp3"
+music_db = -5.0
 
 [node name="PropCryptDoor" type="Sprite2D" parent="."]
 position = Vector2(3550, 290)
