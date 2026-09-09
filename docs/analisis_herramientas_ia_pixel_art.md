@@ -55,3 +55,52 @@ Este documento anota únicamente lo verificable por búsqueda a la fecha
 proyectos, corresponde una revisión más profunda (leer el código, probarlo
 en un branch aparte) — esto es un análisis de "¿existe y es razonable
 confiar en la afirmación?", no una auditoría de seguridad ni de calidad.
+
+---
+
+## Pipeline de reparación/recolor integrado (2026-09-09)
+
+Segunda ronda de búsqueda, esta vez con un objetivo concreto: una herramienta
+para **reparar y recolorear** imágenes (packs de terceros, referencias de IA) a
+la paleta canónica de 14 colores, reemplazando el recoloreo por script suelto.
+Roadmap: `Documents/Claude-Vault/Roadmaps/roadmap_sesion_2026-09-09.md`.
+
+### Verificado y descartado en esta ronda
+
+| Herramienta | Veredicto | Motivo |
+|---|---|---|
+| **PixelRenderUnity3D** (kode80) | ❌ | Unity, sin mantenimiento desde 2016, licencia no comercial. El código no es portable a Godot. |
+| **blender-pixelart** (int-ua) | ⚠️ Sólo referencia | Blender 2.8/2.9, cámara isométrica (el juego es side-scroller), reducción de bits genérica (no a paleta fija). Útil como guía de montaje para la Etapa 4.2, no para adoptar. |
+| **proper-pixel-art** (KennethJAllen) | ❌ en este entorno | Bueno (MIT, paleta compartida entre frames), pero exige **Python ≥3.10** y la norma de entorno manda miniconda 3.9. |
+| **pyxelate** en PyPI | ❌ | El paquete `pyxelate` de PyPI es un *placeholder* vacío ("Reserved name placeholder. No functionality."). El real vive sólo en GitHub. |
+| **Retro Diffusion (offline)** | ❌ por ahora | Mejor en su clase pero es extensión de Aseprite **de pago** + descarga de modelo + GPU. Fricción de entorno > beneficio. |
+
+### Integrado
+
+| Herramienta | Rol | Cómo |
+|---|---|---|
+| **pyxelate 2.1.1** (`sedthh/pyxelate` HEAD, MIT) | Cuantizar a la paleta canónica + dithering (`recolor.py`) | venv en `tools/img_pipeline/.venv`, pineado por commit. Corre en 3.9 con un shim de una función (`_compat.py`: `skimage.morphology.footprint_rectangle`, que recién existe en skimage ≥0.25 / py ≥3.10). El tag `2.0.2` se descartó: su build de wheel sale vacía con setuptools moderno. |
+| **pixelfixer** (`Retro-Diffusion/pixel-art-fixer`, subcarpeta `python/`, MIT) | Detectar la grilla real de una imagen "falso pixel art" y reconstruirla (`fix_ai.py`) | **Vendorizado** en `tools/img_pipeline/vendor/pixel-art-fixer/` (su `pyproject.toml` pide py ≥3.10 sólo por metadata; el código declara `requires-python >=3.9` y corre). Única dep extra: `opencv-python`. |
+
+### Bloqueo de entorno resuelto
+
+`pip`/`git` contra PyPI y GitHub fallaban con `CERTIFICATE_VERIFY_FAILED`: la
+red intercepta TLS con la CA **"Avast Web/Mail Shield Root"**. Workaround:
+`tools/img_pipeline/make_cert_bundle.ps1` exporta las raíces de Windows (incluida
+la de Avast) + el bundle de certifi a `tools/img_pipeline/.certs/win-root-bundle.pem`,
+y se apunta `PIP_CERT` / `GIT_SSL_CAINFO` ahí. Anotado en [[Red-y-SSL]].
+
+### Pruebas de aceptación (2026-09-09)
+
+- `recolor.py` sobre `cave_props_craftpix_free/Blue-green_crystal_dark_shadow1.png`
+  (64×64 RGBA): salida con `--check` OK (sólo colores de la paleta), alpha
+  idéntico al original (2649 transparentes / 1447 opacos).
+- `fix_ai.py` sobre `assets/sprites/player/vaelith_custom/attack_high_0.png`
+  (referencia IA, 320×240): reconstruida a 83×64 px reales en ~10 s
+  (`consensus=arbitrated`, `confidence=medium`).
+
+### Límite (sin cambios respecto a `guia_estilo_visual.md` §6)
+
+Esto **no** genera sprites finales desde cero ni reemplaza el pixelado a mano en
+LibreSprite. Sirve para bajar packs de terceros a la paleta y para limpiar
+referencias de IA antes de usarlas como base.

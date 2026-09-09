@@ -6,6 +6,24 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 
 ## [Unreleased]
 
+### 2026-09-09 — Pipeline local de reparación/recolor de imagen
+
+- **`tools/img_pipeline/`**: entorno offline para bajar packs de terceros y
+  referencias de IA a la paleta canónica sin recolorear a mano.
+  - `recolor.py` (sobre **pyxelate**, MIT): cuantiza a los 14 colores de
+    `docs/guia_estilo_visual.md` + dithering opcional; preserva alpha; `--check`
+    valida que la salida use sólo colores de la paleta.
+  - `fix_ai.py` (sobre **pixelfixer**, Retro Diffusion, MIT, vendorizado en
+    `vendor/pixel-art-fixer/`): reconstruye "falso pixel art" a grilla real.
+  - `palette_canon.hex` / `palette_extended.hex` volcados de la guía de estilo;
+    `_compat.py` (shim skimage para correr pyxelate en Python 3.9);
+    `make_cert_bundle.ps1` (workaround SSL: la red intercepta TLS con la CA de
+    Avast — anotado en el vault `Leyes/Red-y-SSL.md`).
+  - `.venv/`, `.certs/`, `_samples/` quedan fuera de git.
+- Descartadas en la evaluación previa: PixelRenderUnity3D (Unity, 2016, no
+  comercial), blender-pixelart (sólo referencia), proper-pixel-art (exige
+  Python ≥3.10). Detalle en `docs/analisis_herramientas_ia_pixel_art.md`.
+
 ### 2026-08-27 (cont. 2) — Audio, UI con arte propio, ataque con mouse, arranque de Level 1 largo
 
 - **Audio (Etapa 8, completa)**: buses sagrado/corrupto + `AudioManager`

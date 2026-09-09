@@ -4,6 +4,18 @@ Este archivo lista todo asset que no es 100% original del proyecto, con su
 licencia y atribución. Mantener actualizado cada vez que se suma un asset
 externo (ver `docs/lista_assets_pixel_art.md` y `docs/lista_audio.md`).
 
+## Herramientas de terceros (código vendorizado)
+
+- **pixelfixer** — `tools/img_pipeline/vendor/pixel-art-fixer/`
+  Fuente: Retro Diffusion / Astropulse, LLC — https://github.com/Retro-Diffusion/pixel-art-fixer
+  (subcarpeta `python/`). Commit vendorizado en `vendor/pixel-art-fixer/UPSTREAM_COMMIT.txt`.
+  Licencia: **MIT** (`Copyright (c) 2026 Astropulse, LLC`, `LICENSE` incluido en la carpeta).
+  Uso: motor de `tools/img_pipeline/fix_ai.py` (detección de grilla + reconstrucción
+  de "falso pixel art"). Es herramienta de desarrollo, no se distribuye con el juego.
+- **pyxelate** — instalado en el venv de `tools/img_pipeline/` (no vendorizado).
+  Fuente: https://github.com/sedthh/pyxelate · Licencia: **MIT**.
+  Uso: motor de `tools/img_pipeline/recolor.py`.
+
 ## Arte
 
 - **Ghost sprite (89x88, 2 variantes)** — `assets/sprites/enemies/ghost_opengameart_CC-BY4.0/`
