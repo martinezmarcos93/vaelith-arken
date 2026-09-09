@@ -31,10 +31,21 @@ paleta y que tamaño + alpha quedan intactos.
 - `cave_props_craftpix_free` (8 PNG) — recoloreado.
 - `dungeon_platformer_craftpix_free` (42 PNG) — **rehecho** con la herramienta;
   supersede el script ad-hoc del 2026-08-26. `Level1.tscn` usa estos assets.
+- `bringer_of_death_clembod_free` (40 PNG, Attack/Cast/Death/Hurt/Idle) —
+  recoloreado con `--no-accents`. Único sprite de personaje tocado en esta
+  pasada: es pixel art real de 13 colores. Los personajes custom generados con
+  IA (`vaelith_custom`, `espejo_boss_custom`, `no_muerto_errante_custom`,
+  `espiritu_atado_custom`, `zombi_devorado_custom`) **NO** se recolorearon —
+  son láminas pictóricas de miles de colores sin grilla de píxeles, el recolor
+  las posteriza; se mantienen como referencia hasta el pixelado a mano
+  (`guia_estilo_visual.md` §6).
 - **No tocados**: `cave_rocks_craftpix_free` (colapsaba de 4 a 2 colores, perdía
-  el sombreado) y `dungeon_raou_free_commercial_ok` (ya calzaba; pyxelate emitió
-  warning de asignación de color). `gothicvania_*` y `battleground1_pale` ya eran
-  compatibles.
+  el sombreado, ni `--dither floyd` ni `--extended` lo arreglan) y
+  `dungeon_raou_free_commercial_ok` (ya calzaba; pyxelate emitió warning de
+  asignación de color). `gothicvania_*` y `battleground1_pale` ya eran
+  compatibles. El parallax de `Level1.tscn` (`level1_parallax/`: sky_bloodmoon,
+  ridge, clouds) tampoco: son degradados de 21k-95k colores que el recolor
+  convierte en bandas.
 
 ## Arte
 

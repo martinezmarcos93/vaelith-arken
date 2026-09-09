@@ -21,6 +21,14 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 - Herramienta: `recolor.py` gana `--no-accents` (quita el rojo de peligro
   `#B41F1C` para arte de entorno) y recorrido recursivo de carpetas.
 
+### 2026-09-09 (cont. 2) — Recolor de bringer_of_death
+
+- `bringer_of_death_clembod_free` (40 frames) recoloreado a la paleta canónica
+  con `--no-accents`. Es el único sprite de personaje en la pasada: pixel art
+  real. Los personajes generados con IA se dejan intactos (son referencia
+  pictórica, no pixel art — el recolor los posteriza). El parallax de Level1
+  tampoco se toca (degradados de miles de colores).
+
 ### 2026-09-09 — Pipeline local de reparación/recolor de imagen
 
 - **`tools/img_pipeline/`**: entorno offline para bajar packs de terceros y
