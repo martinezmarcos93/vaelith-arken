@@ -98,6 +98,14 @@ var _vulnerable_duration: float = 0.6
 var _consecutive_blocks: int = 0
 var _arena_center_x: float
 var _rng := RandomNumberGenerator.new()
+## Gate de P0-06: el boss no actúa hasta que BossFightController llama
+## begin_fight() (tras la entrada a la arena + línea de intro). Antes iba
+## directo a APPROACH desde _ready() -- sin "entrada de boss".
+var _fight_active: bool = false
+
+
+func begin_fight() -> void:
+	_fight_active = true
 
 
 func _ready() -> void:
@@ -126,6 +134,18 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta
 	else:
 		velocity.y = 0.0
+
+	# Antes de la entrada: queda de pie mirando al jugador, sin avanzar ni atacar.
+	if not _fight_active:
+		velocity.x = 0.0
+		var p := _player()
+		if p != null:
+			var d := signf(p.global_position.x - global_position.x)
+			if d != 0.0:
+				facing = int(d)
+		_update_sprite()
+		move_and_slide()
+		return
 
 	match state:
 		State.APPROACH:

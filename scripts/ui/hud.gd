@@ -21,6 +21,7 @@ extends CanvasLayer
 
 
 func _ready() -> void:
+	add_to_group("hud")
 	var player := get_tree().get_first_node_in_group("player")
 	if player == null:
 		push_warning("HUD: no se encontro ningun nodo en el grupo 'player'.")
@@ -34,12 +35,20 @@ func _ready() -> void:
 	GameState.corruption_changed.connect(_on_corruption_changed)
 	_on_corruption_changed(GameState.corruption)
 
+	# La BossBar se conecta al boss pero queda OCULTA hasta reveal_boss_bar()
+	# (lo llama BossFightController al entrar a la arena). Antes se mostraba
+	# al cargar el nivel -- ver AUDITORIA_TECNICA_2026-09-09 §3.
 	var boss := get_tree().get_first_node_in_group("boss")
 	if boss != null:
-		boss_root.visible = true
+		boss_root.visible = false
 		boss.health_changed.connect(_on_boss_health_changed)
 		boss.surrendered.connect(_on_boss_surrendered)
 		_on_boss_health_changed(boss.health, boss.max_health)
+
+
+## Lo llama BossFightController cuando arranca el evento de boss.
+func reveal_boss_bar() -> void:
+	boss_root.visible = true
 
 
 func _on_health_changed(current: int, max_health: int) -> void:
