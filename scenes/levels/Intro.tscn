@@ -46,7 +46,9 @@ size = Vector2(1600, 60)
 size = Vector2(1600, 150)
 
 [sub_resource type="Gradient" id="Gradient_glow"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3, 0.55, 0.8)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.62, 1, 1, 1, 0.32, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_glow"]
 gradient = SubResource("Gradient_glow")
@@ -243,9 +245,9 @@ offset = Vector2(0, -63)
 [node name="Brazier1Light" type="PointLight2D" parent="Brazier1"]
 position = Vector2(0, -63)
 color = Color(1, 0.62, 0.32, 1)
-energy = 1.0
+energy = 1.3
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 1.1
+texture_scale = 2.2
 
 [node name="Brazier2" type="AnimatedSprite2D" parent="."]
 position = Vector2(745, 440)
@@ -258,9 +260,9 @@ offset = Vector2(0, -63)
 [node name="Brazier2Light" type="PointLight2D" parent="Brazier2"]
 position = Vector2(0, -63)
 color = Color(1, 0.62, 0.32, 1)
-energy = 1.0
+energy = 1.3
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 1.1
+texture_scale = 2.2
 
 [node name="Torch1" type="AnimatedSprite2D" parent="."]
 position = Vector2(262, 367)
@@ -273,9 +275,9 @@ offset = Vector2(0, -49)
 [node name="Torch1Light" type="PointLight2D" parent="Torch1"]
 position = Vector2(-6, -67)
 color = Color(1, 0.66, 0.36, 1)
-energy = 0.85
+energy = 1.15
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 0.9
+texture_scale = 1.8
 
 [node name="Torch2" type="AnimatedSprite2D" parent="."]
 position = Vector2(788, 367)
@@ -289,9 +291,9 @@ offset = Vector2(0, -49)
 [node name="Torch2Light" type="PointLight2D" parent="Torch2"]
 position = Vector2(6, -67)
 color = Color(1, 0.66, 0.36, 1)
-energy = 0.85
+energy = 1.15
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 0.9
+texture_scale = 1.8
 
 [node name="PropCryptDoor" type="Sprite2D" parent="."]
 position = Vector2(1075, 355)
@@ -312,17 +314,17 @@ offset = Vector2(0, -63)
 
 [node name="CryptDoorLight" type="PointLight2D" parent="."]
 position = Vector2(1075, 372)
-color = Color(0.6, 0.35, 0.95, 1)
-energy = 1.3
+color = Color(0.6, 0.44, 0.92, 1)
+energy = 1.1
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 0.7
+texture_scale = 2.6
 
 [node name="BrazierVioletLight" type="PointLight2D" parent="."]
 position = Vector2(1180, 388)
-color = Color(0.62, 0.36, 0.98, 1)
-energy = 1.0
+color = Color(0.6, 0.44, 0.92, 1)
+energy = 0.9
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 0.75
+texture_scale = 1.8
 
 [node name="DoorSymbolTrigger" parent="." instance=ExtResource("4_dialogue_trigger")]
 position = Vector2(915, 400)

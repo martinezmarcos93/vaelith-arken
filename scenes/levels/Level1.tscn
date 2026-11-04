@@ -79,7 +79,9 @@ size = Vector2(60, 24)
 size = Vector2(3800, 180)
 
 [sub_resource type="Gradient" id="Gradient_glow"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3, 0.55, 0.8)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.62, 1, 1, 1, 0.32, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_glow"]
 gradient = SubResource("Gradient_glow")
@@ -615,9 +617,9 @@ offset = Vector2(0, -53)
 [node name="BonfireLight" type="PointLight2D" parent="PropBonfire"]
 position = Vector2(0, -33)
 color = Color(1, 0.58, 0.28, 1)
-energy = 1.6
+energy = 1.4
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 2.9
+texture_scale = 2.6
 
 [node name="PropStump1" type="Sprite2D" parent="."]
 position = Vector2(250, 248)
@@ -742,10 +744,10 @@ texture = ExtResource("hz_22")
 
 [node name="EyeLight" type="PointLight2D" parent="PropCryptDoor"]
 position = Vector2(0, -3)
-color = Color(0.6, 0.35, 1, 1)
+color = Color(0.6, 0.44, 0.92, 1)
 energy = 1.0
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 1.1
+texture_scale = 2.2
 
 [node name="Boss1" parent="." instance=ExtResource("20_boss1")]
 position = Vector2(3550, 410)

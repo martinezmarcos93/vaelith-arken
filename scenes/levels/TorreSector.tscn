@@ -29,7 +29,9 @@
 [ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/antorcha_frames.tres" id="fx_antorcha"]
 
 [sub_resource type="Gradient" id="Gradient_glow"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3, 0.55, 0.8)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.62, 1, 1, 1, 0.32, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_glow"]
 gradient = SubResource("Gradient_glow")
@@ -208,9 +210,9 @@ texture = ExtResource("hz_10")
 [node name="CandelabrumLight" type="PointLight2D" parent="MG/Candelabrum"]
 position = Vector2(0, -66)
 color = Color(1, 0.63, 0.33, 1)
-energy = 2.3
+energy = 1.6
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 2.9
+texture_scale = 2.6
 
 [node name="BrazierWarm" type="AnimatedSprite2D" parent="MG"]
 position = Vector2(162, 257)
@@ -223,9 +225,9 @@ offset = Vector2(0, -63)
 [node name="BrazierWarmLight" type="PointLight2D" parent="MG/BrazierWarm"]
 position = Vector2(0, -58)
 color = Color(1, 0.58, 0.28, 1)
-energy = 1.7
+energy = 1.5
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 2.3
+texture_scale = 2.4
 
 [node name="WallTorchBack" type="AnimatedSprite2D" parent="MG"]
 z_index = -1
@@ -240,9 +242,9 @@ offset = Vector2(0, -49)
 [node name="WallTorchBackLight" type="PointLight2D" parent="MG/WallTorchBack"]
 position = Vector2(4, -39)
 color = Color(1, 0.62, 0.32, 1)
-energy = 0.9
+energy = 1.15
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 1.5
+texture_scale = 1.8
 
 [node name="RoomFill" type="PointLight2D" parent="MG"]
 position = Vector2(240, 30)
@@ -299,10 +301,10 @@ offset = Vector2(0, -63)
 
 [node name="BrazierVioletLight" type="PointLight2D" parent="Threshold/BrazierViolet"]
 position = Vector2(0, -66)
-color = Color(0.62, 0.36, 0.98, 1)
-energy = 1.5
+color = Color(0.6, 0.44, 0.92, 1)
+energy = 1.0
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 2.1
+texture_scale = 2.4
 
 [node name="SpectralGate" type="Sprite2D" parent="Threshold"]
 modulate = Color(0.88, 0.72, 1.15, 0.85)
@@ -311,10 +313,10 @@ texture = ExtResource("hz_19")
 
 [node name="ThresholdLight" type="PointLight2D" parent="Threshold"]
 position = Vector2(748, 211)
-color = Color(0.55, 0.3, 1.0, 1)
-energy = 2.4
+color = Color(0.58, 0.42, 0.92, 1)
+energy = 1.4
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 3.7
+texture_scale = 4.2
 
 [node name="ThresholdTrigger" parent="Threshold" instance=ExtResource("6_exit")]
 position = Vector2(748, 234)

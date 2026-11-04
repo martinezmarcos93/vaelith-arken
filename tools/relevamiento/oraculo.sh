@@ -16,6 +16,9 @@ TMP=$(mktemp -d)
 falla=0
 ruido='resources still in use|RID allocations|leaked at exit|ObjectDB instances|~CompressedTexture2D|RenderingServer::get_singleton|~Utilities|Texture with GL ID'
 
+# dos pasadas: en la primera, un PNG nuevo puede dar "Failed loading resource"
+# pasajero (la escena se escanea antes de importar la imagen); vale la segunda.
+timeout 900 "$G" --headless --path . --import > /dev/null 2>&1
 timeout 900 "$G" --headless --path . --import > "$TMP/import.log" 2>&1
 if grep -E "ERROR" "$TMP/import.log" | grep -vqE "$ruido"; then
   echo "FALLA import:"; grep -E "ERROR" -A2 "$TMP/import.log" | grep -vE "$ruido" | head -10; falla=1
