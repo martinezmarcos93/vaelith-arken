@@ -2,7 +2,8 @@
 # Oráculo visual/técnico de Vaelith Arken. Sale con código != 0 si algo falla.
 #   1. El proyecto importa sin errores.
 #   2. Las escenas de scenes/ cargan sin errores (se ignora el ruido de cierre).
-#   3. Ningún Sprite2D / TextureRect / TextureProgressBar tiene escala distinta de ±1
+#   3. Ningún Sprite2D / TextureRect / TextureProgressBar / TileMapLayer / NinePatchRect
+#      tiene escala distinta de ±1
 #      (pixel 1:1). Quedan afuera las PointLight2D, las texturas procedurales
 #      (SubResource: sombras de degradado) y Zombi/BringerOfDeath, que no se usan
 #      en ningún nivel.
@@ -40,7 +41,7 @@ for scn in sorted(glob.glob("scenes/**/*.tscn", recursive=True)):
     t = open(scn, encoding="utf-8").read()
     for b in re.split(r'\n(?=\[node )', t):
         ty = re.search(r'type="([^"]+)"', b.split("\n")[0])
-        if not ty or ty.group(1) not in ("Sprite2D", "TextureRect", "TextureProgressBar", "AnimatedSprite2D"):
+        if not ty or ty.group(1) not in ("Sprite2D", "TextureRect", "TextureProgressBar", "AnimatedSprite2D", "TileMapLayer", "TileMap", "NinePatchRect"):
             continue
         if "texture = SubResource(" in b:
             continue
