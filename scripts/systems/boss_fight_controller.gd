@@ -57,16 +57,12 @@ func _on_body_entered(body: Node2D) -> void:
 func _begin() -> void:
 	boss_intro_started.emit()
 
-	# 1. Pared invisible en la entrada: el jugador ya no puede volver atrás.
-	var wall := StaticBody2D.new()
-	wall.name = "ArenaEntranceWall"
-	var wcs := CollisionShape2D.new()
-	var wshape := RectangleShape2D.new()
-	wshape.size = Vector2(16.0, arena_bottom - arena_top)
-	wcs.shape = wshape
-	wall.add_child(wcs)
-	wall.global_position = Vector2(arena_left, (arena_top + arena_bottom) * 0.5)
-	get_parent().add_child(wall)
+	# 1. Paredes invisibles: en la entrada (no se vuelve atrás) y en el borde
+	# derecho (antes no había: saltando por encima del boss se caía del mundo).
+	# Diferidas porque _begin corre dentro de body_entered y Godot no deja
+	# tocar la física mientras resuelve colisiones.
+	_pared("ArenaEntranceWall", arena_left)
+	_pared("ArenaExitWall", arena_right)
 
 	# 2. Límites de cámara a la arena (encierra el encuadre en el combate).
 	var cam := _player_camera()
@@ -97,6 +93,18 @@ func _start_fight() -> void:
 	if boss != null and boss.has_method("begin_fight"):
 		boss.begin_fight()
 	boss_fight_started.emit()
+
+
+func _pared(nombre: String, x: float) -> void:
+	var wall := StaticBody2D.new()
+	wall.name = nombre
+	var wcs := CollisionShape2D.new()
+	var wshape := RectangleShape2D.new()
+	wshape.size = Vector2(16.0, arena_bottom - arena_top)
+	wcs.shape = wshape
+	wall.add_child(wcs)
+	wall.position = Vector2(x, (arena_top + arena_bottom) * 0.5)
+	get_parent().add_child.call_deferred(wall)
 
 
 func _player_camera() -> Camera2D:
