@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/level/checkpoint.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/checkpoint_altar_custom/altar.png" id="2_altar"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/checkpoint_altar_custom/altar@0.35x0.35.png" id="hz_1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_area"]
 size = Vector2(24, 64)
@@ -16,5 +16,4 @@ shape = SubResource("RectangleShape2D_area")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -45)
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("2_altar")
+texture = ExtResource("hz_1")
