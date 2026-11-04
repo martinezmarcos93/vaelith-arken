@@ -127,6 +127,17 @@ modulate = Color(0.5, 0.48, 0.56, 1)
 position = Vector2(560, 430)
 texture = ExtResource("hz_2")
 
+[node name="NieblaLejana" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2(0.18, 0.18)
+
+[node name="Bruma" type="ColorRect" parent="Background/NieblaLejana"]
+offset_left = -4000.0
+offset_top = -1200.0
+offset_right = 8000.0
+offset_bottom = 1600.0
+mouse_filter = 2
+color = Color(0.208, 0.125, 0.216, 0.3)
+
 [node name="Clouds" type="ParallaxLayer" parent="Background"]
 motion_scale = Vector2(0.26, 0.14)
 motion_mirroring = Vector2(1140, 0)

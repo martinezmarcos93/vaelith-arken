@@ -71,7 +71,7 @@ motion_scale = Vector2(0.05, 0.05)
 motion_mirroring = Vector2(1285, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Sky"]
-modulate = Color(0.2, 0.21, 0.28, 1)
+modulate = Color(0.3, 0.31, 0.4, 1)
 position = Vector2(640, 300)
 texture = ExtResource("hz_1")
 
@@ -80,18 +80,40 @@ motion_scale = Vector2(0.2, 0.2)
 motion_mirroring = Vector2(1330, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/RuinsFar"]
-modulate = Color(0.22, 0.22, 0.29, 1)
+modulate = Color(0.26, 0.27, 0.35, 1)
 position = Vector2(640, 300)
 texture = ExtResource("hz_2")
+
+[node name="NieblaLejana" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2(0.2, 0.2)
+
+[node name="Bruma" type="ColorRect" parent="Background/NieblaLejana"]
+offset_left = -4000.0
+offset_top = -1200.0
+offset_right = 8000.0
+offset_bottom = 1600.0
+mouse_filter = 2
+color = Color(0.086, 0.173, 0.239, 0.32)
 
 [node name="RuinsNear" type="ParallaxLayer" parent="Background"]
 motion_scale = Vector2(0.4, 0.4)
 motion_mirroring = Vector2(1265, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/RuinsNear"]
-modulate = Color(0.22, 0.21, 0.28, 1)
+modulate = Color(0.17, 0.17, 0.24, 1)
 position = Vector2(640, 300)
 texture = ExtResource("hz_3")
+
+[node name="NieblaCercana" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2(0.4, 0.4)
+
+[node name="Bruma" type="ColorRect" parent="Background/NieblaCercana"]
+offset_left = -4000.0
+offset_top = -1200.0
+offset_right = 8000.0
+offset_bottom = 1600.0
+mouse_filter = 2
+color = Color(0.086, 0.173, 0.239, 0.16)
 
 [node name="TowerBackdrop" type="Node2D" parent="."]
 z_index = -3
@@ -116,28 +138,28 @@ texture = ExtResource("hz_6")
 z_index = -1
 
 [node name="ColB1" type="Sprite2D" parent="ColumnsBack"]
-modulate = Color(0.78, 0.76, 0.84, 1)
+modulate = Color(0.56, 0.55, 0.64, 1)
 position = Vector2(250, 372)
 texture = ExtResource("hz_7")
 
 [node name="ColB2" type="Sprite2D" parent="ColumnsBack"]
-modulate = Color(0.72, 0.7, 0.8, 1)
+modulate = Color(0.52, 0.51, 0.6, 1)
 position = Vector2(475, 378)
 texture = ExtResource("hz_8")
 
 [node name="ColB3" type="Sprite2D" parent="ColumnsBack"]
-modulate = Color(0.78, 0.76, 0.84, 1)
+modulate = Color(0.56, 0.55, 0.64, 1)
 position = Vector2(775, 368)
 texture = ExtResource("hz_9")
 
 [node name="ColB4" type="Sprite2D" parent="ColumnsBack"]
-modulate = Color(0.72, 0.7, 0.8, 1)
+modulate = Color(0.52, 0.51, 0.6, 1)
 position = Vector2(1180, 376)
 flip_h = true
 texture = ExtResource("hz_10")
 
 [node name="Gargoyle1" type="Sprite2D" parent="ColumnsBack"]
-modulate = Color(0.8, 0.78, 0.86, 1)
+modulate = Color(0.58, 0.57, 0.66, 1)
 position = Vector2(600, 400)
 texture = ExtResource("hz_11")
 
@@ -223,13 +245,13 @@ texture = ExtResource("hz_17")
 
 [node name="ColFront1" type="Sprite2D" parent="."]
 z_index = 1
-modulate = Color(0.62, 0.6, 0.7, 1)
+modulate = Color(0.3, 0.29, 0.36, 1)
 position = Vector2(70, 360)
 texture = ExtResource("hz_18")
 
 [node name="ColFront2" type="Sprite2D" parent="."]
 z_index = 1
-modulate = Color(0.62, 0.6, 0.7, 1)
+modulate = Color(0.3, 0.29, 0.36, 1)
 position = Vector2(1340, 352)
 flip_h = true
 texture = ExtResource("hz_19")
