@@ -22,7 +22,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/fire/vaelith_torre_hanging_lantern@0.22x0.22.png" id="hz_14"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_arched_door_01@0.7x0.7.png" id="hz_15"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_barred_gate_01@0.9x0.9.png" id="hz_16"]
-[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/vfx/vaelith_vfx_floor_projection_violet@0.8x0.8.png" id="hz_17"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/vfx/vaelith_vfx_spectral_flame_violet@0.35x0.35.png" id="hz_19"]
 [ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/brasero_violeta_frames.tres" id="fx_brasero_violeta"]
 [ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/brasero_calido_frames.tres" id="fx_brasero_calido"]
@@ -30,6 +29,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_balcony_segment_01.png" id="lj_balcon"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_ruined_arch_01.png" id="lj_arco"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_spiral_staircase_01.png" id="lj_escalera"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/circulo_runas_frames.tres" id="fx_circulo_runas"]
 
 [sub_resource type="Gradient" id="Gradient_glow"]
 interpolation_mode = 1
@@ -307,10 +307,12 @@ modulate = Color(0.54, 0.48, 0.8, 1)
 position = Vector2(744, 222)
 texture = ExtResource("hz_16")
 
-[node name="FloorProjection" type="Sprite2D" parent="Threshold"]
-modulate = Color(0.95, 0.78, 1.15, 1)
-position = Vector2(712, 252)
-texture = ExtResource("hz_17")
+[node name="FloorProjection" type="AnimatedSprite2D" parent="Threshold"]
+position = Vector2(712, 258)
+sprite_frames = ExtResource("fx_circulo_runas")
+animation = &"default"
+autoplay = "default"
+offset = Vector2(0, -30)
 
 [node name="BrazierViolet" type="AnimatedSprite2D" parent="Threshold"]
 position = Vector2(684, 256)
