@@ -6,6 +6,20 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 
 ## [Unreleased]
 
+### 2026-11-04 (cont.) — Dirección artística v2 (rama `feat/direccion-artistica`)
+
+Respuesta a una crítica externa de arte (cohesión, luz, profundidad, UI).
+Cada cambio pasó `tools/relevamiento/oraculo.sh`.
+
+- **Protagonista legible**: shader `luz_contorno` (borde superior #766DBC y contorno #010901 tenue).
+- **Piso**: superficie clara + cuerpo oscuro de bajo contraste (`piso_legible.py`); rocas de Level1 atenuadas.
+- **Luz por fuente**: halos en 6 bandas, fuego con más alcance, violeta menos saturado y más ancho (`luces.py`). Sombras de contacto de la Torre arregladas (eran elipses blancas por `self_modulate`).
+- **Profundidad**: bruma entre capas de parallax y modulate por plano en Intro y Level1 (`capas.py`).
+- **Torre**: tiles a pixel 1:1 (estaban ×2), siluetas arquitectónicas lejanas, cámara que no muestra vacío, círculo de runas de pixelfx en el umbral.
+- **UI** (delegado con el orquestador): diálogo 20 % más bajo con marco a la mitad y sombra (Codex, va-01); calavera 24 px y "Corrupción" en #766DBC (Codex, va-05).
+- **Guía**: `docs/guia_estilo_visual.md` § Dirección artística v2 (Codex, va-04).
+- **Oráculo**: también revisa TileMapLayer/NinePatchRect; import en dos pasadas.
+
 ### 2026-11-04 — Coherencia visual (rama `fix/coherencia-visual`)
 
 Relevamiento en `docs/RELEVAMIENTO_2026-11-04.md`. Todo lo de abajo se midió
