@@ -8,8 +8,8 @@ if "skull_icon@0.75x0.75.png" not in t:
 cor = t[t.index('[node name="CorruptionLabel"'):t.index('[node name="BossBar"')]
 if "Color(0.463, 0.427, 0.737, 1)" not in cor:
     errores.append("Corrupción no usa #766DBC")
-if "font_size = 14" not in cor:
-    errores.append("Corrupción no está a 14")
+if "font_size = 16" not in cor:
+    errores.append("Corrupción no está a 16 (tamaño nativo de la fuente)")
 icono = t[t.index('[node name="SkullIcon"'):t.index('[node name="SkullCount"')]
 if "offset_right = 28.0" not in icono:
     errores.append("SkullIcon no mide 24 px")
