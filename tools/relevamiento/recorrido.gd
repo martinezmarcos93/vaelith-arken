@@ -17,6 +17,11 @@ func _run(lvl: Node, out: String, xs: PackedStringArray, nombre: String) -> void
 			p.global_position = Vector2(float(xs[i]), p.global_position.y - 40)
 			p.velocity = Vector2.ZERO
 		for f in 75:
+			if OS.get_cmdline_user_args().size() < 4:
+				paused = false
+				var d = root.get_node_or_null("DialogueBox")
+				if d != null:
+					d.visible = false
 			await physics_frame
 		# cerrar diálogos que tapen la escena
 		var dlg = root.get_node_or_null("DialogueBox")

@@ -5,6 +5,10 @@
 [ext_resource type="Script" path="res://scripts/combat/hurtbox.gd" id="3_hurtbox"]
 [ext_resource type="SpriteFrames" path="res://assets/sprites/player/vaelith_custom/_frames.tres" id="4_placeholder_frames"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/contact_shadow.png" id="5_shadow"]
+[ext_resource type="Shader" path="res://assets/shaders/luz_contorno.gdshader" id="6_contorno"]
+
+[sub_resource type="ShaderMaterial" id="Mat_contorno"]
+shader = ExtResource("6_contorno")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(28, 44)
@@ -33,6 +37,7 @@ texture = ExtResource("5_shadow")
 shape = SubResource("RectangleShape2D_body")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("Mat_contorno")
 sprite_frames = ExtResource("4_placeholder_frames")
 animation = &"idle"
 offset = Vector2(0, -12)
