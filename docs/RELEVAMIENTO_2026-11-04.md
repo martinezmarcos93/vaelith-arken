@@ -18,9 +18,9 @@ Lo roto es **visual**, y tiene causas medibles. En orden de impacto:
 
 ## Detalle por área
 
-**Jugador** (`Player.tscn`): escala raíz 1,05 y sprite 0,5 (no enteras: P0-4 de la
+**Jugador** (`Player.tscn`): sprite a escala 0,5 y sombra a 1,05 (no enteras: P0-4 de la
 auditoría del 09/09 sigue abierto). Lienzo 320×240 por frame, figura de ~93 px →
-~49 px en pantalla. 4.000–8.000 colores por frame.
+~47 px en pantalla. 4.000–8.000 colores por frame.
 
 **Boss "Guerrero-Espejo"**: mismo pipeline que el jugador, mismos defectos. Al
 entrar a la arena queda chico al lado de la puerta de cripta (IA, escala 0,45).

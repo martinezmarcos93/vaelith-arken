@@ -26,7 +26,6 @@ script = ExtResource("1_script")
 
 [node name="ContactShadow" type="Sprite2D" parent="."]
 position = Vector2(0, 21)
-scale = Vector2(1.05, 1.05)
 z_index = -1
 texture = ExtResource("5_shadow")
 
@@ -34,10 +33,9 @@ texture = ExtResource("5_shadow")
 shape = SubResource("RectangleShape2D_body")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("4_placeholder_frames")
 animation = &"idle"
-offset = Vector2(0, -50)
+offset = Vector2(0, -12)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true

@@ -1,0 +1,228 @@
+{
+ "raiz": "../..",
+ "lamina": "assets/source_sheets/characters/vaelith/vaelith_knight_sheet.png",
+ "salida": "assets/sprites/player/vaelith_custom",
+ "escala": 0.5,
+ "lienzo": [
+  128,
+  80
+ ],
+ "ancla": [
+  64,
+  74
+ ],
+ "colores": 32,
+ "filas": [
+  {
+   "nombre": "idle_{i}",
+   "caja": [
+    265,
+    5,
+    650,
+    145
+   ],
+   "n": 4
+  },
+  {
+   "nombre": "walk_{i}",
+   "caja": [
+    655,
+    5,
+    1430,
+    145
+   ],
+   "n": 8
+  },
+  {
+   "nombre": "run_{i}",
+   "caja": [
+    260,
+    145,
+    1010,
+    290
+   ],
+   "n": 8
+  },
+  {
+   "nombre": "jump_{i}",
+   "caja": [
+    1010,
+    145,
+    1525,
+    290
+   ],
+   "n": 5
+  },
+  {
+   "nombre": "land_{i}",
+   "caja": [
+    0,
+    300,
+    335,
+    445
+   ],
+   "n": 3
+  },
+  {
+   "nombre": "attack_high_{i}",
+   "caja": [
+    340,
+    300,
+    950,
+    445
+   ],
+   "n": 6
+  },
+  {
+   "nombre": "attack_low_{i}",
+   "caja": [
+    950,
+    300,
+    1530,
+    445
+   ],
+   "n": 6
+  },
+  {
+   "nombre": "block_{i}",
+   "caja": [
+    0,
+    455,
+    525,
+    590
+   ],
+   "n": 6
+  },
+  {
+   "nombre": "shove_{i}",
+   "caja": [
+    530,
+    455,
+    1230,
+    590
+   ],
+   "n": 5
+  },
+  {
+   "nombre": "hurt_{i}",
+   "caja": [
+    0,
+    598,
+    325,
+    738
+   ],
+   "n": 4
+  },
+  {
+   "nombre": "death_{i}",
+   "caja": [
+    330,
+    598,
+    890,
+    738
+   ],
+   "n": 6,
+   "centros": [
+    374,
+    440,
+    535,
+    642,
+    753,
+    845
+   ]
+  },
+  {
+   "nombre": "resurrect_{i}",
+   "caja": [
+    890,
+    598,
+    1530,
+    738
+   ],
+   "n": 7,
+   "centros": [
+    945,
+    1055,
+    1140,
+    1207,
+    1294,
+    1383,
+    1464
+   ]
+  }
+ ],
+ "animaciones": {
+  "idle": {
+   "prefijo": "idle",
+   "fps": 6,
+   "loop": true
+  },
+  "walk": {
+   "prefijo": "walk",
+   "fps": 9,
+   "loop": true
+  },
+  "run": {
+   "prefijo": "run",
+   "fps": 12,
+   "loop": true
+  },
+  "jump": {
+   "archivos": [
+    "jump_0.png",
+    "jump_1.png",
+    "jump_2.png"
+   ],
+   "fps": 10,
+   "loop": false
+  },
+  "fall": {
+   "archivos": [
+    "jump_3.png",
+    "jump_4.png"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "land": {
+   "prefijo": "land",
+   "fps": 12,
+   "loop": false
+  },
+  "attack1": {
+   "prefijo": "attack_high",
+   "fps": 12,
+   "loop": false
+  },
+  "attack2": {
+   "prefijo": "attack_low",
+   "fps": 17,
+   "loop": false
+  },
+  "block": {
+   "prefijo": "block",
+   "fps": 10,
+   "loop": false
+  },
+  "shove": {
+   "prefijo": "shove",
+   "fps": 20,
+   "loop": false
+  },
+  "hurt": {
+   "prefijo": "hurt",
+   "fps": 13,
+   "loop": false
+  },
+  "dead": {
+   "prefijo": "death",
+   "fps": 8,
+   "loop": false
+  },
+  "resurrect": {
+   "prefijo": "resurrect",
+   "fps": 8,
+   "loop": false
+  }
+ }
+}
