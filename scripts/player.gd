@@ -407,7 +407,7 @@ func _update_sprite_animation() -> void:
 			if not is_on_floor():
 				target_anim = "jump" if velocity.y < 0.0 else "fall"
 			elif absf(velocity.x) > 5.0:
-				target_anim = "run"
+				target_anim = "walk"
 			else:
 				target_anim = "idle"
 		State.BLOCK:
