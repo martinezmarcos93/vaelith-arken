@@ -18,15 +18,15 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/props/vaelith_torre_failed_experiment_corpse_01@0.2x0.2.png" id="hz_8"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/props/vaelith_torre_skull_bones_cluster_01@0.13x0.13.png" id="hz_9"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/fire/vaelith_torre_candelabrum@0.3x0.3.png" id="hz_10"]
-[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/fire/vaelith_torre_floor_brazier_warm@0.2x0.2.png" id="hz_11"]
-[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/fire/vaelith_torre_wall_torch@0.24x0.24.png" id="hz_12"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_column_twisted_01@1.9x1.9.png" id="hz_13"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/fire/vaelith_torre_hanging_lantern@0.22x0.22.png" id="hz_14"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_arched_door_01@0.7x0.7.png" id="hz_15"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_barred_gate_01@0.9x0.9.png" id="hz_16"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/vfx/vaelith_vfx_floor_projection_violet@0.8x0.8.png" id="hz_17"]
-[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/fire/vaelith_torre_floor_brazier_violet@0.24x0.24.png" id="hz_18"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/vfx/vaelith_vfx_spectral_flame_violet@0.35x0.35.png" id="hz_19"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/brasero_violeta_frames.tres" id="fx_brasero_violeta"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/brasero_calido_frames.tres" id="fx_brasero_calido"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/antorcha_frames.tres" id="fx_antorcha"]
 
 [sub_resource type="Gradient" id="Gradient_glow"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -212,25 +212,33 @@ energy = 2.3
 texture = SubResource("GradientTexture2D_glow")
 texture_scale = 2.9
 
-[node name="BrazierWarm" type="Sprite2D" parent="MG"]
-position = Vector2(162, 243)
-texture = ExtResource("hz_11")
+[node name="BrazierWarm" type="AnimatedSprite2D" parent="MG"]
+position = Vector2(162, 257)
+sprite_frames = ExtResource("fx_brasero_calido")
+animation = &"default"
+autoplay = "default"
+frame = 7
+offset = Vector2(0, -63)
 
 [node name="BrazierWarmLight" type="PointLight2D" parent="MG/BrazierWarm"]
-position = Vector2(0, -44)
+position = Vector2(0, -58)
 color = Color(1, 0.58, 0.28, 1)
 energy = 1.7
 texture = SubResource("GradientTexture2D_glow")
 texture_scale = 2.3
 
-[node name="WallTorchBack" type="Sprite2D" parent="MG"]
+[node name="WallTorchBack" type="AnimatedSprite2D" parent="MG"]
 z_index = -1
-position = Vector2(398, 140)
+position = Vector2(398, 155)
 flip_h = true
-texture = ExtResource("hz_12")
+sprite_frames = ExtResource("fx_antorcha")
+animation = &"default"
+autoplay = "default"
+frame = 14
+offset = Vector2(0, -49)
 
 [node name="WallTorchBackLight" type="PointLight2D" parent="MG/WallTorchBack"]
-position = Vector2(4, -24)
+position = Vector2(4, -39)
 color = Color(1, 0.62, 0.32, 1)
 energy = 0.9
 texture = SubResource("GradientTexture2D_glow")
@@ -281,12 +289,16 @@ modulate = Color(0.95, 0.78, 1.15, 1)
 position = Vector2(712, 252)
 texture = ExtResource("hz_17")
 
-[node name="BrazierViolet" type="Sprite2D" parent="Threshold"]
-position = Vector2(684, 238)
-texture = ExtResource("hz_18")
+[node name="BrazierViolet" type="AnimatedSprite2D" parent="Threshold"]
+position = Vector2(684, 256)
+sprite_frames = ExtResource("fx_brasero_violeta")
+animation = &"default"
+autoplay = "default"
+frame = 0
+offset = Vector2(0, -63)
 
 [node name="BrazierVioletLight" type="PointLight2D" parent="Threshold/BrazierViolet"]
-position = Vector2(0, -48)
+position = Vector2(0, -66)
 color = Color(0.62, 0.36, 0.98, 1)
 energy = 1.5
 texture = SubResource("GradientTexture2D_glow")

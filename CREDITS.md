@@ -599,6 +599,18 @@ se ignoró a propósito, a pedido explícito.
   subpixel desactivados) para que se vea nítida como pixel art — el
   importador de Godot por defecto la suaviza como tipografía normal.
 
+## Efectos generados con pixelfx (2026-11-04)
+
+- **pixelfx** — https://github.com/patch-gg/pixelfx — MIT, © 2026 Patch y
+  © 2026 Hugo Duprez (partes adaptadas de los VFX open source de Sprite Fusion).
+  Uso comercial permitido. La fuente "Patch Pixel" del repo NO se usa.
+- `assets/sprites/props/fuego_pixelfx/`: `brasero_calido`, `brasero_violeta`
+  (`fire/brazier`), `antorcha` (`fire/torch`), `hoguera` (`fire/campfire`).
+  Renderizados con `node tools/render.mjs <id> --sheet --fps 15` y paletas
+  propias (hierro y madera en la rampa índigo canónica; fuego cálido
+  óxido→#B41F1C→naranja; fuego violeta con la familia violeta de la guía).
+  Comando exacto y paletas: commit `feat(fx): fuego animado con pixelfx`.
+
 ## Pendientes de descarga manual (bloqueados por flujo de compra de itch.io)
 
 El resto de los candidatos de `docs/lista_assets_pixel_art.md` y

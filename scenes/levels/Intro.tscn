@@ -27,11 +27,11 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/props/vaelith_torre_skull_bones_cluster_01@0.34x0.34.png" id="hz_17"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_column_twisted_01@1.15x1.15.png" id="hz_18"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_column_plain_01@1.25x1.25.png" id="hz_19"]
-[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/fire/vaelith_torre_floor_brazier_warm@0.46x0.46.png" id="hz_20"]
-[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/fire/vaelith_torre_wall_torch@0.6x0.6.png" id="hz_21"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/crypt_door_custom/door_closed@0.42x0.42.png" id="hz_22"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_props_craftpix_free/Dark_totem_dark_shadow2@0.42x0.42.png" id="hz_23"]
-[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/fire/vaelith_torre_floor_brazier_violet@0.44x0.44.png" id="hz_24"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/brasero_calido_frames.tres" id="fx_brasero_calido"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/antorcha_frames.tres" id="fx_antorcha"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/brasero_violeta_frames.tres" id="fx_brasero_violeta"]
 
 [sub_resource type="RectangleShape2D" id="Shape_ground_start"]
 size = Vector2(300, 40)
@@ -232,46 +232,62 @@ position = Vector2(1340, 352)
 flip_h = true
 texture = ExtResource("hz_19")
 
-[node name="Brazier1" type="Sprite2D" parent="."]
-position = Vector2(196, 417)
-texture = ExtResource("hz_20")
+[node name="Brazier1" type="AnimatedSprite2D" parent="."]
+position = Vector2(196, 450)
+sprite_frames = ExtResource("fx_brasero_calido")
+animation = &"default"
+autoplay = "default"
+frame = 0
+offset = Vector2(0, -63)
 
 [node name="Brazier1Light" type="PointLight2D" parent="Brazier1"]
-position = Vector2(0, -30)
+position = Vector2(0, -63)
 color = Color(1, 0.62, 0.32, 1)
 energy = 1.0
 texture = SubResource("GradientTexture2D_glow")
 texture_scale = 1.1
 
-[node name="Brazier2" type="Sprite2D" parent="."]
-position = Vector2(745, 407)
-texture = ExtResource("hz_20")
+[node name="Brazier2" type="AnimatedSprite2D" parent="."]
+position = Vector2(745, 440)
+sprite_frames = ExtResource("fx_brasero_calido")
+animation = &"default"
+autoplay = "default"
+frame = 7
+offset = Vector2(0, -63)
 
 [node name="Brazier2Light" type="PointLight2D" parent="Brazier2"]
-position = Vector2(0, -30)
+position = Vector2(0, -63)
 color = Color(1, 0.62, 0.32, 1)
 energy = 1.0
 texture = SubResource("GradientTexture2D_glow")
 texture_scale = 1.1
 
-[node name="Torch1" type="Sprite2D" parent="."]
-position = Vector2(262, 330)
-texture = ExtResource("hz_21")
+[node name="Torch1" type="AnimatedSprite2D" parent="."]
+position = Vector2(262, 367)
+sprite_frames = ExtResource("fx_antorcha")
+animation = &"default"
+autoplay = "default"
+frame = 14
+offset = Vector2(0, -49)
 
 [node name="Torch1Light" type="PointLight2D" parent="Torch1"]
-position = Vector2(-6, -30)
+position = Vector2(-6, -67)
 color = Color(1, 0.66, 0.36, 1)
 energy = 0.85
 texture = SubResource("GradientTexture2D_glow")
 texture_scale = 0.9
 
-[node name="Torch2" type="Sprite2D" parent="."]
-position = Vector2(788, 330)
+[node name="Torch2" type="AnimatedSprite2D" parent="."]
+position = Vector2(788, 367)
 flip_h = true
-texture = ExtResource("hz_21")
+sprite_frames = ExtResource("fx_antorcha")
+animation = &"default"
+autoplay = "default"
+frame = 21
+offset = Vector2(0, -49)
 
 [node name="Torch2Light" type="PointLight2D" parent="Torch2"]
-position = Vector2(6, -30)
+position = Vector2(6, -67)
 color = Color(1, 0.66, 0.36, 1)
 energy = 0.85
 texture = SubResource("GradientTexture2D_glow")
@@ -286,9 +302,13 @@ texture = ExtResource("hz_22")
 position = Vector2(1075, 423)
 texture = ExtResource("hz_23")
 
-[node name="BrazierViolet" type="Sprite2D" parent="."]
-position = Vector2(1180, 408)
-texture = ExtResource("hz_24")
+[node name="BrazierViolet" type="AnimatedSprite2D" parent="."]
+position = Vector2(1180, 441)
+sprite_frames = ExtResource("fx_brasero_violeta")
+animation = &"default"
+autoplay = "default"
+frame = 28
+offset = Vector2(0, -63)
 
 [node name="CryptDoorLight" type="PointLight2D" parent="."]
 position = Vector2(1075, 372)

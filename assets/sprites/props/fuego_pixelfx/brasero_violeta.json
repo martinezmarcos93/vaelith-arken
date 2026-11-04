@@ -1,0 +1,1029 @@
+{
+ "frames": [
+  {
+   "filename": "brazier 0",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 1",
+   "frame": {
+    "x": 112,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 2",
+   "frame": {
+    "x": 224,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 3",
+   "frame": {
+    "x": 336,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 4",
+   "frame": {
+    "x": 448,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 5",
+   "frame": {
+    "x": 560,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 6",
+   "frame": {
+    "x": 672,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 7",
+   "frame": {
+    "x": 784,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 8",
+   "frame": {
+    "x": 0,
+    "y": 148,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 9",
+   "frame": {
+    "x": 112,
+    "y": 148,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 10",
+   "frame": {
+    "x": 224,
+    "y": 148,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 11",
+   "frame": {
+    "x": 336,
+    "y": 148,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 12",
+   "frame": {
+    "x": 448,
+    "y": 148,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 13",
+   "frame": {
+    "x": 560,
+    "y": 148,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 14",
+   "frame": {
+    "x": 672,
+    "y": 148,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 15",
+   "frame": {
+    "x": 784,
+    "y": 148,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 16",
+   "frame": {
+    "x": 0,
+    "y": 296,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 17",
+   "frame": {
+    "x": 112,
+    "y": 296,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 18",
+   "frame": {
+    "x": 224,
+    "y": 296,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 19",
+   "frame": {
+    "x": 336,
+    "y": 296,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 20",
+   "frame": {
+    "x": 448,
+    "y": 296,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 21",
+   "frame": {
+    "x": 560,
+    "y": 296,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 22",
+   "frame": {
+    "x": 672,
+    "y": 296,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 23",
+   "frame": {
+    "x": 784,
+    "y": 296,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 24",
+   "frame": {
+    "x": 0,
+    "y": 444,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 25",
+   "frame": {
+    "x": 112,
+    "y": 444,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 26",
+   "frame": {
+    "x": 224,
+    "y": 444,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 27",
+   "frame": {
+    "x": 336,
+    "y": 444,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 28",
+   "frame": {
+    "x": 448,
+    "y": 444,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 29",
+   "frame": {
+    "x": 560,
+    "y": 444,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 30",
+   "frame": {
+    "x": 672,
+    "y": 444,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 31",
+   "frame": {
+    "x": 784,
+    "y": 444,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 32",
+   "frame": {
+    "x": 0,
+    "y": 592,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 33",
+   "frame": {
+    "x": 112,
+    "y": 592,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 34",
+   "frame": {
+    "x": 224,
+    "y": 592,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 35",
+   "frame": {
+    "x": 336,
+    "y": 592,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 36",
+   "frame": {
+    "x": 448,
+    "y": 592,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 37",
+   "frame": {
+    "x": 560,
+    "y": 592,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 38",
+   "frame": {
+    "x": 672,
+    "y": 592,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 39",
+   "frame": {
+    "x": 784,
+    "y": 592,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 40",
+   "frame": {
+    "x": 0,
+    "y": 740,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 41",
+   "frame": {
+    "x": 112,
+    "y": 740,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 42",
+   "frame": {
+    "x": 224,
+    "y": 740,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 43",
+   "frame": {
+    "x": 336,
+    "y": 740,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  },
+  {
+   "filename": "brazier 44",
+   "frame": {
+    "x": 448,
+    "y": 740,
+    "w": 112,
+    "h": 148
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 112,
+    "h": 148
+   },
+   "sourceSize": {
+    "w": 112,
+    "h": 148
+   },
+   "duration": 67
+  }
+ ],
+ "meta": {
+  "app": "https://github.com/patch-gg/pixelfx",
+  "version": "1",
+  "image": "brazier.png",
+  "format": "RGBA8888",
+  "size": {
+   "w": 896,
+   "h": 888
+  },
+  "scale": "1",
+  "frameTags": [
+   {
+    "name": "brazier",
+    "from": 0,
+    "to": 44,
+    "direction": "forward"
+   }
+  ],
+  "pixelfx": {
+   "id": "fire/brazier",
+   "name": "Brazier",
+   "fps": 15,
+   "loop": true,
+   "frames": 45,
+   "frameSize": [
+    112,
+    148
+   ],
+   "pivot": [
+    56,
+    136
+   ],
+   "columns": 8
+  }
+ }
+}

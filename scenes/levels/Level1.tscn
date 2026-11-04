@@ -26,7 +26,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_props_craftpix_free/Blue-green_crystal_dark_shadow1@0.7x0.7.png" id="hz_8"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_props_craftpix_free/Demon_scull_dark_shadow@0.4x0.4.png" id="hz_9"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_props_craftpix_free/Dinosaur_skeleton_part1_dark_shadow@0.4x0.4.png" id="hz_10"]
-[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_props_craftpix_free/Gates_dark_shadow3@0.4x0.4.png" id="hz_11"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/dungeon_props_craftpix_free/obj_09@0.9x0.9.png" id="hz_12"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/dungeon_props_craftpix_free/obj_30@1.4x1.4.png" id="hz_13"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/dungeon_props_craftpix_free/obj_47@1.3x1.3.png" id="hz_14"]
@@ -38,6 +37,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_rocks_craftpix_free/cave_rock1@0.7x0.7.png" id="hz_20"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_rocks_craftpix_free/cave_rock3@0.8x0.8.png" id="hz_21"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/crypt_door_custom/door_closed@0.45x0.45.png" id="hz_22"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/hoguera_frames.tres" id="fx_hoguera"]
 
 [sub_resource type="RectangleShape2D" id="Shape_220x24"]
 size = Vector2(220, 24)
@@ -605,11 +605,15 @@ texture = ExtResource("hz_9")
 position = Vector2(2755, 437)
 texture = ExtResource("hz_10")
 
-[node name="PropBonfire" type="Sprite2D" parent="."]
-position = Vector2(2945, 439)
-texture = ExtResource("hz_11")
+[node name="PropBonfire" type="AnimatedSprite2D" parent="."]
+position = Vector2(2945, 452)
+sprite_frames = ExtResource("fx_hoguera")
+animation = &"default"
+autoplay = "default"
+frame = 0
+offset = Vector2(0, -53)
 [node name="BonfireLight" type="PointLight2D" parent="PropBonfire"]
-position = Vector2(0, -20)
+position = Vector2(0, -33)
 color = Color(1, 0.58, 0.28, 1)
 energy = 1.6
 texture = SubResource("GradientTexture2D_glow")
