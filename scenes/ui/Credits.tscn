@@ -23,7 +23,7 @@ theme_override_constants/separation = 20
 [node name="Title" type="Label" parent="Center/VBox"]
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.92, 0.92, 0.92, 1)
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 32
 text = "VAELITH ARKEN"
 
 [node name="Subtitle" type="Label" parent="Center/VBox"]
@@ -47,13 +47,13 @@ custom_minimum_size = Vector2(0, 8)
 [node name="AssetsHeader" type="Label" parent="Center/VBox"]
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.541, 0.439, 0.251, 1)
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 16
 text = "Arte placeholder en uso en esta demo"
 
 [node name="AssetsList" type="Label" parent="Center/VBox"]
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.72, 0.72, 0.72, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 theme_override_constants/line_spacing = 6
 text = "Vaelith, Boss, No-muerto errante, Espíritu atado — original (IA), Marcos
 Bringer of Death — Clembod (uso libre)
@@ -69,7 +69,7 @@ custom_minimum_size = Vector2(0, 8)
 [node name="EngineLabel" type="Label" parent="Center/VBox"]
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.72, 0.72, 0.72, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "Motor: Godot 4.7"
 
 [node name="ThanksLabel" type="Label" parent="Center/VBox"]
@@ -84,5 +84,5 @@ custom_minimum_size = Vector2(0, 16)
 [node name="BackButton" type="Button" parent="Center/VBox"]
 custom_minimum_size = Vector2(220, 48)
 theme_override_colors/font_color = Color(0.541, 0.439, 0.251, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 16
 text = "Volver al título"

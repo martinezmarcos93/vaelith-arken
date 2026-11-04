@@ -14,7 +14,9 @@ lleva a una RAMPA de la paleta (oscuro → claro), elegida por su tono original:
 Todos los colores salen de docs/guia_estilo_visual.md (núcleo + extendida).
 El rojo de peligro #B41F1C no se usa: esto es arte de entorno.
 
-Uso:  python3 -I tools/img_pipeline/mapa_degradado.py <entrada.png> <salida.png>
+Uso:  python3 -I tools/img_pipeline/mapa_degradado.py <entrada.png> <salida.png> [desde hasta]
+      desde/hasta (0..1): tramo de la rampa a usar. Ej. 0.15 0.6 = menos
+      contraste y más oscuro (pisos que no compiten con los personajes).
 Solo numpy + Pillow.
 """
 import colorsys
@@ -51,7 +53,7 @@ def rampa_de(r, g, b):
     return "indigo"
 
 
-def mapear(im):
+def mapear(im, desde=0.0, hasta=1.0):
     a = np.array(im.convert("RGBA"))
     rgb = a[..., :3].astype(float)
     lum = (0.2126 * rgb[..., 0] + 0.7152 * rgb[..., 1] + 0.0722 * rgb[..., 2]) / 255
@@ -61,7 +63,7 @@ def mapear(im):
     # estira el rango de la imagen para usar toda la rampa (el contraste interno
     # de cada prop se conserva; el tono general lo da la rampa)
     lo, hi = np.percentile(lum[opaco], 2), np.percentile(lum[opaco], 98)
-    t = np.clip((lum - lo) / max(hi - lo, 1e-3), 0, 1)
+    t = desde + (hasta - desde) * np.clip((lum - lo) / max(hi - lo, 1e-3), 0, 1)
     out = a.copy()
     cache = {}
     ys, xs = np.nonzero(opaco)
@@ -76,4 +78,5 @@ def mapear(im):
 
 
 if __name__ == "__main__":
-    mapear(Image.open(sys.argv[1])).save(sys.argv[2])
+    rango = [float(x) for x in sys.argv[3:5]] if len(sys.argv) >= 5 else [0.0, 1.0]
+    mapear(Image.open(sys.argv[1]), *rango).save(sys.argv[2])

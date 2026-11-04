@@ -24,6 +24,10 @@ const FLOOR_ALT := Vector2i(5, 22)
 ## Semilla del patron de piso -- cambiarla re-mezcla la variacion de tiles
 ## sin tocar el codigo. Deterministico: mismo valor = mismo piso.
 @export var floor_seed: int = 7
+## Tiles de grosor de paredes y piso. Con el nodo a escala 1 (pixel 1:1,
+## desde 2026-11-04) se usa 2: misma geometría que antes con escala 2 y
+## grosor 1, pero los tiles de 16 px con la densidad de píxel del resto.
+@export var grosor: int = 1
 
 
 func _ready() -> void:
@@ -32,15 +36,16 @@ func _ready() -> void:
 
 func _build_room() -> void:
 	clear()
-	for x in width:
-		set_cell(Vector2i(x, 0), 0, _wall_variant(x))
-	for y in range(1, height - 1):
-		if draw_left_wall:
-			set_cell(Vector2i(0, y), 0, _wall_variant(y))
-		if y not in door_rows:
-			set_cell(Vector2i(width - 1, y), 0, _wall_variant(y + width))
-	for x in width:
-		set_cell(Vector2i(x, height - 1), 0, _floor_variant(x))
+	for g in grosor:
+		for x in width:
+			set_cell(Vector2i(x, g), 0, _wall_variant(x + g))
+			set_cell(Vector2i(x, height - 1 - g), 0, _floor_variant(x + g * 7))
+	for y in range(grosor, height - grosor):
+		for g in grosor:
+			if draw_left_wall:
+				set_cell(Vector2i(g, y), 0, _wall_variant(y + g))
+			if y not in door_rows:
+				set_cell(Vector2i(width - 1 - g, y), 0, _wall_variant(y + width + g))
 
 
 ## Variacion sutil de mamposteria (sin textura nueva, misma hoja) para que

@@ -158,3 +158,83 @@ Leonardo/Gemini):
 Subir como referencia una de las imágenes ya curadas en `Estetica ideal/`
 antes de generar, para mantener la paleta y atmósfera consistentes con lo
 que ya se aprobó.
+
+## Dirección artística v2 (2026-11-04)
+
+### Paleta por elemento
+
+| Elemento | Hex de referencia |
+|---|---|
+| Sombras profundas | `#010901` |
+| Piedra | `#11222E` |
+| Vegetación muerta | `#0f1f12` |
+| Metales antiguos | `#3A5184` |
+| Fuego convencional | `#4d1409` |
+| Energía sobrenatural | `#766DBC` |
+| Sagrado/especial | `#B41F1C` |
+
+El dorado sagrado sigue pendiente de muestra real en Aseprite; se usa el rojo
+existente reservado para elementos sagrados críticos hasta definirlo. No
+inventar un hex fuera de las paletas de esta guía.
+
+### Variación por zona
+
+| Zona | Dominante | Acento permitido | Qué NO se usa |
+|---|---|---|---|
+| Intro (exterior nocturno) | Frío azul-violeta; `CanvasModulate` actual `Color(0.58, 0.55, 0.64, 1)` (aprox. `#948CA3`) | Luz cálida de brasero/antorcha y violeta solo en la puerta corrupta | Cálidos como luz ambiental general; violeta decorativo sin fuente sobrenatural |
+| Level1 (bosque/ruinas) | Frío desaturado; `CanvasModulate` actual `Color(0.62, 0.58, 0.66, 1)` (aprox. `#9E94A8`) | Teal de hongos/cristales, fuego puntual y violeta de corrupción | Cálido uniforme, ni mezclar teal y violeta sin que cada fuente sea legible |
+| Torre del nigromante | Índigo oscuro; `CanvasModulate` actual `Color(0.42, 0.4, 0.5, 1)` (aprox. `#6B6680`) | Violeta en umbral corrupto y ámbar localizado en altar/llamas | Aclarar toda la sala con luz cálida o teñir de violeta objetos sin relación con corrupción |
+
+Los hex aproximados convierten los RGB actuales de las escenas; conservar el
+valor Godot citado como referencia exacta.
+
+### Significado del violeta
+
+El violeta marca energía sobrenatural/corrupción y lo que el jugador puede usar
+o temer de ese origen.
+
+Respetan la regla `CryptDoorLight` y `BrazierVioletLight` (Intro), `TotemLight`
+y `EyeLight` (Level1), y `BrazierVioletLight` y `ThresholdLight` (TorreSector).
+No la respetan como señal de energía sobrenatural `CrystalWhiteLight`,
+`MushroomLight` y `CrystalBlueLight` (Level1), ni `AltarNicheLight` (TorreSector):
+son fuentes blancas, teal o ámbar y deben leerse como tales, sin teñirse de
+violeta salvo que su función cambie explícitamente.
+
+### Capas de profundidad
+
+| Capa | Contenido | Contraste relativo | Saturación | Contorno | z_index sugerido |
+|---|---|---|---|---|---|
+| Fondo lejano (`BG`, arquitectura profunda) | Siluetas grandes, muros y formas detrás de la escena | Muy bajo | Muy baja | No | -10 a -4 |
+| Fondo cercano (`MG`, ruinas y props detrás del jugador) | Columnas, escombros, luces ambientales | Bajo; separar del BG | Baja | Solo silueta selectiva | -3 a -1 |
+| Plano jugable | Suelo, jugador, enemigos e interactuables | Alto en silueta y lectura | Media; acentos puntuales | Sí, consistente | 0 a 2 |
+| Primer plano (`FG`) | Columnas y elementos que enmarcan sin tapar acción | Medio; no ocultar amenazas | Baja | Sí, menos brillante que el plano jugable | 3 a 5 |
+
+En `TorreSector.tscn`, `BG`, `MG` y `FG` agrupan esos planos; sus sprites
+existentes usan, respectivamente, z_index -4/-1, -1 y 3 como referencia.
+
+### Escala de referencia
+
+Con personaje de ~47 px en pantalla, viewport 640×360 y escala 1:1:
+
+| Elemento | Proporción de altura del personaje | Alto de referencia |
+|---|---:|---:|
+| Puerta | 2–3× | 94–141 px |
+| Columna | 2–4× | 94–188 px |
+| Estatua | 1.5–3× | 71–141 px |
+| Props de mano | 0.15–0.6× | 7–28 px |
+
+Medir en píxeles de pantalla; no compensar diferencias escalando nodos.
+
+### Iluminación por fuente
+
+| Fuente | Color de luz (hex) | Energía sugerida (`PointLight2D`) | Qué debe iluminar |
+|---|---|---:|---|
+| Antorcha | `#FFAA5C` | 0.7–1.0 | Pared y suelo cercanos, con caída corta |
+| Brasero/fuego ritual | `#FF9447` | 1.0–1.7 | Altar, piso y siluetas inmediatas; cálido concentrado |
+| Llama violeta | `#9E5CF9` | 1.0–1.5 | Umbral, corrupción y objetos ligados a esa fuente |
+| Portal/altar | `#766DBC` | 0.7–1.2 | Borde y entorno inmediato; núcleo legible y acotado |
+| Zona sin luz | `#010901` | 0 | Mantener masas oscuras; conservar solo lectura mínima de silueta |
+
+Los colores de luz describen el tratamiento de la fuente; priorizar los colores
+existentes en paleta cuando sean aplicables. Las energías son rangos iniciales,
+ajustables para que las fuentes no borren el contraste del pixel art.

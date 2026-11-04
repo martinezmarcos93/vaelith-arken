@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/dialogue_box.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/dialogue/options_frame.png" id="2_frame"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/ui/dialogue/options_frame@0.5x0.5.png" id="2_frame"]
 
 [node name="DialogueBox" type="CanvasLayer"]
 layer = 90
@@ -9,28 +9,31 @@ script = ExtResource("1_script")
 
 [node name="Panel" type="NinePatchRect" parent="."]
 texture = ExtResource("2_frame")
-patch_margin_left = 76
-patch_margin_top = 50
-patch_margin_right = 76
-patch_margin_bottom = 48
+patch_margin_left = 38
+patch_margin_top = 25
+patch_margin_right = 38
+patch_margin_bottom = 24
 anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 96.0
-offset_top = -196.0
-offset_right = -96.0
-offset_bottom = -16.0
+offset_left = 112.0
+offset_top = -156.0
+offset_right = -112.0
+offset_bottom = -12.0
 
 [node name="Label" type="Label" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 88.0
-offset_top = 42.0
-offset_right = -88.0
-offset_bottom = -58.0
+offset_left = 44.0
+offset_top = 20.0
+offset_right = -44.0
+offset_bottom = -30.0
 theme_override_colors/font_color = Color(0.87, 0.87, 0.83, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.85)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 16
 autowrap_mode = 3
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -40,12 +43,16 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -190.0
-offset_top = -52.0
-offset_right = -88.0
-offset_bottom = -30.0
+offset_left = -222.0
+offset_top = -32.0
+offset_right = -56.0
+offset_bottom = -14.0
 theme_override_colors/font_color = Color(0.82, 0.66, 0.42, 1)
-theme_override_font_sizes/font_size = 15
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.85)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 16
+grow_horizontal = 0
 horizontal_alignment = 2
 vertical_alignment = 1
 text = "[E]  CONTINUAR"
@@ -54,9 +61,9 @@ text = "[E]  CONTINUAR"
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 100.0
-offset_top = 32.0
-offset_right = -100.0
-offset_bottom = -40.0
+offset_left = 50.0
+offset_top = 16.0
+offset_right = -50.0
+offset_bottom = -20.0
 alignment = 1
 theme_override_constants/separation = 6

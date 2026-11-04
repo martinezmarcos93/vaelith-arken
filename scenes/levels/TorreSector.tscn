@@ -22,14 +22,19 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/fire/vaelith_torre_hanging_lantern@0.22x0.22.png" id="hz_14"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_arched_door_01@0.7x0.7.png" id="hz_15"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_barred_gate_01@0.9x0.9.png" id="hz_16"]
-[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/vfx/vaelith_vfx_floor_projection_violet@0.8x0.8.png" id="hz_17"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/vfx/vaelith_vfx_spectral_flame_violet@0.35x0.35.png" id="hz_19"]
 [ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/brasero_violeta_frames.tres" id="fx_brasero_violeta"]
 [ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/brasero_calido_frames.tres" id="fx_brasero_calido"]
 [ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/antorcha_frames.tres" id="fx_antorcha"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_balcony_segment_01.png" id="lj_balcon"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_ruined_arch_01.png" id="lj_arco"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_spiral_staircase_01.png" id="lj_escalera"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/circulo_runas_frames.tres" id="fx_circulo_runas"]
 
 [sub_resource type="Gradient" id="Gradient_glow"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.18, 0.36, 0.52, 0.68, 0.84)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.78, 1, 1, 1, 0.56, 1, 1, 1, 0.36, 1, 1, 1, 0.18, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_glow"]
 gradient = SubResource("Gradient_glow")
@@ -67,25 +72,26 @@ color = Color(0.05, 0.06, 0.11, 1)
 [node name="Room" type="TileMapLayer" parent="."]
 z_index = -5
 modulate = Color(0.6, 0.68, 0.95, 1)
-scale = Vector2(2, 2)
 tile_set = ExtResource("1_tileset")
 script = ExtResource("2_builder")
-height = 9
-door_rows = Array[int]([6, 7])
+width = 28
+height = 18
+door_rows = Array[int]([12, 13, 14, 15])
 floor_seed = 7
+grosor = 2
 
 [node name="Corridor" type="TileMapLayer" parent="."]
 z_index = -5
 modulate = Color(0.5, 0.56, 0.82, 1)
 position = Vector2(448, 0)
-scale = Vector2(2, 2)
 tile_set = ExtResource("1_tileset")
 script = ExtResource("2_builder")
-width = 10
-height = 9
-door_rows = Array[int]([4, 5, 6, 7])
+width = 20
+height = 18
+door_rows = Array[int]([8, 9, 10, 11, 12, 13, 14, 15])
 draw_left_wall = false
 floor_seed = 23
+grosor = 2
 
 [node name="SafetyFloor" type="StaticBody2D" parent="."]
 position = Vector2(360, 490)
@@ -104,6 +110,23 @@ collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SafetyFloor/KillZone"]
 shape = SubResource("Shape_killzone")
+
+[node name="Lejano" type="Node2D" parent="."]
+z_index = -7
+modulate = Color(0.16, 0.17, 0.27, 1)
+
+[node name="GaleriaAlta" type="Sprite2D" parent="Lejano"]
+position = Vector2(590, 98)
+texture = ExtResource("lj_balcon")
+
+[node name="ArcoRuinas" type="Sprite2D" parent="Lejano"]
+position = Vector2(548, 180)
+texture = ExtResource("lj_arco")
+
+[node name="Escalera" type="Sprite2D" parent="Lejano"]
+position = Vector2(96, 182)
+flip_h = true
+texture = ExtResource("lj_escalera")
 
 [node name="BG" type="Node2D" parent="."]
 
@@ -147,7 +170,7 @@ texture = ExtResource("hz_5")
 
 [node name="Shadows" type="Node2D" parent="."]
 z_index = -1
-self_modulate = Color(0, 0, 0, 0.55)
+modulate = Color(0, 0, 0, 0.55)
 
 [node name="ShMonumental" type="Sprite2D" parent="Shadows"]
 position = Vector2(64, 259)
@@ -208,9 +231,9 @@ texture = ExtResource("hz_10")
 [node name="CandelabrumLight" type="PointLight2D" parent="MG/Candelabrum"]
 position = Vector2(0, -66)
 color = Color(1, 0.63, 0.33, 1)
-energy = 2.3
+energy = 1.6
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 2.9
+texture_scale = 2.6
 
 [node name="BrazierWarm" type="AnimatedSprite2D" parent="MG"]
 position = Vector2(162, 257)
@@ -223,9 +246,9 @@ offset = Vector2(0, -63)
 [node name="BrazierWarmLight" type="PointLight2D" parent="MG/BrazierWarm"]
 position = Vector2(0, -58)
 color = Color(1, 0.58, 0.28, 1)
-energy = 1.7
+energy = 1.5
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 2.3
+texture_scale = 2.4
 
 [node name="WallTorchBack" type="AnimatedSprite2D" parent="MG"]
 z_index = -1
@@ -240,9 +263,9 @@ offset = Vector2(0, -49)
 [node name="WallTorchBackLight" type="PointLight2D" parent="MG/WallTorchBack"]
 position = Vector2(4, -39)
 color = Color(1, 0.62, 0.32, 1)
-energy = 0.9
+energy = 1.15
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 1.5
+texture_scale = 1.8
 
 [node name="RoomFill" type="PointLight2D" parent="MG"]
 position = Vector2(240, 30)
@@ -284,10 +307,12 @@ modulate = Color(0.54, 0.48, 0.8, 1)
 position = Vector2(744, 222)
 texture = ExtResource("hz_16")
 
-[node name="FloorProjection" type="Sprite2D" parent="Threshold"]
-modulate = Color(0.95, 0.78, 1.15, 1)
-position = Vector2(712, 252)
-texture = ExtResource("hz_17")
+[node name="FloorProjection" type="AnimatedSprite2D" parent="Threshold"]
+position = Vector2(712, 258)
+sprite_frames = ExtResource("fx_circulo_runas")
+animation = &"default"
+autoplay = "default"
+offset = Vector2(0, -30)
 
 [node name="BrazierViolet" type="AnimatedSprite2D" parent="Threshold"]
 position = Vector2(684, 256)
@@ -299,10 +324,10 @@ offset = Vector2(0, -63)
 
 [node name="BrazierVioletLight" type="PointLight2D" parent="Threshold/BrazierViolet"]
 position = Vector2(0, -66)
-color = Color(0.62, 0.36, 0.98, 1)
-energy = 1.5
+color = Color(0.6, 0.44, 0.92, 1)
+energy = 1.0
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 2.1
+texture_scale = 2.4
 
 [node name="SpectralGate" type="Sprite2D" parent="Threshold"]
 modulate = Color(0.88, 0.72, 1.15, 0.85)
@@ -311,10 +336,10 @@ texture = ExtResource("hz_19")
 
 [node name="ThresholdLight" type="PointLight2D" parent="Threshold"]
 position = Vector2(748, 211)
-color = Color(0.55, 0.3, 1.0, 1)
-energy = 2.4
+color = Color(0.58, 0.42, 0.92, 1)
+energy = 1.4
 texture = SubResource("GradientTexture2D_glow")
-texture_scale = 3.7
+texture_scale = 4.2
 
 [node name="ThresholdTrigger" parent="Threshold" instance=ExtResource("6_exit")]
 position = Vector2(748, 234)
@@ -368,7 +393,7 @@ texture_scale = 1.1
 [node name="Camera2D" parent="Player"]
 limit_left = 0
 limit_top = -20
-limit_right = 780
+limit_right = 768
 limit_bottom = 296
 
 [node name="HUD" parent="." instance=ExtResource("5_hud")]
