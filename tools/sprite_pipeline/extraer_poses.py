@@ -168,7 +168,13 @@ def main(spec_path):
     spec = json.load(open(spec_path, encoding="utf-8"))
     raiz = os.path.dirname(os.path.abspath(spec_path))
     raiz = os.path.normpath(os.path.join(raiz, spec.get("raiz", ".")))
-    img = Image.open(os.path.join(raiz, spec["lamina"]))
+    img = Image.open(os.path.join(raiz, spec["lamina"])).convert("RGBA")
+    # rectángulos a borrar de la lámina (etiquetas pegadas a las figuras)
+    if spec.get("excluir"):
+        a = np.array(img)
+        for x0, y0, x1, y1 in spec["excluir"]:
+            a[y0:y1, x0:x1, 3] = 0
+        img = Image.fromarray(a, "RGBA")
     esc, lienzo, ancla = spec["escala"], tuple(spec["lienzo"]), tuple(spec["ancla"])
     salida = os.path.join(raiz, spec["salida"])
     os.makedirs(salida, exist_ok=True)
