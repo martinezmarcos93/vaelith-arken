@@ -49,3 +49,23 @@ Frames por animación: `relevamiento_2026-11-04/frames_cortados.txt` (los
    ni consistencia entre poses. Re-extraer mejora el corte pero no la
    animación. Decisión pendiente: re-extraer, redibujar a mano a ~48 px, o
    cambiar a un pack de pixel art real con licencia comercial.
+
+## Estado tras los arreglos (mismo día)
+
+Rama `fix/coherencia-visual`. Detalle en `CHANGELOG.md`. Evidencia:
+`relevamiento_2026-11-04/despues_escenas.png` y `despues_jugador_grilla.png`.
+
+| # | Medición antes | Medición después |
+|---|---|---|
+| 1 | piso 13 px por debajo de la colisión; 27 props flotando hasta 38 px | piso al ras; 0 props flotando (salvo `SpectralGate`, que flota a propósito) |
+| 2 | caminar con `run`; `run_4` 15 px arriba | `walk`; todos los frames con el pie en la misma fila |
+| 3 | frames con cortes/restos: jugador 54/77, boss 54/65, espíritu 22/22 | sin cortes; los que marca `recortes.py` son tajos/estelas separados a propósito y bordes rectos del escudo (revisado en grillas) |
+| 4 | Bringer pegado al boss | fuera |
+| 5 | escalas de 0,13 a 5,0 | escala ±1 en todos los sprites; 27 escenas cargan sin errores |
+
+Además: cruce automático de Level1 (`tools/relevamiento/cruzar_level1.gd`)
+llega a la arena con vida completa; el sandbox de combate (`tools/Main.tscn`)
+pasa ataque alto/bajo, bloqueo y ruptura de postura.
+
+Pendiente (no visual): el Zombi no aparece en ningún nivel; la HUD se ve
+durante los diálogos de la Intro (es jugable, se dejó así).

@@ -76,7 +76,13 @@ interacción).
   (hb = semialto de la caja de colisión, s = escala del nodo, H = alto del
   canvas del frame).
 
-## Estado (2026-08-27)
+## Estado
+
+El estado vigente está en `docs/punto-de-control.md`. Desde 2026-11-04 todo el
+arte va a escala 1 (pixel 1:1): para cambiar el tamaño de algo, re-hornear
+con `tools/sprite_pipeline/hornear_escalas.py`, no escalar el nodo.
+
+### Histórico (2026-08-27)
 
 Fases 1–3 del rework narrativo hechas (intro/Level 1 textos, intercambio del
 boss, epílogo + cierre) sobre `main`. Bugs de doble-figura y alineación de pie

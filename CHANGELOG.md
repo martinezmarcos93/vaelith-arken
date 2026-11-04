@@ -6,6 +6,34 @@ en desarrollo). Ver progreso por etapa en [`docs/Roadmap.md`](docs/Roadmap.md).
 
 ## [Unreleased]
 
+### 2026-11-04 — Coherencia visual (rama `fix/coherencia-visual`)
+
+Relevamiento en `docs/RELEVAMIENTO_2026-11-04.md`. Todo lo de abajo se midió
+antes y después con `tools/relevamiento/`.
+
+- **Personajes flotando**: el tile de piso de Level1 tenía 13 filas
+  transparentes arriba → `tile2_surface.png`. 27 props flotaban hasta 38 px →
+  apoyados (`props_flotantes.gd` + `apoyar_props.py`).
+- **Caminata**: jugador y boss usaban `run` (pies en el aire) para caminar →
+  `walk`.
+- **Personajes re-extraídos** (Vaelith, Guerrero-Espejo, Espíritu, No-muerto)
+  con `tools/sprite_pipeline/extraer_poses.py`: sin cuerpos cortados ni restos
+  de poses vecinas, cantidades reales de cada lámina, pixel art 1:1 con paleta
+  de 32 por personaje. El espíritu sale de la lámina v1 (la v2 tiene una bruma
+  de fondo que generaba el rectángulo gris).
+- **Bringer of Death** fuera de la antesala del boss (no estaba en el guion).
+- **Props legibles**: `mapa_degradado.py` reemplaza al recolor por color
+  cercano en las 20 texturas usadas (conserva luces y sombras).
+- **Un solo tamaño de píxel**: `hornear_escalas.py` hornea la escala de 69
+  sprites y de las barras de la HUD; todo queda a escala ±1.
+- **HUD**: barra del boss arriba a la derecha (se montaba sobre la del
+  jugador); barras e ícono sin filtro lineal.
+- **Hazard del tramo C**: pinches góticos en vez de un `ColorRect` rojo.
+- **Fuego animado con pixelfx** (MIT) en braseros, antorchas y hoguera.
+- **Boss**: paredes de la arena diferidas (errores de física) y pared derecha
+  (se podía caer del mundo).
+- El Zombi no se re-extrajo: no aparece en ningún nivel.
+
 ### 2026-09-09 (cont.) — Recolor del catálogo de arte de entorno
 
 - Pasada sistemática de recolor a la paleta canónica con
