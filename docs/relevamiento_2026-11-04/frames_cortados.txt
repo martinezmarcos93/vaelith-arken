@@ -1,0 +1,140 @@
+
+assets/sprites/enemies/bringer_of_death_clembod_free: 7/40 frames con problemas
+    Bringer-of-Death_Attack_6.png -> 2 restos sueltos (mayor 104px)
+    Bringer-of-Death_Attack_7.png -> 2 restos sueltos (mayor 52px)
+    Bringer-of-Death_Attack_8.png -> 5 restos sueltos (mayor 255px)
+    Bringer-of-Death_Attack_9.png -> 2 restos sueltos (mayor 59px)
+    Bringer-of-Death_Cast_8.png -> 1 restos sueltos (mayor 42px)
+    Bringer-of-Death_Death_7.png -> 1 restos sueltos (mayor 174px)
+    Bringer-of-Death_Death_8.png -> 2 restos sueltos (mayor 76px)
+
+assets/sprites/enemies/espejo_boss_custom: 54/65 frames con problemas
+    idle_2.png -> corte der 60px
+    idle_3.png -> corte der 66px
+    walk_0.png -> corte izq 64px, corte der 64px, 1 restos sueltos (mayor 1493px)
+    walk_1.png -> corte izq 64px, corte der 60px, 1 restos sueltos (mayor 2073px)
+    walk_2.png -> corte izq 57px, corte der 53px, 1 restos sueltos (mayor 2143px)
+    walk_3.png -> corte izq 53px, corte der 57px, 1 restos sueltos (mayor 1750px)
+    walk_4.png -> corte izq 56px, corte der 55px
+    walk_5.png -> corte izq 59px, corte der 60px, 1 restos sueltos (mayor 1926px)
+    walk_6.png -> corte izq 60px, corte der 62px
+    walk_7.png -> corte izq 60px, corte der 60px, 1 restos sueltos (mayor 2247px)
+    run_2.png -> corte der 32px
+    run_3.png -> corte izq 31px, corte der 39px, 1 restos sueltos (mayor 218px)
+    run_4.png -> corte izq 38px, corte der 45px, 1 restos sueltos (mayor 648px)
+    run_5.png -> corte izq 45px, corte der 51px, 1 restos sueltos (mayor 769px)
+    run_6.png -> corte izq 50px, corte der 43px, 1 restos sueltos (mayor 1073px)
+    run_7.png -> corte izq 56px, corte der 56px, 1 restos sueltos (mayor 1655px)
+    jump_0.png -> corte izq 45px, corte der 59px, 1 restos sueltos (mayor 1546px)
+    jump_1.png -> corte izq 60px, corte der 46px, 1 restos sueltos (mayor 1716px)
+    jump_2.png -> corte izq 45px, corte der 30px
+    jump_3.png -> corte izq 30px, corte der 66px, 1 restos sueltos (mayor 807px)
+    jump_4.png -> corte izq 67px, corte der 80px
+    land_0.png -> 1 restos sueltos (mayor 375px)
+    land_2.png -> corte der 61px, 1 restos sueltos (mayor 327px)
+    land_3.png -> corte izq 64px, corte der 81px, 1 restos sueltos (mayor 941px)
+    attack_high_0.png -> corte izq 71px, corte der 64px, 2 restos sueltos (mayor 574px)
+    attack_high_1.png -> corte izq 68px
+    attack_high_2.png -> corte der 69px
+    attack_high_3.png -> corte izq 55px, corte der 77px, 1 restos sueltos (mayor 377px)
+    attack_high_4.png -> corte izq 78px, corte der 80px, 2 restos sueltos (mayor 1543px)
+    attack_high_5.png -> corte izq 79px, 2 restos sueltos (mayor 316px)
+    attack_high_6.png -> corte der 52px, 1 restos sueltos (mayor 1244px)
+    attack_high_7.png -> corte izq 62px, 1 restos sueltos (mayor 398px)
+    attack_low_0.png -> corte der 64px
+    attack_low_1.png -> corte izq 65px, corte der 56px
+    attack_low_2.png -> corte izq 56px, 1 restos sueltos (mayor 39px)
+    attack_low_3.png -> corte der 76px
+    attack_low_4.png -> corte izq 45px, corte der 92px, 2 restos sueltos (mayor 298px)
+    attack_low_5.png -> corte izq 87px, corte der 84px, 2 restos sueltos (mayor 1478px)
+    attack_low_6.png -> corte izq 83px, corte der 65px, 1 restos sueltos (mayor 553px)
+    attack_low_7.png -> corte izq 66px, corte der 46px
+
+assets/sprites/enemies/espiritu_atado_custom: 22/22 frames con problemas
+    idle_0.png -> corte izq 110px, corte der 110px
+    idle_1.png -> corte izq 110px, corte der 110px
+    idle_2.png -> corte izq 110px, corte der 110px
+    idle_3.png -> corte izq 110px, corte der 110px
+    idle_4.png -> corte izq 110px, corte der 110px
+    idle_5.png -> corte izq 110px, corte der 110px
+    idle_6.png -> corte izq 110px, corte der 110px
+    idle_7.png -> corte izq 110px, corte der 110px
+    attack1_0.png -> corte izq 115px, corte der 115px
+    attack1_1.png -> corte izq 115px, corte der 115px
+    attack1_2.png -> corte izq 115px, corte der 115px
+    attack1_3.png -> corte izq 115px, corte der 115px
+    attack1_4.png -> corte izq 115px, corte der 115px
+    attack1_5.png -> corte izq 115px, corte der 115px
+    vulnerable_0.png -> corte izq 115px, corte der 115px
+    vulnerable_1.png -> corte izq 115px, corte der 115px
+    vulnerable_2.png -> corte izq 115px, corte der 115px
+    vulnerable_3.png -> corte izq 115px, corte der 115px
+    death_0.png -> corte izq 115px, corte der 115px
+    death_1.png -> corte izq 115px, corte der 115px
+    death_2.png -> corte izq 115px, corte der 115px
+    death_3.png -> corte izq 115px, corte der 115px
+
+assets/sprites/enemies/ghost_skull_fatalaigaming_free: 1/1 frames con problemas
+    ghostSpritesheetfull.png -> corte izq 32px, corte der 32px, 6 restos sueltos (mayor 2144px)
+
+assets/sprites/enemies/necromancer_creativekind_free_commercial_ok: 1/1 frames con problemas
+    Necromancer_creativekind-Sheet.png -> 75 restos sueltos (mayor 828px)
+
+assets/sprites/enemies/no_muerto_errante_custom: 4/36 frames con problemas
+    attack1_0.png -> 1 restos sueltos (mayor 75px)
+    attack1_1.png -> 1 restos sueltos (mayor 55px)
+    attack1_5.png -> 4 restos sueltos (mayor 62px)
+    death_3.png -> 1 restos sueltos (mayor 35px)
+
+assets/sprites/enemies/skeleton_warrior_craftpix_free: 7/7 frames con problemas
+    Idle.png -> 6 restos sueltos (mayor 1102px)
+    Walk.png -> 6 restos sueltos (mayor 1001px)
+    Attack_1.png -> 4 restos sueltos (mayor 985px)
+    Attack_2.png -> 5 restos sueltos (mayor 1195px)
+    Attack_3.png -> 3 restos sueltos (mayor 907px)
+    Hurt.png -> 1 restos sueltos (mayor 966px)
+    Dead.png -> 3 restos sueltos (mayor 900px)
+
+assets/sprites/enemies/zombi_devorado_custom: 25/32 frames con problemas
+    walk_0.png -> corte der 52px
+    walk_1.png -> corte izq 47px, corte der 67px, 2 restos sueltos (mayor 266px)
+    walk_2.png -> corte izq 57px, corte der 112px, 3 restos sueltos (mayor 372px)
+    walk_3.png -> corte izq 111px, corte der 95px, 3 restos sueltos (mayor 1130px)
+    walk_4.png -> corte izq 104px, corte der 69px, 1 restos sueltos (mayor 2138px)
+    walk_5.png -> corte izq 71px, corte der 77px, 1 restos sueltos (mayor 1225px)
+    walk_6.png -> corte izq 77px
+    attack_claw_0.png -> corte der 61px, 2 restos sueltos (mayor 378px)
+    attack_claw_1.png -> corte izq 81px, 2 restos sueltos (mayor 198px)
+    attack_claw_2.png -> corte izq 50px, 3 restos sueltos (mayor 59px)
+    attack_bite_1.png -> 1 restos sueltos (mayor 573px)
+    attack_bite_2.png -> corte der 59px, 3 restos sueltos (mayor 1391px)
+    attack_bite_3.png -> corte izq 59px, corte der 56px, 2 restos sueltos (mayor 294px)
+    attack_bite_4.png -> corte izq 74px, 2 restos sueltos (mayor 116px)
+    hurt_0.png -> 1 restos sueltos (mayor 41px)
+    die_0.png -> corte der 57px, 1 restos sueltos (mayor 92px)
+    die_1.png -> corte izq 84px, corte der 125px, 1 restos sueltos (mayor 1344px)
+    die_2.png -> corte izq 121px
+    die_3.png -> corte izq 29px, corte der 42px
+    die_4.png -> corte izq 42px, 3 restos sueltos (mayor 227px)
+    dissolve_0.png -> 2 restos sueltos (mayor 168px)
+    dissolve_1.png -> corte der 51px, 4 restos sueltos (mayor 710px)
+    dissolve_2.png -> corte izq 48px, 1 restos sueltos (mayor 213px)
+    dissolve_3.png -> 1 restos sueltos (mayor 100px)
+    dissolve_4.png -> 2 restos sueltos (mayor 98px)
+
+assets/sprites/player/vaelith_custom: 54/77 frames con problemas
+    walk_0.png -> corte der 92px
+    walk_1.png -> corte izq 78px, corte der 48px
+    walk_2.png -> corte izq 39px, 1 restos sueltos (mayor 176px)
+    walk_4.png -> 1 restos sueltos (mayor 157px)
+    walk_5.png -> corte der 40px, 1 restos sueltos (mayor 429px)
+    walk_6.png -> corte izq 58px, corte der 58px, 1 restos sueltos (mayor 755px)
+    walk_7.png -> corte izq 59px
+    run_2.png -> 1 restos sueltos (mayor 138px)
+    run_3.png -> corte izq 46px, 1 restos sueltos (mayor 262px)
+    run_4.png -> corte izq 49px, corte der 35px, 1 restos sueltos (mayor 537px)
+    run_5.png -> corte izq 56px, corte der 37px, 1 restos sueltos (mayor 658px)
+    run_6.png -> corte izq 67px
+    jump_3.png -> 1 restos sueltos (mayor 183px)
+    land_1.png -> corte der 79px
+    land_2.png -> corte izq 79px, corte der 63px, 2 restos sueltos (mayor 1070px)

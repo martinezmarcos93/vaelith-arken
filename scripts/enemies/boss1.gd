@@ -63,7 +63,7 @@ enum State { APPROACH, ATTACK_HIGH, ATTACK_LOW, SHOVE, BLOCK, VULNERABLE, TRANSI
 ## extraido de source_sheets/characters/boss/spectral_knight_violet_sheet.png
 ## (Fase 1 de la auditoria). Todas las acciones tienen animacion propia.
 @export var anim_idle: String = "idle"
-@export var anim_move: String = "run"
+@export var anim_move: String = "walk"
 @export var anim_attack_high: String = "attack1"
 @export var anim_attack_low: String = "attack2"
 @export var anim_shove: String = "shove"

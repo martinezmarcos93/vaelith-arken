@@ -1,0 +1,286 @@
+{
+ "raiz": "../..",
+ "lamina": "assets/source_sheets/characters/boss/spectral_knight_violet_sheet.png",
+ "salida": "assets/sprites/enemies/espejo_boss_custom",
+ "escala": 0.5,
+ "lienzo": [
+  128,
+  80
+ ],
+ "ancla": [
+  64,
+  74
+ ],
+ "colores": 32,
+ "filas": [
+  {
+   "nombre": "idle_{i}",
+   "caja": [
+    300,
+    25,
+    580,
+    145
+   ],
+   "n": 3
+  },
+  {
+   "nombre": "walk_{i}",
+   "caja": [
+    590,
+    25,
+    1530,
+    145
+   ],
+   "n": 9
+  },
+  {
+   "nombre": "run_{i}",
+   "caja": [
+    295,
+    165,
+    1065,
+    290
+   ],
+   "n": 8
+  },
+  {
+   "nombre": "jump_{i}",
+   "caja": [
+    1070,
+    165,
+    1530,
+    290
+   ],
+   "n": 5
+  },
+  {
+   "nombre": "land_{i}",
+   "caja": [
+    0,
+    348,
+    305,
+    440
+   ],
+   "n": 3
+  },
+  {
+   "nombre": "attack_high_{i}",
+   "caja": [
+    310,
+    300,
+    958,
+    440
+   ],
+   "n": 6,
+   "centros": [
+    356,
+    454,
+    547,
+    646,
+    752,
+    862
+   ]
+  },
+  {
+   "nombre": "attack_low_{i}",
+   "caja": [
+    958,
+    300,
+    1530,
+    440
+   ],
+   "n": 6
+  },
+  {
+   "nombre": "block_{i}",
+   "caja": [
+    0,
+    445,
+    485,
+    575
+   ],
+   "n": 6
+  },
+  {
+   "nombre": "shove_{i}",
+   "caja": [
+    488,
+    445,
+    1265,
+    575
+   ],
+   "n": 6,
+   "centros": [
+    538,
+    631,
+    810,
+    965,
+    1105,
+    1215
+   ]
+  },
+  {
+   "nombre": "hurt_{i}",
+   "caja": [
+    0,
+    580,
+    335,
+    715
+   ],
+   "n": 4
+  },
+  {
+   "nombre": "stagger_{i}",
+   "caja": [
+    338,
+    580,
+    570,
+    715
+   ],
+   "n": 3
+  }
+ ],
+ "animaciones": {
+  "idle": {
+   "prefijo": "idle",
+   "fps": 5,
+   "loop": true
+  },
+  "walk": {
+   "prefijo": "walk",
+   "fps": 10,
+   "loop": true
+  },
+  "run": {
+   "prefijo": "run",
+   "fps": 12,
+   "loop": true
+  },
+  "jump": {
+   "archivos": [
+    "jump_0.png",
+    "jump_1.png",
+    "jump_2.png"
+   ],
+   "fps": 10,
+   "loop": false
+  },
+  "fall": {
+   "archivos": [
+    "jump_3.png",
+    "jump_4.png"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "land": {
+   "prefijo": "land",
+   "fps": 12,
+   "loop": false
+  },
+  "attack1": {
+   "prefijo": "attack_high",
+   "fps": 6,
+   "loop": false
+  },
+  "attack2": {
+   "prefijo": "attack_low",
+   "fps": 7.5,
+   "loop": false
+  },
+  "block": {
+   "prefijo": "block",
+   "fps": 10,
+   "loop": false
+  },
+  "shove": {
+   "prefijo": "shove",
+   "fps": 24,
+   "loop": false
+  },
+  "hurt": {
+   "prefijo": "hurt",
+   "fps": 13,
+   "loop": false
+  },
+  "stagger": {
+   "prefijo": "stagger",
+   "fps": 6,
+   "loop": false
+  }
+ },
+ "excluir": [
+  [
+   305,
+   8,
+   425,
+   37
+  ],
+  [
+   600,
+   8,
+   745,
+   37
+  ],
+  [
+   305,
+   148,
+   445,
+   174
+  ],
+  [
+   1080,
+   143,
+   1200,
+   172
+  ],
+  [
+   305,
+   300,
+   460,
+   327
+  ],
+  [
+   960,
+   300,
+   1130,
+   327
+  ],
+  [
+   10,
+   445,
+   227,
+   470
+  ],
+  [
+   483,
+   445,
+   630,
+   470
+  ],
+  [
+   10,
+   581,
+   177,
+   606
+  ],
+  [
+   345,
+   581,
+   487,
+   606
+  ],
+  [
+   788,
+   576,
+   1023,
+   602
+  ],
+  [
+   785,
+   608,
+   955,
+   635
+  ]
+ ]
+}

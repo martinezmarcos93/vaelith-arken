@@ -1,0 +1,22 @@
+{
+ "raiz": "../..",
+ "lamina": "assets/source_sheets/characters/enemies/bound_spirit_sheet.png",
+ "salida": "assets/sprites/enemies/espiritu_atado_custom",
+ "escala": 0.6,
+ "lienzo": [160, 96],
+ "ancla": [80, 90],
+ "colores": 32,
+ "excluir": [[515, 712, 612, 825], [1012, 712, 1125, 825]],
+ "filas": [
+  {"nombre": "idle_{i}",       "caja": [215, 10, 1250, 140],   "n": 8},
+  {"nombre": "attack1_{i}",    "caja": [205, 395, 1290, 505],  "n": 5},
+  {"nombre": "vulnerable_{i}", "caja": [190, 600, 1120, 712],  "n": 7, "centros": [224, 333, 467, 638, 767, 909, 1032]},
+  {"nombre": "death_{i}",      "caja": [195, 712, 1010, 825],  "n": 6, "centros": [240, 342, 451, 698, 841, 972]}
+ ],
+ "animaciones": {
+  "idle": {"prefijo": "idle", "fps": 8, "loop": true},
+  "attack1": {"prefijo": "attack1", "fps": 10, "loop": false},
+  "vulnerable": {"prefijo": "vulnerable", "fps": 8, "loop": true},
+  "death": {"prefijo": "death", "fps": 8, "loop": false}
+ }
+}

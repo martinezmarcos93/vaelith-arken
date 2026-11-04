@@ -10,35 +10,34 @@
 [ext_resource type="PackedScene" path="res://scenes/level/Checkpoint.tscn" id="4_checkpoint"]
 [ext_resource type="PackedScene" path="res://scenes/level/Hazard.tscn" id="5_hazard"]
 [ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="6_hud"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/white_crystal_dark_shadow1.png" id="7_crystal_white"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Blue-green_crystal_dark_shadow1.png" id="8_crystal_blue"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/mushroom2_light_shadow1.png" id="9_mushroom"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Dark_totem_dark_shadow2.png" id="10_totem"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Demon_scull_dark_shadow.png" id="11_skull"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Dinosaur_skeleton_part1_dark_shadow.png" id="12_bones"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/caveman_statue_dark_shadow1.png" id="13_statue"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_props_craftpix_free/Gates_dark_shadow3.png" id="14_bonfire"]
 [ext_resource type="PackedScene" path="res://scenes/level/MemoryFragment.tscn" id="16_memory"]
 [ext_resource type="PackedScene" path="res://scenes/level/DialogueTrigger.tscn" id="17_dialogue"]
 [ext_resource type="PackedScene" path="res://scenes/level/SkullCollectible.tscn" id="19_skull"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/Boss1.tscn" id="20_boss1"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/BringerOfDeath.tscn" id="33_bringer"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_01.png" id="22_root1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_02.png" id="23_root2"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_60.png" id="24_table1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_05.png" id="25_jar1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_rocks_craftpix_free/cave_rock1.png" id="26_rock1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/cave_rocks_craftpix_free/cave_rock3.png" id="27_rock2"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_51.png" id="28_shelf1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_platformer_craftpix_free/Tiles_rock/tile2.png" id="29_tile_rock"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/level1_parallax/sky_bloodmoon.png" id="30_bg_sky"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/level1_parallax/ridge_silhouette.png" id="31_bg_ruinsbg"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/level1_parallax/clouds_far.png" id="32_bg_ruins"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_09.png" id="34_stump1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_30.png" id="35_book1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_47.png" id="36_plant1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_44.png" id="37_potion1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/crypt_door_custom/door_closed.png" id="38_cryptdoor"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_platformer_craftpix_free/Tiles_rock/tile2_surface.png" id="29_tile_rock"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/backgrounds/level1_parallax/sky_bloodmoon@2.6x2.6.png" id="hz_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/backgrounds/level1_parallax/ridge_silhouette@2.5x2.5.png" id="hz_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/backgrounds/level1_parallax/clouds_far@1.4x1.4.png" id="hz_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_props_craftpix_free/white_crystal_dark_shadow1@0.7x0.7.png" id="hz_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_props_craftpix_free/mushroom2_light_shadow1@0.4x0.4.png" id="hz_5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_props_craftpix_free/caveman_statue_dark_shadow1@0.7x0.7.png" id="hz_6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_props_craftpix_free/Dark_totem_dark_shadow2@0.4x0.4.png" id="hz_7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_props_craftpix_free/Blue-green_crystal_dark_shadow1@0.7x0.7.png" id="hz_8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_props_craftpix_free/Demon_scull_dark_shadow@0.4x0.4.png" id="hz_9"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_props_craftpix_free/Dinosaur_skeleton_part1_dark_shadow@0.4x0.4.png" id="hz_10"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/dungeon_props_craftpix_free/obj_09@0.9x0.9.png" id="hz_12"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/dungeon_props_craftpix_free/obj_30@1.4x1.4.png" id="hz_13"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/dungeon_props_craftpix_free/obj_47@1.3x1.3.png" id="hz_14"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/dungeon_props_craftpix_free/obj_44@1.4x1.4.png" id="hz_15"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/dungeon_props_craftpix_free/obj_01@0.7x0.7.png" id="hz_16"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/dungeon_props_craftpix_free/obj_60@0.9x0.9.png" id="hz_17"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/dungeon_props_craftpix_free/obj_02@0.6x0.6.png" id="hz_18"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/dungeon_props_craftpix_free/obj_05@0.9x0.9.png" id="hz_19"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_rocks_craftpix_free/cave_rock1@0.7x0.7.png" id="hz_20"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/tilesets/cave_rocks_craftpix_free/cave_rock3@0.8x0.8.png" id="hz_21"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/crypt_door_custom/door_closed@0.45x0.45.png" id="hz_22"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/hoguera_frames.tres" id="fx_hoguera"]
 
 [sub_resource type="RectangleShape2D" id="Shape_220x24"]
 size = Vector2(220, 24)
@@ -114,8 +113,7 @@ motion_scale = Vector2(0.04, 0.04)
 texture_filter = 1
 modulate = Color(0.5, 0.48, 0.6, 1)
 position = Vector2(560, 250)
-scale = Vector2(2.6, 2.6)
-texture = ExtResource("30_bg_sky")
+texture = ExtResource("hz_1")
 
 [node name="Ridge" type="ParallaxLayer" parent="Background"]
 motion_scale = Vector2(0.18, 0.12)
@@ -125,8 +123,7 @@ motion_mirroring = Vector2(2405, 0)
 texture_filter = 1
 modulate = Color(0.5, 0.48, 0.56, 1)
 position = Vector2(560, 430)
-scale = Vector2(2.5, 2.5)
-texture = ExtResource("31_bg_ruinsbg")
+texture = ExtResource("hz_2")
 
 [node name="Clouds" type="ParallaxLayer" parent="Background"]
 motion_scale = Vector2(0.26, 0.14)
@@ -136,8 +133,7 @@ motion_mirroring = Vector2(1140, 0)
 texture_filter = 1
 modulate = Color(0.52, 0.5, 0.6, 0.5)
 position = Vector2(560, 250)
-scale = Vector2(1.4, 1.4)
-texture = ExtResource("32_bg_ruins")
+texture = ExtResource("hz_3")
 
 [node name="SafetyFloor" type="StaticBody2D" parent="."]
 position = Vector2(1800, 650)
@@ -562,9 +558,8 @@ range_item_cull_mask = 2
 texture = SubResource("GradientTexture2D_glow")
 texture_scale = 1.6
 [node name="PropCrystalWhite" type="Sprite2D" parent="."]
-position = Vector2(435, 308)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("7_crystal_white")
+position = Vector2(435, 313)
+texture = ExtResource("hz_4")
 [node name="CrystalWhiteLight" type="PointLight2D" parent="PropCrystalWhite"]
 color = Color(0.7, 0.78, 0.95, 1)
 energy = 0.7
@@ -572,9 +567,8 @@ texture = SubResource("GradientTexture2D_glow")
 texture_scale = 1.6
 
 [node name="PropMushroom" type="Sprite2D" parent="."]
-position = Vector2(685, 368)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("9_mushroom")
+position = Vector2(685, 375)
+texture = ExtResource("hz_5")
 [node name="MushroomLight" type="PointLight2D" parent="PropMushroom"]
 color = Color(0.45, 0.6, 0.7, 1)
 energy = 0.25
@@ -582,14 +576,12 @@ texture = SubResource("GradientTexture2D_glow")
 texture_scale = 0.9
 
 [node name="PropStatue" type="Sprite2D" parent="."]
-position = Vector2(2365, 416)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("13_statue")
+position = Vector2(2365, 429)
+texture = ExtResource("hz_6")
 
 [node name="PropDarkTotem" type="Sprite2D" parent="."]
-position = Vector2(1845, 406)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("10_totem")
+position = Vector2(1845, 435)
+texture = ExtResource("hz_7")
 [node name="TotemLight" type="PointLight2D" parent="PropDarkTotem"]
 color = Color(0.55, 0.35, 0.85, 1)
 energy = 0.5
@@ -597,9 +589,8 @@ texture = SubResource("GradientTexture2D_glow")
 texture_scale = 1.4
 
 [node name="PropCrystalBlueGreen" type="Sprite2D" parent="."]
-position = Vector2(2425, 425)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("8_crystal_blue")
+position = Vector2(2425, 434)
+texture = ExtResource("hz_8")
 [node name="CrystalBlueLight" type="PointLight2D" parent="PropCrystalBlueGreen"]
 color = Color(0.4, 0.8, 0.75, 1)
 energy = 0.7
@@ -607,85 +598,75 @@ texture = SubResource("GradientTexture2D_glow")
 texture_scale = 1.6
 
 [node name="PropDemonSkull" type="Sprite2D" parent="."]
-position = Vector2(2585, 406)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("11_skull")
+position = Vector2(2585, 439)
+texture = ExtResource("hz_9")
 
 [node name="PropDinoBones" type="Sprite2D" parent="."]
-position = Vector2(2755, 406)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("12_bones")
+position = Vector2(2755, 437)
+texture = ExtResource("hz_10")
 
-[node name="PropBonfire" type="Sprite2D" parent="."]
-position = Vector2(2945, 406)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("14_bonfire")
+[node name="PropBonfire" type="AnimatedSprite2D" parent="."]
+position = Vector2(2945, 452)
+sprite_frames = ExtResource("fx_hoguera")
+animation = &"default"
+autoplay = "default"
+frame = 0
+offset = Vector2(0, -53)
 [node name="BonfireLight" type="PointLight2D" parent="PropBonfire"]
-position = Vector2(0, -20)
+position = Vector2(0, -33)
 color = Color(1, 0.58, 0.28, 1)
 energy = 1.6
 texture = SubResource("GradientTexture2D_glow")
 texture_scale = 2.9
 
 [node name="PropStump1" type="Sprite2D" parent="."]
-position = Vector2(250, 245)
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("34_stump1")
+position = Vector2(250, 248)
+texture = ExtResource("hz_12")
 
 [node name="PropBook1" type="Sprite2D" parent="."]
-position = Vector2(600, 375)
-scale = Vector2(1.4, 1.4)
-texture = ExtResource("35_book1")
+position = Vector2(600, 383)
+texture = ExtResource("hz_13")
 
 [node name="PropPlant1" type="Sprite2D" parent="."]
-position = Vector2(2150, 420)
-scale = Vector2(1.3, 1.3)
-texture = ExtResource("36_plant1")
+position = Vector2(2150, 443)
+texture = ExtResource("hz_14")
 
 [node name="PropPotion1" type="Sprite2D" parent="."]
-position = Vector2(2500, 300)
-scale = Vector2(1.4, 1.4)
-texture = ExtResource("37_potion1")
+position = Vector2(2500, 302)
+texture = ExtResource("hz_15")
 
 [node name="PropRoot1" type="Sprite2D" parent="."]
-position = Vector2(850, 410)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("22_root1")
+position = Vector2(850, 427)
+texture = ExtResource("hz_16")
 
 [node name="PropTable1" type="Sprite2D" parent="."]
-position = Vector2(1220, 410)
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("24_table1")
+position = Vector2(1220, 438)
+texture = ExtResource("hz_17")
 
 [node name="PropRoot2" type="Sprite2D" parent="."]
-position = Vector2(1450, 400)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("23_root2")
+position = Vector2(1450, 407)
+texture = ExtResource("hz_18")
 
 [node name="PropJar1" type="Sprite2D" parent="."]
-position = Vector2(1630, 400)
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("25_jar1")
+position = Vector2(1630, 409)
+texture = ExtResource("hz_19")
 
 [node name="PropRockPile1" type="Sprite2D" parent="."]
 position = Vector2(2450, 410)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("26_rock1")
+texture = ExtResource("hz_20")
 
 [node name="PropRockPile2" type="Sprite2D" parent="."]
-position = Vector2(2800, 420)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("27_rock2")
+position = Vector2(2800, 426)
+texture = ExtResource("hz_21")
 
 [node name="PropShelf1" type="Sprite2D" parent="."]
-position = Vector2(3150, 410)
+position = Vector2(3150, 432)
 scale = Vector2(1.0, 1.0)
 texture = ExtResource("28_shelf1")
 
 [node name="PropJar2" type="Sprite2D" parent="."]
-position = Vector2(3480, 400)
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("25_jar1")
+position = Vector2(3480, 429)
+texture = ExtResource("hz_19")
 
 [node name="DialogueTrigger5" parent="." instance=ExtResource("17_dialogue")]
 position = Vector2(720, 368)
@@ -755,10 +736,9 @@ boss_music = "res://assets/audio/music/boss.mp3"
 music_db = -5.0
 
 [node name="PropCryptDoor" type="Sprite2D" parent="."]
-position = Vector2(3550, 290)
-scale = Vector2(0.45, 0.45)
+position = Vector2(3550, 329)
 z_index = -1
-texture = ExtResource("38_cryptdoor")
+texture = ExtResource("hz_22")
 
 [node name="EyeLight" type="PointLight2D" parent="PropCryptDoor"]
 position = Vector2(0, -3)
@@ -766,20 +746,6 @@ color = Color(0.6, 0.35, 1, 1)
 energy = 1.0
 texture = SubResource("GradientTexture2D_glow")
 texture_scale = 1.1
-
-[node name="BringerOfDeath1" parent="." instance=ExtResource("33_bringer")]
-position = Vector2(3220, 410)
-
-[node name="AnimatedSprite2D" parent="BringerOfDeath1" index="1"]
-light_mask = 5
-
-[node name="RimLight" type="PointLight2D" parent="BringerOfDeath1"]
-position = Vector2(0, -38)
-color = Color(0.6, 0.66, 0.8, 1)
-energy = 0.17
-range_item_cull_mask = 4
-texture = SubResource("GradientTexture2D_glow")
-texture_scale = 0.95
 
 [node name="Boss1" parent="." instance=ExtResource("20_boss1")]
 position = Vector2(3550, 410)

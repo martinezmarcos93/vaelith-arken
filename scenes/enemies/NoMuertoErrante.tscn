@@ -37,10 +37,9 @@ anim_death = "death"
 shape = SubResource("Body")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.6, 0.6)
 sprite_frames = ExtResource("4_frames")
 animation = &"idle"
-offset = Vector2(0, -34)
+offset = Vector2(0, -20)
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2

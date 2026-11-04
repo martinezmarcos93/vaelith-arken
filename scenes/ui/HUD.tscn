@@ -1,11 +1,13 @@
 [gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/hud/hud_bar_frame.png" id="2_frame"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/hud/hud_bar_track.png" id="3_track"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/hud/hud_bar_fill_gold.png" id="4_gold"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/hud/hud_bar_fill_violet.png" id="5_violet"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ui/skull_collectible_craftpix_free/skull_icon.png" id="6_skull"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/ui/skull_collectible_craftpix_free/skull_icon@0.5625x0.5625.png" id="6_skull"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/ui/hud/hud_bar_frame@0.6x0.6.png" id="2_frame_p"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/ui/hud/hud_bar_track@0.6x0.6.png" id="3_track_p"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/ui/hud/hud_bar_fill_gold@0.6x0.6.png" id="4_gold_p"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/ui/hud/hud_bar_frame@0.828x0.828.png" id="2_frame_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/ui/hud/hud_bar_track@0.828x0.828.png" id="3_track_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/ui/hud/hud_bar_fill_violet@0.828x0.828.png" id="5_violet_b"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_script")
@@ -17,18 +19,15 @@ offset_right = 280.0
 offset_bottom = 110.0
 
 [node name="HealthBar" type="TextureProgressBar" parent="PlayerBlock"]
-texture_filter = 1
-scale = Vector2(0.6, 0.6)
 max_value = 5.0
 value = 5.0
 nine_patch_stretch = false
-texture_under = ExtResource("3_track")
-texture_over = ExtResource("2_frame")
-texture_progress = ExtResource("4_gold")
-texture_progress_offset = Vector2i(92, 46)
+texture_under = ExtResource("3_track_p")
+texture_over = ExtResource("2_frame_p")
+texture_progress = ExtResource("4_gold_p")
+texture_progress_offset = Vector2i(55, 28)
 
 [node name="SkullIcon" type="TextureRect" parent="PlayerBlock"]
-texture_filter = 1
 offset_left = 4.0
 offset_top = 62.0
 offset_right = 22.0
@@ -62,11 +61,11 @@ text = "Corrupción ○○○"
 
 [node name="BossBar" type="Control" parent="."]
 visible = false
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -164.0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -348.0
 offset_top = 16.0
-offset_right = 164.0
+offset_right = -20.0
 offset_bottom = 92.0
 grow_horizontal = 2
 
@@ -81,13 +80,11 @@ horizontal_alignment = 1
 text = "GUERRERO-ESPEJO"
 
 [node name="HealthBar" type="TextureProgressBar" parent="BossBar"]
-texture_filter = 1
 offset_top = 20.0
-scale = Vector2(0.828, 0.828)
 max_value = 20.0
 value = 20.0
 nine_patch_stretch = false
-texture_under = ExtResource("3_track")
-texture_over = ExtResource("2_frame")
-texture_progress = ExtResource("5_violet")
-texture_progress_offset = Vector2i(92, 46)
+texture_under = ExtResource("3_track_b")
+texture_over = ExtResource("2_frame_b")
+texture_progress = ExtResource("5_violet_b")
+texture_progress_offset = Vector2i(76, 38)

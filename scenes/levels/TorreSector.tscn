@@ -8,24 +8,25 @@
 [ext_resource type="PackedScene" path="res://scenes/level/SceneTransitionTrigger.tscn" id="6_exit"]
 [ext_resource type="PackedScene" path="res://scenes/level/RecognitionPoint.tscn" id="7_recognition"]
 [ext_resource type="Script" path="res://scripts/level/hazard.gd" id="8_hazard"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_column_plain_01.png" id="9_col_plain"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_column_twisted_01.png" id="10_col_twisted"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_arched_door_01.png" id="11_arched_door"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_barred_gate_01.png" id="12_barred_gate"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_altar_01.png" id="13_altar"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_gargoyle_01.png" id="14_gargoyle"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/architecture/vaelith_gothic_arch_ruined_arch_01.png" id="15_ruined_arch"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/props/vaelith_torre_ritual_table_01.png" id="16_ritual_table"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/props/vaelith_torre_failed_experiment_corpse_01.png" id="17_corpse"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/props/vaelith_torre_skull_bones_cluster_01.png" id="18_skulls"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/props/vaelith_torre_rubble_pile_01.png" id="19_rubble"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/fire/vaelith_torre_floor_brazier_warm.png" id="20_brazier_warm"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/fire/vaelith_torre_floor_brazier_violet.png" id="21_brazier_violet"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/fire/vaelith_torre_wall_torch.png" id="22_wall_torch"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/fire/vaelith_torre_candelabrum.png" id="23_candelabrum"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/fire/vaelith_torre_hanging_lantern.png" id="24_lantern"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/vfx/vaelith_vfx_floor_projection_violet.png" id="25_floor_proj"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/vaelith_torre/vfx/vaelith_vfx_spectral_flame_violet.png" id="26_spectral"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_ruined_arch_01@0.9x0.9.png" id="hz_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_column_plain_01@0.55x0.55.png" id="hz_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_gargoyle_01@0.23x0.23.png" id="hz_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_altar_01@0.45x0.45.png" id="hz_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/vfx/vaelith_vfx_spectral_flame_violet@0.3x0.3.png" id="hz_5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/props/vaelith_torre_rubble_pile_01@0.25x0.25.png" id="hz_6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/props/vaelith_torre_ritual_table_01@0.28x0.28.png" id="hz_7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/props/vaelith_torre_failed_experiment_corpse_01@0.2x0.2.png" id="hz_8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/props/vaelith_torre_skull_bones_cluster_01@0.13x0.13.png" id="hz_9"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/fire/vaelith_torre_candelabrum@0.3x0.3.png" id="hz_10"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_column_twisted_01@1.9x1.9.png" id="hz_13"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/fire/vaelith_torre_hanging_lantern@0.22x0.22.png" id="hz_14"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_arched_door_01@0.7x0.7.png" id="hz_15"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/architecture/vaelith_gothic_arch_barred_gate_01@0.9x0.9.png" id="hz_16"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/vfx/vaelith_vfx_floor_projection_violet@0.8x0.8.png" id="hz_17"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/props/vaelith_torre/vfx/vaelith_vfx_spectral_flame_violet@0.35x0.35.png" id="hz_19"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/brasero_violeta_frames.tres" id="fx_brasero_violeta"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/brasero_calido_frames.tres" id="fx_brasero_calido"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/props/fuego_pixelfx/antorcha_frames.tres" id="fx_antorcha"]
 
 [sub_resource type="Gradient" id="Gradient_glow"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -110,30 +111,26 @@ shape = SubResource("Shape_killzone")
 z_index = -4
 modulate = Color(0.25, 0.29, 0.43, 1)
 position = Vector2(340, 190)
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("15_ruined_arch")
+texture = ExtResource("hz_1")
 
 [node name="ColDistant" type="Sprite2D" parent="BG"]
 z_index = -2
 modulate = Color(0.35, 0.41, 0.61, 1)
 position = Vector2(366, 208)
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("9_col_plain")
+texture = ExtResource("hz_2")
 
 [node name="Gargoyle" type="Sprite2D" parent="BG"]
 z_index = -2
 modulate = Color(0.4, 0.44, 0.6, 1)
 position = Vector2(366, 145)
-scale = Vector2(0.23, 0.23)
 flip_h = true
-texture = ExtResource("14_gargoyle")
+texture = ExtResource("hz_3")
 
 [node name="AltarNiche" type="Sprite2D" parent="BG"]
 z_index = -1
 modulate = Color(0.82, 0.74, 0.72, 1)
 position = Vector2(138, 88)
-scale = Vector2(0.45, 0.45)
-texture = ExtResource("13_altar")
+texture = ExtResource("hz_4")
 
 [node name="AltarNicheLight" type="PointLight2D" parent="BG/AltarNiche"]
 position = Vector2(0, 8)
@@ -146,8 +143,7 @@ texture_scale = 1.3
 z_index = -1
 modulate = Color(0.72, 0.6, 1.0, 0.6)
 position = Vector2(336, 228)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("26_spectral")
+texture = ExtResource("hz_5")
 
 [node name="Shadows" type="Node2D" parent="."]
 z_index = -1
@@ -188,31 +184,26 @@ texture = SubResource("GradientTexture2D_glow")
 [node name="RubblePile" type="Sprite2D" parent="MG"]
 modulate = Color(0.62, 0.66, 0.8, 1)
 position = Vector2(60, 248)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("19_rubble")
+texture = ExtResource("hz_6")
 
 [node name="RitualTable" type="Sprite2D" parent="MG"]
 modulate = Color(0.78, 0.78, 0.86, 1)
 position = Vector2(212, 231)
-scale = Vector2(0.28, 0.28)
-texture = ExtResource("16_ritual_table")
+texture = ExtResource("hz_7")
 
 [node name="FailedExperimentCorpse" type="Sprite2D" parent="MG"]
 modulate = Color(0.88, 0.76, 0.76, 1)
 position = Vector2(210, 189)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("17_corpse")
+texture = ExtResource("hz_8")
 
 [node name="SkullCluster" type="Sprite2D" parent="MG"]
 modulate = Color(0.68, 0.68, 0.78, 1)
 position = Vector2(186, 247)
-scale = Vector2(0.13, 0.13)
-texture = ExtResource("18_skulls")
+texture = ExtResource("hz_9")
 
 [node name="Candelabrum" type="Sprite2D" parent="MG"]
 position = Vector2(246, 234)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("23_candelabrum")
+texture = ExtResource("hz_10")
 
 [node name="CandelabrumLight" type="PointLight2D" parent="MG/Candelabrum"]
 position = Vector2(0, -66)
@@ -221,27 +212,33 @@ energy = 2.3
 texture = SubResource("GradientTexture2D_glow")
 texture_scale = 2.9
 
-[node name="BrazierWarm" type="Sprite2D" parent="MG"]
-position = Vector2(162, 241)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("20_brazier_warm")
+[node name="BrazierWarm" type="AnimatedSprite2D" parent="MG"]
+position = Vector2(162, 257)
+sprite_frames = ExtResource("fx_brasero_calido")
+animation = &"default"
+autoplay = "default"
+frame = 7
+offset = Vector2(0, -63)
 
 [node name="BrazierWarmLight" type="PointLight2D" parent="MG/BrazierWarm"]
-position = Vector2(0, -44)
+position = Vector2(0, -58)
 color = Color(1, 0.58, 0.28, 1)
 energy = 1.7
 texture = SubResource("GradientTexture2D_glow")
 texture_scale = 2.3
 
-[node name="WallTorchBack" type="Sprite2D" parent="MG"]
+[node name="WallTorchBack" type="AnimatedSprite2D" parent="MG"]
 z_index = -1
-position = Vector2(398, 140)
-scale = Vector2(0.24, 0.24)
+position = Vector2(398, 155)
 flip_h = true
-texture = ExtResource("22_wall_torch")
+sprite_frames = ExtResource("fx_antorcha")
+animation = &"default"
+autoplay = "default"
+frame = 14
+offset = Vector2(0, -49)
 
 [node name="WallTorchBackLight" type="PointLight2D" parent="MG/WallTorchBack"]
-position = Vector2(4, -24)
+position = Vector2(4, -39)
 color = Color(1, 0.62, 0.32, 1)
 energy = 0.9
 texture = SubResource("GradientTexture2D_glow")
@@ -260,14 +257,12 @@ texture_scale = 11.0
 z_index = 3
 modulate = Color(0.6, 0.68, 0.92, 1)
 position = Vector2(40, 118)
-scale = Vector2(1.9, 1.9)
-texture = ExtResource("10_col_twisted")
+texture = ExtResource("hz_13")
 
 [node name="HangingLantern" type="Sprite2D" parent="FG"]
 z_index = 3
 position = Vector2(224, 46)
-scale = Vector2(0.22, 0.22)
-texture = ExtResource("24_lantern")
+texture = ExtResource("hz_14")
 
 [node name="HangingLanternLight" type="PointLight2D" parent="FG/HangingLantern"]
 position = Vector2(0, 30)
@@ -282,28 +277,28 @@ texture_scale = 1.9
 z_index = -3
 modulate = Color(0.4, 0.42, 0.58, 1)
 position = Vector2(478, 206)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("11_arched_door")
+texture = ExtResource("hz_15")
 
 [node name="BarredGate" type="Sprite2D" parent="Threshold"]
 modulate = Color(0.54, 0.48, 0.8, 1)
 position = Vector2(744, 222)
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("12_barred_gate")
+texture = ExtResource("hz_16")
 
 [node name="FloorProjection" type="Sprite2D" parent="Threshold"]
 modulate = Color(0.95, 0.78, 1.15, 1)
 position = Vector2(712, 252)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("25_floor_proj")
+texture = ExtResource("hz_17")
 
-[node name="BrazierViolet" type="Sprite2D" parent="Threshold"]
-position = Vector2(684, 238)
-scale = Vector2(0.24, 0.24)
-texture = ExtResource("21_brazier_violet")
+[node name="BrazierViolet" type="AnimatedSprite2D" parent="Threshold"]
+position = Vector2(684, 256)
+sprite_frames = ExtResource("fx_brasero_violeta")
+animation = &"default"
+autoplay = "default"
+frame = 0
+offset = Vector2(0, -63)
 
 [node name="BrazierVioletLight" type="PointLight2D" parent="Threshold/BrazierViolet"]
-position = Vector2(0, -48)
+position = Vector2(0, -66)
 color = Color(0.62, 0.36, 0.98, 1)
 energy = 1.5
 texture = SubResource("GradientTexture2D_glow")
@@ -312,8 +307,7 @@ texture_scale = 2.1
 [node name="SpectralGate" type="Sprite2D" parent="Threshold"]
 modulate = Color(0.88, 0.72, 1.15, 0.85)
 position = Vector2(744, 215)
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("26_spectral")
+texture = ExtResource("hz_19")
 
 [node name="ThresholdLight" type="PointLight2D" parent="Threshold"]
 position = Vector2(748, 211)
