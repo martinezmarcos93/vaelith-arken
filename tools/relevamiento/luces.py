@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Ajuste de iluminación por fuente (crítica 2026-11-04, Fase 2).
 
-- Halos escalonados: el degradado de las PointLight2D pasa a 4 bandas con
+- Halos escalonados: el degradado de las PointLight2D pasa a 6 bandas con
   interpolación constante (halo de pixel art) en vez de un degradado liso.
 - Fuego: radio y energía suficientes para iluminar columnas y suelo vecinos.
 - Violeta: menos saturado e intenso en el centro, más ancho, para que se
@@ -13,8 +13,8 @@ import re
 
 BANDAS = ('[sub_resource type="Gradient" id="Gradient_glow"]\n'
           'interpolation_mode = 1\n'
-          'offsets = PackedFloat32Array(0, 0.3, 0.55, 0.8)\n'
-          'colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.62, 1, 1, 1, 0.32, 1, 1, 1, 0)\n')
+          'offsets = PackedFloat32Array(0, 0.18, 0.36, 0.52, 0.68, 0.84)\n'
+          'colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.78, 1, 1, 1, 0.56, 1, 1, 1, 0.36, 1, 1, 1, 0.18, 1, 1, 1, 0)\n')
 
 # nombre de luz -> (color o None, energía, escala de textura)
 AJUSTES = {
