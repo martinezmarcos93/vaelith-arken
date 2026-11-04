@@ -22,7 +22,6 @@
 [ext_resource type="PackedScene" path="res://scenes/level/DialogueTrigger.tscn" id="17_dialogue"]
 [ext_resource type="PackedScene" path="res://scenes/level/SkullCollectible.tscn" id="19_skull"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/Boss1.tscn" id="20_boss1"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/BringerOfDeath.tscn" id="33_bringer"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_01.png" id="22_root1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_02.png" id="23_root2"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tilesets/dungeon_props_craftpix_free/obj_60.png" id="24_table1"]
@@ -766,20 +765,6 @@ color = Color(0.6, 0.35, 1, 1)
 energy = 1.0
 texture = SubResource("GradientTexture2D_glow")
 texture_scale = 1.1
-
-[node name="BringerOfDeath1" parent="." instance=ExtResource("33_bringer")]
-position = Vector2(3220, 410)
-
-[node name="AnimatedSprite2D" parent="BringerOfDeath1" index="1"]
-light_mask = 5
-
-[node name="RimLight" type="PointLight2D" parent="BringerOfDeath1"]
-position = Vector2(0, -38)
-color = Color(0.6, 0.66, 0.8, 1)
-energy = 0.17
-range_item_cull_mask = 4
-texture = SubResource("GradientTexture2D_glow")
-texture_scale = 0.95
 
 [node name="Boss1" parent="." instance=ExtResource("20_boss1")]
 position = Vector2(3550, 410)
