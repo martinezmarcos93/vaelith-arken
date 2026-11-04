@@ -36,6 +36,11 @@ interacción).
 
 - **No generar assets nuevos.** Usar/adaptar los existentes. Si falta uno
   concreto para una sección: detenerse y anotarlo en `docs/ASSETS_PENDIENTES.md`.
+  **Excepción (Marcos, 2026-11-04):** se permiten assets generados con
+  [pixelfx](https://github.com/patch-gg/pixelfx) (MIT) sin límite de tipo
+  (efectos, bichos de ambiente, transiciones), siempre recoloreados a la paleta
+  canónica de `docs/guia_estilo_visual.md` y exportados como hoja de sprites
+  (`node tools/render.mjs <id> --sheet`). Acreditar en `CREDITS.md`.
 - **No rehacer código que funciona** sin razón concreta. Preservar la
   arquitectura marcada en la auditoría §5.
 - **No agregar mecánicas** fuera del brief (nada de doble salto/dash/wall
@@ -48,13 +53,12 @@ interacción).
 
 ## Entorno / comandos
 
-- Godot: `C:/Users/Usuario Contable/Desktop/Codigo/Godot_v4.7.2-stable_win64.exe`
-  (usar el `..._console.exe` para capturar stdout desde Bash).
+- Godot (Linux, desde 2026-11-04): `~/Aplicaciones/godot/Godot_v4.7.2-stable_linux.x86_64`.
 - Verificación headless:
   - import: `godot --headless --path . --import`
   - cargar una escena: `godot --headless --path . --quit-after 120 res://escena.tscn`
     (chequear el exit code de Godot, no el de un `grep` en el pipe)
-- Shell: PowerShell primero; el tool Bash también está disponible. UTF-8 siempre.
+- Shell: Bash (Linux). UTF-8 siempre.
 
 ## Assets
 
