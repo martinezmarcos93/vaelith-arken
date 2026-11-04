@@ -140,12 +140,26 @@ def achicar(im, ancla_x, pie, escala, lienzo, ancla_lienzo):
     return Image.fromarray(a, "RGBA")
 
 
-def limpiar_islas(im, minimo=3):
+def limpiar_islas(im, minimo=3, lejos=6, chica=40):
+    """Borra islas de 1-2 px y, además, islas chicas separadas del cuerpo
+    (restos de etiquetas o de poses vecinas)."""
     a = np.array(im)
     lab, n = componentes(a[..., 3] > 0)
+    if n == 0:
+        return im
+    tam = [(lab == i).sum() for i in range(1, n + 1)]
+    mayor = lab == (int(np.argmax(tam)) + 1)
+    ys, xs = np.nonzero(mayor)
+    x0, x1, y0, y1 = xs.min() - lejos, xs.max() + lejos, ys.min() - lejos, ys.max() + lejos
     for i in range(1, n + 1):
         sub = lab == i
-        if sub.sum() < minimo:
+        s = tam[i - 1]
+        if s < minimo:
+            a[sub] = 0
+            continue
+        sy, sx = np.nonzero(sub)
+        fuera = sx.max() < x0 or sx.min() > x1 or sy.max() < y0 or sy.min() > y1
+        if fuera and s < chica:
             a[sub] = 0
     return Image.fromarray(a, "RGBA")
 

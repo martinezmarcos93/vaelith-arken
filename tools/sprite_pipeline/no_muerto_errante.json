@@ -1,0 +1,24 @@
+{
+ "raiz": "../..",
+ "lamina": "assets/source_sheets/characters/enemies/wandering_undead_sheet.png",
+ "salida": "assets/sprites/enemies/no_muerto_errante_custom",
+ "escala": 0.6,
+ "lienzo": [224, 96],
+ "ancla": [112, 90],
+ "colores": 32,
+ "filas": [
+  {"nombre": "idle_{i}",        "caja": [250, 10, 1250, 142],   "n": 7},
+  {"nombre": "walk_{i}",        "caja": [225, 142, 1520, 272],  "n": 9},
+  {"nombre": "telegraph_{i}",   "caja": [215, 272, 1320, 392],  "n": 6},
+  {"nombre": "attack1_{i}",     "caja": [215, 392, 1520, 515],  "n": 6, "centros": [300, 455, 595, 810, 1055, 1305]},
+  {"nombre": "vulnerable_{i}",  "caja": [225, 512, 1250, 625],  "n": 7},
+  {"nombre": "death_{i}",       "caja": [225, 742, 1470, 850],  "n": 7}
+ ],
+ "animaciones": {
+  "idle": {"prefijo": "idle", "fps": 6, "loop": true},
+  "walk": {"prefijo": "walk", "fps": 10, "loop": true},
+  "attack1": {"archivos": ["telegraph_0.png", "telegraph_1.png", "telegraph_2.png", "telegraph_3.png", "telegraph_4.png", "telegraph_5.png", "attack1_0.png", "attack1_1.png", "attack1_2.png", "attack1_3.png", "attack1_4.png", "attack1_5.png"], "fps": 20, "loop": false},
+  "vulnerable": {"prefijo": "vulnerable", "fps": 6, "loop": true},
+  "death": {"prefijo": "death", "fps": 8, "loop": false}
+ }
+}
