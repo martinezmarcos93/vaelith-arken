@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/ui/skull_collectible_craftpix_free/skull_icon@0.5625x0.5625.png" id="6_skull"]
+[ext_resource type="Texture2D" path="res://assets/sprites/_horneado/ui/skull_collectible_craftpix_free/skull_icon@0.75x0.75.png" id="6_skull"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/ui/hud/hud_bar_frame@0.6x0.6.png" id="2_frame_p"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/ui/hud/hud_bar_track@0.6x0.6.png" id="3_track_p"]
 [ext_resource type="Texture2D" path="res://assets/sprites/_horneado/ui/hud/hud_bar_fill_gold@0.6x0.6.png" id="4_gold_p"]
@@ -29,19 +29,20 @@ texture_progress_offset = Vector2i(55, 28)
 
 [node name="SkullIcon" type="TextureRect" parent="PlayerBlock"]
 offset_left = 4.0
-offset_top = 62.0
-offset_right = 22.0
-offset_bottom = 80.0
+offset_top = 58.0
+offset_right = 28.0
+offset_bottom = 82.0
 texture = ExtResource("6_skull")
 stretch_mode = 5
 
 [node name="SkullCount" type="Label" parent="PlayerBlock"]
-offset_left = 28.0
-offset_top = 60.0
+offset_left = 32.0
+offset_top = 58.0
 offset_right = 130.0
 offset_bottom = 82.0
 theme_override_colors/font_color = Color(0.86, 0.75, 0.48, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.65)
+theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 18
 vertical_alignment = 1
@@ -51,11 +52,12 @@ text = "×0"
 offset_left = 4.0
 offset_top = 86.0
 offset_right = 220.0
-offset_bottom = 108.0
-theme_override_colors/font_color = Color(0.62, 0.45, 0.85, 1)
+offset_bottom = 104.0
+theme_override_colors/font_color = Color(0.463, 0.427, 0.737, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.65)
+theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 vertical_alignment = 1
 text = "Corrupción ○○○"
 
