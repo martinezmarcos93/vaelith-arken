@@ -92,13 +92,14 @@ CUBO = unreal.load_asset("/Engine/BasicShapes/Cube")
 PLANO_M = unreal.load_asset("/Engine/BasicShapes/Plane")
 MAT = {n: malla(f"/Game/Vaelith/Materiales/{n}") for n in
        ("M_Piedra", "M_Piso", "M_Metal", "M_Suelo_Bosque", "M_Roca", "M_Piedra_Negra", "M_Emisivo", "M_Piedra_DosCaras", "M_Agua",
-        "M_Ladrillo_Quemado", "M_Sombra", "M_Madera", "M_Suelo_Cementerio")}
+        "M_Ladrillo_Quemado", "M_Sombra", "M_Madera", "M_Suelo_Cementerio", "M_Agua_Quieta", "M_Agua_Corriente")}
 MAT["M_Oro"] = malla("/Game/Vaelith/Mallas/Osario/M_Oro")
 M = lambda kit, n: malla(f"/Game/Vaelith/Mallas/{kit}/{n}")
 PARED = M("Catacumba", "SM_Pared_4m")
 PARED_NICHOS = M("Catacumba", "SM_Pared_Nichos_4m")
 BOVEDA = M("Catacumba", "SM_Boveda_4m")
-REJA = M("Catacumba", "SM_Reja")
+REJA = malla("/Game/Vaelith/Ext/catacumba/SM_Reja_Hierro") or M("Catacumba", "SM_Reja")  # hierro forjado (tools/blender/reja.py)
+LOSA_RUNA = malla("/Game/Vaelith/Ext/catacumba/SM_Losa_Runa")
 
 
 def v(x, y, z):
@@ -329,6 +330,8 @@ def poblar_catacumbas():
                 interactuable(unreal.TipoInteractuable.DAGA_PHARASMA, v(x, y, 62), 0, T("SM_Daga_Pharasma"), "daga", "daga")
             elif ch == "T":
                 # La reja de la tentación: tres vías (fuerza, fe o necromancia). La daga de Pharasma está detrás.
+                if LOSA_RUNA:
+                    poner(LOSA_RUNA, v(x + 130, y, -6), 90, carpeta="Catacumba/Props", sombra=False)
                 reja = interactuable(unreal.TipoInteractuable.PUERTA, p, 90, REJA or CUBO, "reja_tentacion", "", 0, "",
                                      etiqueta="Abrir la reja")
                 if not REJA:
@@ -352,6 +355,10 @@ def poblar_catacumbas():
             elif ch == "P":
                 id_, req = PUERTAS[(f, c)]
                 yaw = 90 if abierta(f, c - 1) or abierta(f, c + 1) else 0
+                if LOSA_RUNA:  # la runa del mecanismo, en el piso delante de la reja
+                    dx, dy = (130, 0) if yaw == 90 else (0, 130)
+                    lado = 1 if abierta(f + (dy > 0), c + (dx > 0)) else -1
+                    poner(LOSA_RUNA, v(x + dx * lado, y + dy * lado, -6), yaw, carpeta="Catacumba/Props", sombra=False)
                 if REJA:
                     interactuable(unreal.TipoInteractuable.PUERTA, p, yaw, REJA, id_, "", 0, req)
                 else:
@@ -366,7 +373,7 @@ def poblar_catacumbas():
                     poner(O("SM_Pila_Huesos"), v(x - 120, y + 100, 0), rnd.uniform(0, 360), carpeta="Catacumba/Props")
                 interactuable(unreal.TipoInteractuable.RECUERDO, v(x, y, 0), 0, O("SM_Urna"), f"recuerdo_{n}", "", n, etiqueta="Tocar la urna")
             elif ch == "E":
-                agua = poner(PLANO_M, v(x, y, 3), 0, (3.2, 3.2, 1), MAT["M_Agua"] or MAT["M_Metal"], "Catacumba/Props")
+                agua = poner(PLANO_M, v(x, y, 3), 0, (3.2, 3.2, 1), MAT["M_Agua_Quieta"] or MAT["M_Agua"], "Catacumba/Props")
                 sonido_3d("amb_agua", v(x, y, 50), 800.0, 0.6)
                 interactuable(unreal.TipoInteractuable.ESPEJO, v(x, y + 170, 0), 0, D("SM_Escombro_02"), "espejo", "espejo_agua")
             elif ch == "L":
@@ -711,7 +718,7 @@ def construir_bosque():
     x = TER.X0
     while x < TER.X1:
         z = min(H(x + d, TER.ARROYO_Y) for d in (0, 500, 1000))
-        poner(PLANO_M, v(x + 500, TER.ARROYO_Y, z + 35), 0, (10.2, 6.5, 1), MAT["M_Agua"], "Exterior/Bosque/Arroyo", False)
+        poner(PLANO_M, v(x + 500, TER.ARROYO_Y, z + 35), 0, (10.2, 6.5, 1), MAT["M_Agua_Corriente"] or MAT["M_Agua"], "Exterior/Bosque/Arroyo", False)
         x += 1000.0
     px, py = TER.PUENTE
     zp = min(H(px, py - 600), H(px, py + 600)) - 140

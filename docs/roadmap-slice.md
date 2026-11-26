@@ -152,7 +152,16 @@ Toda la ficha de PF2e de Vaelith pasa a ser sistema de juego. Se parte en 4 entr
 - Es la versión barata de "la muerte no es siempre enemiga": cada cadáver del nivel pasa a ser contenido sin geometría nueva.
 - El guardián del bosque deja de ser un caso aislado: el diagnóstico es lo que avisa que no hay que matarlo.
 
-### Fase D: agua, rejas y piedra (sin descargas)
+### Fase D: agua, rejas y piedra — HECHA 26/11
+**Resultado:**
+- **Texturas por script** (`tools/texturas_d.py`): normal de agua y óxido (color, ARM y normal), todo tileable y sin descargas.
+- **Agua:** `M_AguaMaestro` casi negro, liso y reflectante, con dos normales que se desplazan. Instancias `M_Agua_Quieta` (catacumba) y `M_Agua_Corriente` (arroyo).
+- **Rejas:** `SM_Reja_Hierro`, de hierro forjado (17 barrotes con punta de lanza, travesaños con remaches, dos barrotes torcidos), y `SM_Losa_Runa` con la espiral emisiva delante de cada reja (`tools/blender/reja.py`). El cubo azul se fue.
+- **Piedra:** `M_MundoVariado` agrega variación macro, musgo y humedad. Las 6 instancias de piedra pasaron a este maestro con valores por zona (el piso de la catacumba quedó húmedo).
+- **Hallazgo:** el diferido en mosaico (`r.TiledDeferredShading`) también pintaba de verde las luces en Vulkan; se desactivó.
+- **Medido:** pueblo 142 FPS, catacumba 138 FPS.
+
+**Plan original:**
 - Agua oscura con normal CC0, y una variante con corriente para el arroyo.
 - Reja de hierro forjado y losa con runa emisiva, ambas por script de Blender.
 - **Master material de piedra** con musgo, suciedad, humedad y macro variación, más decals. Así las paredes repetidas dejan de leerse iguales (puntos 19–21 de la revisión).
