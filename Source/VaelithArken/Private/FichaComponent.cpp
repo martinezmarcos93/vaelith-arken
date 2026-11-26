@@ -3,6 +3,142 @@
 UFichaComponent::UFichaComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
+	// Campeón de Pharasma (Religión + Medicina por la deidad), trasfondo Retornado (Saber del Osario), Atletismo e Intimidación.
+	Habilidades.Add(EHabilidad::Atletismo, ERango::Entrenado);
+	Habilidades.Add(EHabilidad::Religion, ERango::Entrenado);
+	Habilidades.Add(EHabilidad::Medicina, ERango::Entrenado);
+	Habilidades.Add(EHabilidad::Intimidacion, ERango::Entrenado);
+	Habilidades.Add(EHabilidad::SaberOsario, ERango::Entrenado);
+}
+
+float UFichaComponent::Ahora() const
+{
+	const UWorld* Mundo = GetWorld();
+	return Mundo ? Mundo->GetTimeSeconds() : 0.f;
+}
+
+int32 UFichaComponent::Mod(EAtributo A) const
+{
+	switch (A)
+	{
+	case EAtributo::Fuerza:       return Atributos.Fuerza;
+	case EAtributo::Destreza:     return Atributos.Destreza;
+	case EAtributo::Constitucion: return Atributos.Constitucion;
+	case EAtributo::Inteligencia: return Atributos.Inteligencia;
+	case EAtributo::Sabiduria:    return Atributos.Sabiduria;
+	default:                      return Atributos.Carisma;
+	}
+}
+
+int32 UFichaComponent::CA() const
+{
+	int32 Valor = CAFija > 0 ? CAFija
+		: 10 + FMath::Min(Atributos.Destreza, DesMaxArmadura) + Planilla::BonoRango(RangoArmadura, Nivel) + ArmaduraObjeto;
+	if (bBloqueando && !EscudoDestruido()) Valor += 2;  // Alzar el escudo
+	Valor -= Condicion(ECondicion::Asustado);
+	if (Condicion(ECondicion::Desprevenido) > 0) Valor -= 2;
+	return Valor;
+}
+
+int32 UFichaComponent::Salvacion(ESalvacion S) const
+{
+	if (S == ESalvacion::Voluntad && VoluntadFija > 0) return VoluntadFija - Condicion(ECondicion::Asustado);
+	int32 Base = 0;
+	switch (S)
+	{
+	case ESalvacion::Fortaleza: Base = Atributos.Constitucion + Planilla::BonoRango(RangoFortaleza, Nivel); break;
+	case ESalvacion::Reflejos:  Base = Atributos.Destreza + Planilla::BonoRango(RangoReflejos, Nivel); break;
+	default:                    Base = Atributos.Sabiduria + Planilla::BonoRango(RangoVoluntad, Nivel); break;
+	}
+	return Base - Condicion(ECondicion::Asustado);
+}
+
+int32 UFichaComponent::Percepcion() const
+{
+	return Atributos.Sabiduria + Planilla::BonoRango(RangoPercepcion, Nivel) - Condicion(ECondicion::Asustado);
+}
+
+int32 UFichaComponent::CDClase() const
+{
+	return 10 + Atributos.Fuerza + Planilla::BonoRango(RangoCDClase, Nivel);
+}
+
+int32 UFichaComponent::Ataque() const
+{
+	if (AtaqueFijo > 0) return AtaqueFijo - Condicion(ECondicion::Asustado) - Condicion(ECondicion::Debilitado);
+	return Atributos.Fuerza + Planilla::BonoRango(RangoArmas, Nivel) - Condicion(ECondicion::Asustado) - Condicion(ECondicion::Debilitado);
+}
+
+ERango UFichaComponent::RangoHabilidad(EHabilidad H) const
+{
+	if (H == EHabilidad::Percepcion) return RangoPercepcion;
+	const ERango* R = Habilidades.Find(H);
+	return R ? *R : ERango::SinEntrenar;
+}
+
+int32 UFichaComponent::Habilidad(EHabilidad H) const
+{
+	if (H == EHabilidad::Percepcion) return Percepcion();
+	int32 V = Mod(Planilla::AtributoDe(H)) + Planilla::BonoRango(RangoHabilidad(H), Nivel) - Condicion(ECondicion::Asustado);
+	if (H == EHabilidad::SaberOsario) V += BonoMemoria;
+	if (Planilla::AtributoDe(H) == EAtributo::Fuerza) V -= Condicion(ECondicion::Debilitado);
+	return V;
+}
+
+EGrado UFichaComponent::Prueba(EHabilidad H, int32 CD, int32 Dado, int32* OutTotal) const
+{
+	const int32 D = Planilla::D20(Dado);
+	const int32 Total = D + Habilidad(H);
+	if (OutTotal) *OutTotal = Total;
+	return Planilla::Grado(Total, CD, D);
+}
+
+EGrado UFichaComponent::TirarSalvacion(ESalvacion S, int32 CD, int32 Dado) const
+{
+	const int32 D = Planilla::D20(Dado);
+	return Planilla::Grado(D + Salvacion(S), CD, D);
+}
+
+EGrado UFichaComponent::RecibirTiradaAtaque(int32 Bono, int32 Dado, int32* OutTotal) const
+{
+	const int32 D = Planilla::D20(Dado);
+	if (OutTotal) *OutTotal = D + Bono;
+	return Planilla::Grado(D + Bono, CA(), D);
+}
+
+void UFichaComponent::SetCondicion(ECondicion C, int32 Valor, float Segundos)
+{
+	if (Valor <= 0)
+	{
+		Condiciones.Remove(C);
+		VenceCondicion.Remove(C);
+		return;
+	}
+	Condiciones.Add(C, Valor);
+	if (Segundos > 0.f) VenceCondicion.Add(C, Ahora() + Segundos);
+	else VenceCondicion.Remove(C);
+}
+
+void UFichaComponent::SubirCondicion(ECondicion C, int32 Cuanto)
+{
+	SetCondicion(C, Condicion(C) + Cuanto);
+}
+
+void UFichaComponent::ComprobarMuerte()
+{
+	if (Condicion(ECondicion::Moribundo) < MuerteEn()) return;
+	if (PuntosHeroe > 0)
+	{
+		// "Gastá todos para evitar la muerte": Pharasma lo devuelve. Herido no cambia.
+		PuntosHeroe = 0;
+		bMoribundo = false;
+		SetCondicion(ECondicion::Moribundo, 0);
+		PG = 1;
+		AlCambiarPG.Broadcast(PG, PGMax());
+		AlSalvarseDeMorir.Broadcast();
+		return;
+	}
+	Morir();
 }
 
 int32 UFichaComponent::PGMax() const
@@ -32,12 +168,31 @@ void UFichaComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	{
 		return;
 	}
+	// Condiciones temporales y rondas
+	const float T = Ahora();
+	for (auto It = VenceCondicion.CreateIterator(); It; ++It)
+	{
+		if (T >= It.Value())
+		{
+			Condiciones.Remove(It.Key());
+			It.RemoveCurrent();
+		}
+	}
+	TiempoRonda += DeltaTime;
+	const bool bRonda = TiempoRonda >= SegundosRonda;
+	if (bRonda)
+	{
+		TiempoRonda = 0.f;
+		if (Condicion(ECondicion::Asustado) > 0) SetCondicion(ECondicion::Asustado, Condicion(ECondicion::Asustado) - 1);
+	}
 	if (bMoribundo)
 	{
+		// Moribundo empeora 1 por ronda (sin tirada de recuperación: el tiempo real ya presiona).
 		TiempoMoribundo += DeltaTime;
-		if (TiempoMoribundo >= SegundosMoribundo)
+		if (bRonda)
 		{
-			Morir();
+			SubirCondicion(ECondicion::Moribundo);
+			ComprobarMuerte();
 		}
 		return;
 	}
@@ -97,7 +252,7 @@ void UFichaComponent::SetBloqueando(bool bNuevo)
 	bBloqueando = bNuevo && !EscudoDestruido() && !bMoribundo && !bMuerto;
 }
 
-int32 UFichaComponent::RecibirDanio(int32 Cantidad, ETipoDanio Tipo, bool bToqueFantasmal)
+int32 UFichaComponent::RecibirDanio(int32 Cantidad, ETipoDanio Tipo, bool bToqueFantasmal, bool bCritico)
 {
 	if (bMuerto || Cantidad <= 0)
 	{
@@ -140,7 +295,12 @@ int32 UFichaComponent::RecibirDanio(int32 Cantidad, ETipoDanio Tipo, bool bToque
 
 	if (bMoribundo)
 	{
-		Morir();  // cualquier golpe estando moribundo es mortal
+		// PF2e: recibir daño estando Moribundo lo sube 1 (2 si es crítico).
+		if (Danio > 0)
+		{
+			SubirCondicion(ECondicion::Moribundo, bCritico ? 2 : 1);
+			ComprobarMuerte();
+		}
 		return Danio;
 	}
 
@@ -149,16 +309,20 @@ int32 UFichaComponent::RecibirDanio(int32 Cantidad, ETipoDanio Tipo, bool bToque
 	AlCambiarPG.Broadcast(PG, PGMax());
 	if (PG == 0)
 	{
-		if (bTieneDiehard && bDiehardDisponible)
+		if (PGBaseFijos > 0)
 		{
-			bMoribundo = true;
-			TiempoMoribundo = 0.f;
-			bBloqueando = false;
-			AlQuedarMoribundo.Broadcast();
+			Morir();  // los enemigos no quedan moribundos
 		}
 		else
 		{
-			Morir();
+			// PF2e: al caer, Moribundo 1 (2 si fue crítico) más el valor de Herido.
+			bMoribundo = true;
+			TiempoMoribundo = 0.f;
+			TiempoRonda = 0.f;
+			bBloqueando = false;
+			SetCondicion(ECondicion::Moribundo, (bCritico ? 2 : 1) + Condicion(ECondicion::Herido));
+			AlQuedarMoribundo.Broadcast();
+			ComprobarMuerte();
 		}
 	}
 	return Antes - PG;
@@ -180,7 +344,7 @@ void UFichaComponent::Curar(int32 Cantidad)
 
 bool UFichaComponent::GastarFoco()
 {
-	if (Foco <= 0 || bMuerto)
+	if (Foco <= 0 || bMuerto || bAnatema)
 	{
 		return false;
 	}
@@ -196,7 +360,8 @@ bool UFichaComponent::Levantarse()
 		return false;
 	}
 	bMoribundo = false;
-	bDiehardDisponible = false;
+	SetCondicion(ECondicion::Moribundo, 0);
+	SubirCondicion(ECondicion::Herido);
 	PG = FMath::Max(PG, 1);
 	AlCambiarPG.Broadcast(PG, PGMax());
 	return true;
@@ -206,11 +371,12 @@ void UFichaComponent::DescansarEnAltar()
 {
 	bMuerto = false;
 	bMoribundo = false;
-	bDiehardDisponible = true;
+	Condiciones.Reset();
+	VenceCondicion.Reset();
 	PG = PGMax();
 	PGEscudo = bTieneEscudo ? PGEscudoMax : 0;
 	Acciones = AccionesMax;
-	Foco = FocoMax();
+	Foco = bAnatema ? 0 : FocoMax();
 	MarcasAtaque.Reset();
 	AvisarTodo();
 }
@@ -220,6 +386,7 @@ void UFichaComponent::Morir()
 	bMuerto = true;
 	bMoribundo = false;
 	bBloqueando = false;
+	SetCondicion(ECondicion::Moribundo, 0);
 	PG = 0;
 	AlCambiarPG.Broadcast(PG, PGMax());
 	AlMorir.Broadcast();

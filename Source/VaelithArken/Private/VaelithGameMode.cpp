@@ -285,7 +285,7 @@ void AVaelithGameMode::Guardar(FName Altar)
 	Partida->bTieneDaga = J->bTieneDaga;
 	Partida->Fecha = FDateTime::Now();
 	UGameplayStatics::SaveGameToSlot(Partida, UVaelithGameInstance::Ranura, 0);
-	if (J->Corrupcion > 0) J->Corrupcion = FMath::Max(0, J->Corrupcion - 1);  // rezar alivia la penitencia
+	if (J->Penitencia > 0) J->Penitencia = FMath::Max(0, J->Penitencia - 1);  // rezar alivia la penitencia
 }
 
 // ---------------------------------------------------------------- recuerdos
@@ -363,7 +363,7 @@ void AVaelithGameMode::Respawnear()
 	AVaelithCharacter* J = Jugador();
 	if (!J) return;
 	UGameplayStatics::SetGlobalTimeDilation(this, 1.f);
-	J->Corrupcion = FMath::Min(J->Corrupcion + 1, 3);
+	J->Penitencia = FMath::Min(J->Penitencia + 1, 3);
 	J->Ficha->DescansarEnAltar();
 	APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0);
 	FVector Destino = J->GetActorLocation();
@@ -378,7 +378,7 @@ void AVaelithGameMode::Respawnear()
 	}
 	J->SetActorLocation(Destino, false, nullptr, ETeleportType::TeleportPhysics);
 	Modo = EModoJuego::Juego;
-	Aviso(TEXT("Penitencia"), TextoGuion(FString::Printf(TEXT("penitencia_%d"), J->Corrupcion)), 6.f);
+	Aviso(TEXT("Penitencia"), TextoGuion(FString::Printf(TEXT("penitencia_%d"), J->Penitencia)), 6.f);
 }
 
 // ---------------------------------------------------------------- zonas, jefe, final

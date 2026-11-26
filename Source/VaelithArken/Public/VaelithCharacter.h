@@ -68,7 +68,7 @@ public:
 	float NivelPenumbra = 1.f;
 	float PenumbraObjetivo = 1.f;
 	/** Corrupción del tramo (0..3): oscurece y enfría. */
-	int32 Corrupcion = 0;
+	int32 Penitencia = 0;  // muertes en el tramo (0..3): niebla y un no-muerto extra
 
 	/** Para el HUD. */
 	float UltimoDanioRecibido = -100.f;

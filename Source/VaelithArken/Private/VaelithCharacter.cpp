@@ -602,7 +602,7 @@ void AVaelithCharacter::ActualizarPostProceso(float Dt)
 	const float Herida = FMath::Clamp(1.f - (Ahora - UltimoDanioRecibido) / 0.6f, 0.f, 1.f);
 	const float Vida = Ficha->PGMax() > 0 ? float(Ficha->PG) / Ficha->PGMax() : 1.f;
 	const float Peligro = Ficha->bMoribundo ? 1.f : FMath::Clamp((0.35f - Vida) / 0.35f, 0.f, 1.f);
-	const float Corr = Corrupcion / 3.f;
+	const float Corr = Penitencia / 3.f;
 
 	float Sat = FMath::Lerp(1.f, 0.72f, NivelPenumbra);
 	Sat = FMath::Lerp(Sat, 0.05f, Desaturacion);

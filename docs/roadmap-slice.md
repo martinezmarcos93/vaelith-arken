@@ -86,7 +86,17 @@ Cada fase cierra con:
 
 ### Fase R: la planilla viva (pedido de Marcos, 25/11). Detalle en `planilla-en-juego.md`
 Toda la ficha de PF2e de Vaelith pasa a ser sistema de juego. Se parte en 4 entregas y cada una deja el juego jugable. R1 y R2 van **antes de C y E**, porque el diagnóstico de cadáveres usa las pruebas de habilidad y la tentación usa el anatema.
-- **R1, modelo de datos (C++ + tests):**
+- **R1, modelo de datos — HECHA 26/11.**
+  - Están en `Planilla.h` y en `FichaComponent`:
+    - rangos (E/X/M/L);
+    - CA, salvaciones, percepción, ataque, CD de clase y habilidades;
+    - condiciones con vencimiento;
+    - Moribundo/Herido según PF2e, con Diehard en 5;
+    - Puntos de Héroe que evitan la muerte;
+    - anatema.
+  - El test `Vaelith.Ficha.Planilla` verifica la hoja: CA 21, Fort +7, Ref +6, Vol +7, Percepción +7, golpe +7, CD 17. `Vaelith.Planilla.Grados` cubre los grados de éxito. Tests: 8/8.
+  - La "corrupción" de las muertes pasó a llamarse **Penitencia** para que "Corrupción" quede como el tercer eje.
+- **R1, plan original (C++ + tests):**
   - competencias (E/X/M/L), CA 21, salvaciones, percepción, CD de clase, golpes, habilidades, condiciones, Puntos de Héroe y carga;
   - todo calculado como atributo + rango + nivel;
   - la tabla de dotes en datos editables, como `guion.json`.

@@ -3,6 +3,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Planilla.h"
 #include "FichaComponent.generated.h"
 
 UENUM(BlueprintType)
@@ -29,6 +30,7 @@ struct FAtributosPF2e
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAlCambiarValor, int32, Actual, int32, Maximo);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FAlEvento);
+DECLARE_MULTICAST_DELEGATE(FAlEventoNativo);
 
 UCLASS(ClassGroup=(Vaelith), meta=(BlueprintSpawnableComponent))
 class VAELITHARKEN_API UFichaComponent : public UActorComponent
@@ -51,6 +53,34 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Defensa") TMap<ETipoDanio, int32> Resistencias;
 	/** Inmaterial (fantasmas): mitad del daño físico salvo que el golpe sea "toque fantasmal". */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Defensa") bool bInmaterial = false;
+
+	// ---- Competencias (hoja de nivel 1: CA 21, Fort +7, Ref +6, Vol +7, Percepción +7, golpes +7, CD de clase 17) ----
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Competencias") ERango RangoArmadura = ERango::Experto;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Competencias") ERango RangoFortaleza = ERango::Experto;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Competencias") ERango RangoReflejos = ERango::Experto;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Competencias") ERango RangoVoluntad = ERango::Experto;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Competencias") ERango RangoPercepcion = ERango::Experto;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Competencias") ERango RangoArmas = ERango::Entrenado;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Competencias") ERango RangoCDClase = ERango::Entrenado;
+	/** Armadura completa: +6 de objeto, límite de Destreza +0. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Competencias") int32 ArmaduraObjeto = 6;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Competencias") int32 DesMaxArmadura = 0;
+	/** Habilidades entrenadas (las demás, sin entrenar). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Competencias") TMap<EHabilidad, ERango> Habilidades;
+	/** Regla de la casa (memoria residual): +1 al Saber del Osario por cada recuerdo recuperado. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Competencias") int32 BonoMemoria = 0;
+	/** Enemigos: si es > 0, reemplaza el cálculo (bono de ataque y CA del bloque de PF2e). */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Competencias") int32 AtaqueFijo = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Competencias") int32 CAFija = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Competencias") int32 VoluntadFija = 0;
+	/** Sin mente (zombis, esqueletos): inmunes a Desmoralizar y al miedo. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Defensa") bool bSinMente = false;
+
+	// ---- Puntos de Héroe = favor de Pharasma ----
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Heroe") int32 PuntosHeroe = 1;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha|Heroe") int32 PuntosHeroeMax = 3;
+	/** Rompió el anatema: sin foco ni Imponer las Manos hasta expiar en un altar. */
+	UPROPERTY(BlueprintReadOnly, Category="Ficha|Credo") bool bAnatema = false;
 
 	// ---- Escudo (Bloqueo con escudo de PF2e) ----
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Escudo") bool bTieneEscudo = true;
@@ -75,6 +105,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category="Estado") bool bBloqueando = false;
 	UPROPERTY(BlueprintReadOnly, Category="Estado") bool bMoribundo = false;
 	UPROPERTY(BlueprintReadOnly, Category="Estado") bool bMuerto = false;
+	UPROPERTY(BlueprintReadOnly, Category="Estado") TMap<ECondicion, int32> Condiciones;
 
 	UPROPERTY(BlueprintAssignable) FAlCambiarValor AlCambiarPG;
 	UPROPERTY(BlueprintAssignable) FAlCambiarValor AlCambiarEscudo;
@@ -83,6 +114,35 @@ public:
 	UPROPERTY(BlueprintAssignable) FAlEvento AlQuedarMoribundo;
 	UPROPERTY(BlueprintAssignable) FAlEvento AlMorir;
 	UPROPERTY(BlueprintAssignable) FAlEvento AlRomperseEscudo;
+
+	/** Se gastaron todos los Puntos de Héroe para evitar la muerte. */
+	FAlEventoNativo AlSalvarseDeMorir;
+
+	// ---- Consultas de la planilla ----
+	int32 Mod(EAtributo A) const;
+	/** CA = 10 + Des (hasta el límite) + competencia + armadura; +2 con el escudo levantado; −Asustado, −2 Desprevenido. */
+	int32 CA() const;
+	int32 Salvacion(ESalvacion S) const;
+	int32 Percepcion() const;
+	int32 CDClase() const;
+	/** Bono de ataque con armas (Fuerza). */
+	int32 Ataque() const;
+	ERango RangoHabilidad(EHabilidad H) const;
+	int32 Habilidad(EHabilidad H) const;
+	/** Prueba contra una CD: d20 + modificador (Dado 1..20 lo fuerza, para tests). Devuelve el grado. */
+	EGrado Prueba(EHabilidad H, int32 CD, int32 Dado = 0, int32* OutTotal = nullptr) const;
+	EGrado TirarSalvacion(ESalvacion S, int32 CD, int32 Dado = 0) const;
+	/** Un ataque de bono B contra esta ficha. */
+	EGrado RecibirTiradaAtaque(int32 Bono, int32 Dado = 0, int32* OutTotal = nullptr) const;
+	int32 Condicion(ECondicion C) const { const int32* V = Condiciones.Find(C); return V ? *V : 0; }
+	/** Fija una condición; con Segundos > 0 desaparece sola (Desprevenido, Aturdido). */
+	void SetCondicion(ECondicion C, int32 Valor, float Segundos = 0.f);
+	void SubirCondicion(ECondicion C, int32 Cuanto = 1);
+	int32 MuerteEn() const { return bTieneDiehard ? 5 : 4; }
+	void GanarPuntoHeroe(int32 N = 1) { PuntosHeroe = FMath::Clamp(PuntosHeroe + N, 0, PuntosHeroeMax); }
+	/** Romper el anatema: pierde el foco hasta la expiación. */
+	void RomperAnatema() { bAnatema = true; Foco = 0; AvisarTodo(); }
+	void Expiar() { bAnatema = false; }
 
 	// ---- Consultas ----
 	UFUNCTION(BlueprintPure, Category="Ficha") int32 PGMax() const;
@@ -103,17 +163,19 @@ public:
 	 * Aplica daño con debilidades, resistencias, inmaterialidad y escudo.
 	 * Devuelve los PG que efectivamente perdió el portador.
 	 */
-	UFUNCTION(BlueprintCallable, Category="Ficha") int32 RecibirDanio(int32 Cantidad, ETipoDanio Tipo, bool bToqueFantasmal = false);
+	UFUNCTION(BlueprintCallable, Category="Ficha") int32 RecibirDanio(int32 Cantidad, ETipoDanio Tipo, bool bToqueFantasmal = false, bool bCritico = false);
 	UFUNCTION(BlueprintCallable, Category="Ficha") void Curar(int32 Cantidad);
 	/** Imponer las Manos: cura 6 o, si se usa sobre un no-muerto, devuelve true y el llamador aplica 2d6 vital. */
 	UFUNCTION(BlueprintCallable, Category="Foco") bool GastarFoco();
-	/** Diehard: levantarse del estado Moribundo con 1 PG (una vez por altar). */
+	/** Levantarse del estado Moribundo con 1 PG: Herido sube 1 (regla de PF2e; reemplaza "una vez por altar"). */
 	UFUNCTION(BlueprintCallable, Category="Ficha") bool Levantarse();
 	/** Altar de Pharasma: restaura todo. */
 	UFUNCTION(BlueprintCallable, Category="Ficha") void DescansarEnAltar();
 
-	/** Segundos que dura el estado Moribundo antes de morir (Diehard: margen extra). */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha") float SegundosMoribundo = 3.0f;
+	/** Una ronda de PF2e en tiempo real: Moribundo empeora 1 por ronda; Asustado baja 1. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha") float SegundosRonda = 2.5f;
+	/** Compatibilidad: duración aproximada del estado Moribundo con Herido 0 y Diehard (4 rondas). */
+	float SegundosMoribundo = 10.f;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Ficha") bool bTieneDiehard = true;
 
 protected:
@@ -123,9 +185,14 @@ protected:
 private:
 	float AcumuladoAcciones = 0.f;
 	float TiempoMoribundo = 0.f;
-	bool bDiehardDisponible = true;
+	float TiempoRonda = 0.f;
+	TMap<ECondicion, float> VenceCondicion;
 	TArray<float> MarcasAtaque;
 
 	void Morir();
+	/** Al llegar a Moribundo MuerteEn(): si quedan Puntos de Héroe, se gastan todos y no muere. */
+	void ComprobarMuerte();
+	float Ahora() const;
+public:
 	void AvisarTodo();
 };
