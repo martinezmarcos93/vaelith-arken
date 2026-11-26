@@ -186,6 +186,22 @@ La propuesta externa es que el juego tiente al jugador a repetir el pecado de Va
 - Se difiere: barra de corrupción con umbrales, tres valores (Memoria, Deuda, Reputación), "peso del alma" por muerte.
 
 ### Fase F: interfaz propia (UMG en C++) — **prioridad de Marcos: dejar atrás el pixel art**
+**Estado 26/11: EN CURSO (compila y funciona; faltan ajustes).**
+- **Hecho:**
+  - `tools/ui_generar.py` genera el arte propio: título, subtítulo, botones normal y resaltado, placa 9-slice, barras, rombo, espiral, flecha, marco del minimapa, pergamino y los dos mapas en tinta (exterior desde `terreno.py`, catacumba desde el plano).
+  - `tools/ue/ui_importar.py` importa a `/Game/Vaelith/UI2` y crea `M_UI_Barra` (llenado, rastro de daño, destello) y `M_UI_Mapa` (minimapa circular que gira, con niebla de guerra).
+  - `UVaelithPantalla` (UMG armado en C++) reemplaza todo el Canvas: HUD, opciones, destello, condiciones, línea del guion, avisos, jefe, menú, pausa, dotes, créditos, fundidos y minimapa. La exploración queda guardada en la partida.
+  - `AVaelithHUD` solo crea el widget. Las capturas incluyen la interfaz.
+- **Falta:**
+  - los botones del menú quedan del tamaño del texto: envolverlos en un `USizeBox` de 460×100;
+  - verificar con capturas el HUD de juego, la pausa, el minimapa (giro y niebla) y los créditos;
+  - borrar los PNG del Godot (`assets_fuente/ui`, `/Game/Vaelith/UI/T_*`) cuando ya nada los use;
+  - revisar el ajuste de escala de UMG a 1360×768.
+- **Problema abierto (verde intermitente):** con luces 100 % dinámicas, en Vulkan con la GTX 1060 algunas corridas pintan de verde lo que ilumina una luz.
+  - Medido en 4 corridas idénticas del menú: verde medio 8,2 / −1,9 / −1,9 / 1,4.
+  - Apagar el sombreado agrupado y el de mosaico no lo resuelve del todo.
+  - Próximo paso: `depuracion-sistematica`. Probar Substrate o shading model, `r.Vulkan.*`, drivers, o volver la luna y el cielo a Stationary con luz horneada solo para esas dos.
+
 **Regla (Marcos, 25/11):** todo elemento de interfaz se crea con el motor: barras, placas, botones, títulos y minimapa. No queda ningún PNG del proyecto Godot.
 - **Barras de vida, foco y escudo:**
   - widgets UMG con material propio (llenado suave, destello al recibir daño, marco gótico generado por script);

@@ -52,6 +52,9 @@ public:
 	UPROPERTY() bool bAnatema = false;
 	UPROPERTY() int32 AguaBendita = 2;
 	UPROPERTY() int32 Pociones = 0;
+	/** Niebla de guerra del minimapa (128x128 sobre cada mapa, 0..255). */
+	UPROPERTY() TArray<uint8> ExploradoExterior;
+	UPROPERTY() TArray<uint8> ExploradoCatacumba;
 	UPROPERTY() FDateTime Fecha;
 };
 

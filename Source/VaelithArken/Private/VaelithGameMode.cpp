@@ -664,7 +664,7 @@ void AVaelithGameMode::Tick(float DeltaTime)
 		if (T >= Capturas[i])
 		{
 			const FString Archivo = FPaths::ProjectSavedDir() / FString::Printf(TEXT("Capturas/cap_%03d.png"), FMath::RoundToInt(Capturas[i]));
-			FScreenshotRequest::RequestScreenshot(Archivo, false, false);
+			FScreenshotRequest::RequestScreenshot(Archivo, true, false);  // con la interfaz (UMG)
 			UE_LOG(LogTemp, Log, TEXT("[vaelith] captura %s"), *Archivo);
 			Capturas.RemoveAt(i);
 		}
