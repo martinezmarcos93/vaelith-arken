@@ -1057,6 +1057,59 @@
     4.0
    ]
   ],
+  "diag_cortes": [
+   [
+    "rotulo",
+    "Amenaza",
+    2.5,
+    0.3
+   ],
+   [
+    "narracion",
+    "No fue un animal ni un soldado. Fue algo que pelea como vos, y que todavía anda suelto.",
+    5.0
+   ]
+  ],
+  "eco_tumbas": [
+   [
+    "narracion",
+    "Lo oís antes de verlo: uñas contra madera. Acá salieron tres. El más chico tardó más.",
+    5.0
+   ]
+  ],
+  "eco_arroyo": [
+   [
+    "narracion",
+    "Alguien se ahogó acá queriendo cruzar. Llevaba una carta para Varo. Nunca llegó, y él tampoco.",
+    5.5
+   ]
+  ],
+  "eco_soldado": [
+   [
+    "narracion",
+    "Un soldado de tu ejército se perdió entre estos árboles. Todavía busca la formación.",
+    4.5
+   ],
+   [
+    "narracion",
+    "No lo vas a encontrar. Ya es mío.",
+    3.0
+   ]
+  ],
+  "eco_puerta_pueblo": [
+   [
+    "narracion",
+    "Una mujer esperó en esta puerta a un hijo que se fue a pelear contra vos. Esperó once inviernos.",
+    5.5
+   ]
+  ],
+  "eco_aventurero": [
+   [
+    "narracion",
+    "Acá cayó el primero de los que vinieron a matarte. Antes de morir se rió. Sabía que los otros iban a llegar.",
+    6.0
+   ]
+  ],
   "anatema": [
    [
     "narracion",
@@ -1136,6 +1189,7 @@
   "diag_guardian",
   "diag_guardian_critico",
   "diag_huesos",
-  "expiacion"
+  "expiacion",
+  "diag_cortes"
  ]
 }

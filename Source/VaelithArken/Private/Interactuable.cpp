@@ -373,6 +373,22 @@ void ATriggerGuion::AlEntrar(UPrimitiveComponent*, AActor* Otro, UPrimitiveCompo
 	AVaelithGameMode* GM = GetWorld()->GetAuthGameMode<AVaelithGameMode>();
 	if (!GM || GM->Modo == EModoJuego::Menu) return;
 	if (Penumbra >= 0.f || !Musica.IsEmpty()) GM->EntrarZona(Penumbra, Musica);
+	if (!Escena.IsEmpty() && Prueba != EHabilidad::Ninguna)
+	{
+		// Eco de la muerte: un intento por eco; si no lo percibe, se pierde (no se avisa).
+		const FName Intento(*(TEXT("eco_") + Escena));
+		if (GM->HechoOcurrido(Intento)) return;
+		GM->RegistrarHecho(Intento);
+		AVaelithCharacter* J = Cast<AVaelithCharacter>(Otro);
+		const EGrado G = J->Ficha->Prueba(Prueba, CD);
+		UE_LOG(LogTemp, Log, TEXT("[vaelith] eco %s: %s"), *Escena, *Planilla::Nombre(G).ToString());
+		if (G == EGrado::Exito || G == EGrado::ExitoCritico)
+		{
+			Sonido(this, TEXT("sfx_recuerdo"), 0.45f);
+			GM->ReproducirEscena(Escena, true);
+		}
+		return;
+	}
 	if (!Escena.IsEmpty()) GM->ReproducirEscena(Escena, true);
 	if (bJefe) GM->IniciarJefe();
 }

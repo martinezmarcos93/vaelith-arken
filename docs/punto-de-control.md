@@ -1,18 +1,13 @@
 # Punto de control
 
 <!-- PUNTO-DE-CONTROL -->
-- Tarea actual: pausa pedida por Marcos (25/11, noche). Roadmap nuevo en `docs/roadmap-slice.md`. Integra su lista, la revisión del video y la visión narrativa externa, y reemplaza el orden de `roadmap-afinado.md` desde su fase 3.
-- Hecho hoy, después de la prueba de Marcos:
-  - pausa con fondo negro y cursor (el cursor no se pudo verificar por captura);
-  - "E o Enter" en la ayuda;
-  - aviso LIGHTING NEEDS TO BE REBUILT arreglado de raíz (76 luces Movable, `r.AllowStaticLighting=False`, `tools/ue/luces_dinamicas.py`);
-  - motion blur 0,1;
-  - `tools/grabar_partida.sh` (graba con ffmpeg; el grabador de GNOME cierra el juego).
-- Próximo paso: fase A del roadmap. Recalibrar el cielo y la exposición: con el cielo dinámico, el menú quedó plano y los árboles muertos casi blancos (captura del menú del 25/11). Después, legibilidad del bosque oscuro (-ir=9500,50500,1400,157,-5) y volver a medir FPS.
-- Decidido por Marcos (25/11): tentación SÍ, como interactuable según el Ministro Dragón; frase eje del menú SÍ; pueblo con NPC en el slice SÍ (ver "Decisiones" en `roadmap-slice.md`).
-- Tono de Pharasma v2 APROBADO. Se suman la fase A2 (cielo estrellado, luna, niebla de horizonte, pueblo a 250–300 m y transitable) y, en la fase F, el minimapa y la interfaz 100 % del motor.
-- Fase R nueva: la planilla PF2e completa en el juego (`docs/planilla-en-juego.md`). R1 y R2 van antes de C y E; R3 y R4 con la UI.
-- **Pausa: no implementar nada hasta que Marcos diga "empezamos".** El orden está en `roadmap-slice.md`.
-- Ojo: durante las capturas, alguien pausó y cerró las ventanas del juego. No tocarlas mientras corren.
-- Archivos en curso: `docs/roadmap-slice.md`, `docs/revision-video-2026-11-25.md`, `tools/ue/construir_nivel.py` (luces Movable y motion blur).
+- Tarea actual: implementar `docs/roadmap-slice.md` completo, de corrido (autorizado por Marcos el 26/11). Cada fase lleva commit y push a la rama `unreal-5.8` del repo `vaelith-arken`; nunca a main.
+- Hechas: A, A2 (cielo, horizonte, pueblo), B (guion de Pharasma), R1 (modelo de la planilla) y R2 (reglas en juego, tentación, anatema).
+- Próximo paso: fase C (Ecos de la muerte con Percepción y más diagnósticos). Después D (agua, rejas y piedra), E (cierre de la tentación), F (UI en UMG desde C++ y minimapa), R3 (progresión a nivel 5), R4 (Registro del Osario), G y H (NPC del pueblo).
+- Herramientas:
+  - `tools/ue/regenerar_nivel.sh` reconstruye el mapa;
+  - `tools/ue/capturas_ref.sh <dir>` saca las 8 vistas;
+  - `-usar=id#n` usa la opción n de un interactuable;
+  - `python3 tools/guion_pharasma.py` regenera el guion.
+- Ojo: el sombreado agrupado (clustered) está apagado en DefaultEngine.ini: pintaba de verde las luces dinámicas.
 <!-- /PUNTO-DE-CONTROL -->

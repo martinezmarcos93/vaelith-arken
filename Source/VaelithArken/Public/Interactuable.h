@@ -133,6 +133,9 @@ public:
 	UPROPERTY(EditAnywhere, Category="Vaelith") FString Musica;
 	/** Inicia la pelea con la Sombra. */
 	UPROPERTY(EditAnywhere, Category="Vaelith") bool bJefe = false;
+	/** Eco de la muerte (Retornado): la escena solo aparece si pasa esta prueba oculta (Percepción). Una sola vez. */
+	UPROPERTY(EditAnywhere, Category="Vaelith") EHabilidad Prueba = EHabilidad::Ninguna;
+	UPROPERTY(EditAnywhere, Category="Vaelith") int32 CD = 15;
 
 protected:
 	UFUNCTION() void AlEntrar(UPrimitiveComponent* Comp, AActor* Otro, UPrimitiveComponent* OtroComp, int32 Indice, bool bBarrido, const FHitResult& Hit);

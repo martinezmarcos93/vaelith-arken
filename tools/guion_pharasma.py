@@ -285,6 +285,27 @@ ESCENAS = {
         [RO, "Compasión", 2.5, 0.3],
         [N, "Esta alma espera que alguien la entierre. Nada más que eso.", 4.0],
     ],
+    "diag_cortes": [
+        [RO, "Amenaza", 2.5, 0.3],
+        [N, "No fue un animal ni un soldado. Fue algo que pelea como vos, y que todavía anda suelto.", 5.0],
+    ],
+    # Ecos de la muerte (Retornado): solo con Percepción.
+    "eco_tumbas": [
+        [N, "Lo oís antes de verlo: uñas contra madera. Acá salieron tres. El más chico tardó más.", 5.0],
+    ],
+    "eco_arroyo": [
+        [N, "Alguien se ahogó acá queriendo cruzar. Llevaba una carta para Varo. Nunca llegó, y él tampoco.", 5.5],
+    ],
+    "eco_soldado": [
+        [N, "Un soldado de tu ejército se perdió entre estos árboles. Todavía busca la formación.", 4.5],
+        [N, "No lo vas a encontrar. Ya es mío.", 3.0],
+    ],
+    "eco_puerta_pueblo": [
+        [N, "Una mujer esperó en esta puerta a un hijo que se fue a pelear contra vos. Esperó once inviernos.", 5.5],
+    ],
+    "eco_aventurero": [
+        [N, "Acá cayó el primero de los que vinieron a matarte. Antes de morir se rió. Sabía que los otros iban a llegar.", 6.0],
+    ],
     "anatema": [[N, "Te lo anoto. Hasta que vuelvas a rezarme, mi fuerza no pasa por tus manos.", 4.5]],
     "expiacion": [
         [N, "Rezás. No te perdono: anoto que volviste.", 3.5],
@@ -308,7 +329,7 @@ ESCENAS = {
 BLOQUEAN = ["armas", "daga", "lectura_nichos", "lectura_altar", "espejo_agua", "cadaver", "estandarte",
             "lectura_lapida", "guardian_relevado", "diag_fallo", "diag_tentacion", "diag_tentacion_critico",
             "tentacion_descanso", "tentacion_levantar", "reja_forzada", "reja_rezada", "diag_restos", "robo_restos",
-            "diag_guardian", "diag_guardian_critico", "diag_huesos", "expiacion"]
+            "diag_guardian", "diag_guardian_critico", "diag_huesos", "expiacion", "diag_cortes"]
 
 TEXTOS = {
     "menu_pie": "No busca vivir. Busca merecer morir.",

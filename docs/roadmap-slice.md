@@ -137,7 +137,17 @@ Toda la ficha de PF2e de Vaelith pasa a ser sistema de juego. Se parte en 4 entr
   - dos mazos de dotes, Camino de Pharasma y Eco de Arken (R3).
 - **R4, interfaz:** la planilla como **Registro del Osario** (Tab, 4 páginas: el alma, lo aprendido, lo que carga, el credo y la deuda) y la pantalla de subida de nivel. Va **después de la base UMG de la fase F**.
 
-### Fase C: Saber del Osario sobre cadáveres (C++ chico)
+### Fase C: Saber del Osario sobre cadáveres — HECHA 26/11
+**Resultado:**
+- **Diagnósticos con Saber del Osario** (memoria residual incluida). Cada uno nombra una de las categorías del Registro: Respeto, Compasión, Liberación o Amenaza. Están en:
+  - el muerto de la reja (Respeto; con crítico, "lo sabés porque vos también sabías");
+  - los restos del aventurero (Respeto);
+  - el centinela (Liberación; con crítico, "la orden tiene tu voz");
+  - los huesos del bosque (Compasión);
+  - los restos cortados (Amenaza).
+- **Ecos de la muerte (Retornado):** `ATriggerGuion` con una prueba oculta de Percepción y un solo intento. Hay 5: tumbas abiertas, arroyo, soldado perdido, puerta del pueblo y el primer aventurero en la torre. Verificado: `eco eco_arroyo: Éxito`.
+
+**Plan original:**
 - Hoy el Saber del Osario solo da la ficha del enemigo. Se extiende a **cadáveres y restos**: mirar un cuerpo da un diagnóstico vago en la voz de Pharasma ("Murió hace días." "Algo usó este cuerpo." "Su alma sigue acá.").
 - Es la versión barata de "la muerte no es siempre enemiga": cada cadáver del nivel pasa a ser contenido sin geometría nueva.
 - El guardián del bosque deja de ser un caso aislado: el diagnóstico es lo que avisa que no hay que matarlo.

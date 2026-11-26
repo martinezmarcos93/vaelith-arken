@@ -212,6 +212,15 @@ def trigger(pos, extension, escena="", penumbra=-1.0, musica="", jefe=False):
     return a
 
 
+def eco(pos, escena, cd=15, radio=500):
+    """Eco de la muerte (Retornado): solo se percibe con una prueba oculta de Percepción. Un intento."""
+    a = trigger(pos, (radio, radio, 300), escena)
+    a.set_editor_property("prueba", unreal.Habilidad.PERCEPCION)
+    a.set_editor_property("cd", cd)
+    a.set_folder_path("Guion/Ecos")
+    return a
+
+
 ANTORCHAS = 0
 
 
@@ -400,6 +409,9 @@ def poblar_catacumbas():
     for dx, dy, giro in ((-110, 60, 20), (90, -80, 200)):
         poner(O("SM_Pila_Huesos"), v(x + dx, y + dy, 0), giro, (0.8, 0.8, 0.8), carpeta="Catacumba/Props")
     poner(O("SM_Craneo"), v(x + 20, y + 120, 0), 75, carpeta="Catacumba/Props")
+    cortes = interactuable(unreal.TipoInteractuable.LECTURA, v(x - 110, y + 60, 0), 20, O("SM_Pila_Huesos"), "restos_cortados",
+                           etiqueta="Restos cortados", escala=(0.8, 0.8, 0.8))
+    con_opciones(cortes, [opcion("Examinar los cortes", "DIAGNOSTICAR", "SABER_OSARIO", 16, "diag_cortes", "", "diag_fallo")])
     # escudo partido de un tajo limpio: dos mitades separadas
     for lado in (-1, 1):
         a = caja(v(x + lado * 55, y - 20, 6), (70, 4, 90), MAT["M_Metal"], "Catacumba/Props")
@@ -542,6 +554,7 @@ def construir_cementerio():
         poner(E("cementerio", "SM_Obelisco"), vt(sx + lado * 700, sy + 900), 0, carpeta="Exterior/Cementerio")
     sonido_3d("amb_antorcha", v(sx, sy + 300, 260), 700.0, 0.5)
     trigger(v(sx, sy + 500, 250), (350, 250, 300), "zona_cementerio", 0.0, "mus_bosque")
+    eco(vt(sx, sy + 2100, 150), "eco_tumbas", 14)
     # Tumbas abiertas junto a la salida: "la tierra empujada desde abajo, nadie cavó"
     lapidas = [a for a in (E("cementerio", f"SM_Lapida_0{i}") for i in (1, 2, 3, 4)) if a]
     for i, (dx, dy) in enumerate(((-700, 1500), (650, 1750), (-520, 2450), (820, 2650))):
@@ -704,6 +717,7 @@ def construir_bosque():
     zp = min(H(px, py - 600), H(px, py + 600)) - 140
     poner(E("bosque", "SM_Puente"), v(px, py, zp), 90, carpeta="Exterior/Bosque")
     sonido_3d("amb_agua", v(px, py, zp + 100), 2600.0, 0.8)
+    eco(v(px, py, zp + 200), "eco_arroyo", 15, 700)
     sonido_3d("amb_viento", v(8000, 30000, 600), 12000.0, 0.3)
     # Centinela junto al sendero, recuerdo 3 en un claro pasando el puente
     no_muerto(unreal.TipoNoMuerto.GUARDIAN, vt(7600, 25500, 100), 200, "guardian")
@@ -744,6 +758,7 @@ def construir_bosque():
         opcion("Examinar los huesos", "DIAGNOSTICAR", "SABER_OSARIO", 15, "diag_huesos", "", "diag_fallo", terminal=False),
     ])
     no_muerto(unreal.TipoNoMuerto.FANTASMA, vt(4000, 52500, 160), 0, "nm_oscuro_1")
+    eco(vt(GUIAS[2][0] + 600, GUIAS[2][1], 150), "eco_soldado", 16, 600)
     no_muerto(unreal.TipoNoMuerto.ESQUELETO, vt(-5000, 54000, 100), 0, "nm_oscuro_2")
     no_muerto(unreal.TipoNoMuerto.FANTASMA, vt(-9500, 51000, 160), 0, "nm_oscuro_3")
     nav(-4000, 53500, 9000, 6000)
@@ -827,6 +842,7 @@ def construir_pueblo():
         nav((ax + bx) / 2, (ay + by) / 2, abs(bx - ax) / 2 + 1500, abs(by - ay) / 2 + 1500)
     nav(px, py, TER.RADIO_PUEBLO + 800, TER.RADIO_PUEBLO + 800)
     trigger(vt(gx, gy, 200), (600, 600, 400), "zona_pueblo", 0.0, "")
+    eco(vt(gx + math.cos(a_puerta) * 900, gy + math.sin(a_puerta) * 900, 150), "eco_puerta_pueblo", 15, 450)
     unreal.log(f"[vaelith] pueblo: {len(puestas)} casas, empalizada {n} tramos de {largo:.0f} cm, a {math.hypot(px - lx, py - ly) / 100:.0f} m de la loma")
 
 
@@ -858,6 +874,7 @@ def construir_torre():
     ra = math.radians(ENTRADA_TORRE)
     ex, ey = tx + math.cos(ra) * (radio + 900), ty + math.sin(ra) * (radio + 900)
     poner(E("ruinas", "SM_Arco_Ruina"), v(ex, ey, H(ex, ey) - 60), ENTRADA_TORRE - 90, carpeta="Torre")
+    eco(vt(ex, ey, 150), "eco_aventurero", 15, 500)
     # Dos verdugos de piedra custodian el paso (la malla mira a su -Y local)
     for lado in (-1, 1):
         vx = tx + math.cos(ra) * 1450 + math.cos(ra + lado * math.pi / 2) * 330
