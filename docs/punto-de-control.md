@@ -1,13 +1,13 @@
 # Punto de control
 
 <!-- PUNTO-DE-CONTROL -->
-- Tarea actual: implementar `docs/roadmap-slice.md` completo, de corrido (autorizado por Marcos el 26/11). Cada fase lleva commit y push a la rama `unreal-5.8` del repo `vaelith-arken`; nunca a main.
-- Hechas: A, A2 (cielo, horizonte, pueblo), B (guion de Pharasma), R1 (modelo de la planilla) y R2 (reglas en juego, tentación, anatema).
-- Próximo paso: fase C (Ecos de la muerte con Percepción y más diagnósticos). Después D (agua, rejas y piedra), E (cierre de la tentación), F (UI en UMG desde C++ y minimapa), R3 (progresión a nivel 5), R4 (Registro del Osario), G y H (NPC del pueblo).
-- Herramientas:
-  - `tools/ue/regenerar_nivel.sh` reconstruye el mapa;
-  - `tools/ue/capturas_ref.sh <dir>` saca las 8 vistas;
-  - `-usar=id#n` usa la opción n de un interactuable;
-  - `python3 tools/guion_pharasma.py` regenera el guion.
-- Ojo: el sombreado agrupado (clustered) está apagado en DefaultEngine.ini: pintaba de verde las luces dinámicas.
+- Tarea actual: roadmap del slice (`docs/roadmap-slice.md`), **en pausa por pedido de Marcos (26/11)** a mitad de la fase F (UI en UMG desde C++).
+- Hechas, con push a la rama `unreal-5.8` (nunca a main): A, A2, B, R1, R2, C, D y E. Tests 8/8. Detalle en `docs/handoffs/2026-11-26.md`.
+- Próximo paso al retomar:
+  1. Bug del verde intermitente en las luces dinámicas, con `depuracion-sistematica`. Métrica: verde medio de la captura del menú > 3.
+  2. Terminar F: botones en `USizeBox`, capturas del HUD, la pausa y el minimapa, y borrar los PNG del Godot.
+  3. Después R3 (progresión a nivel 5), R4 (Registro del Osario), G y H.
+- Bloqueado por: nada. G espera los assets de Marcos.
+- Herramientas: `tools/ue/regenerar_nivel.sh`, `tools/ue/capturas_ref.sh`, `-usar=id#n`, `tools/guion_pharasma.py`.
+- Preguntas abiertas: ¿la rama `unreal-5.8` se integra alguna vez a main? (decide Marcos).
 <!-- /PUNTO-DE-CONTROL -->
