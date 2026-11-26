@@ -1,6 +1,7 @@
 #include "VaelithCharacter.h"
 #include "VaelithGameMode.h"
 #include "NoMuerto.h"
+#include "Planilla.h"
 #include "Interactuable.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -131,6 +132,15 @@ void AVaelithCharacter::BeginPlay()
 		Escudo->SetRelativeScale3D(FVector(0.65f, 0.06f, 0.85f));
 	}
 	AplicarDotes();
+	Ficha->AlSalvarseDeMorir.AddLambda([this]()
+	{
+		if (AVaelithGameMode* GM = GetWorld()->GetAuthGameMode<AVaelithGameMode>())
+		{
+			GM->ReproducirEscena(TEXT("salvado"), false);
+			GM->Aviso(TEXT("Favor de Pharasma"), TEXT("Gastaste todo tu favor. Ella te devolvió una vez más."), 5.f);
+		}
+		Reproducir(TEXT("sfx_respiracion"), 1.f, 0.8f);
+	});
 }
 
 void AVaelithCharacter::AplicarDotes()
@@ -183,6 +193,11 @@ void AVaelithCharacter::Tick(float DeltaTime)
 		LeerControles(DeltaTime);
 	}
 
+	if (TratandoHasta > 0.f && GetWorld()->GetTimeSeconds() >= TratandoHasta)
+	{
+		TratandoHasta = -1.f;
+		bControlBloqueado = false;
+	}
 	NivelPenumbra = FMath::FInterpTo(NivelPenumbra, PenumbraObjetivo, DeltaTime, 0.7f);
 	ActualizarAccion(DeltaTime);
 	AnimarArmas(DeltaTime);
@@ -297,6 +312,19 @@ void AVaelithCharacter::LeerControles(float Dt)
 		}
 	}
 	if (PC->WasInputKeyJustPressed(EKeys::R) && Accion == EAccionArma::Ninguna) UsarManos();
+	if (Accion == EAccionArma::Ninguna)
+	{
+		if (PC->WasInputKeyJustPressed(EKeys::T)) Desmoralizar();
+		if (PC->WasInputKeyJustPressed(EKeys::V)) TratarHeridas();
+		if (PC->WasInputKeyJustPressed(EKeys::G)) ArrojarAguaBendita();
+		if (PC->WasInputKeyJustPressed(EKeys::C)) BeberPocion();
+	}
+	// Varias vías para un mismo obstáculo: la rueda del ratón elige.
+	if (InteractuableEnMira && InteractuableEnMira->Opciones.Num() > 1)
+	{
+		if (PC->WasInputKeyJustPressed(EKeys::MouseScrollUp)) InteractuableEnMira->CambiarSeleccion(-1);
+		if (PC->WasInputKeyJustPressed(EKeys::MouseScrollDown)) InteractuableEnMira->CambiarSeleccion(1);
+	}
 	if (PC->WasInputKeyJustPressed(EKeys::Two) && bTieneDaga && Accion == EAccionArma::Ninguna)
 	{
 		bUsandoDaga = !bUsandoDaga;
@@ -400,6 +428,15 @@ void AVaelithCharacter::AplicarGolpe()
 			break;
 		default: break;
 		}
+		// PF2e: contra un enemigo desprevenido (aturdido, después de una Embestida o de la Retribución) o por la
+		// espalda, el golpe es crítico (+10 sobre su CA, traducido): daño doble.
+		const bool bEspalda = FVector::DotProduct(N->GetActorForwardVector().GetSafeNormal2D(), Frente.GetSafeNormal2D()) > 0.5f;
+		const bool bCritico = Base > 0 && (N->Ficha->Condicion(ECondicion::Desprevenido) > 0 || bEspalda);
+		if (bCritico)
+		{
+			Base *= 2;
+			if (AVaelithGameMode* GMc = GetWorld()->GetAuthGameMode<AVaelithGameMode>()) GMc->Destello(TEXT("Crítico"), 0.9f);
+		}
 		const int32 Danio = Base > 0 ? Ficha->RegistrarAtaque(Base) : 0;
 		if (Danio > 0 || Aturdir > 0.f)
 		{
@@ -447,10 +484,38 @@ bool AVaelithCharacter::RecibirGolpe(int32 Danio, ETipoDanio Tipo, AActor* Ataca
 	}
 
 	const bool bBloqueaba = Ficha->bBloqueando;
-	if (!bDeFrente) Ficha->bBloqueando = false;
+	if (!bDeFrente) Ficha->bBloqueando = false;  // el escudo alzado solo cuenta de frente (CA +2)
+
+	// Tirada de ataque oculta contra la CA (grados de PF2e): fallo = no entra, crítico = doble.
+	ANoMuerto* Enemigo = Cast<ANoMuerto>(Atacante);
+	const int32 Bono = Enemigo ? Enemigo->Ficha->Ataque() : 7;
+	int32 Total = 0;
+	const EGrado Grado = Ficha->RecibirTiradaAtaque(Bono, 0, &Total);
+	UE_LOG(LogTemp, Log, TEXT("[vaelith] ataque enemigo +%d total=%d CA=%d grado=%d"), Bono, Total, Ficha->CA(), int32(Grado));
+	if (Grado == EGrado::Fallo || Grado == EGrado::FalloCritico)
+	{
+		Ficha->bBloqueando = bBloqueaba;
+		Reproducir(bBloqueaba && bDeFrente ? TEXT("sfx_bloqueo") : TEXT("sfx_tajo"), 0.5f, 1.4f);
+		if (AVaelithGameMode* GMd = GetWorld()->GetAuthGameMode<AVaelithGameMode>()) GMd->Destello(bBloqueaba && bDeFrente ? TEXT("Desviado") : TEXT("Esquivado"), 0.7f);
+		return false;
+	}
+	const bool bCritico = Grado == EGrado::ExitoCritico;
+	if (bCritico) Danio *= 2;
+
 	const int32 Antes = Ficha->PGEscudo;
-	const int32 Perdido = Ficha->RecibirDanio(Danio, Tipo);
+	const int32 Perdido = Ficha->RecibirDanio(Danio, Tipo, false, bCritico);
 	Ficha->bBloqueando = bBloqueaba && !Ficha->EscudoDestruido();
+	// Toque del espectro: salvación de Voluntad contra el miedo (CD 16). Fallo: Asustado 1; fallo crítico: 2.
+	if (Enemigo && Enemigo->Tipo == ETipoNoMuerto::Fantasma && !Ficha->bMoribundo && !Ficha->bMuerto)
+	{
+		const EGrado Miedo = Ficha->TirarSalvacion(ESalvacion::Voluntad, 16);
+		const int32 Asustado = Miedo == EGrado::FalloCritico ? 2 : (Miedo == EGrado::Fallo ? 1 : 0);
+		if (Asustado > Ficha->Condicion(ECondicion::Asustado))
+		{
+			Ficha->SetCondicion(ECondicion::Asustado, Asustado);
+			if (AVaelithGameMode* GMm = GetWorld()->GetAuthGameMode<AVaelithGameMode>()) GMm->Destello(FString::Printf(TEXT("Asustado %d"), Asustado), 1.2f);
+		}
+	}
 	if (bBloqueaba && bDeFrente)
 	{
 		Reproducir(TEXT("sfx_bloqueo"), 0.9f);
@@ -476,6 +541,11 @@ bool AVaelithCharacter::RecibirGolpe(int32 Danio, ETipoDanio Tipo, AActor* Ataca
 
 void AVaelithCharacter::UsarManos()
 {
+	if (Ficha->bAnatema)
+	{
+		if (AVaelithGameMode* GM = GetWorld()->GetAuthGameMode<AVaelithGameMode>()) GM->Aviso(TEXT("Anatema"), TEXT("Tu foco no responde. Expiá ante un altar de Pharasma."), 3.f);
+		return;
+	}
 	if (Ficha->Foco <= 0)
 	{
 		if (AVaelithGameMode* GM = GetWorld()->GetAuthGameMode<AVaelithGameMode>()) GM->Aviso(TEXT("Sin foco"), TEXT("Rezá en un altar de Pharasma para recuperarlo."), 3.f);
@@ -504,6 +574,114 @@ void AVaelithCharacter::UsarManos()
 		}
 	}
 	Ficha->Curar(6);
+}
+
+ANoMuerto* AVaelithCharacter::EnemigoDelante(float Alcance, float Radio) const
+{
+	TArray<FHitResult> Golpes;
+	const FVector Ojo = Camara->GetComponentLocation();
+	const FVector Frente = GetViewRotation().Vector();
+	FCollisionQueryParams Params(SCENE_QUERY_STAT(EnemigoDelante), false, this);
+	GetWorld()->SweepMultiByChannel(Golpes, Ojo + Frente * 30.f, Ojo + Frente * Alcance, FQuat::Identity, ECC_Pawn, FCollisionShape::MakeSphere(Radio), Params);
+	for (const FHitResult& H : Golpes)
+	{
+		if (ANoMuerto* N = Cast<ANoMuerto>(H.GetActor()))
+		{
+			if (N->EstaVivo()) return N;
+		}
+	}
+	return nullptr;
+}
+
+bool AVaelithCharacter::HayEnemigoCerca(float Radio) const
+{
+	for (TActorIterator<ANoMuerto> It(GetWorld()); It; ++It)
+	{
+		if (It->EstaVivo() && It->Tipo != ETipoNoMuerto::Guardian && FVector::Dist(It->GetActorLocation(), GetActorLocation()) < Radio) return true;
+	}
+	return false;
+}
+
+void AVaelithCharacter::Desmoralizar()
+{
+	// Intimidación (1 acción) contra la Voluntad del objetivo. Los no-muertos sin mente son inmunes (PF2e).
+	AVaelithGameMode* GM = GetWorld()->GetAuthGameMode<AVaelithGameMode>();
+	ANoMuerto* N = EnemigoDelante(700.f, 60.f);
+	if (!N || !GM) return;
+	if (!Ficha->GastarAcciones(1)) return;
+	Reproducir(TEXT("sfx_esfuerzo"), 0.9f, 0.8f);
+	if (N->Ficha->bSinMente)
+	{
+		GM->Destello(TEXT("No tiene mente que asustar"), 1.4f);
+		return;
+	}
+	const int32 CD = 10 + N->Ficha->Salvacion(ESalvacion::Voluntad);
+	const EGrado G = Ficha->Prueba(EHabilidad::Intimidacion, CD);
+	const int32 Valor = G == EGrado::ExitoCritico ? 2 : (G == EGrado::Exito ? 1 : 0);
+	GM->Destello(FString::Printf(TEXT("Intimidación: %s"), *Planilla::Nombre(G).ToString()), 1.2f);
+	if (Valor > 0) N->Ficha->SetCondicion(ECondicion::Asustado, Valor);
+}
+
+void AVaelithCharacter::TratarHeridas()
+{
+	// Medicina (Tratar heridas): fuera de combate, 3 s quieto. CD 15: éxito 2d8, crítico 4d8, fallo crítico 1d8 de daño.
+	AVaelithGameMode* GM = GetWorld()->GetAuthGameMode<AVaelithGameMode>();
+	if (!GM || Ficha->PG >= Ficha->PGMax()) return;
+	if (!bTratoHeridasDisponible) { GM->Destello(TEXT("Ya trataste tus heridas: rezá en un altar"), 1.8f); return; }
+	if (HayEnemigoCerca(1500.f)) { GM->Destello(TEXT("No con enemigos cerca"), 1.4f); return; }
+	bTratoHeridasDisponible = false;
+	const EGrado G = Ficha->Prueba(EHabilidad::Medicina, 15);
+	int32 Cura = 0;
+	if (G == EGrado::ExitoCritico) for (int32 i = 0; i < 4; ++i) Cura += FMath::RandRange(1, 8);
+	else if (G == EGrado::Exito) Cura = FMath::RandRange(1, 8) + FMath::RandRange(1, 8);
+	if (G == EGrado::FalloCritico) Ficha->RecibirDanio(FMath::RandRange(1, 8), ETipoDanio::Contundente);
+	else Ficha->Curar(Cura);
+	TratandoHasta = GetWorld()->GetTimeSeconds() + 3.f;
+	bControlBloqueado = true;
+	Reproducir(TEXT("sfx_respiracion"), 0.8f, 1.1f);
+	GM->Destello(FString::Printf(TEXT("Medicina: %s"), *Planilla::Nombre(G).ToString()), 2.5f);
+}
+
+void AVaelithCharacter::ArrojarAguaBendita()
+{
+	// Frasco de agua bendita (los pharasmitas siempre llevan): 1 acción, daño vital 1d6 + 1 a un no-muerto delante.
+	AVaelithGameMode* GM = GetWorld()->GetAuthGameMode<AVaelithGameMode>();
+	if (!GM) return;
+	if (AguaBendita <= 0) { GM->Destello(TEXT("Sin agua bendita"), 1.f); return; }
+	ANoMuerto* N = EnemigoDelante(1100.f, 70.f);
+	if (!N) { GM->Destello(TEXT("No hay a quién arrojarla"), 1.f); return; }
+	if (!Ficha->GastarAcciones(1)) return;
+	--AguaBendita;
+	Reproducir(TEXT("sfx_manos"), 0.9f, 1.3f);
+	N->RecibirAtaque(FMath::RandRange(1, 6) + 1, ETipoDanio::Vital, true, 0.3f, FVector::ZeroVector);
+}
+
+void AVaelithCharacter::BeberPocion()
+{
+	// Poción de curación menor: 1 acción, 1d8.
+	AVaelithGameMode* GM = GetWorld()->GetAuthGameMode<AVaelithGameMode>();
+	if (!GM) return;
+	if (Pociones <= 0) { GM->Destello(TEXT("Sin pociones"), 1.f); return; }
+	if (Ficha->PG >= Ficha->PGMax() || !Ficha->GastarAcciones(1)) return;
+	--Pociones;
+	Ficha->Curar(FMath::RandRange(1, 8));
+	Reproducir(TEXT("sfx_respiracion"), 0.6f, 1.2f);
+}
+
+void AVaelithCharacter::DarObjeto(const FString& Objeto, int32 Cantidad)
+{
+	AVaelithGameMode* GM = GetWorld()->GetAuthGameMode<AVaelithGameMode>();
+	if (Objeto == TEXT("pocion")) { Pociones += Cantidad; if (GM) GM->Destello(TEXT("Poción de curación (C)"), 1.8f); }
+	else if (Objeto == TEXT("agua_bendita")) { AguaBendita += Cantidad; if (GM) GM->Destello(TEXT("Agua bendita (G)"), 1.8f); }
+}
+
+float AVaelithCharacter::Carga() const
+{
+	// Armadura completa 4 + espada larga 1 + escudo 1 + daga (ligera) + frascos y pociones (ligeros, 0,1 cada uno).
+	float C = 4.f;
+	if (bTieneArmas) C += 2.f;
+	if (bTieneDaga) C += 0.1f;
+	return C + 0.1f * (AguaBendita + Pociones);
 }
 
 void AVaelithCharacter::AnimarArmas(float Dt)
@@ -666,7 +844,7 @@ void AVaelithCharacter::BuscarInteractuable()
 			if (I->PuedeUsarse())
 			{
 				InteractuableEnMira = I;
-				TextoInteraccion = I->TextoAccion().ToString();
+				TextoInteraccion = I->Opciones.Num() > 0 ? I->TextoOpciones(Ficha) : I->TextoAccion().ToString();
 				return;
 			}
 		}
@@ -687,7 +865,7 @@ void AVaelithCharacter::BuscarInteractuable()
 		Mejor = Dist;
 		InteractuableEnMira = I;
 	}
-	if (InteractuableEnMira) TextoInteraccion = InteractuableEnMira->TextoAccion().ToString();
+	if (InteractuableEnMira) TextoInteraccion = InteractuableEnMira->Opciones.Num() > 0 ? InteractuableEnMira->TextoOpciones(Ficha) : InteractuableEnMira->TextoAccion().ToString();
 }
 
 void AVaelithCharacter::IniciarDespertar()

@@ -12,7 +12,7 @@
   "penitencia_3": "Yo no me canso. Vos sí. Rezá ante un altar y aliviá la carga.",
   "moribundo": "Levantate. Todavía no terminaste. (clic o R)",
   "dote_titulo": "Algo vuelve con el recuerdo",
-  "controles": "WASD moverse · Shift correr · Espacio saltar|Clic izquierdo tajo · mantener para tajo potente|Clic derecho bloquear · bloquear justo antes del golpe: Retribución|F golpe de escudo · Q embestida · R Imponer las Manos|2 espada / daga · E interactuar · E o Enter adelantar texto · Tab Registro del Osario · Esc pausa",
+  "controles": "WASD moverse · Shift correr · Espacio saltar|Clic izquierdo tajo · mantener para tajo potente · golpe a un enemigo desprevenido o de espaldas: crítico|Clic derecho alzar el escudo (+2 CA) · justo antes del golpe: Retribución|F golpe de escudo · Q embestida · R Imponer las Manos · T desmoralizar|G agua bendita · C poción · V tratar heridas (fuera de combate)|2 espada / daga · E interactuar · rueda elegir · E o Enter adelantar texto · Tab Registro del Osario · Esc pausa",
   "creditos": "#VAELITH ARKEN||#Idea, historia y personaje|Marcos||#Desarrollo|Marcos con Claude (Anthropic)|Asistencia en modelado procedural: Codex (OpenAI)||#Motor|Unreal Engine 5.8 · Epic Games|Maniquíes y animaciones base: Epic Games (contenido de plantilla)||#Música|Composiciones del proyecto original Vaelith Arken||#Sonido|Ver CREDITS.md del proyecto: cada efecto con su autor y licencia||#Texturas|Poly Haven (CC0)||#Tipografías|SIL Open Font License||Basado en el personaje de Pathfinder 2e|Pathfinder es una marca de Paizo Inc. Este proyecto no está afiliado a Paizo.||||#La deuda continúa."
  },
  "escenas": {
@@ -897,6 +897,198 @@
     5.0
    ]
   ],
+  "diag_fallo": [
+   [
+    "narracion",
+    "Huesos y tela. Hoy no sabés leerlos.",
+    3.0
+   ]
+  ],
+  "diag_tentacion": [
+   [
+    "rotulo",
+    "Respeto",
+    2.5,
+    0.3
+   ],
+   [
+    "narracion",
+    "Murió contra esta reja, del lado de afuera. Quería llegar a mi daga y no lo dejaron.",
+    5.0
+   ]
+  ],
+  "diag_tentacion_critico": [
+   [
+    "rotulo",
+    "Respeto",
+    2.5,
+    0.3
+   ],
+   [
+    "narracion",
+    "Murió contra esta reja, del lado de afuera. Quería llegar a mi daga y no lo dejaron.",
+    5.0
+   ],
+   [
+    "narracion",
+    "Lo encerró alguien que sabía levantar muertos. Lo sabés porque vos también sabías.",
+    5.0
+   ]
+  ],
+  "tentacion_descanso": [
+   [
+    "narracion",
+    "Lo dejás en paz. La reja sigue cerrada.",
+    3.5
+   ],
+   [
+    "narracion",
+    "Lo correcto casi nunca es lo corto.",
+    3.0
+   ]
+  ],
+  "tentacion_levantar": [
+   [
+    "narracion",
+    "Extendés la mano. El muerto se pone de pie y empuja el hierro. Te obedece, como antes.",
+    5.5
+   ],
+   [
+    "recuerdo",
+    "Otra vez.",
+    2.5,
+    0.8
+   ],
+   [
+    "narracion",
+    "Sabías hacerlo. Por eso estás acá.",
+    3.5
+   ]
+  ],
+  "reja_forzada": [
+   [
+    "narracion",
+    "El hierro cede. Tus brazos recuerdan más que vos.",
+    3.5
+   ]
+  ],
+  "reja_firme": [
+   [
+    "narracion",
+    "El hierro no se mueve. Todavía.",
+    2.5
+   ]
+  ],
+  "reja_rezada": [
+   [
+    "narracion",
+    "Mi sello te reconoce. No porque lo merezcas: porque me servís.",
+    4.0
+   ]
+  ],
+  "reja_sello_mudo": [
+   [
+    "narracion",
+    "El sello no responde. Rezaste con la boca.",
+    3.0
+   ]
+  ],
+  "diag_restos": [
+   [
+    "rotulo",
+    "Respeto",
+    2.5,
+    0.3
+   ],
+   [
+    "narracion",
+    "Un aventurero. Lo mataron de frente. En la cintura, un frasco intacto.",
+    4.5
+   ]
+  ],
+  "robo_restos": [
+   [
+    "narracion",
+    "Le sacás el frasco a un muerto. Lo que robaste era mío.",
+    3.5
+   ]
+  ],
+  "diag_guardian": [
+   [
+    "rotulo",
+    "Liberación",
+    2.5,
+    0.3
+   ],
+   [
+    "narracion",
+    "No lo ata un ritual. Lo ata una orden. Las órdenes se revocan.",
+    4.0
+   ]
+  ],
+  "diag_guardian_critico": [
+   [
+    "rotulo",
+    "Liberación",
+    2.5,
+    0.3
+   ],
+   [
+    "narracion",
+    "No lo ata un ritual. Lo ata una orden. Las órdenes se revocan.",
+    4.0
+   ],
+   [
+    "narracion",
+    "La orden tiene tu voz.",
+    3.0
+   ]
+  ],
+  "diag_huesos": [
+   [
+    "rotulo",
+    "Compasión",
+    2.5,
+    0.3
+   ],
+   [
+    "narracion",
+    "Esta alma espera que alguien la entierre. Nada más que eso.",
+    4.0
+   ]
+  ],
+  "anatema": [
+   [
+    "narracion",
+    "Te lo anoto. Hasta que vuelvas a rezarme, mi fuerza no pasa por tus manos.",
+    4.5
+   ]
+  ],
+  "expiacion": [
+   [
+    "narracion",
+    "Rezás. No te perdono: anoto que volviste.",
+    3.5
+   ],
+   [
+    "narracion",
+    "Mi fuerza vuelve a tus manos. Lo que hiciste, no se va.",
+    3.5
+   ]
+  ],
+  "salvado": [
+   [
+    "pharasma",
+    "Todavía no.",
+    2.5,
+    0.5
+   ],
+   [
+    "narracion",
+    "Te devolví sin cobrarte. No te acostumbres.",
+    3.5
+   ]
+  ],
   "estatua_guia": [
    [
     "narracion",
@@ -931,6 +1123,19 @@
   "cadaver",
   "estandarte",
   "lectura_lapida",
-  "guardian_relevado"
+  "guardian_relevado",
+  "diag_fallo",
+  "diag_tentacion",
+  "diag_tentacion_critico",
+  "tentacion_descanso",
+  "tentacion_levantar",
+  "reja_forzada",
+  "reja_rezada",
+  "diag_restos",
+  "robo_restos",
+  "diag_guardian",
+  "diag_guardian_critico",
+  "diag_huesos",
+  "expiacion"
  ]
 }

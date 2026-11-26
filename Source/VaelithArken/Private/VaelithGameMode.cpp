@@ -173,6 +173,11 @@ void AVaelithGameMode::PrepararJuego(bool bContinuar)
 	J->Ficha->Nivel = Partida->Nivel;
 	J->bTieneArmas = Partida->bTieneArmas;
 	J->bTieneDaga = Partida->bTieneDaga;
+	J->Ficha->PuntosHeroe = Partida->PuntosHeroe;
+	J->Ficha->bAnatema = Partida->bAnatema;
+	J->Ficha->BonoMemoria = Partida->Recuerdos.Num();
+	J->AguaBendita = Partida->AguaBendita;
+	J->Pociones = Partida->Pociones;
 	if (FParse::Param(FCommandLine::Get(), TEXT("armas"))) { J->bTieneArmas = J->bTieneDaga = true; }
 	J->AplicarDotes();
 	J->Ficha->DescansarEnAltar();
@@ -272,6 +277,39 @@ void AVaelithGameMode::SumarGracia(int32 N, const FString& Motivo)
 	if (!Partida) return;
 	Partida->Gracia += N;
 	Aviso(N > 0 ? TEXT("Gracia") : TEXT("Deuda"), Motivo, 4.f);
+	// Los actos del credo ganan favor de Pharasma (Puntos de Héroe).
+	if (N > 0)
+	{
+		if (AVaelithCharacter* J = Jugador()) J->Ficha->GanarPuntoHeroe(1);
+	}
+}
+
+void AVaelithGameMode::SumarCorrupcion(int32 N)
+{
+	if (!Partida || N == 0) return;
+	Partida->Corrupcion = FMath::Max(0, Partida->Corrupcion + N);
+	UE_LOG(LogTemp, Log, TEXT("[vaelith] corrupcion=%d"), Partida->Corrupcion);
+}
+
+void AVaelithGameMode::RomperAnatema(const FString& Que)
+{
+	AVaelithCharacter* J = Jugador();
+	if (!J) return;
+	J->Ficha->RomperAnatema();
+	if (Partida) Partida->bAnatema = true;
+	J->Sacudir(0.5f);
+	Aviso(TEXT("Anatema"), TEXT("Sabor a tierra en la boca. Un escalofrío. Tu foco se apagó hasta que expíes ante un altar."), 6.f);
+	ReproducirEscena(TEXT("anatema"), false);
+	UE_LOG(LogTemp, Log, TEXT("[vaelith] anatema roto: %s"), *Que);
+}
+
+FString AVaelithGameMode::FinalPorEjes() const
+{
+	const int32 Gracia = Partida ? Partida->Gracia : 0;
+	const int32 Corr = Partida ? Partida->Corrupcion : 0;
+	if (Corr >= 2) return TEXT("nigromante");
+	if (Gracia >= 3 && Corr == 0) return TEXT("guardian");
+	return TEXT("penitente");
 }
 
 void AVaelithGameMode::Guardar(FName Altar)
@@ -283,6 +321,10 @@ void AVaelithGameMode::Guardar(FName Altar)
 	Partida->Dotes = J->Dotes;
 	Partida->bTieneArmas = J->bTieneArmas;
 	Partida->bTieneDaga = J->bTieneDaga;
+	Partida->PuntosHeroe = J->Ficha->PuntosHeroe;
+	Partida->bAnatema = J->Ficha->bAnatema;
+	Partida->AguaBendita = J->AguaBendita;
+	Partida->Pociones = J->Pociones;
 	Partida->Fecha = FDateTime::Now();
 	UGameplayStatics::SaveGameToSlot(Partida, UVaelithGameInstance::Ranura, 0);
 	if (J->Penitencia > 0) J->Penitencia = FMath::Max(0, J->Penitencia - 1);  // rezar alivia la penitencia
@@ -297,6 +339,7 @@ void AVaelithGameMode::ActivarRecuerdo(int32 Fragmento)
 	RecuerdoEnCurso = Fragmento;
 	J->bControlBloqueado = true;
 	if (Partida) Partida->Recuerdos.AddUnique(Fragmento);
+	J->Ficha->BonoMemoria = Memoria();  // memoria residual: +1 al Saber del Osario por recuerdo
 	if (USoundBase* S = LoadObject<USoundBase>(nullptr, TEXT("/Game/Vaelith/Audio/sfx_recuerdo.sfx_recuerdo"))) UGameplayStatics::PlaySound2D(this, S);
 	ReproducirEscena(FString::Printf(TEXT("recuerdo_%d"), Fragmento), true);
 }
@@ -414,9 +457,13 @@ void AVaelithGameMode::JefeDerrotado(ANoMuerto* Sombra)
 	TiempoFinal = 0.f;
 	Cola.Reset();
 	Activa = FLineaActiva();
-	const int32 Gracia = Partida ? Partida->Gracia : 0;
-	ReproducirEscena(Gracia >= 3 ? TEXT("final_gracia") : (Gracia <= -1 ? TEXT("final_deuda") : TEXT("final_neutro")), true);
+	// Tres ejes: Guardián (Gracia alta, sin Corrupción), Penitente, Nigromante (Corrupción alta).
+	const FString Eje = FinalPorEjes();
+	UE_LOG(LogTemp, Log, TEXT("[vaelith] final por ejes: %s (gracia=%d memoria=%d corrupcion=%d)"), *Eje,
+		Partida ? Partida->Gracia : 0, Memoria(), Partida ? Partida->Corrupcion : 0);
+	ReproducirEscena(Eje == TEXT("guardian") ? TEXT("final_gracia") : (Eje == TEXT("nigromante") ? TEXT("final_deuda") : TEXT("final_neutro")), true);
 	ReproducirEscena(TEXT("final"), true);
+	ReproducirEscena(TEXT("final_") + Eje, true);
 	if (AVaelithCharacter* J = Jugador()) J->bControlBloqueado = true;
 	if (Partida) UGameplayStatics::SaveGameToSlot(Partida, UVaelithGameInstance::Ranura, 0);
 }
@@ -566,14 +613,21 @@ void AVaelithGameMode::Tick(float DeltaTime)
 		Usar.ParseIntoArray(Ids, TEXT(","));
 		if (Ids.IsValidIndex(UsadosPrueba))
 		{
-			const FName Id(*Ids[UsadosPrueba]);
+			// id#n elige la opción n (planilla en juego)
+			FString IdTxt = Ids[UsadosPrueba], OpTxt;
+			int32 Op = -1;
+			if (IdTxt.Split(TEXT("#"), &IdTxt, &OpTxt)) Op = FCString::Atoi(*OpTxt);
+			const FName Id(*IdTxt);
 			bool bEncontrado = false;
 			for (TActorIterator<AInteractuable> It(GetWorld()); It; ++It)
 			{
 				if (It->Id != Id) continue;
 				bEncontrado = true;
+				if (Op >= 0) It->Seleccion = Op;
 				It->Usar(J);
-				UE_LOG(LogTemp, Log, TEXT("[vaelith] usar %s -> usado=%d hecho=%d armas=%d daga=%d"), *Id.ToString(), It->bUsado, HechoOcurrido(Id), J->bTieneArmas, J->bTieneDaga);
+				UE_LOG(LogTemp, Log, TEXT("[vaelith] usar %s op=%d -> usado=%d hecho=%d armas=%d daga=%d gracia=%d corrupcion=%d anatema=%d foco=%d favor=%d pociones=%d"),
+					*Id.ToString(), Op, It->bUsado, HechoOcurrido(Id), J->bTieneArmas, J->bTieneDaga, Partida ? Partida->Gracia : 0,
+					Partida ? Partida->Corrupcion : 0, J->Ficha->bAnatema, J->Ficha->Foco, J->Ficha->PuntosHeroe, J->Pociones);
 			}
 			if (!bEncontrado) UE_LOG(LogTemp, Warning, TEXT("[vaelith] usar %s: no existe"), *Id.ToString());
 			++UsadosPrueba;

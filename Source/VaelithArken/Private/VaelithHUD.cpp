@@ -1,4 +1,5 @@
 #include "VaelithHUD.h"
+#include "Planilla.h"
 #include "VaelithGameMode.h"
 #include "VaelithCharacter.h"
 #include "NoMuerto.h"
@@ -259,7 +260,39 @@ void AVaelithHUD::DibujarJuego()
 	// Interacción
 	if (!J->TextoInteraccion.IsEmpty() && GM->Modo == EModoJuego::Juego)
 	{
-		Texto(J->TextoInteraccion, CX, CY + 60.f * E, Hueso, 20.f, true);
+		// Varias vías (opciones de la planilla): una línea por opción; la elegida lleva [E].
+		TArray<FString> Lineas;
+		J->TextoInteraccion.ParseIntoArray(Lineas, TEXT("|"));
+		float LY = CY + 60.f * E;
+		for (const FString& L : Lineas)
+		{
+			const bool bElegida = L.StartsWith(TEXT("[E]"));
+			const bool bAyuda = L.StartsWith(TEXT("("));
+			Texto(L.TrimStart(), CX, LY, bAyuda ? Tenue : (bElegida || Lineas.Num() == 1 ? Hueso : Tenue), bAyuda ? 14.f : 20.f, true);
+			LY += (bAyuda ? 20.f : 27.f) * E;
+		}
+	}
+	// Destello: resultado de una prueba, "Crítico", "Esquivado".
+	if (!GM->DestelloTexto.IsEmpty() && GM->Ahora() < GM->DestelloFin)
+	{
+		const float Resta = GM->DestelloFin - GM->Ahora();
+		Texto(GM->DestelloTexto, CX, CY - 70.f * E, FLinearColor(Oro.R, Oro.G, Oro.B, FMath::Clamp(Resta * 2.f, 0.f, 1.f)), 22.f, true, FuenteTitulo);
+	}
+	// Condiciones activas (PF2e) y recursos, bajo las barras.
+	{
+		FString Cond;
+		for (const ECondicion C : { ECondicion::Asustado, ECondicion::Desprevenido, ECondicion::Debilitado, ECondicion::Herido, ECondicion::Moribundo })
+		{
+			const int32 V = F->Condicion(C);
+			if (V <= 0) continue;
+			if (!Cond.IsEmpty()) Cond += TEXT("  ·  ");
+			Cond += Planilla::Nombre(C).ToString() + (C == ECondicion::Desprevenido ? FString() : FString::Printf(TEXT(" %d"), V));
+		}
+		if (F->bAnatema) Cond += Cond.IsEmpty() ? TEXT("Anatema") : TEXT("  ·  Anatema");
+		if (!Cond.IsEmpty()) Texto(Cond, X, Y - 34.f * E, FLinearColor(0.95f, 0.55f, 0.45f), 16.f);
+		FString Rec = FString::Printf(TEXT("favor %d   agua bendita %d"), F->PuntosHeroe, J->AguaBendita);
+		if (J->Pociones > 0) Rec += FString::Printf(TEXT("   pociones %d"), J->Pociones);
+		Texto(Rec, X + 250.f * E, Y + 76.f * E, Tenue, 14.f);
 	}
 
 	// Moribundo: Diehard
@@ -267,6 +300,7 @@ void AVaelithHUD::DibujarJuego()
 	{
 		const float Pulso = 0.6f + 0.4f * FMath::Sin(GM->Ahora() * 6.f);
 		Texto(GM->TextoGuion(TEXT("moribundo")), CX, CY - 120.f * E, FLinearColor(0.9f, 0.3f, 0.25f, Pulso), 30.f, true, FuenteTitulo);
+		Texto(FString::Printf(TEXT("Moribundo %d de %d"), F->Condicion(ECondicion::Moribundo), F->MuerteEn()), CX, CY - 80.f * E, FLinearColor(0.9f, 0.5f, 0.45f, Pulso), 18.f, true);
 	}
 
 	// Bloqueo perfecto

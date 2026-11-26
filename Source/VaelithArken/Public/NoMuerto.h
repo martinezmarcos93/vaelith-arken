@@ -46,6 +46,8 @@ public:
 	int32 RecibirAtaque(int32 Danio, ETipoDanio TipoDanio, bool bToque, float Aturdir, FVector Empuje);
 	void Aturdir(float Segundos);
 	void Liberar();
+	/** Centinela: Vaelith revoca la orden; se desarma en paz (Gracia). */
+	void Relevar();
 	/** Saca a la Sombra de su espera (la llama el director al empezar el duelo). */
 	void Despertar() { if (Estado == EEstadoNoMuerto::Dormido) Cambiar(EEstadoNoMuerto::Acecho); }
 	bool EstaVivo() const { return Estado != EEstadoNoMuerto::Muerto && Estado != EEstadoNoMuerto::Liberado; }

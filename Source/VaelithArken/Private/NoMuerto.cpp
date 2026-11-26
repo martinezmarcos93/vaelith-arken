@@ -70,6 +70,7 @@ void ANoMuerto::Configurar()
 		Ficha->PGBaseFijos = 22; VelocidadBase = 140.f; DanioDado = 6; DanioFijo = 3; TipoGolpe = ETipoDanio::Contundente;
 		TiempoAmago = 1.0f; TiempoRecuperacion = 1.1f; AlcanceGolpe = 160.f;
 		Ficha->Debilidades.Add(ETipoDanio::Cortante, 3); Ficha->Debilidades.Add(ETipoDanio::Vital, 5);
+		Ficha->AtaqueFijo = 9; Ficha->CAFija = 14; Ficha->VoluntadFija = 4; Ficha->bSinMente = true;
 		Escala = FVector(1.05f, 1.05f, 0.97f);
 		break;
 	case ETipoNoMuerto::Esqueleto:
@@ -88,6 +89,7 @@ void ANoMuerto::Configurar()
 		TiempoAmago = 0.6f; TiempoRecuperacion = 0.8f; AlcanceGolpe = 175.f;
 		Ficha->Resistencias.Add(ETipoDanio::Cortante, 5); Ficha->Resistencias.Add(ETipoDanio::Perforante, 5);
 		Ficha->Debilidades.Add(ETipoDanio::Contundente, 5); Ficha->Debilidades.Add(ETipoDanio::Vital, 5);
+		Ficha->AtaqueFijo = 9; Ficha->CAFija = 16; Ficha->VoluntadFija = 4; Ficha->bSinMente = true;
 		ColorBrillo = FLinearColor(0.9f, 0.35f, 0.2f); IntensidadBrillo = 250.f;  // brasas en las cuencas
 		Escala = FVector(0.92f, 0.92f, 1.02f);
 		break;
@@ -96,6 +98,7 @@ void ANoMuerto::Configurar()
 		Ficha->PGBaseFijos = 16; VelocidadBase = 250.f; DanioDado = 6; DanioFijo = 2; TipoGolpe = ETipoDanio::Vacio;
 		TiempoAmago = 0.75f; TiempoRecuperacion = 0.9f; AlcanceGolpe = 170.f;
 		Ficha->bInmaterial = true; Ficha->Debilidades.Add(ETipoDanio::Vital, 5);
+		Ficha->AtaqueFijo = 10; Ficha->CAFija = 15; Ficha->VoluntadFija = 8;
 		ColorBrillo = FLinearColor(0.45f, 0.65f, 1.f); IntensidadBrillo = 1800.f;
 		Mov->SetMovementMode(MOVE_Flying);
 		Mov->MaxFlySpeed = VelocidadBase;
@@ -110,6 +113,7 @@ void ANoMuerto::Configurar()
 			RutaMaterial = nullptr;
 		}
 		Ficha->PGBaseFijos = 22; VelocidadBase = 0.f;
+		Ficha->AtaqueFijo = 9; Ficha->CAFija = 16; Ficha->VoluntadFija = 6;
 		ColorBrillo = FLinearColor(0.6f, 0.7f, 0.9f); IntensidadBrillo = 150.f;
 		break;
 	case ETipoNoMuerto::Sombra:
@@ -117,6 +121,7 @@ void ANoMuerto::Configurar()
 		Ficha->PGBaseFijos = 60; VelocidadBase = 340.f; DanioDado = 8; DanioFijo = 4; TipoGolpe = ETipoDanio::Cortante;
 		TiempoAmago = 0.55f; TiempoRecuperacion = 0.7f; AlcanceGolpe = 190.f;
 		Ficha->bTieneEscudo = true; Ficha->DurezaEscudo = 5; Ficha->PGEscudoMax = 20; Ficha->UmbralRoturaEscudo = 10;
+		Ficha->AtaqueFijo = 13; Ficha->CAFija = 21; Ficha->VoluntadFija = 9;  // el reflejo de Vaelith, más afinado
 		ColorBrillo = FLinearColor(0.55f, 0.25f, 0.9f); IntensidadBrillo = 900.f;
 		DistanciaVision = 3000.f;
 		break;
@@ -414,7 +419,11 @@ int32 ANoMuerto::RecibirAtaque(int32 Danio, ETipoDanio TipoDanio, bool bToque, f
 		Sonar(Tipo == ETipoNoMuerto::Esqueleto ? TEXT("sfx_huesos") : TEXT("sfx_impacto_carne"), 0.9f);
 	}
 	if (!Empuje.IsNearlyZero()) LaunchCharacter(Empuje + FVector(0, 0, 80.f), true, false);
-	if (SegundosAturdir > 0.f && Estado != EEstadoNoMuerto::Dormido) Aturdir(SegundosAturdir);
+	if (SegundosAturdir > 0.f && Estado != EEstadoNoMuerto::Dormido)
+	{
+		Aturdir(SegundosAturdir);
+		Ficha->SetCondicion(ECondicion::Desprevenido, 1, SegundosAturdir + 1.f);  // el siguiente golpe es crítico
+	}
 
 	if (Tipo == ETipoNoMuerto::Sombra && !bFase2 && Ficha->PG <= Ficha->PGMax() / 2 && GM)
 	{
@@ -455,6 +464,27 @@ void ANoMuerto::Liberar()
 		GM->ReproducirEscena(TEXT("alma_liberada"), false);
 	}
 	Sonar(TEXT("sfx_liberacion"), 1.f);
+}
+
+void ANoMuerto::Relevar()
+{
+	if (!EstaVivo()) return;
+	Cambiar(EEstadoNoMuerto::Liberado);
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	GetCharacterMovement()->DisableMovement();
+	Brillo->SetIntensity(0.f);
+	if (AVaelithGameMode* GM = GetWorld()->GetAuthGameMode<AVaelithGameMode>())
+	{
+		if (!Hecho.IsNone()) GM->RegistrarHecho(Hecho);
+		GM->RegistrarHecho(TEXT("guardian_relevado"));
+		GM->SumarGracia(2, TEXT("Relevaste de su guardia a quien seguía tu orden."));
+		GM->ReproducirEscena(TEXT("guardian_relevado"), true);
+	}
+	if (UAnimSequenceBase* A = LoadObject<UAnimSequenceBase>(nullptr, TEXT("/Game/Characters/Mannequins/Anims/Death/MM_Death_Back_01.MM_Death_Back_01")))
+	{
+		GetMesh()->PlayAnimation(A, false);
+	}
+	Sonar(TEXT("sfx_liberacion"), 0.8f, 0.9f);
 }
 
 void ANoMuerto::Morir()

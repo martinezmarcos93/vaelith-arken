@@ -59,6 +59,13 @@ public:
 	bool HechoOcurrido(FName H) const;
 	void RegistrarHecho(FName H);
 	void SumarGracia(int32 N, const FString& Motivo);
+	/** Tercer eje (Gracia, Memoria, Corrupción). */
+	void SumarCorrupcion(int32 N);
+	/** Romper el anatema: sin foco hasta expiar; señales de desagrado de Pharasma. */
+	void RomperAnatema(const FString& Que);
+	/** Final según los tres ejes: "guardian", "penitente" o "nigromante". */
+	FString FinalPorEjes() const;
+	int32 Memoria() const { return Partida ? Partida->Recuerdos.Num() : 0; }
 
 	// ---- Recuerdos y nivel ----
 	void ActivarRecuerdo(int32 Fragmento);
@@ -90,6 +97,10 @@ public:
 	void Aviso(const FString& Titulo, const FString& Texto, float Duracion = 5.f);
 	FString AvisoTitulo, AvisoTexto;
 	float AvisoFin = 0.f;
+	/** Texto breve bajo la mira: grado de una prueba, "Crítico", "Esquivado". */
+	void Destello(const FString& Texto, float Duracion = 1.6f) { DestelloTexto = Texto; DestelloFin = Ahora() + Duracion; }
+	FString DestelloTexto;
+	float DestelloFin = 0.f;
 
 protected:
 	virtual void BeginPlay() override;

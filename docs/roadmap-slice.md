@@ -100,7 +100,27 @@ Toda la ficha de PF2e de Vaelith pasa a ser sistema de juego. Se parte en 4 entr
   - competencias (E/X/M/L), CA 21, salvaciones, percepción, CD de clase, golpes, habilidades, condiciones, Puntos de Héroe y carga;
   - todo calculado como atributo + rango + nivel;
   - la tabla de dotes en datos editables, como `guion.json`.
-- **R2, reglas en juego:**
+- **R2, reglas en juego — HECHA 26/11.**
+  - **Ataques enemigos:** tirada oculta de d20 + ataque contra la CA, con los 4 grados ("Esquivado", "Desviado" o crítico doble). Bloque de PF2e por enemigo: zombi +9/CA 14, esqueleto +9/16, espectro +10/15, Sombra +13/21. Zombis y esqueletos son sin mente.
+  - **Crítico propio:** contra un enemigo desprevenido (después de aturdirlo) o golpeándolo por la espalda.
+  - **Miedo del espectro:** salvación de Voluntad CD 16 que puede dejar *Asustado*.
+  - **Acciones nuevas:**
+    - Desmoralizar (T, Intimidación; no sirve contra no-muertos sin mente);
+    - Tratar heridas (V, Medicina, una vez entre altares);
+    - agua bendita (G);
+    - poción (C).
+  - **Interactuables con varias vías** (`FOpcionInteraccion`, se elige con la rueda). Están en:
+    - la reja de la tentación (Atletismo CD 18, Religión CD 16);
+    - el muerto junto a la reja (Examinar, Dar descanso, Levantar: anatema);
+    - los restos del aventurero (Cubrir, Examinar, Tomar el frasco: anatema);
+    - el puesto del centinela (Examinar, Relevar);
+    - los huesos del bosque.
+  - **Anatema:** se pierde el foco hasta expiar en un altar.
+  - **Favor de Pharasma (Puntos de Héroe):** se gana con cada acto del credo. Ante un fallo crítico en una prueba se gasta 1 para repetirla; todos, para no morir.
+  - **Tres ejes y finales** Guardián, Penitente y Nigromante (`FinalPorEjes`).
+  - **Memoria residual:** +1 al Saber del Osario por recuerdo.
+  - Verificado por log con `-usar=id#opción`. Tests: 8/8.
+- **R2, plan original:**
   - grados de éxito con d20 oculto para los ataques enemigos y las salvaciones;
   - condiciones reales (Moribundo/Herido, Asustado, Desprevenido, Debilitado);
   - pruebas de habilidad en exploración, narradas por Pharasma;

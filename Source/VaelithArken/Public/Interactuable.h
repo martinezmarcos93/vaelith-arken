@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Planilla.h"
 #include "Interactuable.generated.h"
 
 class UBoxComponent;
@@ -24,6 +25,45 @@ enum class ETipoInteractuable : uint8
 	Espejo       // reflejo en el agua: escena del guion, una sola vez
 };
 
+/** Qué hace una opción al lograrse. */
+UENUM(BlueprintType)
+enum class EEfectoOpcion : uint8
+{
+	Escena,       // solo narra (según el grado)
+	Abrir,        // abre la puerta Objetivo (o esta misma)
+	Diagnosticar, // Saber del Osario: Pharasma dice qué es (Respeto, Compasión, Liberación, Enemigo, Amenaza)
+	DarDescanso,  // cubrir o enterrar: Gracia
+	Levantar,     // anatema: levanta al muerto (abre Objetivo), Corrupción
+	Relevar,      // revoca la orden de un centinela (no-muerto con Hecho = Objetivo)
+	Tomar         // toma Objeto; si es de un muerto, anatema
+};
+
+/** Una vía de resolver un obstáculo: con prueba de habilidad (Habilidad != Ninguna) o directa. */
+USTRUCT(BlueprintType)
+struct FOpcionInteraccion
+{
+	GENERATED_BODY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString Etiqueta;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) EEfectoOpcion Efecto = EEfectoOpcion::Escena;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) EHabilidad Habilidad = EHabilidad::Ninguna;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 CD = 15;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString EscenaExito;
+	/** Si está vacía, el crítico usa la de éxito. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString EscenaCritico;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString EscenaFallo;
+	/** Hecho necesario para que la opción aparezca (una llave, un recuerdo). */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FName Requisito;
+	/** Abrir/Levantar: Id de la puerta. Relevar: Hecho del no-muerto. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FName Objetivo;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 Gracia = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 Corrupcion = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bAnatema = false;
+	/** Al lograrse, el objeto queda usado (desaparecen todas sus opciones). */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bTerminal = true;
+	/** Tomar: "pocion" o "agua_bendita". */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FString Objeto;
+};
+
 UCLASS()
 class VAELITHARKEN_API AInteractuable : public AActor
 {
@@ -42,6 +82,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Vaelith") FName Requisito;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Vaelith") FString Etiqueta;
 
+	/** Varias vías para el mismo obstáculo (la planilla en juego). Si hay opciones, reemplazan a Usar(). */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Vaelith") TArray<FOpcionInteraccion> Opciones;
+	int32 Seleccion = 0;
+
 	UPROPERTY(VisibleAnywhere) UStaticMeshComponent* Malla;
 	UPROPERTY(VisibleAnywhere) UPointLightComponent* Luz;
 
@@ -49,6 +93,13 @@ public:
 	FText TextoAccion() const;
 	bool PuedeUsarse() const;
 	void Usar(class AVaelithCharacter* Quien);
+	/** Índices de las opciones disponibles ahora (requisito cumplido, no agotadas ni ya logradas). */
+	TArray<int32> OpcionesVisibles() const;
+	/** Texto de la mira con las opciones, separadas por '|'; la elegida lleva ▸. */
+	FString TextoOpciones(const class UFichaComponent* Ficha) const;
+	void CambiarSeleccion(int32 Paso);
+	/** Abrir esta puerta desde otra opción (Levantar, Forzar). */
+	void AbrirDesdeAfuera();
 	/** Restaura estado desde la partida (puertas abiertas, anclas rotas, etc.). */
 	void MarcarUsado(bool bInstantaneo);
 
@@ -57,6 +108,9 @@ protected:
 	virtual void Tick(float DeltaTime) override;
 
 private:
+	void UsarOpcion(class AVaelithCharacter* Quien, int32 Indice);
+	FName HechoOpcion(int32 Indice) const { return FName(*FString::Printf(TEXT("%s_op%d"), *Id.ToString(), Indice)); }
+	TSet<int32> Agotadas;  // fallo crítico: esa vía se cerró
 	float Animacion = -1.f;
 	FVector PosInicial;
 	FRotator RotInicial;

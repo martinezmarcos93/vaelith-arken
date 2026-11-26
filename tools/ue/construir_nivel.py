@@ -4,6 +4,7 @@ El plano de las catacumbas es ASCII (celda = 4 m). x = columna * 400, y = fila *
 Leyenda: '#' roca · '.' piso · S losa del despertar · W armas · D daga · P reja (puerta)
 A altar · R recuerdo · E agua quieta (espejo) · L inscripción · C restos · B estandarte
 c cadena-ancla · h huesos · Z zombi · K esqueleto · F espectro · f espíritu atado · X salida
+T reja de la tentación (la daga detrás) · Y el muerto junto a la reja (Levantar / Dar descanso / Examinar)
 
 Uso (editor cerrado; borrar antes Content/Vaelith/Mapas/Lvl_Vaelith.umap si existe):
   tools/ue/correr.sh tools/ue/construir_nivel.py
@@ -23,9 +24,9 @@ PLANO = [
     "#######..A..R..###########",
     "##############.###########",
     "##############P###########",
-    "#########.D....K....c#####",
-    "#########.###.....f..#####",
-    "#########.###.C..B..h#####",
+    "#########DTY...K....c#####",
+    "#############.....f..#####",
+    "#############.C..B..h#####",
     "#########..K..F..R..A#####",
     "################X#########",
     "################.#########",
@@ -161,6 +162,34 @@ def interactuable(tipo, pos, yaw, asset, id_="", escena="", valor=0, requisito="
     return a
 
 
+def opcion(etiqueta, efecto, hab=None, cd=15, exito="", critico="", fallo="", requisito="", objetivo="", gracia=0,
+           corrupcion=0, anatema=False, terminal=True, objeto=""):
+    """Una vía para resolver un obstáculo (FOpcionInteraccion). hab: nombre de unreal.Habilidad (ATLETISMO, RELIGION...)."""
+    o = unreal.OpcionInteraccion()
+    o.set_editor_property("etiqueta", etiqueta)
+    o.set_editor_property("efecto", getattr(unreal.EfectoOpcion, efecto))
+    o.set_editor_property("habilidad", getattr(unreal.Habilidad, hab) if hab else unreal.Habilidad.NINGUNA)
+    o.set_editor_property("cd", cd)
+    o.set_editor_property("escena_exito", exito)
+    o.set_editor_property("escena_critico", critico)
+    o.set_editor_property("escena_fallo", fallo)
+    if requisito:
+        o.set_editor_property("requisito", requisito)
+    if objetivo:
+        o.set_editor_property("objetivo", objetivo)
+    o.set_editor_property("gracia", gracia)
+    o.set_editor_property("corrupcion", corrupcion)
+    o.set_editor_property("anatema", anatema)
+    o.set_editor_property("terminal", terminal)
+    o.set_editor_property("objeto", objeto)
+    return o
+
+
+def con_opciones(actor, lista):
+    actor.set_editor_property("opciones", lista)
+    return actor
+
+
 def no_muerto(tipo, pos, yaw, hecho, ancla=None, vision=1400.0):
     a = actores.spawn_actor_from_class(unreal.NoMuerto, pos, unreal.Rotator(0, 0, yaw))
     a.set_editor_property("tipo", tipo)
@@ -289,6 +318,28 @@ def poblar_catacumbas():
                 if O("SM_Cofre"):
                     poner(O("SM_Cofre"), p, 0, carpeta="Catacumba/Props")
                 interactuable(unreal.TipoInteractuable.DAGA_PHARASMA, v(x, y, 62), 0, T("SM_Daga_Pharasma"), "daga", "daga")
+            elif ch == "T":
+                # La reja de la tentación: tres vías (fuerza, fe o necromancia). La daga de Pharasma está detrás.
+                reja = interactuable(unreal.TipoInteractuable.PUERTA, p, 90, REJA or CUBO, "reja_tentacion", "", 0, "",
+                                     etiqueta="Abrir la reja")
+                if not REJA:
+                    reja.set_actor_scale3d(unreal.Vector(3.9, 0.15, 3.5))
+                con_opciones(reja, [
+                    opcion("Forzar la reja", "ABRIR", "ATLETISMO", 18, "reja_forzada", "", "reja_firme"),
+                    opcion("Rezar ante el sello de Pharasma", "ABRIR", "RELIGION", 16, "reja_rezada", "", "reja_sello_mudo"),
+                ])
+            elif ch == "Y":
+                muerto = interactuable(unreal.TipoInteractuable.CADAVER, v(x - 60, y + 90, 0), 200, O("SM_Pila_Huesos"), "muerto_reja",
+                                       etiqueta="El muerto junto a la reja")
+                con_opciones(muerto, [
+                    opcion("Examinar los restos", "DIAGNOSTICAR", "SABER_OSARIO", 15, "diag_tentacion", "diag_tentacion_critico",
+                           "diag_fallo", terminal=False),
+                    opcion("Darle descanso", "DAR_DESCANSO", exito="tentacion_descanso", gracia=1),
+                    opcion("Levantar al muerto", "LEVANTAR", exito="tentacion_levantar", objetivo="reja_tentacion", gracia=-1,
+                           corrupcion=1, anatema=True),
+                ])
+                if O("SM_Craneo"):
+                    poner(O("SM_Craneo"), v(x - 20, y + 140, 0), 30, carpeta="Catacumba/Props")
             elif ch == "P":
                 id_, req = PUERTAS[(f, c)]
                 yaw = 90 if abierta(f, c - 1) or abierta(f, c + 1) else 0
@@ -312,7 +363,13 @@ def poblar_catacumbas():
             elif ch == "L":
                 interactuable(unreal.TipoInteractuable.LECTURA, v(x, y - 180, 120), 0, O("SM_Losa_Nombre"), "", "lectura_nichos")
             elif ch == "C":
-                interactuable(unreal.TipoInteractuable.CADAVER, p, rnd.uniform(0, 360), O("SM_Pila_Huesos"), f"cadaver_{f}_{c}", "cadaver", etiqueta="Cubrir los restos")
+                restos = interactuable(unreal.TipoInteractuable.CADAVER, p, rnd.uniform(0, 360), O("SM_Pila_Huesos"), f"cadaver_{f}_{c}",
+                                       etiqueta="Restos de un aventurero")
+                con_opciones(restos, [
+                    opcion("Cubrir los restos", "DAR_DESCANSO", exito="cadaver", gracia=1),
+                    opcion("Examinar los restos", "DIAGNOSTICAR", "SABER_OSARIO", 14, "diag_restos", "", "diag_fallo", terminal=False),
+                    opcion("Tomar el frasco de su cintura", "TOMAR", exito="robo_restos", objeto="pocion", corrupcion=1, anatema=True),
+                ])
             elif ch == "B":
                 interactuable(unreal.TipoInteractuable.LECTURA, p, 30, O("SM_Estandarte_Roto"), "", "estandarte", etiqueta="Mirar el estandarte")
             elif ch == "c":
@@ -650,6 +707,14 @@ def construir_bosque():
     sonido_3d("amb_viento", v(8000, 30000, 600), 12000.0, 0.3)
     # Centinela junto al sendero, recuerdo 3 en un claro pasando el puente
     no_muerto(unreal.TipoNoMuerto.GUARDIAN, vt(7600, 25500, 100), 200, "guardian")
+    # Su puesto: un estandarte clavado. Desde ahí se lo puede examinar o relevar de la guardia (la orden fue de Vaelith).
+    puesto = interactuable(unreal.TipoInteractuable.LECTURA, vt(7400, 25300), 200, M("Osario", "SM_Estandarte_Roto"), "puesto_guardian",
+                           etiqueta="El puesto del centinela")
+    con_opciones(puesto, [
+        opcion("Examinar al centinela", "DIAGNOSTICAR", "SABER_OSARIO", 15, "diag_guardian", "diag_guardian_critico", "diag_fallo",
+               terminal=False),
+        opcion("Relevarlo de la guardia", "RELEVAR", objetivo="guardian", exito=""),
+    ])
     interactuable(unreal.TipoInteractuable.RECUERDO, vt(11200, 37000), 0, M("Osario", "SM_Urna"), "recuerdo_3", "", 3, etiqueta="Tocar la urna")
     poner(M("Osario", "SM_Estandarte_Roto"), vt(11400, 36800), 70, carpeta="Exterior/Bosque")
     luz_puntual(vt(11200, 37000, 250), unreal.LinearColor(0.7, 0.75, 1.0), 1500.0, 700.0)
@@ -672,8 +737,12 @@ def construir_bosque():
         if i == 0:
             g.set_editor_property("escena", "estatua_guia")
         g.set_folder_path("Exterior/BosqueOscuro")
-    interactuable(unreal.TipoInteractuable.CADAVER, vt(-15000, 47500), 10, M("Osario", "SM_Pila_Huesos"), "cadaver_bosque",
-                  etiqueta="Enterrar los huesos")
+    huesos = interactuable(unreal.TipoInteractuable.CADAVER, vt(-15000, 47500), 10, M("Osario", "SM_Pila_Huesos"), "cadaver_bosque",
+                           etiqueta="Huesos sin enterrar")
+    con_opciones(huesos, [
+        opcion("Enterrar los huesos", "DAR_DESCANSO", exito="cadaver", gracia=1),
+        opcion("Examinar los huesos", "DIAGNOSTICAR", "SABER_OSARIO", 15, "diag_huesos", "", "diag_fallo", terminal=False),
+    ])
     no_muerto(unreal.TipoNoMuerto.FANTASMA, vt(4000, 52500, 160), 0, "nm_oscuro_1")
     no_muerto(unreal.TipoNoMuerto.ESQUELETO, vt(-5000, 54000, 100), 0, "nm_oscuro_2")
     no_muerto(unreal.TipoNoMuerto.FANTASMA, vt(-9500, 51000, 160), 0, "nm_oscuro_3")

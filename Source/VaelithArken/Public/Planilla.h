@@ -57,7 +57,7 @@ enum class EHabilidad : uint8
 	Robo,
 	SaberOsario,
 	Percepcion,
-	Ninguna UMETA(Hidden)
+	Ninguna
 };
 
 /** Condiciones de PF2e que el juego usa en tiempo real. */

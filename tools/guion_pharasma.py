@@ -243,6 +243,57 @@ ESCENAS = {
         [N, "Esta noche alguien nace acá, y alguien muere. Los dos vienen a mí.", 4.5],
         [N, "Los viejos de este pueblo enterraron a sus muertos dos veces. Acordate de eso cuando te hablen.", 5.0],
     ],
+    # ---- La planilla en juego (fase R2): diagnósticos, tentación, anatema ----
+    "diag_fallo": [[N, "Huesos y tela. Hoy no sabés leerlos.", 3.0]],
+    "diag_tentacion": [
+        [RO, "Respeto", 2.5, 0.3],
+        [N, "Murió contra esta reja, del lado de afuera. Quería llegar a mi daga y no lo dejaron.", 5.0],
+    ],
+    "diag_tentacion_critico": [
+        [RO, "Respeto", 2.5, 0.3],
+        [N, "Murió contra esta reja, del lado de afuera. Quería llegar a mi daga y no lo dejaron.", 5.0],
+        [N, "Lo encerró alguien que sabía levantar muertos. Lo sabés porque vos también sabías.", 5.0],
+    ],
+    "tentacion_descanso": [
+        [N, "Lo dejás en paz. La reja sigue cerrada.", 3.5],
+        [N, "Lo correcto casi nunca es lo corto.", 3.0],
+    ],
+    "tentacion_levantar": [
+        [N, "Extendés la mano. El muerto se pone de pie y empuja el hierro. Te obedece, como antes.", 5.5],
+        [R, "Otra vez.", 2.5, 0.8],
+        [N, "Sabías hacerlo. Por eso estás acá.", 3.5],
+    ],
+    "reja_forzada": [[N, "El hierro cede. Tus brazos recuerdan más que vos.", 3.5]],
+    "reja_firme": [[N, "El hierro no se mueve. Todavía.", 2.5]],
+    "reja_rezada": [[N, "Mi sello te reconoce. No porque lo merezcas: porque me servís.", 4.0]],
+    "reja_sello_mudo": [[N, "El sello no responde. Rezaste con la boca.", 3.0]],
+    "diag_restos": [
+        [RO, "Respeto", 2.5, 0.3],
+        [N, "Un aventurero. Lo mataron de frente. En la cintura, un frasco intacto.", 4.5],
+    ],
+    "robo_restos": [[N, "Le sacás el frasco a un muerto. Lo que robaste era mío.", 3.5]],
+    "diag_guardian": [
+        [RO, "Liberación", 2.5, 0.3],
+        [N, "No lo ata un ritual. Lo ata una orden. Las órdenes se revocan.", 4.0],
+    ],
+    "diag_guardian_critico": [
+        [RO, "Liberación", 2.5, 0.3],
+        [N, "No lo ata un ritual. Lo ata una orden. Las órdenes se revocan.", 4.0],
+        [N, "La orden tiene tu voz.", 3.0],
+    ],
+    "diag_huesos": [
+        [RO, "Compasión", 2.5, 0.3],
+        [N, "Esta alma espera que alguien la entierre. Nada más que eso.", 4.0],
+    ],
+    "anatema": [[N, "Te lo anoto. Hasta que vuelvas a rezarme, mi fuerza no pasa por tus manos.", 4.5]],
+    "expiacion": [
+        [N, "Rezás. No te perdono: anoto que volviste.", 3.5],
+        [N, "Mi fuerza vuelve a tus manos. Lo que hiciste, no se va.", 3.5],
+    ],
+    "salvado": [
+        [P, "Todavía no.", 2.5, 0.5],
+        [N, "Te devolví sin cobrarte. No te acostumbres.", 3.5],
+    ],
     "estatua_guia": [
         [N, "Una de mis estatuas. El farol estaba vacío; cuando te acercás, prende.", 4.0],
         [N, "Hay más. Seguí la luz que encienden.", 3.0],
@@ -255,7 +306,9 @@ ESCENAS = {
 
 # Escenas que nacen de una interacción: bloquean el control (y la tregua frena a los no-muertos).
 BLOQUEAN = ["armas", "daga", "lectura_nichos", "lectura_altar", "espejo_agua", "cadaver", "estandarte",
-            "lectura_lapida", "guardian_relevado"]
+            "lectura_lapida", "guardian_relevado", "diag_fallo", "diag_tentacion", "diag_tentacion_critico",
+            "tentacion_descanso", "tentacion_levantar", "reja_forzada", "reja_rezada", "diag_restos", "robo_restos",
+            "diag_guardian", "diag_guardian_critico", "diag_huesos", "expiacion"]
 
 TEXTOS = {
     "menu_pie": "No busca vivir. Busca merecer morir.",
@@ -269,7 +322,7 @@ TEXTOS = {
     "penitencia_3": "Yo no me canso. Vos sí. Rezá ante un altar y aliviá la carga.",
     "moribundo": "Levantate. Todavía no terminaste. (clic o R)",
     "dote_titulo": "Algo vuelve con el recuerdo",
-    "controles": "WASD moverse · Shift correr · Espacio saltar|Clic izquierdo tajo · mantener para tajo potente|Clic derecho bloquear · bloquear justo antes del golpe: Retribución|F golpe de escudo · Q embestida · R Imponer las Manos|2 espada / daga · E interactuar · E o Enter adelantar texto · Tab Registro del Osario · Esc pausa",
+    "controles": "WASD moverse · Shift correr · Espacio saltar|Clic izquierdo tajo · mantener para tajo potente · golpe a un enemigo desprevenido o de espaldas: crítico|Clic derecho alzar el escudo (+2 CA) · justo antes del golpe: Retribución|F golpe de escudo · Q embestida · R Imponer las Manos · T desmoralizar|G agua bendita · C poción · V tratar heridas (fuera de combate)|2 espada / daga · E interactuar · rueda elegir · E o Enter adelantar texto · Tab Registro del Osario · Esc pausa",
 }
 
 

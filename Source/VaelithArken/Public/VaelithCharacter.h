@@ -49,8 +49,19 @@ public:
 	UFUNCTION(BlueprintPure) bool TieneDote(EDote D) const { return Dotes.Contains(D); }
 	void AplicarDotes();
 
-	/** Golpe de un enemigo. Devuelve true si fue un bloqueo perfecto. */
+	/** Golpe de un enemigo: tirada de ataque oculta contra la CA (grados de PF2e). Devuelve true si fue un bloqueo perfecto. */
 	bool RecibirGolpe(int32 Danio, ETipoDanio Tipo, AActor* Atacante);
+
+	// ---- Inventario mínimo (carga de PF2e en planilla-en-juego.md) ----
+	UPROPERTY(BlueprintReadOnly) int32 AguaBendita = 2;
+	UPROPERTY(BlueprintReadOnly) int32 Pociones = 0;
+	/** Tratar heridas (Medicina): una vez entre altares. */
+	UPROPERTY(BlueprintReadOnly) bool bTratoHeridasDisponible = true;
+	void DarObjeto(const FString& Objeto, int32 Cantidad);
+	/** Carga total (objetos ligeros = 0,1) y máxima sin penalización (5 + Fuerza). */
+	float Carga() const;
+	int32 CargaMaxima() const { return 5 + Ficha->Atributos.Fuerza; }
+	void Sacudir(float Fuerza);
 
 	// ---- Cinemática del despertar ----
 	void IniciarDespertar();
@@ -110,7 +121,14 @@ private:
 	void ActualizarDespertar(float Dt);
 	void BuscarInteractuable();
 	void UsarManos();
-	void Sacudir(float Fuerza);
+	void Desmoralizar();
+	void TratarHeridas();
+	void ArrojarAguaBendita();
+	void BeberPocion();
+	class ANoMuerto* EnemigoDelante(float Alcance, float Radio) const;
+	bool HayEnemigoCerca(float Radio) const;
+	/** Tratar heridas en curso (3 s quieto). */
+	float TratandoHasta = -1.f;
 	void Reproducir(const TCHAR* Ruta, float Volumen = 1.f, float Tono = 1.f);
 
 	UPROPERTY() AInteractuable* InteractuableEnMira = nullptr;

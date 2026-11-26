@@ -46,6 +46,12 @@ public:
 	UPROPERTY() TArray<FName> Hechos;  // anclas liberadas, puertas abiertas, escenas vistas
 	UPROPERTY() bool bTieneArmas = false;
 	UPROPERTY() bool bTieneDaga = false;
+	/** Tercer eje: cuánto repite al viejo Vaelith (anatema, tentación, ecos oscuros). */
+	UPROPERTY() int32 Corrupcion = 0;
+	UPROPERTY() int32 PuntosHeroe = 1;
+	UPROPERTY() bool bAnatema = false;
+	UPROPERTY() int32 AguaBendita = 2;
+	UPROPERTY() int32 Pociones = 0;
 	UPROPERTY() FDateTime Fecha;
 };
 
