@@ -1,0 +1,812 @@
+{
+ "_formato": "escenas: lista de [estilo, texto, duración opcional, espera opcional]. Estilos: narracion, voz, pensamiento, titulo, rotulo, pharasma, recuerdo, sombra. textos: cadenas sueltas; en 'controles' y 'creditos' las líneas se separan con |. Fuente: docs/guion_demo.md del proyecto Godot y el Registro del Osario.",
+ "textos": {
+  "menu_pie": "Un campeón de Pharasma. Una deuda sin plazo.",
+  "aviso_altar": "Partida guardada. Recuperaste la vida, el foco y el escudo.",
+  "aviso_daga": "Su hoja hiere a los espíritus como si tuvieran carne. Tecla 2 para alternar entre espada y daga.",
+  "saber_zombi": "Carne sin voluntad, movida por energía de vacío. Lento y obstinado. El filo de la espada lo abre con facilidad.",
+  "saber_esqueleto": "Hueso ensamblado por un ritual. El filo resbala en él; un golpe de escudo (F) lo quiebra.",
+  "saber_fantasma": "Un alma retenida. El acero apenas la roza. La daga de Pharasma o Imponer las Manos (R) la hieren de verdad. Si está atada a algo, romper el ancla la libera.",
+  "penitencia_1": "Pharasma te devuelve. El lugar donde caíste recuerda tu caída.",
+  "penitencia_2": "Otra vez. La oscuridad del tramo se espesa con cada regreso.",
+  "penitencia_3": "La diosa no se cansa. Vos sí. Rezá ante un altar para aliviar la carga.",
+  "moribundo": "Levantate. Todavía no terminaste. (clic o R)",
+  "dote_titulo": "Algo vuelve con el recuerdo",
+  "controles": "WASD moverse · Shift correr · Espacio saltar|Clic izquierdo tajo · mantener para tajo potente|Clic derecho bloquear · bloquear justo antes del golpe: Retribución|F golpe de escudo · Q embestida · R Imponer las Manos|2 espada / daga · E interactuar (objetos, puertas, altares) · E o Enter adelantar texto · Esc pausa",
+  "creditos": "#VAELITH ARKEN||#Idea, historia y personaje|Marcos||#Desarrollo|Marcos con Claude (Anthropic)|Asistencia en modelado procedural: Codex (OpenAI)||#Motor|Unreal Engine 5.8 · Epic Games|Maniquíes y animaciones base: Epic Games (contenido de plantilla)||#Música|Composiciones del proyecto original Vaelith Arken||#Sonido|Ver CREDITS.md del proyecto: cada efecto con su autor y licencia||#Texturas|Poly Haven (CC0)||#Tipografías|SIL Open Font License||Basado en el personaje de Pathfinder 2e|Pathfinder es una marca de Paizo Inc. Este proyecto no está afiliado a Paizo.||||#La deuda continúa."
+ },
+ "escenas": {
+  "intro": [
+   [
+    "narracion",
+    "La oscuridad no desaparece cuando abrís los ojos.",
+    4.5,
+    4.5
+   ],
+   [
+    "narracion",
+    "Primero sentís frío. No el de una noche de invierno: una ausencia de calor que te atravesó durante tanto tiempo que el cuerpo olvidó cómo se siente estar vivo.",
+    7.5
+   ],
+   [
+    "narracion",
+    "Respirás. El aire huele a piedra húmeda y a incienso apagado.",
+    4.5
+   ],
+   [
+    "pensamiento",
+    "¿Dónde...?",
+    2.5
+   ],
+   [
+    "narracion",
+    "Te incorporás. El cuerpo responde, y eso resulta extraño.",
+    4.0
+   ],
+   [
+    "pensamiento",
+    "¿Quién soy?",
+    2.5,
+    1.2
+   ],
+   [
+    "narracion",
+    "La respuesta llega antes de que termines de formular la pregunta.",
+    4.0
+   ],
+   [
+    "titulo",
+    "Vaelith Arken",
+    4.0,
+    0.8
+   ],
+   [
+    "narracion",
+    "No recordás que nadie te lo haya dicho. Simplemente está ahí.",
+    4.5
+   ]
+  ],
+  "continuar": [
+   [
+    "rotulo",
+    "La deuda continúa",
+    3.5,
+    1.0
+   ]
+  ],
+  "armas": [
+   [
+    "narracion",
+    "Tus dedos encuentran la empuñadura antes de que la busques.",
+    4.0
+   ],
+   [
+    "narracion",
+    "No recordás haber aprendido a usarla. Pero cuando la mano se cierra, la sensación es familiar.",
+    5.5
+   ],
+   [
+    "pensamiento",
+    "Demasiado familiar.",
+    3.0
+   ]
+  ],
+  "daga": [
+   [
+    "narracion",
+    "En la empuñadura hay un símbolo que no reconocés. Al verlo, algo te aprieta el pecho.",
+    5.5
+   ],
+   [
+    "recuerdo",
+    "Una mujer. Un trono. Una rueda que gira.",
+    4.0
+   ],
+   [
+    "narracion",
+    "La imagen desaparece antes de que puedas atraparla.",
+    3.5
+   ]
+  ],
+  "zona_catacumba": [
+   [
+    "rotulo",
+    "Catacumbas de la Rueda",
+    4.0,
+    1.0
+   ]
+  ],
+  "primer_enemigo": [
+   [
+    "pensamiento",
+    "Pasos. Arrastrados. No respira.",
+    3.5
+   ],
+   [
+    "pensamiento",
+    "Sé lo que es. No sé cómo lo sé.",
+    3.5
+   ]
+  ],
+  "puerta_cerrada": [
+   [
+    "pensamiento",
+    "Cerrada. Tiene que haber otro camino, o algo que la abra.",
+    3.5
+   ]
+  ],
+  "lectura_nichos": [
+   [
+    "narracion",
+    "Los nombres de los nichos fueron raspados. No por el tiempo: alguien usó un cincel.",
+    5.0
+   ],
+   [
+    "pensamiento",
+    "Quien hizo esto no quería que los muertos fueran recordados.",
+    4.0
+   ]
+  ],
+  "lectura_altar": [
+   [
+    "narracion",
+    "«Toda alma pasa por la Rueda. Ninguna queda afuera.»",
+    4.5
+   ],
+   [
+    "narracion",
+    "Debajo, en letra más nueva: «Ninguna, salvo las que él retuvo.»",
+    5.0
+   ]
+  ],
+  "espejo_agua": [
+   [
+    "narracion",
+    "El agua está quieta. Te inclinás.",
+    3.0
+   ],
+   [
+    "narracion",
+    "Un rostro delgado, pálido, de rasgos élficos. Ojos que no conocés y que sin embargo te miran como si te esperaran.",
+    6.5
+   ],
+   [
+    "pensamiento",
+    "Así que esta es la cara.",
+    3.0
+   ],
+   [
+    "narracion",
+    "Por un instante, el reflejo tarda en imitarte.",
+    4.0
+   ]
+  ],
+  "sombra_vista": [
+   [
+    "pensamiento",
+    "Alguien estuvo acá hace poco. Esos cortes son limpios.",
+    4.0
+   ],
+   [
+    "pensamiento",
+    "Demasiado limpios. Así cortaría yo.",
+    3.5
+   ]
+  ],
+  "cadaver": [
+   [
+    "narracion",
+    "Cubrís el cuerpo con lo que queda de su mortaja.",
+    3.5
+   ],
+   [
+    "pensamiento",
+    "Descansá. Ya nadie te va a levantar.",
+    3.5
+   ]
+  ],
+  "recuerdo_1": [
+   [
+    "recuerdo",
+    "Una respiración en la oscuridad.",
+    3.0,
+    0.6
+   ],
+   [
+    "voz",
+    "—¿Qué querés que sea?",
+    3.0
+   ],
+   [
+    "recuerdo",
+    "Una mesa de piedra. Sobre ella, algo incompleto: carne, metal, hueso.",
+    5.0
+   ],
+   [
+    "recuerdo",
+    "Una figura de espaldas. No le ves el rostro.",
+    3.5
+   ],
+   [
+    "voz",
+    "—Yo.",
+    2.0
+   ],
+   [
+    "recuerdo",
+    "La criatura abre los ojos.",
+    3.0
+   ],
+   [
+    "voz",
+    "—No. Mejor que yo.",
+    3.0,
+    1.0
+   ],
+   [
+    "pensamiento",
+    "Esa voz era la mía.",
+    3.5,
+    1.0
+   ]
+  ],
+  "zona_osario": [
+   [
+    "rotulo",
+    "El Osario Profundo",
+    4.0,
+    1.0
+   ],
+   [
+    "pensamiento",
+    "Acá abajo los muertos no están quietos. Alguien los ató a este lugar.",
+    4.5
+   ]
+  ],
+  "primer_atado": [
+   [
+    "pensamiento",
+    "Ese espíritu no ataca por odio. Está encadenado.",
+    4.0
+   ],
+   [
+    "pensamiento",
+    "Si rompo lo que lo retiene, se va. No hace falta destruirlo.",
+    4.0
+   ]
+  ],
+  "alma_liberada": [
+   [
+    "narracion",
+    "La luz se eleva y se apaga sin ruido. Por primera vez desde que despertaste, el silencio no pesa.",
+    5.5
+   ]
+  ],
+  "recuerdo_2": [
+   [
+    "recuerdo",
+    "La criatura está de pie frente a vos. Todavía tiene costuras visibles.",
+    4.5,
+    0.6
+   ],
+   [
+    "voz",
+    "—Atacame.",
+    2.0
+   ],
+   [
+    "recuerdo",
+    "No se mueve.",
+    2.0
+   ],
+   [
+    "sombra",
+    "—No quiero.",
+    2.5
+   ],
+   [
+    "voz",
+    "—No te pregunté qué querías.",
+    3.0
+   ],
+   [
+    "recuerdo",
+    "La criatura baja la cabeza.",
+    2.5
+   ],
+   [
+    "sombra",
+    "—Entonces no soy como vos.",
+    3.0
+   ],
+   [
+    "voz",
+    "—Todavía no.",
+    3.0,
+    1.0
+   ],
+   [
+    "pensamiento",
+    "Le di voluntad. Y después le pedí que no la usara.",
+    4.0,
+    1.0
+   ]
+  ],
+  "estandarte": [
+   [
+    "narracion",
+    "Un estandarte podrido: un sol negro de ocho rayos.",
+    4.0
+   ],
+   [
+    "recuerdo",
+    "Filas de muertos marchando bajo ese mismo sol, en silencio, al paso de alguien que no necesitaba gritar.",
+    6.0
+   ],
+   [
+    "pensamiento",
+    "Yo los conducía.",
+    3.5
+   ]
+  ],
+  "zona_bosque": [
+   [
+    "rotulo",
+    "El Bosque de los Centinelas",
+    4.0,
+    1.0
+   ],
+   [
+    "narracion",
+    "Pasado el arco, los pinos se cierran. Resina, humedad, ningún pájaro.",
+    4.5
+   ],
+   [
+    "pensamiento",
+    "Hay un sendero. Alguien lo mantuvo abierto mucho tiempo.",
+    4.0
+   ]
+  ],
+  "guardian": [
+   [
+    "narracion",
+    "Un soldado muerto, todavía en su puesto. Sostiene una lanza que ya no puede levantar.",
+    5.0
+   ],
+   [
+    "narracion",
+    "No ataca. Te mira pasar, como miraría pasar a un superior.",
+    4.5
+   ],
+   [
+    "pensamiento",
+    "Le ordenaron vigilar este camino. Nadie le ordenó que dejara de hacerlo.",
+    4.5
+   ]
+  ],
+  "guardian_herido": [
+   [
+    "pensamiento",
+    "No se defiende.",
+    2.5
+   ]
+  ],
+  "guardian_muerto": [
+   [
+    "narracion",
+    "Cae sin un sonido. La lanza rueda hasta tus pies.",
+    4.0
+   ],
+   [
+    "pensamiento",
+    "Cumplía una orden mía. Y yo lo castigué por cumplirla.",
+    4.5
+   ]
+  ],
+  "lectura_lapida": [
+   [
+    "narracion",
+    "«Aquí yacen los de Varo, que no abrieron sus puertas.»",
+    4.5
+   ],
+   [
+    "narracion",
+    "Debajo alguien agregó, con otra mano: «Las abrieron después. Él se encargó.»",
+    5.0
+   ]
+  ],
+  "recuerdo_3": [
+   [
+    "recuerdo",
+    "La criatura practica en un patio. El mismo movimiento, una y otra vez.",
+    4.5,
+    0.6
+   ],
+   [
+    "voz",
+    "—Otra vez.",
+    2.0
+   ],
+   [
+    "voz",
+    "—Más rápido.",
+    2.0
+   ],
+   [
+    "sombra",
+    "—¿Para qué?",
+    2.5
+   ],
+   [
+    "voz",
+    "—Algún día vas a necesitarlo.",
+    3.0
+   ],
+   [
+    "sombra",
+    "—¿Para qué?",
+    2.5
+   ],
+   [
+    "recuerdo",
+    "Una pausa larga.",
+    2.0
+   ],
+   [
+    "voz",
+    "—Para reemplazarme.",
+    3.0
+   ],
+   [
+    "sombra",
+    "—¿Vas a morir?",
+    2.5
+   ],
+   [
+    "voz",
+    "—Todos mueren.",
+    2.5
+   ],
+   [
+    "sombra",
+    "—Vos también.",
+    3.0,
+    0.8
+   ],
+   [
+    "recuerdo",
+    "No le respondiste.",
+    3.0,
+    1.0
+   ]
+  ],
+  "zona_torre": [
+   [
+    "rotulo",
+    "La Torre de Arken",
+    4.0,
+    1.0
+   ],
+   [
+    "narracion",
+    "Las piedras tienen marcas de fuego. La puerta no fue forzada desde afuera: la abrieron desde adentro.",
+    5.5
+   ],
+   [
+    "pensamiento",
+    "Acá morí.",
+    3.0,
+    1.2
+   ]
+  ],
+  "torre_subida": [
+   [
+    "pensamiento",
+    "Cada escalón lo subí mil veces. Mis pies lo saben mejor que yo.",
+    4.5
+   ]
+  ],
+  "recuerdo_4": [
+   [
+    "recuerdo",
+    "Oscuridad. Después, una luz gris, inmensa, sin fuente.",
+    4.5,
+    0.8
+   ],
+   [
+    "recuerdo",
+    "Una mujer sentada, el rostro velado. A su espalda, una rueda que gira sin detenerse.",
+    5.5
+   ],
+   [
+    "pharasma",
+    "Vaelith Arken.",
+    3.5,
+    1.0
+   ],
+   [
+    "recuerdo",
+    "No necesita enumerar nada. Las tumbas abiertas, las almas sometidas, el pueblo que se negó a entregarte sus muertos y los vio levantarse esa misma noche.",
+    7.5
+   ],
+   [
+    "pharasma",
+    "Creíste que la muerte era un problema sin resolver.",
+    4.0
+   ],
+   [
+    "pharasma",
+    "No vas a recibir el descanso que esperabas.",
+    4.0
+   ],
+   [
+    "recuerdo",
+    "Te quita el poder. Te quita la memoria. Te deja el nombre.",
+    4.5
+   ],
+   [
+    "pharasma",
+    "Vas a volver. Vas a servir. Y cuando la deuda esté saldada, vas a volver a estar frente a mí.",
+    6.5
+   ],
+   [
+    "pensamiento",
+    "No me castigó con olvido. Me castigó con la posibilidad de recordar.",
+    5.0,
+    1.5
+   ]
+  ],
+  "sombra_aparece": [
+   [
+    "narracion",
+    "Al otro lado del piso partido, alguien te espera. Tiene tu altura, tu escudo, tu forma de pararte.",
+    5.5
+   ],
+   [
+    "narracion",
+    "Adoptás la guardia. La figura hace exactamente lo mismo.",
+    4.0
+   ],
+   [
+    "sombra",
+    "—Todavía hacés eso.",
+    3.0
+   ],
+   [
+    "voz",
+    "—¿Qué?",
+    2.0
+   ],
+   [
+    "sombra",
+    "—Cargás primero.",
+    3.0
+   ]
+  ],
+  "sombra_mitad": [
+   [
+    "sombra",
+    "—La espada. El escudo. La distancia.",
+    3.5
+   ],
+   [
+    "sombra",
+    "—Seguís peleando igual.",
+    3.0
+   ],
+   [
+    "sombra",
+    "—Eso que no sabés hacer también lo sabías. Solo que ya no lo recordás.",
+    4.5
+   ]
+  ],
+  "diehard": [
+   [
+    "pensamiento",
+    "Todavía no.",
+    2.5
+   ]
+  ],
+  "muerte_1": [
+   [
+    "pharasma",
+    "Todavía no terminaste.",
+    3.5,
+    0.8
+   ]
+  ],
+  "muerte_2": [
+   [
+    "pharasma",
+    "La deuda no se paga cayendo.",
+    3.5,
+    0.8
+   ]
+  ],
+  "muerte_3": [
+   [
+    "pharasma",
+    "Levantate, Vaelith.",
+    3.5,
+    0.8
+   ]
+  ],
+  "final_gracia": [
+   [
+    "sombra",
+    "—Liberaste a los que até. Yo no habría podido.",
+    4.0,
+    1.0
+   ]
+  ],
+  "final_neutro": [
+   [
+    "sombra",
+    "—Peleás como él. Todavía no sé si pensás como él.",
+    4.0,
+    1.0
+   ]
+  ],
+  "final_deuda": [
+   [
+    "sombra",
+    "—Volviste igual que te fuiste.",
+    3.5,
+    1.0
+   ]
+  ],
+  "final": [
+   [
+    "sombra",
+    "—¿No sabés quién soy?",
+    3.0,
+    0.6
+   ],
+   [
+    "voz",
+    "—No.",
+    2.0
+   ],
+   [
+    "sombra",
+    "—Claro. Te aseguraste de eso.",
+    3.5
+   ],
+   [
+    "recuerdo",
+    "Fuego en los pasillos. Gritos al otro lado de una puerta.",
+    4.0,
+    1.0
+   ],
+   [
+    "recuerdo",
+    "—¡Señor, nos están rodeando!",
+    3.0
+   ],
+   [
+    "voz",
+    "—Entonces que entren.",
+    3.0
+   ],
+   [
+    "recuerdo",
+    "La puerta se abre. Entrás herido y te arrodillás frente a la criatura. Por primera vez parecés cansado.",
+    6.0
+   ],
+   [
+    "voz",
+    "—Si alguna vez regreso... no me dejes recordar.",
+    4.5
+   ],
+   [
+    "sombra",
+    "—¿Por qué?",
+    2.5
+   ],
+   [
+    "voz",
+    "—Porque si recuerdo lo que hice, voy a tener que decidir si todavía soy el mismo.",
+    6.0,
+    1.0
+   ],
+   [
+    "narracion",
+    "La criatura yace frente a vos. La máscara se partió en el suelo. No se parece a vos. Se parece a lo que querías ser.",
+    6.5,
+    1.5
+   ],
+   [
+    "sombra",
+    "—Ahora sí me recordaste.",
+    3.5,
+    1.0
+   ],
+   [
+    "sombra",
+    "—No a mí.",
+    2.5
+   ],
+   [
+    "sombra",
+    "—A vos.",
+    3.5,
+    1.5
+   ],
+   [
+    "titulo",
+    "La deuda continúa.",
+    5.0,
+    2.5
+   ]
+  ],
+  "zona_cementerio": [
+   [
+    "rotulo",
+    "El camposanto de Varo",
+    4.0,
+    1.0
+   ],
+   [
+    "narracion",
+    "Aire. Frío de verdad, con olor a tierra removida.",
+    4.5
+   ],
+   [
+    "narracion",
+    "Las tumbas más cercanas están abiertas. La tierra salió hacia afuera.",
+    4.5
+   ],
+   [
+    "pensamiento",
+    "No los desenterraron. Salieron solos.",
+    3.5
+   ]
+  ],
+  "vista_pueblo": [
+   [
+    "narracion",
+    "Desde lo alto de la loma se ve el valle. Lejos, un pueblo: ventanas encendidas, una iglesia.",
+    5.5
+   ],
+   [
+    "pensamiento",
+    "Gente que cena y se va a dormir sin pensar en los muertos.",
+    4.0
+   ],
+   [
+    "narracion",
+    "Algo tira de vos en la dirección contraria, hacia el oeste, donde el bosque se vuelve negro.",
+    5.0
+   ],
+   [
+    "pensamiento",
+    "Por ahí no hay sendero. Voy a tener que buscarlo.",
+    3.5
+   ]
+  ],
+  "estatua_guia": [
+   [
+    "narracion",
+    "Una estatua de Pharasma con el farol vacío. Cuando te acercás, la mecha prende sola.",
+    5.0
+   ],
+   [
+    "pensamiento",
+    "Habrá más. Alguien quería que este camino se pudiera encontrar.",
+    4.0
+   ]
+  ],
+  "hondonada": [
+   [
+    "narracion",
+    "El terreno baja. La niebla se junta en el fondo como agua quieta.",
+    4.5
+   ],
+   [
+    "narracion",
+    "Recién ahí, entre los troncos, aparece la torre.",
+    4.0
+   ]
+  ]
+ }
+}

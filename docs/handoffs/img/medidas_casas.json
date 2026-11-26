@@ -1,0 +1,197 @@
+[
+{
+"f": "House1.glb",
+"tris": 519276,
+"meshes": 509,
+"dim_m": [
+21.82,
+13.15,
+17.48
+],
+"mats": 9,
+"imgs": 33,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "House2.glb",
+"tris": 246898,
+"meshes": 233,
+"dim_m": [
+10.18,
+9.95,
+21.5
+],
+"mats": 7,
+"imgs": 25,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "House3.glb",
+"tris": 472919,
+"meshes": 450,
+"dim_m": [
+21.82,
+14.99,
+13.52
+],
+"mats": 7,
+"imgs": 26,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "House4.glb",
+"tris": 420481,
+"meshes": 385,
+"dim_m": [
+15.44,
+14.57,
+17.66
+],
+"mats": 5,
+"imgs": 18,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "House5.glb",
+"tris": 212665,
+"meshes": 188,
+"dim_m": [
+10.27,
+9.98,
+17.64
+],
+"mats": 5,
+"imgs": 18,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "House6.glb",
+"tris": 79577,
+"meshes": 80,
+"dim_m": [
+6.26,
+15.95,
+5.6
+],
+"mats": 5,
+"imgs": 18,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "House7.glb",
+"tris": 107967,
+"meshes": 95,
+"dim_m": [
+7.08,
+9.56,
+10.38
+],
+"mats": 4,
+"imgs": 14,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "House8.glb",
+"tris": 320725,
+"meshes": 296,
+"dim_m": [
+9.56,
+25.51,
+10.38
+],
+"mats": 4,
+"imgs": 14,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "House9.glb",
+"tris": 163121,
+"meshes": 151,
+"dim_m": [
+8.55,
+10.43,
+10.38
+],
+"mats": 4,
+"imgs": 14,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "House10.glb",
+"tris": 442861,
+"meshes": 359,
+"dim_m": [
+9.62,
+18.83,
+18.34
+],
+"mats": 4,
+"imgs": 14,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "House11.glb",
+"tris": 395615,
+"meshes": 347,
+"dim_m": [
+10.18,
+19.16,
+23.77
+],
+"mats": 5,
+"imgs": 18,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "House12.glb",
+"tris": 376855,
+"meshes": 325,
+"dim_m": [
+10.18,
+19.18,
+18.34
+],
+"mats": 4,
+"imgs": 14,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "House13.glb",
+"tris": 218985,
+"meshes": 183,
+"dim_m": [
+10.18,
+9.95,
+23.25
+],
+"mats": 5,
+"imgs": 18,
+"arm": 0,
+"bones": 0,
+"anims": []
+}
+]

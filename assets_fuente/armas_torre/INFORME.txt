@@ -1,0 +1,11 @@
+SM_Espada_Larga	416	0.52x0.18x1.12 m	M_Metal,M_Oro,M_Tela
+SM_Escudo_Pharasma	1220	0.65x0.12x0.90 m	M_Madera,M_Metal,M_Oro
+SM_Daga_Pharasma	140	0.16x0.10x0.45 m	M_Metal,M_Oro
+SM_Torre_Muro_Segmento	576	2.46x4.24x6.00 m	M_Piedra
+SM_Torre_Muro_Roto	644	2.81x4.56x3.85 m	M_Piedra
+SM_Torre_Escalon_Caracol	12	1.79x1.82x0.25 m	M_Piedra
+SM_Torre_Piso_Roto	924	9.01x10.00x0.14 m	M_Madera
+SM_Torre_Almena	44	0.80x1.00x1.20 m	M_Piedra
+SM_Ruina_Bloque	44	1.00x0.60x0.50 m	M_Piedra
+SM_Lapida_Bosque	44	0.60x0.31x1.10 m	M_Piedra
+SM_Roca_Grande	80	2.98x2.73x2.82 m	M_Piedra

@@ -1,0 +1,2 @@
+SM_Boveda_4m	576	4.09x4.00x1.33 m	M_Piedra
+SM_Pared_Nichos_4m	312	4.00x0.50x4.00 m	M_Piedra,M_Hueso

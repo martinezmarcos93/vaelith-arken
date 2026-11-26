@@ -1,0 +1,12 @@
+SM_Losa_Altar	480 caras	2.43x1.14x0.71 m	SM_Losa_Altar.fbx
+SM_Columna_Entera	422 caras	1.26x1.26x8.45 m	SM_Columna_Entera.fbx
+SM_Columna_Rota_Alta	236 caras	1.17x1.17x4.67 m	SM_Columna_Rota_Alta.fbx
+SM_Columna_Rota_Baja	92 caras	1.17x1.17x1.81 m	SM_Columna_Rota_Baja.fbx
+SM_Columna_Tambor	82 caras	0.85x0.88x1.62 m	SM_Columna_Tambor.fbx
+SM_Suelo_Losas_4m	416 caras	3.94x3.94x0.28 m	SM_Suelo_Losas_4m.fbx
+SM_Escombro_00	137 caras	0.66x0.69x0.46 m	SM_Escombro_00.fbx
+SM_Escombro_01	136 caras	1.02x1.00x0.47 m	SM_Escombro_01.fbx
+SM_Escombro_02	85 caras	0.93x0.61x0.51 m	SM_Escombro_02.fbx
+SM_Escombro_03	89 caras	0.97x0.55x0.38 m	SM_Escombro_03.fbx
+SM_Escombro_04	82 caras	0.48x0.66x0.55 m	SM_Escombro_04.fbx
+SM_Escombro_05	150 caras	1.18x0.65x0.60 m	SM_Escombro_05.fbx

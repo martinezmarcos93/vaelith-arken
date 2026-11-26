@@ -1,0 +1,561 @@
+[
+{
+"f": "Torch.fbx",
+"tris": 3400,
+"meshes": 1,
+"dim_m": [
+5.26,
+9.95,
+20.6
+],
+"mats": 1,
+"imgs": 3,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "well.fbx",
+"tris": 24576,
+"meshes": 1,
+"dim_m": [
+2.25,
+1.24,
+2.2
+],
+"mats": 1,
+"imgs": 4,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "model.glb",
+"tris": 29999,
+"meshes": 1,
+"dim_m": [
+1.12,
+1.12,
+2.0
+],
+"mats": 1,
+"imgs": 1,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "Bridge.fbx",
+"tris": 13244,
+"meshes": 1,
+"dim_m": [
+123.83,
+31.03,
+79.71
+],
+"mats": 5,
+"imgs": 2,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "castle wall 2.fbx",
+"tris": 948,
+"meshes": 1,
+"dim_m": [
+13.87,
+2.78,
+14.12
+],
+"mats": 3,
+"imgs": 12,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "floor walls castle 1.fbx",
+"tris": 12,
+"meshes": 1,
+"dim_m": [
+19.09,
+5.89,
+0.36
+],
+"mats": 1,
+"imgs": 4,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "wood support walls.fbx",
+"tris": 228,
+"meshes": 1,
+"dim_m": [
+13.8,
+0.44,
+12.94
+],
+"mats": 1,
+"imgs": 4,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "castle wall 1.fbx",
+"tris": 900,
+"meshes": 1,
+"dim_m": [
+13.87,
+2.78,
+13.98
+],
+"mats": 3,
+"imgs": 12,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "column wall castle.fbx",
+"tris": 176,
+"meshes": 1,
+"dim_m": [
+3.98,
+2.72,
+15.25
+],
+"mats": 1,
+"imgs": 4,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "wall side castle.fbx",
+"tris": 36,
+"meshes": 1,
+"dim_m": [
+5.51,
+1.98,
+13.36
+],
+"mats": 1,
+"imgs": 4,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "castle wall up.fbx",
+"tris": 564,
+"meshes": 1,
+"dim_m": [
+13.87,
+1.14,
+2.26
+],
+"mats": 1,
+"imgs": 4,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "wood medieval defense4.fbx",
+"tris": 15228,
+"meshes": 1,
+"dim_m": [
+3.99,
+0.41,
+3.3
+],
+"mats": 1,
+"imgs": 4,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "wood medieval defense1.fbx",
+"tris": 5328,
+"meshes": 1,
+"dim_m": [
+5.19,
+0.26,
+2.49
+],
+"mats": 1,
+"imgs": 4,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "wood medieval defense2.fbx",
+"tris": 14288,
+"meshes": 1,
+"dim_m": [
+3.99,
+1.69,
+3.3
+],
+"mats": 1,
+"imgs": 4,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "wood medieval defense3.fbx",
+"tris": 11388,
+"meshes": 1,
+"dim_m": [
+2.99,
+1.45,
+1.45
+],
+"mats": 1,
+"imgs": 4,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "medieval_long_sword.fbx",
+"tris": 1186,
+"meshes": 1,
+"dim_m": [
+0.24,
+1.66,
+6.79
+],
+"mats": 1,
+"imgs": 4,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "GraveyardAndGriveRobber.fbx",
+"tris": 29530,
+"meshes": 19,
+"dim_m": [
+26.96,
+39.74,
+31.09
+],
+"mats": 3,
+"imgs": 9,
+"arm": 1,
+"bones": 96,
+"anims": [
+"Character|Character|ArmatureAction",
+"Character|Character|Empty.008|Empty.002|Empty.002Action",
+"Character|Character|Face|Face|Empty.002Action"
+]
+},
+{
+"f": "Weapons.blend",
+"tris": 86671,
+"meshes": 182,
+"dim_m": [
+10.29,
+6.89,
+5.11
+],
+"mats": 8,
+"imgs": 18,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "Haunted Church and Graveyard GLB.glb",
+"tris": 5322411,
+"meshes": 1070,
+"dim_m": [
+30.11,
+27.31,
+8.38
+],
+"mats": 16,
+"imgs": 53,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "gravestone_02.fbx",
+"tris": 2196,
+"meshes": 1,
+"dim_m": [
+0.95,
+0.17,
+0.99
+],
+"mats": 1,
+"imgs": 5,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "gravestone_01.fbx",
+"tris": 1750,
+"meshes": 1,
+"dim_m": [
+0.54,
+0.34,
+1.0
+],
+"mats": 1,
+"imgs": 3,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "gravestone_05.fbx",
+"tris": 890,
+"meshes": 1,
+"dim_m": [
+0.6,
+0.6,
+2.19
+],
+"mats": 1,
+"imgs": 5,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "gravestone_03.fbx",
+"tris": 2376,
+"meshes": 1,
+"dim_m": [
+0.78,
+0.42,
+1.51
+],
+"mats": 1,
+"imgs": 3,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "gravestone_04.fbx",
+"tris": 1010,
+"meshes": 1,
+"dim_m": [
+0.86,
+0.24,
+0.95
+],
+"mats": 1,
+"imgs": 3,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "Church1Upload.blend",
+"tris": 43293,
+"meshes": 14,
+"dim_m": [
+12.41,
+16.92,
+18.77
+],
+"mats": 12,
+"imgs": 14,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "Skeleton with armature only.glb",
+"tris": 1029489,
+"meshes": 2,
+"dim_m": [
+1.9,
+2.0,
+2.76
+],
+"mats": 1,
+"imgs": 3,
+"arm": 1,
+"bones": 102,
+"anims": []
+},
+{
+"f": "shield.blend",
+"tris": 7976,
+"meshes": 1,
+"dim_m": [
+2.62,
+0.32,
+2.62
+],
+"mats": 1,
+"imgs": 5,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "statue_lantern.fbx",
+"tris": 21156,
+"meshes": 1,
+"dim_m": [
+1.18,
+1.21,
+3.79
+],
+"mats": 1,
+"imgs": 5,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "BasRelief_FamilleFourie_LowUV02.obj",
+"tris": 29082,
+"meshes": 1,
+"dim_m": [
+29.59,
+15.73,
+28.77
+],
+"mats": 1,
+"imgs": 0,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "stature_base.fbx",
+"tris": 712,
+"meshes": 1,
+"dim_m": [
+1.55,
+1.55,
+1.12
+],
+"mats": 1,
+"imgs": 5,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "model.fbx",
+"tris": 1482154,
+"meshes": 1,
+"dim_m": [
+9.62,
+26.18,
+8.5
+],
+"mats": 1,
+"imgs": 1,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "Graves.fbx",
+"tris": 1116,
+"meshes": 4,
+"dim_m": [
+3.19,
+2.44,
+1.14
+],
+"mats": 1,
+"imgs": 4,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "skeletal_executioner.fbx",
+"tris": 310530,
+"meshes": 1,
+"dim_m": [
+1.08,
+0.84,
+1.92
+],
+"mats": 1,
+"imgs": 4,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "sm_human_skeleton.fbx",
+"tris": 1513308,
+"meshes": 111,
+"dim_m": [
+3.18,
+0.67,
+2.27
+],
+"mats": 1,
+"imgs": 2,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "mossy_swamp_troll.glb",
+"tris": 40000,
+"meshes": 1,
+"dim_m": [
+1.83,
+0.85,
+1.99
+],
+"mats": 1,
+"imgs": 2,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "medieval_houses_10.fbx",
+"tris": 12151,
+"meshes": 1,
+"dim_m": [
+0.79,
+0.72,
+0.81
+],
+"mats": 1,
+"imgs": 6,
+"arm": 0,
+"bones": 0,
+"anims": []
+},
+{
+"f": "skeleton.blend",
+"tris": 492494,
+"meshes": 220,
+"dim_m": [
+6.0,
+2.0,
+2.05
+],
+"mats": 2,
+"imgs": 4,
+"arm": 1,
+"bones": 67,
+"anims": []
+}
+]

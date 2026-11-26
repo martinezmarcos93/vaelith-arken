@@ -1,0 +1,14 @@
+# Generados por Unreal
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+*.sln
+.vscode/
+.idea/
+# Fuentes regenerables o pesadas (ya importadas en Content/)
+assets_fuente/externos/
+assets_fuente/audio/
+__pycache__/
+*.pyc
+.env

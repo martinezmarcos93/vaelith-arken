@@ -1,0 +1,12 @@
+SM_Sarcofago	132	2.20x0.90x0.88 m	M_Piedra
+SM_Sarcofago_Tapa	556	2.70x0.90x0.48 m	M_Piedra
+SM_Pila_Huesos	672	0.73x0.73x0.95 m	M_Hueso
+SM_Craneo	216	0.22x0.19x0.19 m	M_Hueso
+SM_Urna	132	0.46x0.46x0.50 m	M_Metal
+SM_Altar_Pharasma	1004	1.60x0.87x1.53 m	M_Emisivo,M_Oro,M_Piedra
+SM_Soporte_Antorcha	180	0.42x0.62x0.60 m	M_Emisivo,M_Madera,M_Metal
+SM_Cadena_Ancla	420	0.24x0.26x2.12 m	M_Metal
+SM_Estandarte_Roto	413	1.10x0.09x3.00 m	M_Madera,M_Tela
+SM_Candelabro_Suelo	624	0.58x0.57x1.72 m	M_Emisivo,M_Metal
+SM_Cofre	136	0.94x0.57x0.57 m	M_Madera,M_Metal
+SM_Losa_Nombre	136	1.20x0.13x1.20 m	M_Piedra

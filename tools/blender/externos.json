@@ -1,0 +1,442 @@
+{
+ "fuente": "~/Descargas/Assets UE",
+ "assets": [
+  {
+   "nombre": "SM_Espada_Larga",
+   "kit": "armas",
+   "zip": "medieval-long-sword.zip",
+   "archivo": "source/medieval_long_sword.fbx",
+   "rot_z": 90,
+   "largo": 1.12,
+   "pivote": "guarda",
+   "tex_px": 1024,
+   "tex": {
+    "color": "*Base_color*",
+    "normal": "*Normal_OpenGL*",
+    "rough": "*Roughness*",
+    "metal": "*Metallic*"
+   }
+  },
+  {
+   "nombre": "SM_Antorcha_Pared",
+   "kit": "props",
+   "zip": "medieval-torch.zip",
+   "archivo": "source/Torch.fbx",
+   "alto": 0.75,
+   "pivote": "centro",
+   "tex_px": 1024,
+   "tex": {
+    "color": "*Torch_Color*",
+    "normal": "*Torch_Normal*",
+    "rough": "*Torch_Rough*"
+   }
+  },
+  {
+   "nombre": "SM_Lapida_01",
+   "kit": "cementerio",
+   "zip": "free_gravestone_pack.zip",
+   "archivo": "free_gravestone_pack/gravestone_01/gravestone_01.fbx",
+   "tex_px": 1024,
+   "tex": {
+    "color": "gravestone_01*BaseColor*",
+    "normal": "gravestone_01*Normal*",
+    "rough": "gravestone_01*Roughness*"
+   }
+  },
+  {
+   "nombre": "SM_Lapida_02",
+   "kit": "cementerio",
+   "zip": "free_gravestone_pack.zip",
+   "archivo": "free_gravestone_pack/gravestone_02/gravestone_02.fbx",
+   "tex_px": 1024,
+   "tex": {
+    "color": "gravestone_02*BaseColor*",
+    "normal": "gravestone_02*Normal*",
+    "rough": "gravestone_02*Roughness*",
+    "metal": "gravestone_02*Metallic*"
+   }
+  },
+  {
+   "nombre": "SM_Lapida_03",
+   "kit": "cementerio",
+   "zip": "free_gravestone_pack.zip",
+   "archivo": "free_gravestone_pack/gravestone_03/gravestone_03.fbx",
+   "tex_px": 1024,
+   "tex": {
+    "color": "gravestone_03*BaseColor*",
+    "normal": "gravestone_03*Normal*",
+    "rough": "gravestone_03*Roughness*"
+   }
+  },
+  {
+   "nombre": "SM_Lapida_04",
+   "kit": "cementerio",
+   "zip": "free_gravestone_pack.zip",
+   "archivo": "free_gravestone_pack/gravestone_04/gravestone_04.fbx",
+   "tex_px": 1024,
+   "tex": {
+    "color": "gravestone_04*BaseColor*",
+    "normal": "gravestone_04*Normal*",
+    "rough": "gravestone_04*Roughness*"
+   }
+  },
+  {
+   "nombre": "SM_Obelisco",
+   "kit": "cementerio",
+   "zip": "free_gravestone_pack.zip",
+   "archivo": "free_gravestone_pack/gravestone_05/gravestone_05.fbx",
+   "tex_px": 1024,
+   "tex": {
+    "color": "gravestone_05*BaseColor*",
+    "normal": "gravestone_05*Normal*",
+    "rough": "gravestone_05*Roughness*",
+    "metal": "gravestone_05*Metallic*"
+   }
+  },
+  {
+   "nombre": "SM_Tumbas_Grupo",
+   "kit": "cementerio",
+   "zip": "grave-stone-collection.zip",
+   "archivo": "source/x_Gravestones/Gravestones/Models/Graves.fbx",
+   "tex_px": 1024,
+   "tex": {
+    "color": "*Gravestones_2K_Albedo*",
+    "normal": "*Gravestones_2K_Normal*",
+    "rough": "*Gravestones_2K_Roughness*",
+    "metal": "*Gravestones_2K_Metalness*",
+    "ao": "*Gravestones_512_AO*"
+   }
+  },
+  {
+   "nombre": "SM_Estatua_Pharasma",
+   "kit": "cementerio",
+   "zip": "lantern_statue_free.zip",
+   "archivo": "lantern_statue_free/statue/statue_lantern.fbx",
+   "escala": 0.528,
+   "pivote": "base",
+   "tex_px": 2048,
+   "tex": {
+    "color": "*statue_lantern_BaseColor*",
+    "normal": "*statue_lantern_Normal*",
+    "rough": "*statue_lantern_Roughness*",
+    "metal": "*statue_lantern_Metallic*"
+   }
+  },
+  {
+   "nombre": "SM_Estatua_Base",
+   "kit": "cementerio",
+   "zip": "lantern_statue_free.zip",
+   "archivo": "lantern_statue_free/statue_base/stature_base.fbx",
+   "escala": 0.528,
+   "pivote": "base",
+   "tex_px": 1024,
+   "tex": {
+    "color": "*statue_base_BaseColor*",
+    "normal": "*stature_base_Normal*",
+    "rough": "*stature_base_Roughness*",
+    "metal": "*statue_base_Metallic*"
+   }
+  },
+  {
+   "nombre": "SM_Mausoleo_Relieve",
+   "kit": "cementerio",
+   "zip": "bas-relief-on-a-tomb-pere-lachaise-cemetery.zip",
+   "archivo": "source/x_BasRelief_FamilleFourie_LowUV02/BasRelief_FamilleFourie_LowUV02.obj",
+   "alto": 2.6,
+   "pivote": "base",
+   "tris": 9000,
+   "tex_px": 2048,
+   "tex": {
+    "color": "*xnormal_baseTexBaked*",
+    "normal": "*xnormal_normals*",
+    "ao": "*xnormal_occlusion*"
+   },
+   "rugosidad": 0.85
+  },
+  {
+   "nombre": "SM_Pozo",
+   "kit": "cementerio",
+   "zip": "medieval-wooden-well.zip",
+   "archivo": "source/well.fbx",
+   "pivote": "base",
+   "tris": 7000,
+   "tex_px": 1024,
+   "tex": {
+    "color": "*Well_color*",
+    "normal": "*Well_normal*",
+    "rough": "*Well_roughness*",
+    "metal": "*Well_metallic*"
+   }
+  },
+  {
+   "nombre": "SM_Columna_Osario",
+   "kit": "catacumba",
+   "zip": "free-paris-catacombs-inspired-pillar.zip",
+   "archivo": "source/model.glb",
+   "alto": 2.2,
+   "pivote": "base",
+   "tris": 7000,
+   "tex_px": 1024
+  },
+  {
+   "nombre": "SM_Arco_Ruina",
+   "kit": "ruinas",
+   "zip": "medieval-village-stone-archway.zip",
+   "archivo": "source/x_model/model.fbx",
+   "pivote": "base",
+   "tris": 24000,
+   "tex_px": 2048,
+   "tex": {
+    "color": "*model.jpeg"
+   },
+   "rugosidad": 0.9,
+   "escala": 0.5
+  },
+  {
+   "nombre": "SM_Arbol_Podado_1",
+   "kit": "cementerio",
+   "zip": "haunted_church_and_graveyard_glb.zip",
+   "archivo": "Haunted Church and Graveyard GLB/Haunted Church and Graveyard GLB.glb",
+   "objetos": [
+    "S_Pruned_Tree_vcrwcdqfa*"
+   ],
+   "uno": true,
+   "pivote": "base",
+   "tex_px": 1024
+  },
+  {
+   "nombre": "SM_Arbol_Podado_2",
+   "kit": "cementerio",
+   "zip": "haunted_church_and_graveyard_glb.zip",
+   "archivo": "Haunted Church and Graveyard GLB/Haunted Church and Graveyard GLB.glb",
+   "objetos": [
+    "S_Pruned_Tree_vcwhcexqx*"
+   ],
+   "uno": true,
+   "pivote": "base",
+   "tex_px": 1024
+  },
+  {
+   "nombre": "SM_Arbol_Podado_3",
+   "kit": "cementerio",
+   "zip": "haunted_church_and_graveyard_glb.zip",
+   "archivo": "Haunted Church and Graveyard GLB/Haunted Church and Graveyard GLB.glb",
+   "objetos": [
+    "S_Pruned_Tree_vdeled3va*"
+   ],
+   "uno": true,
+   "pivote": "base",
+   "tex_px": 1024
+  },
+  {
+   "nombre": "SM_Arbol_Podado_4",
+   "kit": "cementerio",
+   "zip": "haunted_church_and_graveyard_glb.zip",
+   "archivo": "Haunted Church and Graveyard GLB/Haunted Church and Graveyard GLB.glb",
+   "objetos": [
+    "S_Pruned_Tree_vdfhcjmfa*"
+   ],
+   "uno": true,
+   "pivote": "base",
+   "tex_px": 1024
+  },
+  {
+   "nombre": "SM_Lapida_Vieja",
+   "kit": "cementerio",
+   "zip": "haunted_church_and_graveyard_glb.zip",
+   "archivo": "Haunted Church and Graveyard GLB/Haunted Church and Graveyard GLB.glb",
+   "objetos": [
+    "S_Old_Gravestone*"
+   ],
+   "uno": true,
+   "pivote": "base",
+   "tex_px": 1024
+  },
+  {
+   "nombre": "SM_Lapida_Musgo",
+   "kit": "cementerio",
+   "zip": "haunted_church_and_graveyard_glb.zip",
+   "archivo": "Haunted Church and Graveyard GLB/Haunted Church and Graveyard GLB.glb",
+   "objetos": [
+    "S_Mossy_Gravestone*"
+   ],
+   "uno": true,
+   "pivote": "base",
+   "tex_px": 1024
+  },
+  {
+   "nombre": "SM_Tumba_Vieja",
+   "kit": "cementerio",
+   "zip": "haunted_church_and_graveyard_glb.zip",
+   "archivo": "Haunted Church and Graveyard GLB/Haunted Church and Graveyard GLB.glb",
+   "objetos": [
+    "S_Old_Tomb*"
+   ],
+   "uno": true,
+   "pivote": "base",
+   "tex_px": 1024
+  },
+  {
+   "nombre": "SM_Cerca",
+   "kit": "cementerio",
+   "zip": "haunted_church_and_graveyard_glb.zip",
+   "archivo": "Haunted Church and Graveyard GLB/Haunted Church and Graveyard GLB.glb",
+   "objetos": [
+    "S_Modular_Fence*"
+   ],
+   "uno": true,
+   "pivote": "base",
+   "tex_px": 1024
+  },
+  {
+   "nombre": "SM_Banco",
+   "kit": "cementerio",
+   "zip": "haunted_church_and_graveyard_glb.zip",
+   "archivo": "Haunted Church and Graveyard GLB/Haunted Church and Graveyard GLB.glb",
+   "objetos": [
+    "S_Old_Wooden_Bench*"
+   ],
+   "uno": true,
+   "pivote": "base",
+   "tex_px": 1024
+  },
+  {
+   "nombre": "SM_Raiz",
+   "kit": "bosque",
+   "zip": "haunted_church_and_graveyard_glb.zip",
+   "archivo": "Haunted Church and Graveyard GLB/Haunted Church and Graveyard GLB.glb",
+   "objetos": [
+    "S_Nordic_Forest_Ledge_Root*"
+   ],
+   "uno": true,
+   "pivote": "base",
+   "tex_px": 1024
+  },
+  {
+   "nombre": "SM_Casa_A",
+   "kit": "pueblo",
+   "zip": "13_medieval_village_houses_mega_pack_glb.zip",
+   "archivo": "13 Medieval Village Houses Mega Pack GLB/House6 GLB/House6.glb",
+   "pivote": "base",
+   "tris": 6000,
+   "tex_px": 512
+  },
+  {
+   "nombre": "SM_Casa_B",
+   "kit": "pueblo",
+   "zip": "13_medieval_village_houses_mega_pack_glb.zip",
+   "archivo": "13 Medieval Village Houses Mega Pack GLB/House7 GLB/House7.glb",
+   "pivote": "base",
+   "tris": 6000,
+   "tex_px": 512
+  },
+  {
+   "nombre": "SM_Casa_C",
+   "kit": "pueblo",
+   "zip": "13_medieval_village_houses_mega_pack_glb.zip",
+   "archivo": "13 Medieval Village Houses Mega Pack GLB/House9 GLB/House9.glb",
+   "pivote": "base",
+   "tris": 6000,
+   "tex_px": 512
+  },
+  {
+   "nombre": "SM_Casa_D",
+   "kit": "pueblo",
+   "zip": "13_medieval_village_houses_mega_pack_glb.zip",
+   "archivo": "13 Medieval Village Houses Mega Pack GLB/House5 GLB/House5.glb",
+   "pivote": "base",
+   "tris": 8000,
+   "tex_px": 512
+  },
+  {
+   "nombre": "SM_Casa_E",
+   "kit": "pueblo",
+   "zip": "13_medieval_village_houses_mega_pack_glb.zip",
+   "archivo": "13 Medieval Village Houses Mega Pack GLB/House2 GLB/House2.glb",
+   "pivote": "base",
+   "tris": 8000,
+   "tex_px": 512
+  },
+  {
+   "nombre": "SM_Casa_F",
+   "kit": "pueblo",
+   "zip": "13_medieval_village_houses_mega_pack_glb.zip",
+   "archivo": "13 Medieval Village Houses Mega Pack GLB/House13 GLB/House13.glb",
+   "pivote": "base",
+   "tris": 8000,
+   "tex_px": 512
+  },
+  {
+   "nombre": "SM_Iglesia_Pueblo",
+   "kit": "pueblo",
+   "zip": "medieval-church.zip",
+   "archivo": "source/x_9a31a86e916d43c08fae7677dc7b8a59/Church1Upload.blend",
+   "pivote": "base",
+   "tris": 9000,
+   "tex_px": 512,
+   "material": "M_Piedra"
+  },
+  {
+   "nombre": "SM_Empalizada_1",
+   "kit": "pueblo",
+   "zip": "source (1).zip",
+   "archivo": "wood medieval defense1.fbx",
+   "pivote": "base",
+   "tris": 2500,
+   "material": "M_Madera"
+  },
+  {
+   "nombre": "SM_Empalizada_4",
+   "kit": "pueblo",
+   "zip": "source (1).zip",
+   "archivo": "wood medieval defense4.fbx",
+   "pivote": "base",
+   "tris": 3000,
+   "material": "M_Madera"
+  },
+  {
+   "nombre": "SM_Puente",
+   "kit": "bosque",
+   "zip": "medieval_bridge.zip",
+   "archivo": "source/Bridge.fbx",
+   "pivote": "base",
+   "material": "M_Piedra",
+   "escala": 0.1
+  },
+  {
+   "nombre": "SM_Muro_Ladrillo_5",
+   "kit": "ruinas",
+   "objetos": [
+    "Wall_500x*"
+   ],
+   "uno": true,
+   "pivote": "base",
+   "tex_px": 1024,
+   "zip": "haunted_church_and_graveyard_glb.zip",
+   "archivo": "Haunted Church and Graveyard GLB/Haunted Church and Graveyard GLB.glb",
+   "solo_texturas": true
+  },
+  {
+   "nombre": "SM_Muro_Ladrillo_4",
+   "kit": "ruinas",
+   "objetos": [
+    "Wall_400x*"
+   ],
+   "uno": true,
+   "pivote": "base",
+   "tex_px": 1024,
+   "zip": "haunted_church_and_graveyard_glb.zip",
+   "archivo": "Haunted Church and Graveyard GLB/Haunted Church and Graveyard GLB.glb",
+   "solo_texturas": true
+  },
+  {
+   "nombre": "SM_Verdugo",
+   "kit": "ruinas",
+   "archivo": "skeletal_executioner.fbx",
+   "alto": 2.3,
+   "pivote": "base",
+   "tris": 30000,
+   "tex_px": 2048
+  }
+ ]
+}

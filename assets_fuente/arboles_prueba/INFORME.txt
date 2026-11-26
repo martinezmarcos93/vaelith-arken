@@ -1,0 +1,3 @@
+SM_Pino_A: 656 triángulos, alto 11.6 m -> /home/marcos/src/vaelith-arken-unreal/assets_fuente/arboles_prueba/SM_Pino_A.fbx
+SM_Pino_B: 562 triángulos, alto 8.3 m -> /home/marcos/src/vaelith-arken-unreal/assets_fuente/arboles_prueba/SM_Pino_B.fbx
+SM_Roble_Muerto: 876 triángulos, alto 9.5 m -> /home/marcos/src/vaelith-arken-unreal/assets_fuente/arboles_prueba/SM_Roble_Muerto.fbx
