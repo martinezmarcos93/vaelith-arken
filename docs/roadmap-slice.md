@@ -27,7 +27,7 @@ Cada fase cierra con:
 - una captura o un log como evidencia;
 - la prueba de Marcos con teclado.
 
-### Fase A: limpieza técnica (casi hecha, sin depender de Marcos)
+### Fase A: limpieza técnica — HECHA 26/11
 - ✅ Aviso "LIGHTING NEEDS TO BE REBUILT": causa arreglada (todas las luces dinámicas, `AllowStaticLighting=False`).
 - ✅ Motion blur a 0,1. ✅ Fondo negro y cursor en la pausa. ✅ "E o Enter" en la ayuda.
 - ⬜ **Recalibrar la luz.** Con el cielo dinámico, el menú quedó plano y los árboles muertos casi blancos. Hay que ajustar la intensidad del cielo y la exposición, con capturas de antes y después.
@@ -35,7 +35,18 @@ Cada fase cierra con:
 - ⬜ Detalle de cámara del despertar: Marcos tiene que precisar cuál es.
 - ⬜ Volver a medir el rendimiento con todas las luces dinámicas: `tools/ue/medir.sh`.
 
-### Fase A2: cielo, horizonte y pueblo (Marcos, 25/11; sin depender de nada)
+### Fase A2: cielo, horizonte y pueblo — HECHA 26/11
+**Resultado:**
+- **Cielo:** cúpula con estrellas y luna en la dirección de la luz de luna (`tools/texturas_cielo.py`, `tools/ue/cielo.py`, M_Cielo con nodo Custom). Fuera del alcance de la niebla.
+- **Horizonte:** cerros irregulares en los 4 bordes de `tools/terreno.py`. Ya no se ve la llanura.
+- **Pueblo:** a 282 m de la loma, sobre una meseta transitable, con sendero, 13 casas, iglesia, empalizada con puerta, faroles y navegación.
+- **Bosque del este:** 700 árboles.
+- **Hallazgo:** con las luces dinámicas, el *clustered deferred shading* de Vulkan pintaba de verde las luces puntuales. Se desactivó con `r.UseClusteredDeferredShading=0`.
+- **Exposición mínima** −0,9: la noche ya no se aclara como si fuera de día.
+- **Medido:** loma 148 FPS (1 % bajo: 80) y pueblo 150 FPS (1 % bajo: 90), con 900–990 MiB de VRAM.
+- **Herramientas nuevas:** `tools/ue/regenerar_nivel.sh` y `tools/ue/capturas_ref.sh` (mosaico de 8 vistas).
+
+**Plan original:**
 - **Noche estrellada con luna.** Hoy el cielo es solo niebla oscura. Va una cúpula de cielo con estrellas (material propio: campo de estrellas procedural, o HDRI nocturno CC0 de Poly Haven) y una **luna visible**, alineada con la luz direccional que ya hace de luna. Así la dirección de las sombras coincide con lo que se ve.
 - **Niebla de fondo que tape la llanura.** Desde la loma y el cementerio se ve el terreno plano hasta el horizonte. Van dos cosas:
   - niebla de altura recalibrada para que el horizonte se funda;

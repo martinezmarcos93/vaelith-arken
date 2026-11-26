@@ -8,6 +8,8 @@ Zonas (Y crece alejándose de la catacumba; la salida está en (6400, 6000)):
   bosque alto 21000..44000  ondulado; el arroyo cruza en y ~ 33000 (barranco con puente)
   loma        (16000,47000) claro alto: desde ahí se ve el pueblo, al este
   bosque oscuro y hondonada de la torre en (-12000, 58000)
+  pueblo      (44000, 50500) a ~280 m al este de la loma, sobre una meseta transitable
+  bordes      cerros que cierran el mundo (no se ve llanura); detrás, sierras lejanas en la niebla
 """
 import math
 
@@ -16,11 +18,14 @@ ARCO = (6400.0, 20500.0)
 PUENTE = (8200.0, 33000.0)
 LOMA = (16000.0, 47000.0)
 TORRE = (-12000.0, 58000.0)
-PUEBLO = (70000.0, 56000.0)   # fuera del terreno jugable, sobre su propia colina
+PUEBLO = (44000.0, 50500.0)   # dentro del terreno jugable: se baja de la loma y se entra
+RADIO_PUEBLO = 5600.0         # meseta plana (plaza, casas y empalizada)
+ALTURA_PUEBLO = 420.0
+COLINA_LEJANA = (110000.0, 58000.0)  # colina del valle, solo de fondo
 ARROYO_Y = 33000.0
 
 # Extensión del terreno jugable
-X0, X1 = -24000.0, 28000.0
+X0, X1 = -24000.0, 60000.0
 Y0, Y1 = 6200.0, 66000.0
 
 
@@ -65,12 +70,17 @@ def altura(x, y):
     # Hondonada de la torre (la niebla se junta abajo)
     h -= 750.0 * _gauss(x, y, TORRE[0], TORRE[1], 4200.0)
     h += 120.0 * _gauss(x, y, TORRE[0], TORRE[1], 1400.0)  # piso de la torre algo más parejo
-    # Bordes del mundo: suben (no se puede salir) salvo al este de la loma, que cae hacia el valle
-    borde_o = _suave((X0 + 3500.0 - x) / 3500.0)
-    borde_n = _suave((y - (Y1 - 3500.0)) / 3500.0)
-    borde_e = _suave((x - (X1 - 3500.0)) / 3500.0)
-    h += 2500.0 * max(borde_o, borde_n)
-    h += 2500.0 * borde_e * (1.0 - _gauss(x, y, X1, LOMA[1], 9000.0))
+    # Pueblo: meseta pareja a ALTURA_PUEBLO, con una bajada suave desde la loma
+    dp = math.hypot(x - PUEBLO[0], (y - PUEBLO[1]) * 1.15)
+    w = 1.0 - _suave((dp - RADIO_PUEBLO) / 3500.0)
+    h = h * (1.0 - w) + (ALTURA_PUEBLO + 0.12 * ruido(x, y)) * w
+    # Bordes del mundo: cerros irregulares (no paredes) que cierran la vista y no dejan salir
+    ond = 0.75 + 0.25 * math.sin(x / 4100.0 + 0.7) * math.cos(y / 3700.0) + 0.12 * math.sin((x - y) / 1900.0)
+    borde_o = _suave((X0 + 4500.0 - x) / 4500.0)
+    borde_n = _suave((y - (Y1 - 4500.0)) / 4500.0)
+    borde_e = _suave((x - (X1 - 4500.0)) / 4500.0)
+    borde_s = _suave((Y0 + 9000.0 - y) / 4000.0) * _suave((abs(x - SALIDA[0]) - 9000.0) / 3000.0)
+    h += 3200.0 * ond * max(borde_o, borde_n, borde_e, borde_s)
     # La salida misma queda a nivel del piso de la catacumba
     cerca_salida = _gauss(x, y, SALIDA[0], SALIDA[1] + 700.0, 800.0) * (1.0 - _suave((abs(x - SALIDA[0]) - 450.0) / 300.0))
     h = h * (1.0 - cerca_salida)
@@ -83,16 +93,18 @@ def region(x, y):
         return "M_Suelo_Cementerio"
     if x < 3000.0 and y > 43000.0:
         return "M_Suelo_Hojas"
+    if math.hypot(x - PUEBLO[0], y - PUEBLO[1]) < RADIO_PUEBLO + 2500.0:
+        return "M_Suelo_Cementerio"  # pasto seco y tierra pisada alrededor del pueblo
     return "M_Suelo_Bosque"
 
 
-# Valle al este (solo se ve desde la loma; no se pisa). El pueblo está sobre su colina.
+# Valle al este, detrás de los cerros del borde: solo fondo lejano en la niebla.
 VALLE_X0, VALLE_X1 = X1 - 2000.0, 220000.0
 VALLE_Y0, VALLE_Y1 = -30000.0, 150000.0
 
 
 def altura_valle(x, y):
-    h = -2200.0 + 1700.0 * _gauss(x, y, PUEBLO[0], PUEBLO[1], 30000.0)
+    h = -1200.0 + 2200.0 * _gauss(x, y, COLINA_LEJANA[0], COLINA_LEJANA[1], 30000.0)
     h += 400.0 * math.sin(x / 9000.0) * math.cos(y / 11000.0) + 250.0 * math.sin((x - y) / 5000.0)
     # Sierras lejanas que cierran el horizonte
     h += 6000.0 * _suave((x - 170000.0) / 40000.0)

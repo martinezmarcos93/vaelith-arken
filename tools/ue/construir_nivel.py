@@ -378,10 +378,25 @@ def tapa_vista(x, y):
     lx, ly = TER.LOMA
     px, py = TER.PUEBLO
     d = math.hypot(x - lx, y - ly)
-    if d < 1500 or d > 26000:
+    if d < 1500 or d > math.hypot(px - lx, py - ly) - TER.RADIO_PUEBLO:
         return False
     ang = math.degrees(math.atan2(y - ly, x - lx) - math.atan2(py - ly, px - lx))
-    return abs((ang + 180) % 360 - 180) < 30
+    return abs((ang + 180) % 360 - 180) < 20
+
+
+def en_pueblo(x, y, margen=0.0):
+    px, py = TER.PUEBLO
+    return math.hypot(x - px, (y - py) * 1.15) < TER.RADIO_PUEBLO + margen
+
+
+def camino_pueblo():
+    """Sendero de la loma a la puerta del pueblo (la puerta mira a la loma)."""
+    lx, ly = TER.LOMA
+    px, py = TER.PUEBLO
+    a = math.atan2(ly - py, lx - px)
+    puerta = (px + math.cos(a) * (TER.RADIO_PUEBLO - 400), py + math.sin(a) * (TER.RADIO_PUEBLO - 400) / 1.15)
+    medio = ((lx + puerta[0]) / 2, (ly + puerta[1]) / 2 - 1500)
+    return [(lx + 2500, ly), medio, puerta, (px, py)]
 
 
 def lejos(a, distancia):
@@ -571,7 +586,21 @@ def construir_bosque():
         s = rnd.uniform(0.85, 1.5)
         inclinado(rnd.choice(pinos), vt(x, y, -30), rnd.uniform(0, 360), (s, s, s * rnd.uniform(0.95, 1.2)), "Exterior/Bosque/Arboles", 3.0, 14000.0)
         ralos += 1
-    unreal.log(f"[vaelith] bosque: {puestos} árboles en el alto, {oscuros} en el oscuro, {ralos} ralos")
+    # Bosque del este: entre la loma y el pueblo, y al sur del pueblo. Deja libre el sendero, la vista y la meseta
+    este, intentos = 0, 0
+    sendero = camino_pueblo()
+    while este < 700 and intentos < 30000:
+        intentos += 1
+        x, y = rnd.uniform(26500, 57000), rnd.uniform(21600, 63500)
+        if en_pueblo(x, y, 1800) or dist_segmentos(x, y, sendero) < 700 or tapa_vista(x, y):
+            continue
+        if math.hypot(x - TER.LOMA[0], y - TER.LOMA[1]) < 5200:
+            continue
+        s_ = rnd.uniform(0.85, 1.5)
+        asset = rnd.choice(muertos) if rnd.random() < 0.08 else rnd.choice(pinos)
+        inclinado(asset, vt(x, y, -30), rnd.uniform(0, 360), (s_, s_, s_ * rnd.uniform(0.95, 1.2)), "Exterior/Bosque/Arboles", 3.0, 14000.0)
+        este += 1
+    unreal.log(f"[vaelith] bosque: {puestos} árboles en el alto, {oscuros} en el oscuro, {ralos} ralos, {este} al este")
     # Rocas y raíces
     for _ in range(60):
         x, y = rnd.uniform(-20000, 26000), rnd.uniform(21600, 63000)
@@ -629,35 +658,80 @@ def construir_bosque():
 
 
 def construir_pueblo():
-    """Pueblo lejano sobre su colina, al este: se ve desde la loma y no se alcanza."""
+    """Pueblo de Varo, a ~280 m de la loma, sobre su meseta: se baja por un sendero y se entra por la puerta
+    de la empalizada. Iglesia en la plaza, casas en anillo mirando al centro, faroles cálidos."""
     poner(E("terreno", "SM_Valle"), v((TER.VALLE_X0 + TER.VALLE_X1) / 2, (TER.VALLE_Y0 + TER.VALLE_Y1) / 2, 0), 0, carpeta="Exterior/Valle")
     px, py = TER.PUEBLO
-    casas = [E("pueblo", f"SM_Casa_{c}") for c in "ABCDEF"]
-    casas = [c for c in casas if c]
+    lx, ly = TER.LOMA
+    a_puerta = math.atan2(ly - py, lx - px)
+    casas = [c for c in (E("pueblo", f"SM_Casa_{c}") for c in "ABCDEF") if c]
+    poner(E("pueblo", "SM_Iglesia_Pueblo"), vt(px, py, -40), math.degrees(a_puerta) + 90, carpeta="Exterior/Pueblo")
+    # Casas: dos anillos; ninguna en la calle que va de la puerta a la iglesia
     puestas = []
-    for i in range(18):
-        for _ in range(30):
-            a, r = rnd.uniform(0, 2 * math.pi), rnd.uniform(1200, 6500)
-            x, y = px + math.cos(a) * r, py + math.sin(a) * r * 0.7
-            if all(math.hypot(x - qx, y - qy) > 1900 for qx, qy in puestas):
-                break
-        puestas.append((x, y))
-        poner(rnd.choice(casas), v(x, y, TER.altura_valle(x, y) - 30), math.degrees(math.atan2(py - y, px - x)) + rnd.choice((0, 90, 180)),
-              carpeta="Exterior/Pueblo", sombra=False)
-        if rnd.random() < 0.6:  # ventanas encendidas en la cara que mira a la loma
-            lx, ly = TER.LOMA
-            d = math.hypot(lx - x, ly - y)
-            fx, fy = x + (lx - x) / d * 650, y + (ly - y) / d * 650
-            for k in range(rnd.randint(1, 3)):
-                caja(v(fx + rnd.uniform(-250, 250), fy + rnd.uniform(-250, 250), TER.altura_valle(x, y) + rnd.uniform(250, 700)),
-                     (140, 140, 110), MAT["M_Emisivo"], "Exterior/Pueblo")
-    poner(E("pueblo", "SM_Iglesia_Pueblo"), v(px, py, TER.altura_valle(px, py) - 50), 200, carpeta="Exterior/Pueblo", sombra=False)
-    luz_puntual(v(px, py, TER.altura_valle(px, py) + 800), unreal.LinearColor(1.0, 0.6, 0.3), 400000.0, 9000.0, False, "Exterior/Pueblo")
-    for k in range(10):
-        a = k * 2 * math.pi / 10
-        x, y = px + math.cos(a) * 7600, py + math.sin(a) * 5600
-        poner(E("pueblo", f"SM_Empalizada_{rnd.choice((1, 4))}"), v(x, y, TER.altura_valle(x, y) - 20), math.degrees(a) + 90,
-              (3, 3, 3), carpeta="Exterior/Pueblo", sombra=False)
+    for anillo, n in ((2600.0, 7), (4100.0, 9)):
+        for k in range(n):
+            a = a_puerta + 2 * math.pi * (k + 0.5) / n + rnd.uniform(-0.12, 0.12)
+            if abs(((a - a_puerta) + math.pi) % (2 * math.pi) - math.pi) < 0.38:
+                continue  # calle principal
+            x, y = px + math.cos(a) * anillo, py + math.sin(a) * anillo / 1.15
+            if any(math.hypot(x - qx, y - qy) < 1500 for qx, qy in puestas):
+                continue
+            puestas.append((x, y))
+            yaw = math.degrees(math.atan2(py - y, px - x)) + 90  # la fachada mira a la plaza
+            poner(rnd.choice(casas), vt(x, y, -30), yaw + rnd.uniform(-8, 8), carpeta="Exterior/Pueblo")
+            if rnd.random() < 0.7:  # ventana encendida en la fachada
+                fx, fy = x + (px - x) / anillo * 480, y + (py - y) / anillo * 480
+                caja(vt(fx, fy, rnd.uniform(220, 320)), (60, 60, 70), MAT["M_Emisivo"], "Exterior/Pueblo")
+            if rnd.random() < 0.45:
+                fx, fy = x + (px - x) / anillo * 650, y + (py - y) / anillo * 650
+                luz_puntual(vt(fx, fy, 260), unreal.LinearColor(1.0, 0.58, 0.28), 1800.0, 900.0, False, "Exterior/Pueblo/Luces")
+    # Empalizada: anillo con una puerta hacia la loma
+    emp = E("pueblo", "SM_Empalizada_1") or E("pueblo", "SM_Empalizada_4")
+    largo = 600.0
+    if emp:
+        caja_e = emp.get_bounding_box()
+        largo = max(200.0, (caja_e.max.x - caja_e.min.x) * 1.3 - 20)  # tramo de troncos de ~6,7 m
+    radio = TER.RADIO_PUEBLO - 350
+    n = int(2 * math.pi * radio / largo) + 1
+    for k in range(n):
+        a = 2 * math.pi * k / n
+        if abs(((a - a_puerta) + math.pi) % (2 * math.pi) - math.pi) < 0.13:
+            continue  # puerta
+        x, y = px + math.cos(a) * radio, py + math.sin(a) * radio / 1.15
+        poner(emp, vt(x, y, -20), math.degrees(a) + 90, (1.3, 1.3, 1.3), carpeta="Exterior/Pueblo/Empalizada")
+    gx, gy = px + math.cos(a_puerta) * radio, py + math.sin(a_puerta) * radio / 1.15
+    for lado in (-1, 1):  # faroles de la puerta
+        ox, oy = math.cos(a_puerta + math.pi / 2) * 450 * lado, math.sin(a_puerta + math.pi / 2) * 450 * lado
+        poner(E("props", "SM_Antorcha_Pared"), vt(gx + ox, gy + oy, 180), math.degrees(a_puerta) - 90, (1.3, 1.3, 1.3), carpeta="Exterior/Pueblo")
+        luz_puntual(vt(gx + ox + math.cos(a_puerta) * 80, gy + oy + math.sin(a_puerta) * 80, 260), unreal.LinearColor(1.0, 0.55, 0.25),
+                    2600.0, 1100.0, lado < 0, "Exterior/Pueblo/Luces")
+    sonido_3d("amb_antorcha", vt(gx, gy, 200), 800.0, 0.5)
+    # Plaza: pozo y bancos; luz de la iglesia
+    poner(E("cementerio", "SM_Pozo"), vt(px + math.cos(a_puerta) * 1300, py + math.sin(a_puerta) * 1300), 0, carpeta="Exterior/Pueblo")
+    for lado in (-1, 1):
+        bx = px + math.cos(a_puerta) * 1600 + math.cos(a_puerta + math.pi / 2) * 700 * lado
+        by = py + math.sin(a_puerta) * 1600 + math.sin(a_puerta + math.pi / 2) * 700 * lado
+        poner(E("cementerio", "SM_Banco"), vt(bx, by), math.degrees(a_puerta), carpeta="Exterior/Pueblo")
+    luz_puntual(vt(px + math.cos(a_puerta) * 900, py + math.sin(a_puerta) * 900, 420), unreal.LinearColor(1.0, 0.62, 0.32), 5000.0, 2200.0,
+                True, "Exterior/Pueblo/Luces")
+    # Sendero desde la loma: rocas a los lados (lo marcan sin carteles) y navegación
+    sendero = camino_pueblo()
+    for (ax, ay), (bx, by) in zip(sendero, sendero[1:]):
+        tramos = int(math.hypot(bx - ax, by - ay) // 1400)
+        for t in range(1, tramos):
+            f = t / tramos
+            x, y = ax + (bx - ax) * f, ay + (by - ay) * f
+            if en_pueblo(x, y, -300):
+                continue
+            nx, ny = -(by - ay), bx - ax
+            d = math.hypot(nx, ny)
+            lado = 1 if t % 2 else -1
+            poner(M("Torre", "SM_Roca_Grande"), vt(x + nx / d * 420 * lado, y + ny / d * 420 * lado, -40), rnd.uniform(0, 360),
+                  (0.35, 0.35, 0.3), carpeta="Exterior/Pueblo/Sendero")
+        nav((ax + bx) / 2, (ay + by) / 2, abs(bx - ax) / 2 + 1500, abs(by - ay) / 2 + 1500)
+    nav(px, py, TER.RADIO_PUEBLO + 800, TER.RADIO_PUEBLO + 800)
+    trigger(vt(gx, gy, 200), (600, 600, 400), "zona_pueblo", 0.0, "")
+    unreal.log(f"[vaelith] pueblo: {len(puestas)} casas, empalizada {n} tramos de {largo:.0f} cm, a {math.hypot(px - lx, py - ly) / 100:.0f} m de la loma")
 
 
 def construir_torre():
@@ -717,6 +791,9 @@ def construir_torre():
     return ENTRADA_TORRE
 
 
+RADIO_CIELO = 600000.0
+
+
 def iluminacion_global():
     luna = actores.spawn_actor_from_class(unreal.DirectionalLight, v(0, 0, 3000), unreal.Rotator(0, -38, 125))
     lc = luna.get_component_by_class(unreal.DirectionalLightComponent)
@@ -743,7 +820,7 @@ def iluminacion_global():
     pp.set_editor_property("unbound", True)
     ajustes = pp.get_editor_property("settings")
     ajustes.set_editor_property("override_auto_exposure_min_brightness", True)
-    ajustes.set_editor_property("auto_exposure_min_brightness", -1.5)
+    ajustes.set_editor_property("auto_exposure_min_brightness", -0.9)  # noche: no aclarar como de día
     ajustes.set_editor_property("override_auto_exposure_max_brightness", True)
     ajustes.set_editor_property("auto_exposure_max_brightness", 1.0)
     ajustes.set_editor_property("override_bloom_intensity", True)
@@ -754,7 +831,30 @@ def iluminacion_global():
     ajustes.set_editor_property("override_motion_blur_max", True)
     ajustes.set_editor_property("motion_blur_max", 2.0)
     pp.set_editor_property("settings", ajustes)
-    for a in (luna, cielo, niebla, pp):
+    # Cúpula de cielo nocturno (estrellas + luna en la dirección de la luz de luna), fuera del alcance de la niebla
+    cupula = None
+    m_cielo = unreal.load_asset("/Game/Vaelith/Cielo/M_Cielo")
+    esfera = unreal.load_asset("/Engine/EngineSky/SM_SkySphere")
+    if m_cielo and esfera:
+        ruta_mi = "/Game/Vaelith/Cielo/MI_Cielo"
+        if unreal.EditorAssetLibrary.does_asset_exist(ruta_mi):
+            unreal.EditorAssetLibrary.delete_asset(ruta_mi)
+        mi = unreal.AssetToolsHelpers.get_asset_tools().create_asset("MI_Cielo", "/Game/Vaelith/Cielo", unreal.MaterialInstanceConstant,
+                                                                     unreal.MaterialInstanceConstantFactoryNew())
+        mi.set_editor_property("parent", m_cielo)
+        f = luna.get_actor_forward_vector()
+        unreal.MaterialEditingLibrary.set_material_instance_vector_parameter_value(mi, "DirLuna", unreal.LinearColor(-f.x, -f.y, -f.z, 0))
+        unreal.EditorAssetLibrary.save_asset(ruta_mi)
+        b = esfera.get_bounding_box()
+        escala = RADIO_CIELO / max(1.0, (b.max.x - b.min.x) / 2)
+        cupula = poner(esfera, v(6400, 30000, 0), 0, (escala, escala, escala), mi, "Luces", False)
+        cc = cupula.get_component_by_class(unreal.StaticMeshComponent)
+        cc.set_editor_property("cast_shadow", False)
+        cc.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
+        cc.set_editor_property("bounds_scale", 2.0)
+        fc.set_editor_property("fog_cutoff_distance", RADIO_CIELO * 0.7)  # la cúpula no recibe niebla: el material funde el horizonte
+        unreal.log(f"[vaelith] cielo: cúpula radio {RADIO_CIELO:.0f} cm, luna hacia ({-f.x:.2f}, {-f.y:.2f}, {-f.z:.2f})")
+    for a in (luna, cielo, niebla, pp) + ((cupula,) if cupula else ()):
         a.set_folder_path("Luces")
     nav(5200, 3000, 6000, 3600, -200, 800)  # catacumbas
 
