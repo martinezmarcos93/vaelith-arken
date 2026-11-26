@@ -29,6 +29,8 @@ struct FLineaGuion
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) float Duracion = 4.f;
 	/** Pausa antes de mostrarla. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) float Espera = 0.4f;
+	/** La línea viene de una escena de interacción: mientras está en pantalla, Vaelith no se mueve. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool bBloquea = false;
 };
 
 UCLASS()

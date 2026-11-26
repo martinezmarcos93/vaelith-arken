@@ -59,7 +59,20 @@ Cada fase cierra con:
   - el lugar del primer NPC.
   Esto obliga a revisar la niebla (antes alejaba el pueblo para que no lo borrara) y el pasillo de vista.
 
-### Fase B: guion en la voz de Pharasma (tono v2 aprobado)
+### Fase B: guion en la voz de Pharasma — HECHA 26/11
+**Resultado:**
+- `tools/guion_pharasma.py` genera `guion.json`: 46 escenas y 153 líneas en la voz v2. Escenas nuevas: `zona_pueblo`, `guardian_relevado` y los finales Guardián, Penitente y Nigromante.
+- **Frase del menú:** "No busca vivir. Busca merecer morir."
+- **Bloqueo de control por línea:** campo `bBloquea` en `FLineaGuion` y lista `bloquean` en el guion. Verificado: al tomar las armas, el control queda bloqueado de 12,5 a 26 s y después se libera.
+- **Despertar:** "El cuerpo te obedece" cae a los 13,0 s (medido).
+- **Incoherencias corregidas en el nivel:**
+  - 4 tumbas abiertas junto a la salida;
+  - restos y un escudo partido en la celda de `sombra_vista`;
+  - la rueda de Pharasma sobre el altar 4 ("Tocar la rueda");
+  - el texto del centinela ya no menciona una lanza;
+  - la torre habla del arco y del fuego.
+
+**Plan original:**
 - Reescribir las 41 escenas. Pharasma es **acreedora y jueza**: presta la vida, no la regala. Así ya está en la muestra de `guion-auditoria.md`.
 - **Revelación escalonada:** el jugador sabe lo mismo que Vaelith. El orden es: era conocido → temido → usaba la muerte → tenía seguidores → era el enemigo → sos vos. Los 4 recuerdos y la Sombra cubren ese arco sin escenas nuevas.
 - Corregir las incoherencias de la auditoría:

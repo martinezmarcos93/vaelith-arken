@@ -98,6 +98,9 @@ protected:
 private:
 	TMap<FString, TArray<FLineaGuion>> Guion;
 	TMap<FString, FString> Textos;
+	/** Escenas que bloquean el control mientras duran (las que nacen de una interacción). */
+	TSet<FString> EscenasBloqueantes;
+	bool bBloqueoPorEscena = false;
 	TArray<FLineaGuion> Cola;
 	FLineaActiva Activa;
 	float EsperaLinea = 0.f;

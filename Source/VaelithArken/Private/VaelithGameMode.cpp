@@ -85,7 +85,12 @@ void AVaelithGameMode::CargarGuion()
 			}
 		}
 	}
-	UE_LOG(LogTemp, Log, TEXT("[vaelith] guion: %d escenas, %d textos"), Guion.Num(), Textos.Num());
+	const TArray<TSharedPtr<FJsonValue>>* Bloq;
+	if (Raiz->TryGetArrayField(TEXT("bloquean"), Bloq))
+	{
+		for (const TSharedPtr<FJsonValue>& V : *Bloq) EscenasBloqueantes.Add(V->AsString());
+	}
+	UE_LOG(LogTemp, Log, TEXT("[vaelith] guion: %d escenas, %d textos, %d bloquean"), Guion.Num(), Textos.Num(), EscenasBloqueantes.Num());
 }
 
 FString AVaelithGameMode::TextoGuion(const FString& Clave) const
@@ -237,7 +242,12 @@ void AVaelithGameMode::ReproducirEscena(const FString& Clave, bool bUnaVez)
 		return;
 	}
 	if (bUnaVez && Partida) Partida->Hechos.AddUnique(Hecho);
-	Cola.Append(*Lineas);
+	const bool bBloquea = EscenasBloqueantes.Contains(Clave);
+	for (FLineaGuion L : *Lineas)
+	{
+		L.bBloquea = bBloquea;
+		Cola.Add(L);
+	}
 }
 
 void AVaelithGameMode::Aviso(const FString& Titulo, const FString& Texto, float Duracion)
@@ -646,6 +656,22 @@ void AVaelithGameMode::Tick(float DeltaTime)
 		UE_LOG(LogTemp, Log, TEXT("[vaelith] linea adelantada T=%.1f"), T);
 	}
 
+	// Escenas de interacción: bloquean mientras SUS líneas están en pantalla (o a punto de salir), no al encolarse.
+	if (J && Modo == EModoJuego::Juego)
+	{
+		const bool bLineaBloquea = (Activa.Linea.Texto.Len() > 0 && Activa.Linea.bBloquea)
+			|| (Activa.Linea.Texto.IsEmpty() && Cola.Num() > 0 && Cola[0].bBloquea);
+		if (bLineaBloquea && !bBloqueoPorEscena && !J->bControlBloqueado)
+		{
+			bBloqueoPorEscena = true;  // solo se libera lo que se bloqueó acá
+			J->bControlBloqueado = true;
+		}
+		else if (!bLineaBloquea && bBloqueoPorEscena && RecuerdoEnCurso == 0)
+		{
+			bBloqueoPorEscena = false;
+			J->bControlBloqueado = false;
+		}
+	}
 	if (J)
 	{
 		// Recuerdos: la pantalla se lava mientras dura la escena.

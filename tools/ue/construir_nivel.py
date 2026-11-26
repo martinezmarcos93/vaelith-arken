@@ -91,7 +91,8 @@ CUBO = unreal.load_asset("/Engine/BasicShapes/Cube")
 PLANO_M = unreal.load_asset("/Engine/BasicShapes/Plane")
 MAT = {n: malla(f"/Game/Vaelith/Materiales/{n}") for n in
        ("M_Piedra", "M_Piso", "M_Metal", "M_Suelo_Bosque", "M_Roca", "M_Piedra_Negra", "M_Emisivo", "M_Piedra_DosCaras", "M_Agua",
-        "M_Ladrillo_Quemado")}
+        "M_Ladrillo_Quemado", "M_Sombra", "M_Madera", "M_Suelo_Cementerio")}
+MAT["M_Oro"] = malla("/Game/Vaelith/Mallas/Osario/M_Oro")
 M = lambda kit, n: malla(f"/Game/Vaelith/Mallas/{kit}/{n}")
 PARED = M("Catacumba", "SM_Pared_4m")
 PARED_NICHOS = M("Catacumba", "SM_Pared_Nichos_4m")
@@ -337,6 +338,15 @@ def poblar_catacumbas():
     for (f, c), escena, pen, mus in TRIGGERS:
         x, y = centro(f, c)
         trigger(v(x, y, 200), (190, 190, 200), escena, pen, mus)
+    # sombra_vista: "restos cortados hace poco, cortes limpios" (fila 7, col 7)
+    x, y = centro(7, 7)
+    for dx, dy, giro in ((-110, 60, 20), (90, -80, 200)):
+        poner(O("SM_Pila_Huesos"), v(x + dx, y + dy, 0), giro, (0.8, 0.8, 0.8), carpeta="Catacumba/Props")
+    poner(O("SM_Craneo"), v(x + 20, y + 120, 0), 75, carpeta="Catacumba/Props")
+    # escudo partido de un tajo limpio: dos mitades separadas
+    for lado in (-1, 1):
+        a = caja(v(x + lado * 55, y - 20, 6), (70, 4, 90), MAT["M_Metal"], "Catacumba/Props")
+        a.set_actor_rotation(unreal.Rotator(lado * 8, 88, rnd.uniform(0, 360)), False)
 
 
 # ---------------------------------------------------------------- exterior (terreno de tools/terreno.py)
@@ -475,6 +485,23 @@ def construir_cementerio():
         poner(E("cementerio", "SM_Obelisco"), vt(sx + lado * 700, sy + 900), 0, carpeta="Exterior/Cementerio")
     sonido_3d("amb_antorcha", v(sx, sy + 300, 260), 700.0, 0.5)
     trigger(v(sx, sy + 500, 250), (350, 250, 300), "zona_cementerio", 0.0, "mus_bosque")
+    # Tumbas abiertas junto a la salida: "la tierra empujada desde abajo, nadie cavó"
+    lapidas = [a for a in (E("cementerio", f"SM_Lapida_0{i}") for i in (1, 2, 3, 4)) if a]
+    for i, (dx, dy) in enumerate(((-700, 1500), (650, 1750), (-520, 2450), (820, 2650))):
+        gx, gy = sx + dx, sy + dy
+        giro = rnd.uniform(-12, 12)
+        fosa = caja(vt(gx, gy, 1), (110, 220, 4), MAT["M_Piedra_Negra"], "Exterior/Cementerio/Abiertas")
+        fosa.set_actor_rotation(unreal.Rotator(0, 0, giro), False)
+        for lado in (-1, 1):  # tierra volcada hacia afuera, a los dos lados
+            ox = math.cos(math.radians(giro)) * 95 * lado
+            oy = math.sin(math.radians(giro)) * 95 * lado
+            monte = poner(unreal.load_asset("/Engine/BasicShapes/Sphere"), vt(gx + ox, gy + oy, -6), giro,
+                          (0.7, 2.3, 0.5), MAT["M_Suelo_Cementerio"], "Exterior/Cementerio/Abiertas")
+        if lapidas:
+            l = poner(rnd.choice(lapidas), vt(gx, gy + 150, -10), rnd.uniform(160, 200), carpeta="Exterior/Cementerio/Abiertas")
+            l.set_actor_rotation(unreal.Rotator(rnd.uniform(-14, 14), rnd.uniform(6, 16), 180 + giro), False)
+        tapa = caja(vt(gx + 120 * (1 if i % 2 else -1), gy - 40, 12), (80, 200, 8), MAT["M_Madera"], "Exterior/Cementerio/Abiertas")
+        tapa.set_actor_rotation(unreal.Rotator(rnd.uniform(-20, 20), rnd.uniform(-10, 10), giro + 25), False)
     sonido_3d("amb_viento", v(sx, 13000, 400), 9000.0, 0.35)
 
     lapidas = [("SM_Lapida_01", 1.0), ("SM_Lapida_02", 1.0), ("SM_Lapida_03", 1.0), ("SM_Lapida_04", 1.0),
@@ -774,7 +801,15 @@ def construir_torre():
         poner(T("SM_Ruina_Bloque"), vt(tx + math.cos(a) * r, ty + math.sin(a) * r), rnd.uniform(0, 360), carpeta="Torre")
     trigger(v(ex, ey, H(ex, ey) + 250), (500, 400, 300), "zona_torre", 0.35, "mus_catacumba")
     interactuable(unreal.TipoInteractuable.RECUERDO, v(tx, ty, base), ENTRADA_TORRE + 180, M("Osario", "SM_Altar_Pharasma"),
-                  "recuerdo_4", "", 4, etiqueta="Tocar el disco")
+                  "recuerdo_4", "", 4, etiqueta="Tocar la rueda")
+    # La rueda de Pharasma, de pie sobre el altar: el texto del recuerdo 4 es una pista que se puede tocar
+    cil = unreal.load_asset("/Engine/BasicShapes/Cylinder")
+    rueda = poner(cil, v(tx, ty, base + 250), 0, (1.5, 1.5, 0.12), MAT["M_Oro"] or MAT["M_Metal"], "Torre")
+    rueda.set_actor_rotation(unreal.Rotator(0, 90, ENTRADA_TORRE), False)
+    for k in range(8):  # rayos
+        a = k * 45.0
+        r_ = poner(cil, v(tx, ty, base + 250), 0, (0.08, 0.08, 1.4), MAT["M_Metal"], "Torre")
+        r_.set_actor_rotation(unreal.Rotator(a, 0, ENTRADA_TORRE), False)
     sx, sy = tx - math.cos(ra) * 600, ty - math.sin(ra) * 600
     no_muerto(unreal.TipoNoMuerto.SOMBRA, v(sx, sy, base + 100), ENTRADA_TORRE, "sombra", None, 3000.0)
     luz_puntual(v(tx, ty, base + 900), unreal.LinearColor(0.55, 0.6, 1.0), 6000.0, 1800.0, True, "Torre")
