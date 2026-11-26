@@ -111,6 +111,7 @@ private:
 	void UsarOpcion(class AVaelithCharacter* Quien, int32 Indice);
 	FName HechoOpcion(int32 Indice) const { return FName(*FString::Printf(TEXT("%s_op%d"), *Id.ToString(), Indice)); }
 	TSet<int32> Agotadas;  // fallo crítico: esa vía se cerró
+	float Levantado = -1.f;  // tentación: el muerto se pone de pie, empuja la reja y vuelve a caer
 	float Animacion = -1.f;
 	FVector PosInicial;
 	FRotator RotInicial;

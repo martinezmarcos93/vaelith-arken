@@ -729,9 +729,9 @@ void AVaelithGameMode::Tick(float DeltaTime)
 	if (J)
 	{
 		// Recuerdos: la pantalla se lava mientras dura la escena.
-		const bool bEnRecuerdo = RecuerdoEnCurso > 0 && Modo == EModoJuego::Juego;
+		const bool bEnRecuerdo = (RecuerdoEnCurso > 0 || Ahora() < FinDestelloRecuerdo) && Modo == EModoJuego::Juego;
 		J->Desaturacion = FMath::FInterpTo(J->Desaturacion, bEnRecuerdo ? 1.f : 0.f, Dt, 1.5f);
-		if (bEnRecuerdo && !HayEscenaEnCurso())
+		if (RecuerdoEnCurso > 0 && Modo == EModoJuego::Juego && !HayEscenaEnCurso())
 		{
 			const int32 N = RecuerdoEnCurso;
 			RecuerdoEnCurso = 0;

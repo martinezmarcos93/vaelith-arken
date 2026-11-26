@@ -166,7 +166,19 @@ Toda la ficha de PF2e de Vaelith pasa a ser sistema de juego. Se parte en 4 entr
 - Reja de hierro forjado y losa con runa emisiva, ambas por script de Blender.
 - **Master material de piedra** con musgo, suciedad, humedad y macro variación, más decals. Así las paredes repetidas dejan de leerse iguales (puntos 19–21 de la revisión).
 
-### Fase E: tentación (aprobada: interactuable primero, según el Ministro)
+### Fase E: tentación — HECHA 26/11 (camino del Ministro: interactuable primero)
+**Resultado:**
+- **Lugar:** la daga de Pharasma quedó detrás de una reja de hierro forjado en el osario, con un muerto delante.
+- **Tres vías:**
+  - Forzar (Atletismo CD 18);
+  - Rezar ante el sello (Religión CD 16);
+  - Levantar al muerto: inmediato, pero anatema, Gracia −1 y Corrupción +1.
+- **Dar descanso:** Gracia +1; la reja sigue cerrada ("lo correcto casi nunca es lo corto").
+- **Levantar se ve y se siente:** el muerto se incorpora y empuja la reja mientras la pantalla se lava con un recuerdo ("Otra vez." / "Sabías hacerlo. Por eso estás acá.").
+- **Expiación:** rezar en un altar devuelve el foco; la Corrupción queda.
+- **Queda para después:** el muerto aliado que pelea, si Marcos lo pide al jugarla.
+
+**Plan original:**
 La propuesta externa es que el juego tiente al jugador a repetir el pecado de Vaelith. Encaja con la biblia: el **anatema** prohíbe crear muertos vivientes y profanar cadáveres, así que romperlo tiene que ser posible y costar.
 - **Un solo punto de tentación** en el slice. Por ejemplo, en el osario un cadáver que se puede *levantar* durante 30 s para abrir camino o pelear, frente a *darle descanso*.
 - **Costo:** resta Gracia y dispara un recuerdo ("Otra vez."). La tentación y la memoria quedan unidas: usar el poder viejo te hace recordar.

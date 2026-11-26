@@ -100,6 +100,9 @@ public:
 	/** Texto breve bajo la mira: grado de una prueba, "Crítico", "Esquivado". */
 	void Destello(const FString& Texto, float Duracion = 1.6f) { DestelloTexto = Texto; DestelloFin = Ahora() + Duracion; }
 	FString DestelloTexto;
+	/** Un recuerdo que irrumpe sin escena propia (la tentación): la pantalla se lava unos segundos. */
+	void DestelloRecuerdo(float Segundos) { FinDestelloRecuerdo = Ahora() + Segundos; }
+	float FinDestelloRecuerdo = 0.f;
 	float DestelloFin = 0.f;
 
 protected:

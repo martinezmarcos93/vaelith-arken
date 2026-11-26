@@ -68,6 +68,15 @@ void AInteractuable::Tick(float DeltaTime)
 	{
 		Luz->SetIntensity(1300.f + FMath::Sin(GetWorld()->GetTimeSeconds() * 2.2f) * 600.f);
 	}
+	if (Levantado >= 0.f)
+	{
+		// Se incorpora (0–1,2 s), queda de pie mientras la reja sube y se desploma (2,6–3,2 s).
+		Levantado += DeltaTime;
+		const float Sube = FMath::SmoothStep(0.f, 1.2f, Levantado) * (1.f - FMath::SmoothStep(2.6f, 3.2f, Levantado));
+		SetActorLocation(PosInicial + FVector(0.f, 0.f, 70.f * Sube));
+		SetActorRotation(RotInicial + FRotator(0.f, 0.f, 80.f * Sube));
+		if (Levantado > 3.3f) Levantado = -1.f;
+	}
 	if (Animacion >= 0.f)
 	{
 		Animacion += DeltaTime;
@@ -197,6 +206,8 @@ void AInteractuable::UsarOpcion(AVaelithCharacter* Quien, int32 Indice)
 		else Puerta->AbrirDesdeAfuera();
 		if (O.Efecto == EEfectoOpcion::Levantar)
 		{
+			Levantado = 0.f;
+			GM->DestelloRecuerdo(2.8f);
 			if (USoundBase* Snd = LoadObject<USoundBase>(nullptr, TEXT("/Game/Vaelith/Audio/sfx_recuerdo.sfx_recuerdo"))) UGameplayStatics::PlaySound2D(this, Snd, 0.8f, 0.7f);
 		}
 		break;
